@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Plot from 'react-plotly.js';
-import SubTopNav from './SubTopNav';
 import BotNav from './botNav';
 import "../styles/chart.css";
 
@@ -64,7 +63,6 @@ class Graph extends React.Component {
   render() {
     return (
       <div className='validation-page'>
-        <SubTopNav />
         <div className='charts-container'>
           <div className='plot'>
             <Plot
