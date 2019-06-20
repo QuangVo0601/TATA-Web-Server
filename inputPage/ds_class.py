@@ -29,7 +29,10 @@ class ds:
      # graphs avg tpm per chromosome (avg over all n of patients)
      # Don't graph this
     def g1(self):
-        df1 = pd.read_csv('ENS Ids By Chromosome.csv')
+
+        df1 = pd.read_csv('ENS Ids By Chromosome.csv') # change to this when run locally
+        #df1 = pd.read_csv('/var/www/html/webtool/ENS Ids By Chromosome.csv') # change to this when run on mason server
+
         df3 = self.df.join(df1.set_index('ENS ID'), on='ENS ID')
         del df3['Transcript length (including UTRs and CDS)']
         look1 = df3.groupby(['Chromosome']).mean()
@@ -51,7 +54,10 @@ class ds:
     # graphs avg tpm for each chromosome for each patient
     # Graph 2: TPM per Chromosome (TPC)
     def tpc_graph(self): 
-       df1 = pd.read_csv('ENS Ids By Chromosome.csv') #
+
+       df1 = pd.read_csv('ENS Ids By Chromosome.csv') # change to this when run locally
+       #df1 = pd.read_csv('/var/www/html/webtool/ENS Ids By Chromosome.csv') # change to this when run on mason server
+
        df3 = self.df.join(df1.set_index('ENS ID'), on='ENS ID') # SHOULD I COPY SELF.DF!?
        del df3['Transcript length (including UTRs and CDS)']
        look1 = df3.groupby(['Chromosome']).mean()
@@ -110,7 +116,7 @@ class ds:
     # This is graph 3: Principal Component Analysis (PCA)
     # Graph PCA1 vs PCA2
     def pca_graph(self):
-        df = pd.read_csv('patientlist.csv')
+        df = self.df
         # NB next two lines do the transposing in particular the set index() gets rid of the unnamed row
         df = df.set_index('ENS ID').transpose()
         x = df.loc[:,list(df.columns[1:])]
