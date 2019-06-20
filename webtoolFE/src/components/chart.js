@@ -78,6 +78,7 @@ class Graph extends React.Component {
                 },
               ]}
               layout={{ 
+                hovermode: 'closest',
                 title: 'Distribution of Gene Expression',
                 font: { family: 'Oswald,sans-serif', size: 18, color: '#114b5f' },
                 width: 440, height: 500,
@@ -135,6 +136,7 @@ class Graph extends React.Component {
                 },
               ]}
               layout={{
+                hovermode: 'closest',
                 title: 'Principal Component Analysis (PCA)',
                 font: { family: 'Oswald,sans-serif', size: 18, color: '#114b5f' },
                 width: 440, height: 500,
