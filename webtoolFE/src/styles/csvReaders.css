@@ -1,0 +1,47 @@
+/* .className {css styling goes here} */
+
+input[type="file"] {
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+input[type="file"] + label, .next-butt {
+    padding: 5px;
+    border-radius: 4px;
+    background-color: #FF8C42;
+    color: white;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .csv-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 7px;
+    background-color: #FFFFFF;
+    border-radius: 9px;
+    align-items: baseline;
+  }
+
+  .before-upload {
+      justify-self: flex-start;
+      text-decoration: none;
+      font-family: Montserrat;
+      font-weight: 400;
+      font-size: 14px;
+      color: #BCBEC0;
+  }
+
+  .after-upload {
+    justify-self: flex-start;
+    text-decoration: none;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+  }
+
+  .csv-des {
+      color: #BCBEC0;
+  }

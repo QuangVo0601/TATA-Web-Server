@@ -1,0 +1,33 @@
+/* .className {css styling goes here} */
+
+.topnav a
+{
+    float: right;
+    display: block;
+    color: #114B5F;
+    text-align: center;
+    padding: 50px 15px;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+.topnav a:hover
+{
+    text-decoration: underline;
+    text-decoration-color: #FF8C42
+}
+
+.topnav{
+    max-width: 100%;
+    padding: 10px 4%;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    margin:0 auto;
+    margin-bottom: 120px;
+}
+
+

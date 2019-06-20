@@ -1,0 +1,178 @@
+/* .className {css styling goes here} */
+
+  .home-page {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: #ffffff;
+  }
+
+  p {
+    color: #114B5F;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 10pt;
+  }
+
+  .container-img {
+    width: 100%;
+    height: 900px;
+    background-image: url('../assets/home.png');
+    background-size: cover;  
+  }
+
+  .container {
+    width: 75%;
+    margin: 0 auto;
+    justify-content: space-between;
+    display: flex;
+  }
+
+  .left-col {
+    width: 48%;
+  }
+
+  .title {
+    color: #114B5F;
+    font-family: 'Oswald', sans-serif;
+    font-size: 3.7em;
+    font-weight: 500;
+    line-height: 62px;
+  }
+
+  .description {
+    width: 80%;
+
+  }
+  .right-col {
+    width: 41%;
+  }
+
+  .new-project, .code-search {
+    color: #114B5F;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+  }
+
+  .input{
+    width: 89%;
+    padding:20px;
+    background: #FF8C42;
+    border-radius: 20px;
+  }
+
+  .select { 
+    padding: 1px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+  }
+
+  .code-search {
+    font-family: 'Oswald';
+    font-weight:500;
+  }
+
+  .codeinput-container {
+    width: 89%;
+    padding:20px;
+    background: #2EC4B6;
+    border-radius: 20px;
+    
+  }
+  .codeinput-box {
+      align-items: baseline;
+      display: flex;
+      justify-content: space-between;
+      padding: 8px;
+      background-color: #FFFFFF;
+      border-radius: 9px;
+    }
+  .code-input {
+    border:none;
+    width:80%;
+    height: 100%;
+    font-size: 14px;
+    font-family: Montserrat;
+    font-weight: 400;
+
+  }
+
+  .code-input:focus{
+    outline-width: 0;
+  }
+
+  .jobcode-button{
+    padding: 5px;
+    border-radius: 4px;
+    background-color: #2EC4B6;
+    color: #FFFFFF;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  
+  .background {
+    width: 100%;
+    height: 800px;
+    background-image: url('../assets/about.png');
+    background-size: cover;  
+    padding-top: 150px;
+  }
+
+  .about-content {
+    margin: 0 auto;
+    width: 85%;
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .about-header {
+    width: 100%;
+    text-align: right;
+    color: #114B5F;
+    font-weight:400;
+    font-family: 'Oswald';
+    font-size: 80px;
+    line-height: 90px;
+  }
+
+  .about-para {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .abt-para {
+    width: 38%;
+  }
+
+  .abt-para, .team-p {
+    color: #114B5F;
+    font-weight: 600;
+    font-family: 'Montserrat';
+    font-size: 16px;
+    line-height: 0.6cm;
+  }
+
+  .the-team{
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 100px;
+  }
+
+  .team-inside {
+    width: 33%;
+  }
+
+  .team {
+    color: #114B5F;
+    font-weight:400;
+    font-family: 'Oswald';
+    font-size: 80px;
+    line-height: 1px;
+  }
+
+  

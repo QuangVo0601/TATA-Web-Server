@@ -1,0 +1,12 @@
+Django Rest 
+https://www.youtube.com/watch?v=263xt_4mBNc&feature=youtu.be&fbclid=IwAR39j7leym6b0DTAc09P7x-6EFJ800tMc0OzKFcwL34DyJVz3subSzoUCtY
+API and JSON packet requesting:
+https://www.django-rest-framework.org/tutorial/2-requests-and-responses/?fbclid=IwAR0WoOYt_d03Ck2AhSRc82ob0KauU1BFtG4LWcPMqmBpGNmdSZiEaUf2sp8
+Setting up Apache on gmu server :
+https://gist.github.com/ywwwtseng/63c36ccb58a25a09f7096bbb602ac1de?fbclid=IwAR2a5BrY1l2oLNB6SGNIzX1KRY5iNyovHS9MoKS0OyZTra417NY8FkpVoU4
+Djnago CORS headers:
+https://github.com/ottoyiu/django-cors-headers/?fbclid=IwAR2gv6CFSKuePjINeY-HRu-HoaCNlvtkj26u1XygjGYFV42Qo6yK3UW4lNc
+Django REST framework setting up JSON:
+https://www.django-rest-framework.org/tutorial/1-serialization/?fbclid=IwAR3igo8slCVKfOO2coUTUmrtuq5dcygYEyfu53viauvroEovUiwBthxUNqs
+for plotting:
+https://plot.ly/javascript/

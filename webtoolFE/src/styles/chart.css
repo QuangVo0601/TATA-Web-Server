@@ -1,0 +1,36 @@
+/* .className {css styling goes here} */
+
+.charts-container{
+    width: 95%;
+    display:flex;
+    padding-top: 20px;
+    margin: 0 auto;
+    justify-content: space-between;
+
+}
+
+.plot {
+    border: solid #2EC4B6 6px;
+} 
+
+
+.validation {
+    width: 32%;
+    padding-left: 30px;
+    border-right: solid black 2px;
+}
+
+h1{
+font-family: 'Oswald', sans-serif;
+  font-size: 43px;
+  font-weight: 400;
+  color: #114B5F;
+}
+
+p {
+    color: #525252;
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 16px;
+}
+

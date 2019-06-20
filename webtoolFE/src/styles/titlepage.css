@@ -1,0 +1,45 @@
+/* .className {css styling goes here} */
+
+body
+		{
+			background-color: #f1f1f1;
+		}
+		.highlight
+		{
+			border-bottom: 1px solid #fff;
+		 }
+
+		 h3
+		 {
+		   font-family: Times,sans-serif;
+		   font-size: 2em;
+		   color: black;
+		 }
+		 h4
+		 {
+			 font-family: Times,sans-serif;
+			 font-size: 2em;
+			 color: black;
+			 text-align: center;
+		 }
+		 h5
+		 {
+			 font-family: Times,sans-serif;
+			 font-size: 1.5em;
+			 color: black;
+			 text-align: right;
+		 }
+		table, th, td
+		{
+			border:1px solid black;
+		}
+
+		#regForm {
+		  background-color: #ffffff;
+		  margin: 100px auto;
+		  font-family: Raleway;
+		  padding: 40px;
+		  width: 70%;
+		  min-width: 300px;
+		}
+
