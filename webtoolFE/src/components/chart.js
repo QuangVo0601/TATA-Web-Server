@@ -34,6 +34,7 @@ class Graph extends React.Component {
     let no_of_patients = (localStorage.getItem('y_tpc').split(",")).length / no_of_chromosome
     let j = 0 // for slice begin
     let k = no_of_chromosome // for slice end
+    let names = localStorage.getItem('pca_text').split(",") //array of sample names
 
     // This takes care of TPC multilines graph
     for (let i = 0; i < no_of_patients; i++) {
@@ -42,7 +43,7 @@ class Graph extends React.Component {
       let y = localStorage.getItem('y_tpc').split(",").slice(j, k)
       j = k // set new begin index
       k += no_of_chromosome // set new end index
-      let name = 'Patient ' + (i + 1)
+      let name = names[i] //sample name
       let type = 'scatter'
       let trace = { x, y, name, type } // create a new trace obj
       traces_temp.push(trace) // add that trace obj into our tpc_trace
