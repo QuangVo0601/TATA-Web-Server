@@ -8,12 +8,14 @@ from io import StringIO
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 
-# Wait for Jon to delete it 
+# Jon's algorithm for sorting purpose
 def check(x):
    if x == 'X':
        return 24
    if x == 'Y':
        return 25
+   if x == 'MT':
+       return 23 
    else:
        return int(x)
 
