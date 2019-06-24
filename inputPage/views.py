@@ -24,6 +24,10 @@ def input_list(request):
         data = JSONParser().parse(request) # Receive data from front end
         dataString = data['csvFile'] # syntax: data[key], key = package's name being sent
 
+        dataArray = dataString.split(',') # change the string to an array
+        dataArray[0] = "ENS ID" # change the header to "ENS ID" to be used by ds_class.py
+        dataString = ','.join(dataArray) # change the array back to string for later use
+
         # Import and use def from ds_class.py (from Math Team)
         dataSet= ds(5)
         dataSet.dataframe_from_string(dataString)
