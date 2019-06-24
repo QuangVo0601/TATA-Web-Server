@@ -24,9 +24,19 @@ def input_list(request):
         data = JSONParser().parse(request) # Receive data from front end
         dataString = data['csvFile'] # syntax: data[key], key = package's name being sent
 
-        dataArray = dataString.split(',') # change the string to an array
+        dataArray1 =  dataString.split('\n') # change the string to an array
+        dataArray2 = [dataArray1[i].split(',') for i in range(len(dataArray1))] # change 1d array to 2d aray
+        for i in dataArray2:
+            i[0] = i[0][:15] # get only first 15 characters of ENS IDs. Ex: ENSG00000223972.4 will become ENSG00000223972 (no decimal)
+
+        dataArray2[0][0] = "ENS ID" # change the header to "ENS ID" to be used by ds_class.py
+        dataArray = [','.join(dataArray2[i]) for i in range(len(dataArray2))] # convert back to 1d array
+        dataString = '\n'.join(dataArray) # convert the array back to string to be used in ds_class.py
+
+        # may delete this later
+        '''dataArray = dataString.split(',') # change the string to an array
         dataArray[0] = "ENS ID" # change the header to "ENS ID" to be used by ds_class.py
-        dataString = ','.join(dataArray) # change the array back to string for later use
+        dataString = ','.join(dataArray) # change the array back to string for later use'''
 
         # Import and use def from ds_class.py (from Math Team)
         dataSet= ds(5)
