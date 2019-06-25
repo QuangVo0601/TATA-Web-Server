@@ -139,7 +139,7 @@ class Graph extends React.Component {
                   type: 'scattergl',
                   mode: 'markers', //lines or markers
                   text: this.state.pca_text,
-                  hoverinfo: "x+y+text",
+                  hoverinfo: "text",
                   marker: { color: 'green' },
                 },
               ]}
