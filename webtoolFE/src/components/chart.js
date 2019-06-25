@@ -45,7 +45,8 @@ class Graph extends React.Component {
       k += no_of_chromosome // set new end index
       let name = names[i] //sample name
       let type = 'scatter'
-      let trace = { x, y, name, type } // create a new trace obj
+      let mode = 'markers'	
+      let trace = { x, y, name, type, mode} // create a new trace obj
       traces_temp.push(trace) // add that trace obj into our tpc_trace
     }
     // this.setState works the same as setters
@@ -112,14 +113,20 @@ class Graph extends React.Component {
                   autorange: true, showgrid: false, title: {
                     text: 'Chromosome',
                     font: { family: 'Oswald,sans-serif', size: 18, color: '#114b5f' }
-                  },
+                  }, tickmode: 'linear',
+		     	 	         ticks: 'outside',
+        	           tick0: 0,
+        	           dtick: 1,
+        	           ticklen: 4,
+        	     	     tickwidth: 4,
+        	     	     tickcolor: '#000'
                 },
                 yaxis: {
-                  autorange: true, showgrid: false, title: {
+                  autorange: true, type: 'log', showgrid: false, title: {
                     text: 'Total TPM',
                     font: { family: 'Oswald,sans-serif', size: 18, color: '#114b5f' }
                   }
-                }
+                },
               }}
             />
           </div>
