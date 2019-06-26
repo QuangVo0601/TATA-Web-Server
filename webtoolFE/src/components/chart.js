@@ -46,7 +46,8 @@ class Graph extends React.Component {
       let name = names[i] //sample name
       let type = 'scatter'
       let mode = 'markers'	
-      let trace = { x, y, name, type, mode} // create a new trace obj
+      let colorscale= 'BuPu'
+      let trace = { x, y, name, type, mode, colorscale} // create a new trace obj
       traces_temp.push(trace) // add that trace obj into our tpc_trace
     }
     // this.setState works the same as setters
@@ -100,6 +101,7 @@ class Graph extends React.Component {
               }}
             />
           </div>
+
           <div className='plot'>
             <Plot
 
@@ -130,6 +132,7 @@ class Graph extends React.Component {
               }}
             />
           </div>
+
           <div className='plot'>
             <Plot
               data={[
