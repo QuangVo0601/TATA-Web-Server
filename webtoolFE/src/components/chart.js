@@ -46,8 +46,8 @@ class Graph extends React.Component {
       let name = names[i] //sample name
       let type = 'scatter'
       let mode = 'markers'	
-      let colorscale= 'BuPu'
-      let trace = { x, y, name, type, mode, colorscale} // create a new trace obj
+      let marker = {color: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]}
+      let trace = { x, y, name, type, mode, marker} // create a new trace obj
       traces_temp.push(trace) // add that trace obj into our tpc_trace
     }
     // this.setState works the same as setters
@@ -77,7 +77,7 @@ class Graph extends React.Component {
                   y: this.state.y_dge,
                   type: 'scattergl',
                   mode: 'markers',
-                  marker: { color: 'blue' },
+                  marker: { color: 'blue'},
                 },
               ]}
               layout={{ 
