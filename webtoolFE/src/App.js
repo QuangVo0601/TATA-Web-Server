@@ -25,8 +25,8 @@ class App extends React.Component {
       />
       <Route exact path="/validation"
         render={() => (
-          /* <Chart /> */
-          <Validation />
+          <Chart /> 
+          /*<Validation />*/
         )
         }
       />
