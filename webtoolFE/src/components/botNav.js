@@ -6,18 +6,34 @@ import "../styles/botNav.css"; // import its css in to run with jsx file
 function botNav() {
     return (
         <div className='botNav'>
-            <div className='bot-left'>
-            </div>
-            <div className='bot-right'>
-                <div className='contact'><p className='contact-style'>Contact</p></div>
-                <div className='bot-logo'>
-                    <img src={require('../assets/gmulogo.png')} width='147px' height='97px' />
-                    <img src={require('../assets/bottom.png')} width='166px' height='75px' />
+            <footer>
+                            <div id="footer">
+                                <div id="footernav">
+                                    <div id="footerlogo">
 
+                                        <img src={require('../assets/White_TATA_Logo.png')} alt="LOGO" width="90px" height="90px" />
+                                        <p>TATA was developed as a Summer Impact Project Funded by the Office of Student Scholarship, Creative Activates, and Research</p>
+                                    </div>
+                                    {/* <!--end of footerlogo--> */}
 
-                </div>
+                                    <div id="line">
+                                    </div>
 
-            </div>
+                                    <div id="contact">
+                                        <p>Contact Us</p>
+                                    </div>
+
+                                    <div id="logos">
+                                        <img src={require('../assets/Mason Logo.png')} alt="LOGO" width="64px" height="64px" />
+                                        <img src={require('../assets/OSCAR LOGO.png')} alt="LOGO" className="oscar" />
+                                    </div>
+                                    {/* <!--end of logos--> */}
+
+                                </div>
+                                {/* <!--end of footernav--> */}
+                            </div>
+                            {/* <!--end of footer--> */}
+                        </footer>
         </div>
 
     );

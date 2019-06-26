@@ -3,6 +3,7 @@ import './App.css';
 import TopNav from './components/topNav';
 import { Route } from 'react-router-dom';
 import WebTool from './components/webtool';
+import Validation from './components/validationPage';
 import Chart from './components/chart'
 
 class App extends React.Component {
@@ -24,8 +25,8 @@ class App extends React.Component {
       />
       <Route exact path="/validation"
         render={() => (
-          <Chart 
-          />
+          /* <Chart /> */
+          <Validation />
         )
         }
       />

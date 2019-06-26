@@ -1,43 +1,75 @@
-/* .className {css styling goes here} */
+@charset "UTF-8";
+/* CSS Document */
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
 .botNav {
-    width: 100%;
-    height: 140px;
-    align-items: center;
-    background-color: #114B5F;
-    display: flex;
-  }
+  display: block;
+}
+/*beginning of 1920 footer*/
 
-  .bot-left {
-    width: 40%;
-    height: 70%;
-  }
+#footernav{
+	height:265px;
+	width:1920px;
+	flex-wrap: wrap;
+}
 
-  .bot-right {
-    height: 70%;
-    display: flex;
-    width: 60%;
-    border-left: solid white 2px;
-  }
 
-  .contact {
-    padding-left: 10px;
-    width: 50%;
-    display: flex;
-    align-items: center;
-  }
+	#footerlogo{
+	flex-wrap:wrap;
+}
 
-  .contact-style {
-    color: white;
-    font-family: Helvetica Neue;
-    font-size: 20px;
-    font-weight:400;
-  }
 
-  .bot-logo {
-    height: 100%;
-    display:flex;
-    align-items: center;
-    justify-content: space-around;
-    width: 50%;
-  }
-  
+#footerlogo img{
+	margin-left:68px;
+	margin-top:86px;
+	width:90px;
+	height:90px;
+}
+
+
+#footerlogo p{
+width:659px;
+	margin-top:113px;
+	margin-left:15px;
+	font-size:18px;
+	color:white;
+}
+
+
+#contact p{
+	margin-top:124px;
+	font-size:18px;
+	margin-right:300px;
+	width:120px;
+}
+
+
+#line{
+	height:94px;
+	margin-top:93px;
+	margin-right:48px;
+	margin-left:48px;
+}
+
+
+#logos{
+margin-top:95px;
+}
+	
+	#logos .oscar{
+	width:174.45px;
+	height:72.58px;
+	}
+	
+
+#logos img{
+	margin-right:89px;
+	flex-wrap:nowrap;
+	margin-top:0px;
+	width:144.06px;
+	height:93.64px;
+}
+
+/*//////////////////////////// end of 1920 footer ////////////////////////*/
