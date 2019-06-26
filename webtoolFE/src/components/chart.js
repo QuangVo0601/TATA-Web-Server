@@ -112,10 +112,12 @@ class Graph extends React.Component {
                 font: { family: 'Oswald,sans-serif', size: 18, color: '#114b5f' },
                 width: 440, height: 500,
                 xaxis: {
-                  autorange: true, showgrid: false, title: {
+                  range: [0, 25.5], showgrid: false, title: {
                     text: 'Chromosome',
                     font: { family: 'Oswald,sans-serif', size: 18, color: '#114b5f' }
-                  }, tickmode: 'linear',
+                  }, tickmode: 'array',
+                     tickvals: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25],
+                     ticktext: ['','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','MT','X','Y'],
 		     	 	         ticks: 'outside',
         	           tick0: 0,
         	           dtick: 1,
