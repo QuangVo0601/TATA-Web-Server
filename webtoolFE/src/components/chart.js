@@ -45,9 +45,10 @@ class Graph extends React.Component {
       k += no_of_chromosome // set new end index
       let name = names[i] //sample name
       let type = 'scatter'
-      let mode = 'markers'	
+      let mode = 'markers'
+      let hoverinfo = "name"	
       let marker = {color: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]} // This is color scheme for tpc graph
-      let trace = { x, y, name, type, mode, marker} // create a new trace obj
+      let trace = { x, y, name, type, mode, hoverinfo, marker} // create a new trace obj
       traces_temp.push(trace) // add that trace obj into our tpc_trace
     }
     // this.setState works the same as setters
@@ -61,7 +62,7 @@ class Graph extends React.Component {
       tpc_traces: traces_temp
     })
     // remove everything from local storage for safety
-    localStorage.removeItem('x_tpc', 'y_tpc', 'x_pca', 'y_pca', 'x_dge', 'y_dge')
+    localStorage.removeItem('x_tpc', 'y_tpc', 'x_pca', 'y_pca', 'x_dge', 'y_dge','pca_text')
   }
 
   render() {
@@ -77,6 +78,7 @@ class Graph extends React.Component {
                   y: this.state.y_dge,
                   type: 'scattergl',
                   mode: 'markers',
+                  hoverinfo: 'x',
                   marker: { color: 'blue'},
                 },
               ]}
