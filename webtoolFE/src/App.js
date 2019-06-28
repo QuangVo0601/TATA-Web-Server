@@ -3,8 +3,9 @@ import './App.css';
 import TopNav from './components/topNav';
 import { Route } from 'react-router-dom';
 import WebTool from './components/webtool';
-import Validation from './components/validationPage';
-import Chart from './components/chart'
+import Chart from './components/chart';
+import TaskPage from './components/taskPage'
+import ValidationPage from './components/validationPage'
 
 class App extends React.Component {
   constructor(props) {
@@ -15,31 +16,33 @@ class App extends React.Component {
 
   render() {
     return (
-    // Render and route specific js file depend on given exact path
-    <div className="app-container"> 
-      <Route exact path="/"
-        render={() => (
-          <WebTool/>
-        )
-        }
-      />
-      <Route exact path="/validation"
-        render={() => (
-          <Chart /> 
-          /*<Validation />*/
-        )
-        }
-      />
-      <Route exact path="/hello"
-        render={() => (
-          <h1>Hi there</h1> 
-        )
-        }
-      />
+      // Render and route specific js file depend on given exact path
+      <div className="app-container">
+        <Route exact path="/"
+          render={() => (
+            <WebTool />
+          )
+          }
+        />
+        <Route exact path="/validation"
+          render={() => (
+            // <Chart
+            // />
+            <ValidationPage/> //added by Quang for testing
+          )
+          }
+        />
+        <Route exact path="/taskpage"
+          render={() => (
+            <TaskPage
+            />
+          )
+          }
+        />
 
-    </div>
-  )
-}
+      </div>
+    )
   }
-  
+}
+
 export default App;
