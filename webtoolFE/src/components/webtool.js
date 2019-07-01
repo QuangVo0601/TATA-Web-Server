@@ -1,9 +1,7 @@
 import React from "react";
 import "../styles/webtool.css"; // to run this with css file 
-import axios from 'axios'; // to send data to back end
 import Select from "react-select" // to use dropbox
 import CSVReader from './csvReader';
-import Graph from './chart';
 import TopNav from './topNav';
 import BotNav from './botNav';
 
@@ -21,6 +19,7 @@ class WebTool extends React.Component {
             { value: "Raw Counts", label: "Raw Counts" }],
             // to store selected unit option
             selectedOption: "TPM",
+            loadingDiv: "csv-reader",
         }
     }
     /* Syntax in JavaScript: variable = anonymous function
@@ -37,6 +36,20 @@ class WebTool extends React.Component {
     // This method is used to store click option from dropbox
     selectedOption = (selected) => {
         this.setState({ selectedOption: selected })
+    }
+    
+    /* Functions go here */
+    setWaitingTime = () => {
+        this.setCanClick()
+        setTimeout(this.setNextClick,5000)
+        
+    }
+
+    setCanClick = () => {
+        this.setState({loadingDiv: "can-click"})
+    }
+    setNextClick = () => {
+        this.setState({loadingDiv: "csv-reader"})
     }
 
     render() {
@@ -68,9 +81,10 @@ class WebTool extends React.Component {
                                         options={this.state.outputOptions}
                                     />
                                 </div>
-                                <div >
+                                <div>
+                                    <div className={this.state.loadingDiv}>Loading</div>
                                     <CSVReader
-                                        setXY={this.props.setXY}
+                                        setWaitingTime={this.setWaitingTime}
                                     />
                                 </div>
 

@@ -38,7 +38,8 @@ class csvReader extends React.Component {
     handleFileSelect = (file) => {
         this.setState({ csvName: file.name })
         this.setState({ className: "after-upload" })
-        this.setState({ buttonText: "Next" })
+        this.props.setWaitingTime()
+        this.setState({buttonText: "Next"})
         fileReader = new FileReader();
         // onloadend = when done loading file
         // async call ( which means loading and reading concurrently)
