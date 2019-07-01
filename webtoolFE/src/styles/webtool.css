@@ -50,6 +50,14 @@
     width: 41%;
   }
 
+  .csv-reader {
+    display: None;
+  }
+
+  .can-click {
+    display: block;
+  }
+
   .new-project, .code-search {
     color: #114B5F;
     font-family: 'Oswald', sans-serif;
@@ -96,7 +104,6 @@
     font-size: 14px;
     font-family: Montserrat;
     font-weight: 400;
-
   }
 
   .code-input:focus{
