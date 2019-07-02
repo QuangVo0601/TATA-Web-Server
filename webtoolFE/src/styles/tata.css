@@ -883,7 +883,6 @@ h3{
 
     /* Hide the browser's default checkbox */
     .sample-container input {
-      margin-right: 250px;
       opacity: 0;
       cursor: pointer;
       height: 0;
