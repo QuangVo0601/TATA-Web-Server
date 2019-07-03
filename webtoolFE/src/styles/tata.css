@@ -1040,7 +1040,7 @@ span.grippy::after {
 }
 /* -------------------- */
 #nav_group2{
-  display: flex;
+  display: block; /* Need to be block for pop up purpose */
   justify-content: center;
   padding: 28px 35px 16px;
 
@@ -1469,3 +1469,402 @@ margin-top:95px;
 }
 }
 /*footer code ends*/
+
+
+/*gtex module code begins*/
+#wrapper4{
+	margin: 0 auto;
+	width:768px;
+	height:780px;
+	border:1px #D3D3D3 solid;
+	border-radius:10px;
+}
+#gtex h1{
+	font-size:25px;
+	 font-family: 'Oswald', sans-serif;
+	color:#114B5F;
+	line-height:45px;
+}
+
+#topcontent{
+	display:flex;
+	flex-direction:row;
+	margin-left:65px;
+	margin-top:20px;
+}
+#topcontent h2{
+	margin-right:5px;
+}
+#controlgroup {
+	margin-left:35px;
+}
+#sample{
+	margin-left:35px;
+}
+#sample h3{
+	font-size:35px;
+    font-family: 'Oswald', sans-serif;
+	line-height:40px;
+	color:#114B5F;
+	
+}
+#age_drop_down{
+	margin-right:17.5px;
+}
+.sex-dropdown{
+	margin-right:17.5px;
+}
+#all{
+	margin-left:65px;
+}
+#controlgroup input {
+	border: 1px solid #D3D3D3;
+border-radius:10px;
+	background-color:#F5F5F5;
+	height:40px;
+	width:304px;
+    font-family: 'Montserrat', sans-serif;
+    text-align: left;
+    font-size: 15px;
+	outline: none !important;
+}
+#bottomcontent{
+	display:flex;
+	flex-direction:row;
+	margin-top:25px;
+	margin-bottom:25px;
+	height:40px;
+	margin-left:65px;
+}
+
+
+h2{
+	font-size:16px;
+	color:#797979;
+	font-family: 'Montserrat', sans-serif;
+	margin-bottom:10px;
+	margin-top:10px;
+	margin-right:5px;
+}
+/* width */
+::-webkit-scrollbar {
+ width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+ background: #F4F4F4;
+ border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+ background:#CCCCCC;
+ border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+ background: #7E7E7E;
+}
+#gtexbuttons{
+	display:flex;
+	flex-direction:row;
+	margin-left:395px;
+
+}
+.buttoncancel {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 600;
+	font-size: 13.5pt;
+	color: white;
+	text-align: center;
+	display: block;
+	border: none;
+	width: 98px;
+	height: 32px;
+	border-radius: 8px;
+	margin: 5px;
+	margin-right:25px;
+	float: right;
+	cursor: pointer;
+}
+.buttongroup {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 600;
+	font-size: 13.5pt;
+	color: white;
+	text-align: center;
+	display: block;
+	border: none;
+	width: 166px;
+	height: 32px;
+	border-radius: 8px;
+	margin: 5px;
+	float: right;
+	cursor: pointer;
+}
+.buttoncancel {
+	background-color: #FF8C42;
+}
+
+.buttoncancel:hover {
+	background-color: #FF7B26;
+}
+
+.buttongroup:hover {
+	background-color: #0E3C4C;
+}
+
+.buttongroup {
+	background-color: #114B5F;
+}
+
+
+#all{
+	height:480px;
+	width:670px;
+	display:flex;
+}
+#title{
+	margin-left:65px;
+	
+}
+#set1{
+	height:650px;
+	display:flex;
+	flex-direction:row;
+}
+ #set1 > ul { 
+	    	list-style: none;
+	    	float: left; width: 321.17px;
+	    	padding: 0 5px 0 0; 
+	    }
+#set1 li { 
+			text-decoration: none; 
+			display: block; 
+			padding: 5px;
+			background: white; 
+			border:#D3D3D3 1px solid;
+			border-radius: 10px; 
+			color:#114B5F; 
+			text-align:left;
+			margin-right:15px;
+	margin-bottom:5px;
+			font-family: 'Montserrat', sans-serif;
+			font-size:12px;
+	        height:15px;
+			-webkit-transition: all 0.2s ease;
+			-moz-transition: all 0.2s ease;
+			-o-transition: all 0.2s ease;
+	    }
+
+	    #all li:hover {
+			border:#FF8C42 1px solid;
+	    }
+   
+.ms-options-wrap,
+.ms-options-wrap * {
+    box-sizing: border-box;
+	
+	
+}
+
+
+
+/*/////////////// drop down style ////////////////////*/
+
+.ms-options-wrap > button:focus,
+.ms-options-wrap > button {
+	cursor: pointer;
+    position: relative;
+    width: 100px;
+	height:32px;
+	border-radius: 8px;
+    text-align: left;
+    border: 1px solid #D3D3D3;
+    background-color: #F5F5F5;
+    margin-top: 1px;
+    font-size: 13px;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 400;
+    color: #aaa;
+    outline-offset: -2px;
+    white-space: nowrap;
+	outline:none;
+}
+
+.ms-options-wrap > button > span {
+    display: inline-block;
+}
+
+.ms-options-wrap > button[disabled] {
+    background-color: #228DF7;
+    color: #808080;
+    opacity: 0.6;
+}
+/*/////////////// Drop down button arrow ////////////////////*/
+
+.ms-options-wrap > button:after {
+    content: ' ';
+    height: 0;
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    width: 0;
+    border: 6px solid rgba(0, 0, 0, 0);
+    border-top-color: #999;
+    margin-top: -3px;
+}
+
+/*/////////////// Selected text color in dropdown ////////////////////*/
+
+.ms-options-wrap.ms-has-selections > button {
+    color: #646464;
+	
+}
+
+
+/*/////////////// Dropdown Box style ////////////////////*/
+
+.ms-options-wrap > .ms-options {
+    position:relative;
+    left: 0;
+	border-radius: 10px;
+    width: 155px;
+    margin-top: 1px;
+    background: white;
+    z-index: 2000;
+    border: 1px solid #D6D6D6;
+    overflow: auto;
+	font-family: 'Montserrat', sans-serif;
+	color: #707070;
+	font-size: .8em;
+	font-weight: 400;
+    visibility: hidden;
+}
+
+/* Visibility of drop down*/
+
+.ms-options-wrap.ms-active > .ms-options {
+    visibility: visible;
+}
+
+/* Search box options */
+.ms-options-wrap > .ms-options > .ms-search input {
+    width: 100%;
+    padding: 4px 5px;
+    border: none;
+    border-bottom: 1px groove;
+    outline: none;
+}
+
+/*/////////////// Select all style ////////////////////*/
+
+.ms-options-wrap > .ms-options .ms-selectall {
+    display: inline-block;
+    font-size: .9em;
+	color: #114B5F;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 400;
+    text-transform: lowercase;
+    text-decoration: none;
+	
+}
+.ms-options-wrap > .ms-options .ms-selectall:hover {
+    text-decoration: none;
+	cursor: pointer;
+}
+
+.ms-options-wrap > .ms-options > .ms-selectall.global {
+    margin: 5px 10px;
+}
+
+/*/////////////// Options Style ////////////////////*/
+
+.ms-options-wrap > .ms-options > ul,
+.ms-options-wrap > .ms-options > ul > li.optgroup ul {
+    list-style-type: none;
+    padding: 0;
+	padding-left: 5px;
+	padding-bottom: 6px;
+    margin: 0;
+}
+
+.ms-options-wrap > .ms-options > ul li.ms-hidden {
+    display: none;
+}
+
+.ms-options-wrap > .ms-options > ul > li.optgroup {
+    padding: 5px;
+}
+.ms-options-wrap > .ms-options > ul > li.optgroup + li.optgroup {
+    border-top: 1px solid #aaa;
+}
+
+.ms-options-wrap > .ms-options > ul > li.optgroup .label {
+    display: block;
+    padding: 5px 0 0 0;
+	font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+}
+
+.ms-options-wrap > .ms-options > ul label {
+    position: relative;
+    display: inline-block;
+    width: 95%;
+    padding: 4px 4px 4px 20px;
+    margin: 1px 0;
+    border: 1px solid transparent;
+}
+.ms-options-wrap > .ms-options.checkbox-autofit > ul label,
+.ms-options-wrap > .ms-options.hide-checkbox > ul label {
+    padding: 4px;
+}
+
+/*////////////////////// color of box when option is hovered /////////////*/
+.ms-options-wrap > .ms-options > ul label.focused,
+.ms-options-wrap > .ms-options > ul label:hover {
+    background-color: #efefef;
+	border-radius: 5px;
+	cursor: pointer;
+   /* border-color: #999;*/
+}
+
+/*////////////////////// color of box when option is selected /////////////*/
+.ms-options-wrap > .ms-options > ul li.selected label {
+    background-color: #efefef;
+    border-color: transparent;
+	border-radius: 5px;
+	outline:none;
+}
+
+.ms-options-wrap > .ms-options > ul input[type="checkbox"] {
+    margin: 0 5px 0 0;
+    position: absolute;
+    left: 4px;
+    top: 7px;
+	cursor: pointer;
+	  
+}
+
+.ms-options-wrap > .ms-options.hide-checkbox > ul input[type="checkbox"] {
+    position: absolute!important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px 1px 1px 1px);
+	clip: rect(1px, 1px, 1px, 1px);	
+}
+
+.popup-inner {  
+	position: absolute; 
+	border-radius: 10px;
+	left: 10%;
+	right: 10%; 
+	width:768px;
+	height:780px;  
+	top: 2%; 
+    margin: 0 auto;   
+  }
+/*gtex module code ends*/
