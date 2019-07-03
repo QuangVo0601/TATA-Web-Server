@@ -13,7 +13,8 @@ class ValidationPage extends React.Component {
             x_pca: [],
             y_pca: [],
             pca_text: [],
-            tpc_traces: []
+            tpc_traces: [],
+            href: ""
         }
     }
 
@@ -59,6 +60,10 @@ class ValidationPage extends React.Component {
         })
         // remove everything from local storage for safety
         localStorage.removeItem('x_tpc', 'y_tpc', 'x_pca', 'y_pca', 'x_dge', 'y_dge')
+    }
+  
+    handleSubmit = () => {
+            this.setState({ href: '/taskpage' }) 
     }
 
     render() {
@@ -133,7 +138,6 @@ class ValidationPage extends React.Component {
                                             <div className="helpcontent PCA">Top 100 TPMs is generally a function of tissue type. Outliers are generally only expected for variation in tissue or cell types.  If your data is from multiple tissue sources, we recommend keeping not creating groups with more than one tissue type.</div>
                                         </div>
                                         <div className="graphsize">
-                                            {/* This is first graph */}
                                             <Plot
                                                 data={[
                                                     {
@@ -172,7 +176,6 @@ class ValidationPage extends React.Component {
 								may vary based on tissue source and gender. Outliers samples may be an expected outcome if your data is derived from diseased groups or from different tissue types. If your data is derived from multiple batches there should be shifts across all chromosomes. Batch correction option is recommended.</div>
                                         </div>
                                         <div className="graphsize">
-                                            {/* This is second graph */}
                                             <Plot
 
                                                 data={this.state.tpc_traces}
@@ -209,7 +212,6 @@ class ValidationPage extends React.Component {
                                             <div className="helpcontent PCA">Distribution of samples is expected to fall into clusters based on samples state (e.g. disease) Highly heterogeneous data may not cluster in initial PCA. If samples cluster based on assay condition such as different sequencing runs, batch correction option is recommended.</div>
                                         </div>
                                         <div className="graphsize">
-                                            {/* This is last graph */}
                                             <Plot
                                                 data={[
                                                     {
@@ -246,14 +248,16 @@ class ValidationPage extends React.Component {
                                 </div>
                                 <div id="initial_header">Initial Validation</div>
                                 <div id="validation_info">
-                                    <div className="initial_info">The data displayed in these graphs is an initial overview of the input data before batch correction. If you have selected to use data sets derived from multiple sequencing runs, or collected by different groups wesuggest the application of batch correction. The graphs presented above will be available for download again at the end of the run, however you can elect to download the graphs individually now by using the task bars found at the top of each graph. </div>
+                                    <div className="initial_info">The data displayed in these graphs is an initial overview of the input data before batch correction. If you have elected to use data sets derived from multiple sequencing runs, or collected by different groups we suggest the application of batch correction. The graphs presented above will be available for download again at the end of the run, however you can elect to download the graphs individually now by using the task bars found at the top of each graph. </div>
                                     <div className="initial_info">The next step in the process is to define the various groups of interest. Please note that batch correction will only be applied after your groups have been defined. More specific information to help interpret each graph can be found next to each graph title. If your data appears correct and complete please continue to grouping samples.</div>
                                     {/* <!--<div className="initial_info">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris non sodales neque. Suspendisse eget magna eu tellus scelerisque posuere. Fusce vel semper nisl. Vivamus imperdiet arcu quis neque vehicula, ac mattis ipsum auctor. Nunc sodales ligula risus, et pretium sem convallis id. Integer vitae nisi ac ante viverra volutpat.</div>--> */}
                                 </div>
 
                                 <div className="nav_container1">
-                                    <a href="/taskPage"> {/*added by Quang for button testing*/}
-                                        <button type="Continue" className="button validation_cont">Continue</button>
+                                    <a href={this.state.href} style={{'text-decoration': 'none'}}> {/*added by Quang for button testing*/}
+                                        <button type="Continue" 
+                                                className="button validation_cont"
+                                                onClick={this.handleSubmit}>Continue</button>
                                     </a>
                                 </div>
                             </div>

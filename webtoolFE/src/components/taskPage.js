@@ -6,7 +6,10 @@ class TaskPage extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			taskOptions: ["Distinguish between groups", "Task 2", "Task 3", "Task 4"],
+			taskOptions: ["Co-Differential Expression Analysis", 
+						  "Co-Expression Network Analysis", 
+						  "Differential Expression Analysis", 
+						  "Task 4"],
 			selectedTask: "",
 			href: ""
 		}
@@ -261,7 +264,7 @@ class TaskPage extends React.Component {
 														d="M198.19,26.76c-7.54,2.06-12.02,9.82-10.02,17.38c0.15,0.5,0.58,0.87,1.1,0.94h0.31   c0.6-0.16,0.95-0.77,0.79-1.37c0-0.01-0.01-0.03-0.01-0.04c-1.69-6.34,2.07-12.86,8.42-14.55c0.01,0,0.03-0.01,0.04-0.01   c0.6-0.16,0.95-0.77,0.79-1.37c0-0.01-0.01-0.03-0.01-0.04c-0.07-0.61-0.62-1.05-1.23-0.97C198.31,26.74,198.25,26.75,198.19,26.76   z" />
 												</g>
 											</svg>
-											<h3>Distinguish <br /> Between Groups</h3>
+											<h3>Co-Differential <br /> Expression Analysis</h3>
 											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
 										</div>
 									</button>
@@ -383,7 +386,7 @@ class TaskPage extends React.Component {
 													</g>
 												</g>
 											</svg>
-											<h3>Coming soon</h3>
+											<h3>Co-Expression <br/> Network Analysis</h3>
 											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed </p>
 										</div>
 									</button>
@@ -495,7 +498,7 @@ class TaskPage extends React.Component {
 														</g>
 													</g>
 												</svg>
-												<h3>Coming soon</h3>
+												<h3>Differential <br/> Expression Analysis</h3>
 												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed </p>
 											</div>
 										</button>
@@ -573,7 +576,7 @@ class TaskPage extends React.Component {
 									</div>
 								</div>
 								<div className="nav_container">
-									<a href={this.state.href}> {/*added by Quang for button testing*/}
+									<a href={this.state.href} style={{'text-decoration': 'none'}}> {/*added by Quang for button testing*/}
 										<button type="Continue" 
 												className="button task_cont"
 												onClick={this.getLink}
