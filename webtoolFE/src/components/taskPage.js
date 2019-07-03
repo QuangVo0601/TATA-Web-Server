@@ -498,7 +498,7 @@ class TaskPage extends React.Component {
 														</g>
 													</g>
 												</svg>
-												{/* <h3>Differential <br/> Expression Analysis</h3> */}
+												<h3>Differential <br/> Expression Analysis</h3>
 												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed </p>
 											</div>
 										</button>
