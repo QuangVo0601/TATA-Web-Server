@@ -35,6 +35,10 @@ class GtexModule extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            ageRange: [],
+            sex: [],
+            death: [],
+            tissueType: []
         }
     }
 
