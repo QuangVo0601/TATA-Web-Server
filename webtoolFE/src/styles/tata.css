@@ -620,7 +620,8 @@ margin-top:60px;
   border-radius: 20px;
   background-color:#F5F5F5;
   margin-right:53px;
-  transition: box-shadow .3s;
+	transition: box-shadow .3s;
+	border: none
 }
 .content{
   text-align: center;
