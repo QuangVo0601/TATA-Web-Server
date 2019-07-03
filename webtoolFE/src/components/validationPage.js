@@ -19,7 +19,6 @@ class ValidationPage extends React.Component {
 
     // As soon as the page route, it executes
     componentDidMount() {
-
         let traces_temp = []
         // localStorage stores everything as String
         // split by commas ',' to type cast it to array
@@ -59,7 +58,7 @@ class ValidationPage extends React.Component {
             tpc_traces: traces_temp
         })
         // remove everything from local storage for safety
-        localStorage.removeItem('x_tpc', 'y_tpc', 'x_pca', 'y_pca', 'x_dge', 'y_dge', 'pca_text')
+        localStorage.removeItem('x_tpc', 'y_tpc', 'x_pca', 'y_pca', 'x_dge', 'y_dge')
     }
 
     render() {
