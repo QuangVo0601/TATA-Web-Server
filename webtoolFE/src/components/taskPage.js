@@ -576,7 +576,7 @@ class TaskPage extends React.Component {
 									</div>
 								</div>
 								<div className="nav_container">
-									<a href={this.state.href}> {/*added by Quang for button testing*/}
+									<a href={this.state.href} style={{'text-decoration': 'none'}}> {/*added by Quang for button testing*/}
 										<button type="Continue" 
 												className="button task_cont"
 												onClick={this.getLink}
