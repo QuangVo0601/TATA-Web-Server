@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/tata.css";
+import Plot from 'react-plotly.js';
 import Select from "react-select" // to use dropbox
 import Footer from './botNav';
 
@@ -86,7 +87,37 @@ class BatchPage extends React.Component {
                                             <div className="helpcontent_batch"> Add content here.</div>
                                         </div>
                                         <div className="corrected-graphsize">
-
+                                            <Plot
+                                                data={[
+                                                    {
+                                                        x: [1, 2, 3],
+                                                        y: [3, 2, 1],
+                                                        type: 'scattergl',
+                                                        mode: 'markers', //lines or markers
+                                                        text: this.state.pca_text,
+                                                        hoverinfo: "text",
+                                                        marker: { color: 'green' },
+                                                    },
+                                                ]}
+                                                layout={{
+                                                    hovermode: 'closest',
+                                                    title: 'Corrected PCA',
+                                                    font: { family: 'Oswald,sans-serif', size: 15, color: '#114b5f' },
+                                                    width: 460, height: 450,
+                                                    xaxis: {
+                                                        autorange: true, showgrid: false, title: {
+                                                            text: 'PC1',
+                                                            font: { family: 'Oswald,sans-serif', size: 15, color: '#114b5f' }
+                                                        },
+                                                    },
+                                                    yaxis: {
+                                                        autorange: true, showgrid: false, title: {
+                                                            text: 'PC2',
+                                                            font: { family: 'Oswald,sans-serif', size: 15, color: '#114b5f' }
+                                                        }
+                                                    }
+                                                }}
+                                            />
                                         </div>
                                     </div>
 
@@ -96,7 +127,37 @@ class BatchPage extends React.Component {
                                             <div className="helpcontent_batch ">Add content here.</div>
                                         </div>
                                         <div className="corrected-graphsize">
-
+                                            <Plot
+                                                data={[
+                                                    {
+                                                        x: [4, 5, 6],
+                                                        y: [6, 5, 4],
+                                                        type: 'scattergl',
+                                                        mode: 'markers', //lines or markers
+                                                        text: this.state.pca_text,
+                                                        hoverinfo: "text",
+                                                        marker: { color: 'green' },
+                                                    },
+                                                ]}
+                                                layout={{
+                                                    hovermode: 'closest',
+                                                    title: 'Uncorrected PCA',
+                                                    font: { family: 'Oswald,sans-serif', size: 15, color: '#114b5f' },
+                                                    width: 460, height: 450,
+                                                    xaxis: {
+                                                        autorange: true, showgrid: false, title: {
+                                                            text: 'PC1',
+                                                            font: { family: 'Oswald,sans-serif', size: 15, color: '#114b5f' }
+                                                        },
+                                                    },
+                                                    yaxis: {
+                                                        autorange: true, showgrid: false, title: {
+                                                            text: 'PC2',
+                                                            font: { family: 'Oswald,sans-serif', size: 15, color: '#114b5f' }
+                                                        }
+                                                    }
+                                                }}
+                                            />
                                         </div>
                                     </div>
                                 </div>
@@ -111,6 +172,7 @@ class BatchPage extends React.Component {
                                                 <option>No</option>
                                             </select> */}
                                             <Select
+                                                placeholder={this.state.selectedOption}
                                                 value={this.state.selectedOption}
                                                 onChange={this.selectedOption}
                                                 options={this.state.outputOptions}
