@@ -7,6 +7,7 @@ import Chart from './components/chart';
 import ValidationPage from './components/validationPage'
 import TaskPage from './components/taskPage'
 import GroupingPage from './components/groupingPage'
+import BatchPage from './components/batchPage'
 
 class App extends React.Component {
   constructor(props) {
@@ -43,6 +44,13 @@ class App extends React.Component {
         <Route exact path="/groupingpage"
           render={() => (
             <GroupingPage
+            />
+          )
+          }
+        />
+        <Route exact path="/batchpage"
+          render={() => (
+            <BatchPage
             />
           )
           }
