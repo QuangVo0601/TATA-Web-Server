@@ -7,7 +7,7 @@ class BatchPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            outputOptions: [{ value: "Yes", label: "Yes" }, 
+            outputOptions: [{ value: "Yes", label: "Yes" },
             { value: "No", label: "No" }],
             selectedOption: "Yes"
         }
@@ -39,13 +39,13 @@ class BatchPage extends React.Component {
                                     <div id="mainnav">
                                         <div id="circles">
                                             <ul>
-                                                <li><span className="circles" id="active">1</span></li>
-                                                <li><div className="line1"></div></li>
-                                                <li><span className="circles">2</span></li>
-                                                <li><div className="line1"></div></li>
-                                                <li><span className="circles">3</span></li>
-                                                <li><div className="line"></div></li>
-                                                <li><span className="circles">4</span></li>
+                                                <li><span className="circles" id="complete">1</span></li>
+                                                <li><div className="line1" id="active3"></div></li>
+                                                <li><span className="circles" id="complete" >2</span></li>
+                                                <li><div className="line1" id="active3"></div></li>
+                                                <li><span className="circles" id="complete">3</span></li>
+                                                <li><div className="line" id="active3"></div></li>
+                                                <li><span className="circles" id="complete">4</span></li>
                                                 <li><div className="line"></div></li>
                                                 <li><span className="circles">5</span></li>
                                             </ul>
@@ -56,14 +56,14 @@ class BatchPage extends React.Component {
                                             <dl>
                                                 <div id="task">
                                                     <dt><div className="active2">Initial Validation</div></dt>
-                                                    <dt>Choose Task</dt>
-                                                    <dt>Group Samples</dt>
+                                                    <dt><div className="active2">Choose Task</div></dt>
+                                                    <dt><div className="active2">Group Samples</div></dt>
                                                     <dd>Group Samples & create Gtex group</dd>
                                                 </div>
                                                 {/* <!--end of task--> */}
 
                                                 <div id="samples">
-                                                    <dt>Choose Batch Correction</dt>
+                                                    <dt><div className="active2">Choose Batch Correction</div></dt>
                                                     <dd>Choose correction & View Plots</dd>
                                                     <dt>Algorithms & Tuning Parameters</dt>
                                                     <dd>Choose algoithims & set parameters</dd>
@@ -96,7 +96,7 @@ class BatchPage extends React.Component {
                                             <div className="helpcontent_batch ">Add content here.</div>
                                         </div>
                                         <div className="corrected-graphsize">
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -114,7 +114,7 @@ class BatchPage extends React.Component {
                                                 value={this.state.selectedOption}
                                                 onChange={this.selectedOption}
                                                 options={this.state.outputOptions}
-                                            />                                              
+                                            />
                                         </div>
                                     </div>
 
