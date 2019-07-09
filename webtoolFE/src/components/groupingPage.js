@@ -8,7 +8,7 @@ class GroupingPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            samples: localStorage.getItem('pca_text').split(','),
+            samples: localStorage.getItem('pca_text').split(','), // This is the headers 
             showPopUp: false
         }
     }
@@ -172,7 +172,12 @@ class GroupingPage extends React.Component {
                                     {/* <!--............................... --> */}
 
                                     <div className="nav_container3">
-                                        <button type="Continue" className="buttontask_cont">Continue</button>
+                                        <a href="/batchpage">
+                                            <button type="Continue" className="buttontask_cont">
+                                            Continue
+                                            </button> 
+                                        </a>
+                                        
                                     </div>
                                 </div>
 
