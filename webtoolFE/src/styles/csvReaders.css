@@ -6,10 +6,30 @@ input[type="file"] {
     pointer-events: none;
   }
 
-input[type="file"] + label, .next-butt {
+input[type="file"] + label {
+  padding: 5px;
+  border-radius: 4px;
+  background-color: #FF8C42; 
+  color: white;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 600;
+  }
+
+  .next-butt {
     padding: 5px;
     border-radius: 4px;
-    background-color: #FF8C42;
+    background-color: #FF8C42; 
+    color: white;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .nextbutt-after {
+    padding: 5px;
+    border-radius: 4px;
+    background-color:red; 
     color: white;
     font-family: Montserrat;
     font-size: 14px;

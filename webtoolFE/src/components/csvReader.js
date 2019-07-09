@@ -10,7 +10,10 @@ class csvReader extends React.Component {
             buttonText: "Upload",
             className: "before-upload",
             csvName: "file_name.csv",
-            href: ""
+            href: "",
+            waiting: false,
+            disableButt: "nextbutt-after",
+            bgColor:'#FF8C42'
         }
     }
     handleFileRead = () => {
@@ -40,13 +43,25 @@ class csvReader extends React.Component {
         this.setState({ className: "after-upload" })
         this.props.setWaitingTime()
         this.setState({buttonText: "Next"})
+
+        // for time out
+        this.setDisable()
+        console.log(this.state.disableButt)
+        setTimeout(this.setDisable,5000)
+        this.setState({disableButt: "next-butt"})
+        console.log(this.state.disablbeButt)
+        /* ------ End of timeout ----- */
+
         fileReader = new FileReader();
         // onloadend = when done loading file
         // async call ( which means loading and reading concurrently)
         fileReader.onloadend = this.handleFileRead; // calling method
         fileReader.readAsText(file); // return a result
     }
-
+    
+    setDisable=()=>{
+        this.setState({waiting: !this.state.waiting})
+    }
     handleSubmit = () => {
         if (this.state.buttonText === "Next") {
             this.setState({ href: '/validation' }) 
@@ -60,7 +75,13 @@ class csvReader extends React.Component {
                     <link href="https://fonts.googleapis.com/css?family=Montserrat:600&display=swap" rel="stylesheet" />
                     <div className={this.state.className}>{this.state.csvName}</div>
                     <a href={this.state.href} target="_blank">
-                        <button className='next-butt' onClick={this.handleSubmit}>Next</button>
+                        <button 
+                            className={this.state.disableButt} 
+                            disabled={this.state.waiting} 
+                            onClick={this.handleSubmit}
+                            >
+                                Next
+                        </button>
                     </a>         
                 </div>
             )
