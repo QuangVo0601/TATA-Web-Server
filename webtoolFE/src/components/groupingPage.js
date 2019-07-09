@@ -2,15 +2,32 @@ import React from "react";
 import "../styles/tata.css";
 import Footer from './botNav';
 import DragAndDrop from './groupingPageDrag&Drop';
+import Select from "react-select"; // to use dropbox
 import Popup from './gtexModal';
 
 class GroupingPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            //by default is 2 groups (1st group is control group)
+            numberOfGroupsOptions: [{ value: 0, label: "2 groups" }, 
+            { value: 1, label: "3 groups" },
+            { value: 2, label: "4 groups" },
+            { value: 3, label: "5 groups" },
+            { value: 4, label: "6 groups" },
+            { value: 5, label: "7 groups" },
+            { value: 6, label: "8 groups" },
+            { value: 7, label: "9 groups" },
+            { value: 8, label: "10 groups" }],
+            selectedNumberOfGroups: 0,
             samples: localStorage.getItem('pca_text').split(','),
             showPopUp: false
-        }
+        };
+    }
+
+    // This method is used to store new number of groups from Select dropbox
+    handleChange = (selected) => {
+        this.setState({ selectedNumberOfGroups: selected.value });
     }
 
     // To make pop up module
@@ -24,6 +41,11 @@ class GroupingPage extends React.Component {
         DragAndDrop() // enable drag and drop functionality
         //localStorage.removeItem('pca_text') // Delete for overwrite
     }
+
+    // componentDidUpdate() {
+    //     DragAndDrop() // enable drag and drop functionality
+    //     console.log("This is componentDidUpdate")
+    // }
 
     render() {
         return (
@@ -107,10 +129,18 @@ class GroupingPage extends React.Component {
                                 <div id="group-section">
                                     <div id="nav_group1">
                                         <div className="styled-select rounded">
-                                            <select>
+                                            {/* <select>
                                                 <option>Number of Groups</option>
                                                 <option>The second option</option>
-                                            </select>
+                                            </select> */}
+                                            
+                                            <Select
+                                                placeholder="Number of Groups"
+                                                value={this.state.selectedNumberOfGroups}
+                                                onChange={this.handleChange}
+                                                options={this.state.numberOfGroupsOptions}
+                                            />
+                                            
                                         </div>
                                         {/* <!-- group gtex & reset --> */}
                                         <div id="group-button">
@@ -120,22 +150,22 @@ class GroupingPage extends React.Component {
                                                 type="Create Gtext Group"
                                                 className="gtex_group"
                                                 onClick={this.togglePopup.bind(this)}
-                                                >
+                                            >
                                                 Create Gtex Group
                                             </button>
                                             {this.state.showPopup ?
                                                 <Popup
                                                     closePopup={this.togglePopup.bind(this)}
                                                 />
-                                                : null 
+                                                : null
                                             }
-                                        {/* <!-- End of pop up module button --> */}
-    
+                                            {/* <!-- End of pop up module button --> */}
+
                                             <button type="Reset Groups" className="reset_group">Reset Groups</button>
                                         </div>
                                     </div>
                                     {/* <!-- end of top of the group bottom section --> */}
-                                    {/* <!--    - --> */}
+                                    {/* <!-- start of all group boxes --> */}
                                     <div className="grid-container">
                                         <div id="sample-drop-field">
                                             <div id="nav_group2">
@@ -164,9 +194,23 @@ class GroupingPage extends React.Component {
                                             </div>
                                         </div>
 
-                                        {/* <!--  --> */}
-                                        {/* <!--  --> */}
-                                        {/* <!--  --> */}
+                                        {/* Start of populating group boxes after selecting number of groups*/}
+                                        {Array(this.state.selectedNumberOfGroups).fill(
+                                            <div id="sample-drop-field">
+                                                <div id="nav_group2">
+                                                    <form className="signIn">
+                                                        <input type="groupname" placeholder="Group Name" autocomplete='off' required />
+                                                    </form>
+                                                </div>
+                                                <div id="group-box">
+                                                    <ol data-draggable="target"
+                                                        aria-dropeffect="none"> {/*added 07/07 */}
+                                                    </ol>
+                                                </div>
+                                            </div>
+                                        )}
+                                        {/* End of populating group boxes after selecting number of groups*/}
+                                 
                                         {/* <!-- div below is the div for the .gridcontainer --> */}
                                     </div>
                                     {/* <!--............................... --> */}
