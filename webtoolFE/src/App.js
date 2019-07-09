@@ -8,6 +8,7 @@ import ValidationPage from './components/validationPage'
 import TaskPage from './components/taskPage'
 import GroupingPage from './components/groupingPage'
 import BatchPage from './components/batchPage'
+import AlgorithmPage from './components/algorithmPage'
 
 class App extends React.Component {
   constructor(props) {
@@ -51,6 +52,13 @@ class App extends React.Component {
         <Route exact path="/batchpage"
           render={() => (
             <BatchPage
+            />
+          )
+          }
+        />
+        <Route exact path="/algorithmpage"
+          render={() => (
+            <AlgorithmPage
             />
           )
           }
