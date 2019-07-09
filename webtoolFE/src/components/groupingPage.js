@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/tata.css";
 import Footer from './botNav';
-import DragAndDrop from './groupingPageDrag&Drop';
+//import DragAndDrop from './groupingPageDrag&Drop';
 import Select from "react-select"; // to use dropbox
 import Popup from './gtexModal';
 
@@ -19,7 +19,7 @@ class GroupingPage extends React.Component {
             { value: 6, label: "8 groups" },
             { value: 7, label: "9 groups" },
             { value: 8, label: "10 groups" }],
-            selectedNumberOfGroups: 0,
+            selectedNumberOfGroups: [],
             samples: localStorage.getItem('pca_text').split(','),
             showPopUp: false
         };
@@ -27,7 +27,11 @@ class GroupingPage extends React.Component {
 
     // This method is used to store new number of groups from Select dropbox
     handleChange = (selected) => {
-        this.setState({ selectedNumberOfGroups: selected.value });
+        let newArr = []
+        for (let i=0; i<selected.value; i++){
+            newArr.push([])
+        }
+        this.setState({ selectedNumberOfGroups: newArr});
     }
 
     // To make pop up module
@@ -38,7 +42,7 @@ class GroupingPage extends React.Component {
     // As soon as the page routes, it executes
     componentDidMount() {
         // console.log(this.state.samples) // Test if this.state.samples is array
-        DragAndDrop() // enable drag and drop functionality
+        //DragAndDrop() // enable drag and drop functionality
         //localStorage.removeItem('pca_text') // Delete for overwrite
     }
 
@@ -165,6 +169,7 @@ class GroupingPage extends React.Component {
                                         </div>
                                     </div>
                                     {/* <!-- end of top of the group bottom section --> */}
+                                    
                                     {/* <!-- start of all group boxes --> */}
                                     <div className="grid-container">
                                         <div id="sample-drop-field">
@@ -195,7 +200,7 @@ class GroupingPage extends React.Component {
                                         </div>
 
                                         {/* Start of populating group boxes after selecting number of groups*/}
-                                        {Array(this.state.selectedNumberOfGroups).fill(
+                                        {this.state.selectedNumberOfGroups.map(() => (
                                             <div id="sample-drop-field">
                                                 <div id="nav_group2">
                                                     <form className="signIn">
@@ -208,7 +213,7 @@ class GroupingPage extends React.Component {
                                                     </ol>
                                                 </div>
                                             </div>
-                                        )}
+                                        ))}
                                         {/* End of populating group boxes after selecting number of groups*/}
                                  
                                         {/* <!-- div below is the div for the .gridcontainer --> */}
@@ -216,7 +221,7 @@ class GroupingPage extends React.Component {
                                     {/* <!--............................... --> */}
 
                                     <div className="nav_container3">
-                                        <button type="Continue" className="buttontask_cont">Continue</button>
+                                        <a href='/batchpage'><button type="Continue" className="buttontask_cont">Continue</button></a>
                                     </div>
                                 </div>
 

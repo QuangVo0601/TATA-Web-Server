@@ -181,7 +181,7 @@ class BatchPage extends React.Component {
                                     </div>
 
                                     <div className="nav_container4">
-                                        <button type="Continue" className="button batch_cont">Continue</button>
+                                        <a href="/algorithmpage"><button type="Continue" className="button batch_cont">Continue</button></a>
                                     </div>
                                 </div>
 
