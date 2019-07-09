@@ -35,7 +35,10 @@ class GtexModule extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            // For age drop down
             ageRange: [],
+            // -- End of age drop down -- //
+            
             sex: [],
             death: [],
             tissueType: []
