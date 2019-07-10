@@ -1,50 +1,121 @@
-/* This is for syyntax purpose
-import React from "react";
-import "../styles/gtexModal.css";
 
-class GtexModule extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            ageRange: [],
-            sex: [],
-            death: [],
-            tissueType: []
-        }
-    }
-    render() {
-        return (
-            <div className="popup">
-                <div className="popup-inner"> <p>'hi'</p>
-                    <button onClick={this.props.closePopup}>Close</button>
-                </div>
-            </div>
-        )
-    }
-}
-export default GtexModule;
-*/
 
-import React from "react";
+import React, {Component} from "react";
+import Multiselect from 'react-multiselect-checkboxes'
 //import "../styles/gtexModal.css";
 import "../styles/tata.css";
 //import GtexModuleJquery from './gtexModuleJquery';
 
 
+
 class GtexModule extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            ageRange: [],
+            // ---- //
+            ageOpt: [
+                { label: "20-29", value: "20-29" },
+                { label: "30-39", value: "30-39" },
+                { label: "40-49", value: "40-49" },
+                { label: "50-59", value: "50-59" },
+                { label: "60-69", value: "60-69" },
+                { label: "70-79", value: "70-79" },
+            ],
+            age: null,
+            ages: [],
+            // ---- //
+
+            sexOpt: [
+                {label: "Male", value: "Male"},
+                {label: "Female", value:"Female"}
+            ],
             sex: [],
+            // ---- //
+
+            deathOpt: [
+                { label: "Ill Chronic", value: "Ill Chronic" },
+                { label: "Ventilator", value: "Ventilator" },
+                { label: "Fast Violent", value: "Fast Violent" },
+                { label: "Ill Unexpected", value: "Ill Unexpected" },
+                { label: "Fast Natural", value: "Fast Natural" },
+            ],
             death: [],
-            tissueType: []
+            // ---- //
+            
+            tissue1: ['Adipose Tissue','Adrenal Gland','Bladder','Brain','Breast','Cervix Uteri','Colon','Esophagus',
+                        'Fallopian Tube','Heart','Kidney','Liver','Lung','Muscle','Nerve'],
+            tissue2: ['Ovary','Pancreas','Pituitary','Prostate','Salivary Gland','Skin','Small Intestine','Spleen',
+                        'Stomach','Testis','Thyroid','Uterus','Vagina','Whole Blood'],
+            tissueType: [],
+            tissueObj:{},
         }
+
+    }
+    componentDidMount(){
+        this.handleTissueState()
     }
 
-    // 	componentDidMount() {
-    // 		GtexModuleJquery() 
-    // }
+    handleTissueState() {
+        let obj=this.state.tissueObj
+        this.state.tissue1.map((item)=>{
+            obj[item]=false
+        })
+        this.state.tissue2.map((item)=>{
+            obj[item]=false
+        })
+        this.setState({tissueObj:obj})
+    }
+
+    handleTissueClick = (event,key) => {
+        let o = this.state.tissueObj
+        o[key] = !o[key]
+        if(o[key]){
+            event.target.classList.add('selectedLI')
+        }
+        if(!o[key]){
+            event.target.classList.remove('selectedLI')
+        }
+        this.setState({tissueObj:o})
+        
+    }
+    handleAgeOnChange = (selected) => {
+        console.log(selected)
+        let arr = []
+        selected.forEach(element=>{
+            arr.push(element.value)
+        })
+        this.setState({ages:arr})
+  }
+    handleSexOnChange = (selected) => {
+        let arr = []
+        for (let i=0; i<selected.length;i++) {
+            arr.push(selected[i].value)
+        }
+        this.setState({ sex : arr});
+        console.log(this.state.sex)
+    }
+    handleDeathOnChange = (selected) => {
+        let arr = []
+        for (let i=0; i<selected.length;i++) {
+            arr.push(selected[i].value)
+        }
+        this.setState({ death : arr});
+        console.log(this.state.death)
+    }
+    createHandler=()=>{
+        let arr=[]
+        this.state.tissue1.forEach(item=>{
+            if(this.state.tissueObj[item]){
+                arr.push(item)
+            }
+        })
+        this.state.tissue2.forEach(item=>{
+            if(this.state.tissueObj[item]){
+                arr.push(item)
+            }
+        })
+        this.setState({tissueType:arr})
+    }
 
     render() {
         return (
@@ -84,116 +155,54 @@ class GtexModule extends React.Component {
                                 <div id="age">
                                     <h2>Age Range:</h2></div> {/*<!--pick one or more, send to Math team, click refresh to update sample count-->*/}
                                 <div id="age_drop_down">
-                                    <select name="langOpt[]" multiple id="langOpt">
-                                        <option value="20-29">20-29</option>
-                                        <option value="30-39">30-39</option>
-                                        <option value="40-49">40-49</option>
-                                        <option value="50-59">50-59</option>
-                                        <option value="60-69">60-69</option>
-                                        <option value="70-79">70-79</option>
-                                        {/* <!--	<option value="PHP">PHP</option>
-		<option value="Ruby on Rails">Ruby on Rails</option>
-		<option value="Android">Android</option>
-		<option value="iOS">iOS</option>
-		<option value="HTML">HTML</option>
-		<option value="XML">XML</option>	--> */}
-                                    </select>
+                                    <Multiselect 
+                                    isMulti
+                                    value={this.state.age}
+                                    onChange={this.handleAgeOnChange}
+                                    closeMenuOnSelect={false}
+                                    options={this.state.ageOpt}
+                                />
                                 </div>
-
-                                <script>
-
-                                    {/* $('#langOpt').multiselect({
-			{columns: '2',
-			placeholder: '',
-			search: 'false',
-			selectAll: 'true'}
-		}); */}
-
-                                </script>
+                                
                                 <div id="sex">
                                     <h2>Sex:</h2></div> {/*<!--pick one or more, send to Math team, click refresh to update sample count-->*/}
                                 <div className="sex-dropdown">
-                                    <select name="langOpt1[]" multiple id="langOpt1">
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                    </select>
+                                <Multiselect
+                                    isMulti
+                                    onChange={this.handleSexOnChange}
+                                    closeMenuOnSelect={false}
+                                    options={this.state.sexOpt}
+                                />
                                 </div>
-                                <script>
-
-                                    {/* $('#langOpt1').multiselect({
-			{columns: '1',
-			placeholder: '',
-			search: 'false',
-			selectAll: 'true'}
-		}); */}
-
-                                </script>
 
                                 <div id="death">
                                     <h2>Death:</h2></div> {/*<!--pick one or more, send to Math team, click refresh to update sample count-->*/}
                                 <div className="death-dropdown">
-                                    <select name="langOpt2[]" multiple id="langOpt2">
-                                        <option value="Ill Chronic">Ill Chronic</option>
-                                        <option value="Ventilator">Ventilator</option>
-                                        <option value="Fast Violent">Fast Violent</option>
-                                        <option value="Ill Unexpected">Ill Unexpected</option>
-                                        <option value="Fast Natural">Fast Natural</option>
-                                    </select>
+                                <Multiselect
+                                    isMulti
+                                    onChange={this.handleDeathOnChange}
+                                    closeMenuOnSelect={false}
+                                    options={this.state.deathOpt}
+                                />
+
                                 </div>
-                                <script>
-
-                                    {/* $('#langOpt2').multiselect({
-			{columns: '2',
-			placeholder: '',
-			search: 'false',
-			selectAll: 'true'}
-		}); */}
-
-                                </script>
+        
                             </div>
                             <div id="title">
                                 <h2>Select Tissue type(s):</h2></div> {/*<!--pick one or more, send to Math team, click refresh to update sample count-->*/}
                             <div id="all">
                                 <div id="set1">
-                                    <ul>
-                                        <li>Adipose Tissue</li>
-                                        <li>Adrenal Gland</li>
-                                        <li>Bladder</li>
-                                        <li>Brain</li>
-                                        <li>Breast</li>
-                                        <li>Cervix Uteri</li>
-                                        <li>Colon</li>
-                                        <li>Esophagus</li>
-                                        <li>Fallopian Tube</li>
-                                        <li>Heart</li>
-                                        <li>Kidney</li>
-                                        <li>Liver</li>
-                                        <li>Lung</li>
-                                        <li>Muscle</li>
-                                        <li>Nerve</li>
-
+                                    <ul> 
+                                        {this.state.tissue1.map((name)=><li onClick={(event)=>this.handleTissueClick(event,name)}>{name}</li>)}
                                     </ul>
                                     <ul>
-                                        <li>Ovary</li>
-                                        <li>Pancreas</li>
-                                        <li>Pituitary</li>
-                                        <li>Prostate</li>
-                                        <li>Salivary Gland</li>
-                                        <li>Skin</li>
-                                        <li>Small Intestine</li>
-                                        <li>Spleen</li>
-                                        <li>Stomach</li>
-                                        <li>Testis</li>
-                                        <li>Thyroid</li>
-                                        <li>Uterus</li>
-                                        <li>Vagina</li>
-                                        <li>Whole Blood</li>
+                                    {this.state.tissue2.map((name)=><li onClick={(event)=>this.handleTissueClick(event,name)}>{name}</li>)}
                                     </ul>
                                 </div>
                             </div>
                             <div id="gtexbuttons">
                                 <button type="Continue" className="buttoncancel" onClick={this.props.closePopup}>Cancel</button>
-                                <button type="Back" className="buttongroup" onClick={this.props.closePopup}>Create</button>
+                                <button type="Back" className="buttongroup" onClick={this.createHandler}>Create</button>
                             </div>
                         </div>
                     </body>

@@ -1510,6 +1510,7 @@ margin-top:95px;
 #age_drop_down{
 	margin-right:17.5px;
 }
+
 .sex-dropdown{
 	margin-right:17.5px;
 }
@@ -1667,6 +1668,12 @@ h2{
     box-sizing: border-box;
 	
 	
+}
+.selectedLI { 
+	border:#FF8C42 2px solid !important;
+}
+.selected:hover {
+	border: #d3d3d3 2px solid !important; 
 }
 
 
