@@ -8,8 +8,10 @@ class BatchPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            outputOptions: [{ value: "Yes", label: "Yes" },
-            { value: "No", label: "No" }],
+            outputOptions: [
+                { value: "Yes", label: "Yes" },
+                { value: "No", label: "No" }
+            ],
             selectedOption: "Yes"
         }
     }
