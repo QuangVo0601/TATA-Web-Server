@@ -21,7 +21,7 @@ from inputPage.views import index_page, input_detail, input_list
 urlpatterns = [
     path('backend', index_page),
     path('backend/list', input_list), # First route
-    path('backend/detail', input_detail),
+    path('backend/detail', input_detail), # gtex route
     path('', index),
     re_path(r'^(?:.*)/?$',index)
 ]

@@ -58,30 +58,21 @@ def input_list(request):
     
 
 @csrf_exempt
-def input_detail(request, pk):
+def input_detail(request):
     """
     Retrieve, update or delete a code input.
     """
-    try:
-        input = Input.objects.get(pk=pk)
-    except Input.DoesNotExist:
-        return HttpResponse(status=404)
+    if request.method == 'GET': # Back End send, Front End request
+        inputs = Input.objects.all()
+        serializer = InputSerializer(inputs, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
-    if request.method == 'GET': # retrieve data
-        serializer = InputSerializer(input)
-        return JsonResponse(serializer.data)
+    elif request.method == 'POST': # Back End request, Front End send
+        data = JSONParser().parse(request) # Receive data from front end
+        gtexData = data['gtex'] # syntax: data[key], key = package's name being sent
+        print(gtexData)
+        return JsonResponse({}, status=201) 
 
-    elif request.method == 'PUT': # update data
-        data = JSONParser().parse(request)
-        serializer = InputSerializer(input, data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=400)
-
-    elif request.method == 'DELETE': 
-        input.delete()
-        return HttpResponse(status=204)
 
 
 

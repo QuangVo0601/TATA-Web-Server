@@ -2,9 +2,8 @@
 
 import React, {Component} from "react";
 import Multiselect from 'react-multiselect-checkboxes'
-//import "../styles/gtexModal.css";
 import "../styles/tata.css";
-//import GtexModuleJquery from './gtexModuleJquery';
+import axios from 'axios'; // to send data to back end
 
 
 
@@ -21,7 +20,6 @@ class GtexModule extends React.Component {
                 { label: "60-69", value: "60-69" },
                 { label: "70-79", value: "70-79" },
             ],
-            age: null,
             ages: [],
             // ---- //
 
@@ -55,7 +53,35 @@ class GtexModule extends React.Component {
         this.handleTissueState()
     }
 
-    handleTissueState() {
+
+    // Age update handling
+    handleAgeOnChange = (selected) => {
+        console.log(selected)
+        let arr = []
+        selected.forEach(element=>{
+            arr.push(element.value)
+        })
+        this.setState({ages:arr})
+  }
+  // Sex update handling
+    handleSexOnChange = (selected) => {
+        let arr = []
+        for (let i=0; i<selected.length;i++) {
+            arr.push(selected[i].value)
+        }
+        this.setState({ sex : arr});
+    }
+    // Death update handling
+    handleDeathOnChange = (selected) => {
+        let arr = []
+        for (let i=0; i<selected.length;i++) {
+            arr.push(selected[i].value)
+        }
+        this.setState({ death : arr});
+    }
+
+    /* For Tissue type handling */
+        handleTissueState() {
         let obj=this.state.tissueObj
         this.state.tissue1.map((item)=>{
             obj[item]=false
@@ -78,30 +104,8 @@ class GtexModule extends React.Component {
         this.setState({tissueObj:o})
         
     }
-    handleAgeOnChange = (selected) => {
-        console.log(selected)
-        let arr = []
-        selected.forEach(element=>{
-            arr.push(element.value)
-        })
-        this.setState({ages:arr})
-  }
-    handleSexOnChange = (selected) => {
-        let arr = []
-        for (let i=0; i<selected.length;i++) {
-            arr.push(selected[i].value)
-        }
-        this.setState({ sex : arr});
-        console.log(this.state.sex)
-    }
-    handleDeathOnChange = (selected) => {
-        let arr = []
-        for (let i=0; i<selected.length;i++) {
-            arr.push(selected[i].value)
-        }
-        this.setState({ death : arr});
-        console.log(this.state.death)
-    }
+
+    // toggle 'create'
     createHandler=()=>{
         let arr=[]
         this.state.tissue1.forEach(item=>{
@@ -114,8 +118,16 @@ class GtexModule extends React.Component {
                 arr.push(item)
             }
         })
-        this.setState({tissueType:arr})
+        this.setState({tissueType:arr}).then(()=>{
+            axios.post('http://127.0.0.1:8000/backend/detail', {
+                //axios.post('http://oscar19.orc.gmu.edu/backend/detail', {
+                    gtex: [this.state.sex,this.state.ages,this.state.death,this.state.tissueType]
+                })
+        })
     }
+                
+
+    /* End of tissue type handling */
 
     render() {
         return (
