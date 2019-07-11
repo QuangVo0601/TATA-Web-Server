@@ -9,6 +9,7 @@ import TaskPage from './components/taskPage'
 import GroupingPage from './components/groupingPage'
 import BatchPage from './components/batchPage'
 import AlgorithmPage from './components/algorithmPage'
+import Dnd from './components/dummyDND'
 
 class App extends React.Component {
   constructor(props) {
@@ -63,7 +64,13 @@ class App extends React.Component {
           )
           }
         />
-
+        <Route exact path="/dummydnd"
+          render={() => (
+            <Dnd
+            />
+          )
+          }
+        />
       </div>
     )
   }

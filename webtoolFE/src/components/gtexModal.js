@@ -122,6 +122,8 @@ class GtexModule extends React.Component {
         axios.post('http://127.0.0.1:8000/backend/detail', {
             //axios.post('http://oscar19.orc.gmu.edu/backend/detail', {
             gtex: [[], this.state.sex, this.state.ages, this.state.death, [], this.state.tissueType]
+        }).then(()=>{
+            console.log('im posted')
         })
 
     }

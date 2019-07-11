@@ -841,13 +841,13 @@ h3{
 		border-color: #E5E5E5;
 		overflow-y: auto;
 	}
- #all1 > ul {
+ .all1 > ul {
  	    	list-style: none;
  	    	float: left;
 				width: 378px;
 				height:auto;
  	    }
- 	 #all1 li {
+ 	 .all1 li {
  			text-decoration: none;
  		  display: block;
  			padding: 10px;
@@ -861,18 +861,17 @@ h3{
  			-moz-transition: all 0.2s ease;
  			-o-transition: all 0.2s ease;
  	    }
- 	  #all1:hover li {
+ 	  .all1:hover li {
  			opacity: 0.2;
  	    }
- 	  #all1:hover ul:hover li {
+ 	  .all1:hover ul:hover li {
  			opacity: 0.5;
  	    }
- 	  #all1:hover ul:hover li:hover {
+ 	  .all1:hover ul:hover li:hover {
  			opacity: 1;
  	    }
 .sample-container {
-      display: block;
-      position: relative;
+	  display: block;
       cursor:grabbing;
       font-size: 15px;
       -webkit-user-select: none;
@@ -1080,23 +1079,23 @@ label.container{
   font-size: 12px;
 }
 /* ------- */
-#group-box{
+.group-box{
   display: flex;
   justify-content: center;
 	margin:auto;
 }
-[data-draggable="target"]
-{
-    list-style-type:none;
+
+.data-draggable{
+	list-style-type:none;
     width:378px;
     height:95px;
     overflow-y:auto;
-    /* margin:0 0.5em 0.5em 0; */
     padding:0.5em;
     border-radius:15px;
     background-color: #F5F5F5;
     border: 1px solid #E5E5E5;
 }
+
 
 /* drop target state */
 [data-draggable="target"][aria-dropeffect="move"]
@@ -1198,10 +1197,10 @@ label.container{
 		height: 779px;
 		overflow-y: scroll;
 	}
-	#all1 > ul {
+	.all1 > ul {
 		float: left; width: 270px;
 	}
-	#all1 li {
+	.all1 li {
 		width:auto;
 	}
  .sample-container input {
@@ -1240,7 +1239,7 @@ label.container{
 	justify-content: space-around;
 	height: 955px;
 	width: 490px;
-	margin-right: 20px;
+	margin-right: 20ptarrx;
 	padding: 35px 35px 35px;
 	
 }
@@ -1256,10 +1255,10 @@ label.container{
 button.gtex_group{
 	margin-right: 20px;
 }
-#all1 > ul {
+.all1 > ul {
 	float: left; width: 430px;
 }
-#all1 li {
+.all1 li {
 	width:auto;
 }
 .sample-container input {

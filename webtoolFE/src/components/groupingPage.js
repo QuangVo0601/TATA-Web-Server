@@ -10,46 +10,77 @@ class GroupingPage extends React.Component {
         super(props)
         this.state = {
             //by default is 2 groups (1st group is control group)
-            numberOfGroupsOptions: [{ value: 0, label: "2 groups" }, 
-            { value: 1, label: "3 groups" },
-            { value: 2, label: "4 groups" },
-            { value: 3, label: "5 groups" },
-            { value: 4, label: "6 groups" },
-            { value: 5, label: "7 groups" },
-            { value: 6, label: "8 groups" },
-            { value: 7, label: "9 groups" },
-            { value: 8, label: "10 groups" }],
+            groupLabel: '2 groups',
+            numberOfGroupsOptions: [{ value: 2, label: "2 groups" },
+            { value: 3, label: "3 groups" },
+            { value: 4, label: "4 groups" },
+            { value: 5, label: "5 groups" },
+            { value: 6, label: "6 groups" },
+            { value: 7, label: "7 groups" },
+            { value: 8, label: "8 groups" },
+            { value: 9, label: "9 groups" },
+            { value: 10, label: "10 groups" }],
+            dndGroup: {
+                'samples': localStorage.getItem('pca_text').split(','),
+                '1': [],
+                '2': []
+            },
+            dragFrom: '',
             selectedNumberOfGroups: [],
-            samples: localStorage.getItem('pca_text').split(','),
+
             showPopUp: false
         };
     }
 
     // This method is used to store new number of groups from Select dropbox
     handleChange = (selected) => {
-        let newArr = []
-        for (let i=0; i<selected.value; i++){
-            newArr.push([])
+        let newO = {
+            'samples': localStorage.getItem('pca_text').split(','),
+            '1': [],
+            '2': []
         }
-        this.setState({ selectedNumberOfGroups: newArr});
+        let newA = []
+        for (let i = 2; i <= selected.value; i++) {
+            if (i < selected.value) { newA.push([`${i}`]) }
+            newO[`${i}`] = []
+        }
+        this.setState({
+            groupLabel: selected.labbel,
+            dndGroup: newO,
+            selectedNumberOfGroups: newA
+        });
     }
+    onDragStartHandler = (event, value) => {
+        console.log(value, 'value is dragged')
+        console.log(event.target.id, 'id is dragged')
+        this.setState({ dragFrom: event.target.id })//store which array data is removed from
+        event.dataTransfer.setData("value", value)//store value in event object
+
+    }
+    onDropHandler = (event) => {
+        let newObject = this.state.dndGroup//create new objectt
+        const data = event.dataTransfer.getData("value")//get value from event object
+        const id = event.target.id //getting dropped to id
+        console.log(event, 'this is event')
+        console.log(event.target, 'this is target')
+        console.log(id, 'id is in drop')
+        const removeData = this.state.dndGroup[`${this.state.dragFrom}`].filter(value => {
+            return value != data
+        })
+        newObject[`${this.state.dragFrom}`] = removeData
+        newObject[`${id}`].push(data)
+        this.setState({ dndGroup: newObject })
+
+    }
+    onDragOverHandler = (event) => {
+        event.preventDefault()//stop everything from happening at once
+    }
+
 
     // To make pop up module
     togglePopup() {
         this.setState({ showPopup: (!this.state.showPopup) })
     }
-
-    // As soon as the page routes, it executes
-    componentDidMount() {
-        // console.log(this.state.samples) // Test if this.state.samples is array
-        //DragAndDrop() // enable drag and drop functionality
-        //localStorage.removeItem('pca_text') // Delete for overwrite
-    }
-
-    // componentDidUpdate() {
-    //     DragAndDrop() // enable drag and drop functionality
-    //     console.log("This is componentDidUpdate")
-    // }
 
     render() {
         return (
@@ -115,13 +146,25 @@ class GroupingPage extends React.Component {
                             <div id="groupflex-section">
                                 {/* <!-- samples section --> */}
                                 <div id="sample-section">
-                                    <div id="all1">
-                                        <ul data-draggable="target">
+                                    <div
+                                        className="all1"
+                                        id="samples"
+                                        onDragOver={event => this.onDragOverHandler(event)}
+                                        onDrop={event => this.onDropHandler(event)}
+                                    >
+                                        <ul>
                                             {/* Samples input code goes here */}
-                                            {this.state.samples.map((sample) => (
-                                                <li data-draggable="item"><label className="sample-container"><span className="grippy"></span> {sample}
-                                                    <input type="checkbox" checked="checked" />
-                                                    <span className="checkmark-sample"></span></label>
+                                            {this.state.dndGroup['samples'].map((sample) => (
+                                                <li
+                                                    id='samples'
+                                                    draggable
+                                                    onDragStart={event => this.onDragStartHandler(event, sample)}
+                                                >
+                                                    <label className="sample-container">
+                                                        <span className="grippy"></span> {sample}
+                                                        <input type="checkbox" checked="checked" />
+                                                        <span className="checkmark-sample"></span>
+                                                    </label>
                                                 </li>
                                             ))}
                                             {/* End of JSX dynamic code */}
@@ -133,18 +176,13 @@ class GroupingPage extends React.Component {
                                 <div id="group-section">
                                     <div id="nav_group1">
                                         <div className="styled-select rounded">
-                                            {/* <select>
-                                                <option>Number of Groups</option>
-                                                <option>The second option</option>
-                                            </select> */}
-                                            
                                             <Select
                                                 placeholder="Number of Groups"
-                                                value={this.state.selectedNumberOfGroups}
+                                                value={this.state.groupLabel}
                                                 onChange={this.handleChange}
                                                 options={this.state.numberOfGroupsOptions}
                                             />
-                                            
+
                                         </div>
                                         {/* <!-- group gtex & reset --> */}
                                         <div id="group-button">
@@ -169,9 +207,9 @@ class GroupingPage extends React.Component {
                                         </div>
                                     </div>
                                     {/* <!-- end of top of the group bottom section --> */}
-                                    
+
                                     {/* <!-- start of all group boxes --> */}
-                                    <div className="grid-container">
+                                    <div className="grid-container" >
                                         <div id="sample-drop-field">
                                             <div id="nav_group2">
                                                 <form className="signIn">
@@ -179,9 +217,28 @@ class GroupingPage extends React.Component {
                                                     <label className="container">Null Hypothesis</label>
                                                 </form>
                                             </div>
-                                            <div id="group-box">
-                                                <ol data-draggable="target">
-                                                </ol>
+                                            <div
+                                                className="group-box" id='1'
+                                                onDragOver={event => this.onDragOverHandler(event)}
+                                                onDrop={event => this.onDropHandler(event)}
+                                            >
+                                                <div className="data-draggable" id="1">
+                                                    {this.state.dndGroup['1'].map((sample) => {
+                                                        return (
+                                                            <li
+                                                                id='1'
+                                                                draggable
+                                                                onDragStart={event => this.onDragStartHandler(event, sample)}
+                                                            >
+                                                                <label className="sample-container">
+                                                                    <span className="grippy"></span> {sample}
+                                                                    <input type="checkbox" checked="checked" />
+                                                                    <span className="checkmark-sample"></span>
+                                                                </label>
+                                                            </li>
+                                                        )
+                                                    })}
+                                                </div>
                                             </div>
                                         </div>
 
@@ -193,29 +250,64 @@ class GroupingPage extends React.Component {
                                                     <input type="groupname" placeholder="Group Name" autocomplete='off' required />
                                                 </form>
                                             </div>
-                                            <div id="group-box">
-                                                <ol data-draggable="target">
-                                                </ol>
+                                            <div className="group-box" id='2'
+                                                onDragOver={event => this.onDragOverHandler(event)}
+                                                onDrop={event => this.onDropHandler(event)}>
+                                                <div className="data-draggable" id="2">
+                                                    {this.state.dndGroup['2'].map((sample) => {
+                                                        return (
+                                                            <li
+                                                                id='2'
+                                                                draggable
+                                                                onDragStart={event => this.onDragStartHandler(event, sample)}
+                                                            >
+                                                                <label className="sample-container">
+                                                                    <span className="grippy"></span> {sample}
+                                                                    <input type="checkbox" checked="checked" />
+                                                                    <span className="checkmark-sample"></span>
+                                                                </label>
+                                                            </li>
+                                                        )
+                                                    })}
+                                                </div>
                                             </div>
                                         </div>
 
                                         {/* Start of populating group boxes after selecting number of groups*/}
-                                        {this.state.selectedNumberOfGroups.map(() => (
-                                            <div id="sample-drop-field">
-                                                <div id="nav_group2">
-                                                    <form className="signIn">
-                                                        <input type="groupname" placeholder="Group Name" autocomplete='off' required />
-                                                    </form>
+                                        {this.state.selectedNumberOfGroups.map((id) => {
+                                            return (
+                                                <div id="sample-drop-field">
+                                                    <div id="nav_group2">
+                                                        <form className="signIn">
+                                                            <input type="groupname" placeholder="Group Name" autocomplete='off' required />
+                                                        </form>
+                                                    </div>
+                                                    <div className="group-box" id={id}
+                                                        onDragOver={event => this.onDragOverHandler(event)}
+                                                        onDrop={event => this.onDropHandler(event)}>
+                                                        <div className="data-draggable" id={id}>
+                                                            {this.state.dndGroup[id].map((sample) => {
+                                                                return (
+                                                                    <li
+                                                                        id={id}
+                                                                        draggable
+                                                                        onDragStart={event => this.onDragStartHandler(event, sample)}
+                                                                    >
+                                                                        <label className="sample-container">
+                                                                            <span className="grippy"></span> {sample}
+                                                                            <input type="checkbox" checked="checked" />
+                                                                            <span className="checkmark-sample"></span>
+                                                                        </label>
+                                                                    </li>
+                                                                )
+                                                            })}
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div id="group-box">
-                                                    <ol data-draggable="target"
-                                                        aria-dropeffect="none"> {/*added 07/07 */}
-                                                    </ol>
-                                                </div>
-                                            </div>
-                                        ))}
+                                            )
+                                        })}
                                         {/* End of populating group boxes after selecting number of groups*/}
-                                 
+
                                         {/* <!-- div below is the div for the .gridcontainer --> */}
                                     </div>
                                     {/* <!--............................... --> */}
