@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/tata.css";
+import axios from 'axios'; // to send data to back end
 import Select from "react-select" // to use dropbox
 import Footer from './botNav';
 
@@ -14,8 +15,14 @@ class AlgorithmPage extends React.Component {
             sampleVarianceOptions: [{ value: "equal", label: "Equal" },
             { value: "unequal", label: "Unequal" }],
             selectedSampleVariance: "",
+
+            falseDiscoveryRate_value: 0,
+            bonferroniAlpha_value: 0,
             
         }
+        this.handleChangeFalseDiscovery = this.handleChangeFalseDiscovery.bind(this);
+        this.handleChangeBonferroni = this.handleChangeBonferroni.bind(this);
+
     }
 
     // This method is used to store "algorithm" option from dropbox
@@ -28,6 +35,32 @@ class AlgorithmPage extends React.Component {
         this.setState({ selectedSampleVariance: selected })
     }       
 
+    // This method is used to store "False Discovery Rate" from slider 1
+    handleChangeFalseDiscovery(event) {
+        this.setState({falseDiscoveryRate_value: event.target.value});
+    }
+
+    // This method is used to store "Bonferroni Alpha" from slider 2
+    handleChangeBonferroni(event) {
+        this.setState({bonferroniAlpha_value: event.target.value});
+    }
+
+    /*runTaskHandler = () => {
+        // sending request to back end need to be together
+        //axios call (get in header) to send to back end
+        axios.post('http://127.0.0.1:8000/backend/list3', {
+        //axios.post('http://oscar19.orc.gmu.edu/backend/list3', {
+            
+        }).then((arr) => { // to receive data from back end 
+
+        })
+        // }).then(()=>{
+        //     this.setState({ href: '/resultpage' }) 
+        // })
+
+        this.setState({ href: '/resultpage' }) 
+    }*/
+
     render() {
         return (
             <div>
@@ -37,12 +70,6 @@ class AlgorithmPage extends React.Component {
                     <link href="tata.css" rel="stylesheet" />
                     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Oswald&display=swap" rel="stylesheet" />
                     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap" rel="stylesheet" />
-
-                    {/* <!-- jQuery library --> */}
-                    {/* <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> */}
-
-                    {/* <!-- MultiSelect CSS & JS library --> */}
-                    {/* <script src="jQuery/jquery.built.js"></script> */}
                 </head>
 
                 <body>
@@ -111,15 +138,6 @@ class AlgorithmPage extends React.Component {
 
                                         </div>
                                     </div>
-                                    {/* <script>
-                    
-                    $('#langOpt').multiselect({
-                        columns: 1,
-                        placeholder: '',
-                        search: false,
-                    });
-                    
-                </script> */}
                                     <div id="section2">
                                         <div id="samplevariance">
                                             <h2>Sample Variance:</h2></div>
@@ -136,15 +154,6 @@ class AlgorithmPage extends React.Component {
                                                 options={this.state.sampleVarianceOptions}
                                             />                                                
                                         </div>
-                                        {/* <script>
-                    
-                    $('#langOpt2').multiselect({
-                        columns: 1,
-                        placeholder: '',
-                        search: false,
-                    });
-                    
-                </script> */}
                                     </div>
                                 </div>
                                 <div id="slider">
@@ -153,8 +162,8 @@ class AlgorithmPage extends React.Component {
                                         <div className="helpcontent5 TPC"> Outliers samples may be an expected outcome if your data is derived from diseased groups or from different tissue types. If your data is derived from multiple batches there should be shifts across all chromosomes. Batch correction option is recommended.</div>
                                     </div>
                                     <div id="falseDiscoverySlider">
-                                        <input type="range" min="0" max="1" value="0" step="0.025" className="slider" id="myRange" />
-                                        <span id="demo"></span>
+                                        <input type="range" min="0" max="1" value={this.state.falseDiscoveryRate_value} step="0.025" className="slider" id="myRange" onChange={this.handleChangeFalseDiscovery} />
+                                        <span id="demo">{this.state.falseDiscoveryRate_value}</span>
                                     </div>
 
                                     <div className="drophelp5">
@@ -162,29 +171,9 @@ class AlgorithmPage extends React.Component {
                                         <div className="helpcontent5 TPC">based on tissue source and gender. Outliers samples may be an expected outcome if your data is derived from diseased groups or from different tissue types. </div>
                                     </div>
                                     <div id="bonferroniSlider">
-                                        <input type="range" min="0" max="1" value="0" step="0.025" className="slider" id="myRange2" />
-                                        <span id="demo2"></span>
+                                        <input type="range" min="0" max="1" value={this.state.bonferroniAlpha_value} step="0.025" className="slider" id="myRange2" onChange={this.handleChangeBonferroni}/>
+                                        <span id="demo2">{this.state.bonferroniAlpha_value}</span>
                                     </div>
-
-                                    {/* <script>
-            var slider = document.getElementById("myRange");
-            var output = document.getElementById("demo");
-            output.innerHTML = slider.value;
-            
-            slider.oninput = function() {
-              output.innerHTML = this.value;
-            }
-            </script>  */}
-
-                                    {/* <script>
-            var slider = document.getElementById("myRange2");
-            var output = document.getElementById("demo2");
-            output.innerHTML = slider.value;
-            
-            slider.oninput = function() {
-              output.innerHTML = this.value;
-            }
-            </script>  */}
                                 </div>
 
 
