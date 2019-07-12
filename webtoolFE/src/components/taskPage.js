@@ -138,7 +138,7 @@ class TaskPage extends React.Component {
 											<dl>
 												<div id="task">
 													<dt>
-														<div className="active2">Initial Validation</div>
+														<div className="active2">Exploratory Plots</div>
 													</dt>
 													<dt>
 														<div className="active2">Choose Task</div>

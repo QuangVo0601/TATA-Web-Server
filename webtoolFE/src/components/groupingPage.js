@@ -120,7 +120,7 @@ class GroupingPage extends React.Component {
                                         <div id="stepnav">
                                             <dl>
                                                 <div id="task">
-                                                    <dt><div className="active2">Initial Validation</div></dt>
+                                                    <dt><div className="active2">Exploratory Plots</div></dt>
                                                     <dt><div className="active2">Choose Task</div></dt>
                                                     <dt><div className="active2">Group Samples</div></dt>
                                                     <dd>Group Samples & create Gtex group</dd>

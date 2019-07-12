@@ -106,7 +106,7 @@ class ValidationPage extends React.Component {
                                         <div id="stepnav">
                                             <dl>
                                                 <div id="task">
-                                                    <dt><div className="active2">Initial Validation</div></dt>
+                                                    <dt><div className="active2">Exploratory Plots</div></dt>
                                                     <dt>Choose Task</dt>
                                                     <dt>Group Samples</dt>
                                                     <dd>Group Samples & create Gtex group</dd>
@@ -246,7 +246,7 @@ class ValidationPage extends React.Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div id="initial_header">Initial Validation</div>
+                                <div id="initial_header">Exploratory Plots</div>
                                 <div id="validation_info">
                                     <div className="initial_info">The data displayed in these graphs is an initial overview of the input data before batch correction. If you have elected to use data sets derived from multiple sequencing runs, or collected by different groups we suggest the application of batch correction. The graphs presented above will be available for download again at the end of the run, however you can elect to download the graphs individually now by using the task bars found at the top of each graph. </div>
                                     <div className="initial_info">The next step in the process is to define the various groups of interest. Please note that batch correction will only be applied after your groups have been defined. More specific information to help interpret each graph can be found next to each graph title. If your data appears correct and complete please continue to grouping samples.</div>

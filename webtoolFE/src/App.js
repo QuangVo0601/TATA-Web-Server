@@ -1,9 +1,7 @@
 import React from 'react';
 import './App.css';
-import TopNav from './components/topNav';
 import { Route } from 'react-router-dom';
 import WebTool from './components/webtool';
-import Chart from './components/chart';
 import ValidationPage from './components/validationPage'
 import TaskPage from './components/taskPage'
 import GroupingPage from './components/groupingPage'
@@ -30,8 +28,6 @@ class App extends React.Component {
         />
         <Route exact path="/validation"
           render={() => (
-            // <Chart
-            // />
             <ValidationPage /> //added by Quang for testing
           )
           }
