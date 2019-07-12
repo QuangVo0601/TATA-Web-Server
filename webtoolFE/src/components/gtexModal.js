@@ -122,7 +122,7 @@ class GtexModule extends React.Component {
         axios.post('http://127.0.0.1:8000/backend/detail', {
             //axios.post('http://oscar19.orc.gmu.edu/backend/detail', {
             gtex: [[], this.state.sex, this.state.ages, this.state.death, [], this.state.tissueType]
-        }).then(()=>{
+        }).then(() => {
             console.log('im posted')
         })
 
@@ -140,6 +140,7 @@ class GtexModule extends React.Component {
                         <title>gtex group</title>
                         <link href="gtex.css" rel="stylesheet" />
                         <meta name="viewport" content="width=device-width, initial-scale=1" />
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
                         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Oswald&display=swap" rel="stylesheet" />
                         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap" rel="stylesheet" />
 
@@ -162,7 +163,16 @@ class GtexModule extends React.Component {
                                 </div>
                                 <div id="sample">
                                     <h2>Sample Count:</h2>
-                                    <h3>0</h3> {/*<!--need a refresh icon next to this sample count-->*/}
+                                    <div className="sample2">
+                                        <h3>0</h3>
+                                        {/*refresh button part starts*/}
+                                        <button id="refresh"><i className="fa fa-refresh" style={{ 'font-size': '20px' }}></i>
+                                            <span className="text-block">
+                                                Refresh this page
+                                        </span>
+                                        </button>
+                                        {/*refresh button part ends*/}
+                                    </div>
                                 </div>
                             </div>
                             <div id="bottomcontent">

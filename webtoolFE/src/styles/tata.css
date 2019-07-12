@@ -1504,6 +1504,7 @@ margin-top:95px;
     font-family: 'Oswald', sans-serif;
 	line-height:40px;
 	color:#114B5F;
+	padding-right: 5px; 
 	
 }
 #age_drop_down{
@@ -1619,6 +1620,53 @@ h2{
 	background-color: #114B5F;
 }
 
+/*refresh button part starts*/
+.sample2{
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+}
+
+.fa-refresh{
+font-size:20px;
+color:white;
+}
+#refresh{
+  display: inline-grid;
+  position: relative;
+
+ background-color: #2EC4B6;
+ border-radius: 50%;
+ padding:5px;
+  border: none;
+    height: 30px;
+  width: 30px;
+}
+#refresh:hover{
+  background-color:  #22B0A3;
+
+}
+#refresh:hover .text-block{
+  visibility: visible;
+}
+#refresh{
+  	outline: none !important;
+}
+.text-block {
+  visibility: hidden;
+  position: relative;
+  top: 9px;
+  right: 40px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.8em;
+  color: #817e7e;
+  width: 97px;
+  border: .5px solid black;
+  box-shadow: 2px 2px #D4D1D1;
+  padding: 4px;
+  margin: 0;
+}
+/*refresh button part ends*/
 
 #all{
 	height:480px;
@@ -1871,7 +1919,8 @@ h2{
 	height:780px;  
 	top: 2%; 
     margin: 0 auto;   
-  }
+	}
+
 /*gtex module code ends*/
 
 
