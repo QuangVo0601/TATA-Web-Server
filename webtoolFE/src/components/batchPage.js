@@ -12,7 +12,13 @@ class BatchPage extends React.Component {
                 { value: "Yes", label: "Yes" },
                 { value: "No", label: "No" }
             ],
-            selectedOption: "Yes"
+            selectedOption: "Yes",
+            uncorrected_pca_traces: [],
+            corrected_pca_traces: [],
+            // x_uncorrected: [], //maybe localStorage.getItem('x_pca').split(",") ?
+            // y_uncorrected: [], //maybe localStorage.getItem('y_pca').split(",") ?
+            // x_corrected: [], //maybe localStorage.getItem('x_corrected').split(",") ?
+            // y_corrected: [], //maybe localStorage.getItem('y_corrected').split(",") ?
         }
     }
 
@@ -20,6 +26,61 @@ class BatchPage extends React.Component {
     selectedOption = (selected) => {
         this.setState({ selectedOption: selected })
     }
+
+    // As soon as the page route, it executes
+    /*componentDidMount() {
+
+        console.log()
+
+        // number of lines on each graph
+        let no_of_dataframes = parseInt(localStorage.getItem('no_of_dataframes'))
+        // number of ordered pairs for each line
+        let no_of_ordered_pairs = parseInt(localStorage.getItem('no_of_ordered_pairs'))
+        let j = 0 // for slice begin
+        let k = no_of_ordered_pairs // for slice end
+
+        // for uncorrected pca graph
+        let uncorrected_traces_temp = []
+        for(let i = 0; i < no_of_dataframes; i++){
+            let x = localStorage.getItem('x_uncorrected').split(",").slice(j, k)
+            let y = localStorage.getItem('y_uncorrected').split(",").slice(j, k)
+            j = k // set new begin index
+            k += no_of_ordered_pairs // set new end index
+            //let name = names[i] //sample name
+            let type = 'scatter'
+            let mode = 'markers'
+            //let hoverinfo = "name"
+            let trace = { x, y, type, mode} // create a new trace obj
+            uncorrected_traces_temp.push(trace) // add that trace obj into our tpc_trace
+        }
+
+        j = 0 // reset slice begin
+        k = no_of_ordered_pairs // reset slice end
+
+        // for corrected pca graph
+        let corrected_traces_temp = []
+        for(let i = 0; i < no_of_dataframes; i++){
+            let x = localStorage.getItem('x_corrected').split(",").slice(j, k)
+            let y = localStorage.getItem('y_corrected').split(",").slice(j, k)
+            j = k // set new begin index
+            k += no_of_ordered_pairs // set new end index
+            //let name = names[i] //sample name
+            let type = 'scatter'
+            let mode = 'markers'
+            //let hoverinfo = "name"
+            let trace = { x, y, type, mode} // create a new trace obj
+            corrected_traces_temp.push(trace) // add that trace obj into our tpc_trace
+        }
+
+        // this.setState works the same as setters
+        // syntax: this.setState( {target value : value to change} )
+        this.setState({
+            uncorrected_pca_traces: uncorrected_traces_temp,
+            corrected_pca_traces: corrected_traces_temp
+        })
+
+
+    }*/
 
     render() {
         return (
@@ -90,17 +151,9 @@ class BatchPage extends React.Component {
                                         </div>
                                         <div className="corrected-graphsize">
                                             <Plot
-                                                data={[
-                                                    {
-                                                        x: [1, 2, 3],
-                                                        y: [3, 2, 1],
-                                                        type: 'scattergl',
-                                                        mode: 'markers', //lines or markers
-                                                        text: this.state.pca_text,
-                                                        hoverinfo: "text",
-                                                        marker: { color: 'green' },
-                                                    },
-                                                ]}
+                                                data={this.state.corrected_pca_traces}
+
+                                
                                                 layout={{
                                                     hovermode: 'closest',
                                                     title: 'Corrected PCA',
@@ -130,17 +183,9 @@ class BatchPage extends React.Component {
                                         </div>
                                         <div className="corrected-graphsize">
                                             <Plot
-                                                data={[
-                                                    {
-                                                        x: [4, 5, 6],
-                                                        y: [6, 5, 4],
-                                                        type: 'scattergl',
-                                                        mode: 'markers', //lines or markers
-                                                        text: this.state.pca_text,
-                                                        hoverinfo: "text",
-                                                        marker: { color: 'green' },
-                                                    },
-                                                ]}
+                                                data={this.state.uncorrected_pca_traces}
+
+
                                                 layout={{
                                                     hovermode: 'closest',
                                                     title: 'Uncorrected PCA',
@@ -167,7 +212,7 @@ class BatchPage extends React.Component {
                                 {/* <!-- correction dropdown --> */}
                                 <div id="batch-bottom-container">
                                     <div id="batch-bottom-container2" >
-                                        <div id="correction_header">Would you like to apply Batch Correction to your data?</div>
+                                        <div id="correction_header">Would you like to use batch corrected data?</div>
                                         <div className="batch-styled-select rounded">
                                             {/* <select>
                                                 <option>Yes</option>
@@ -183,7 +228,7 @@ class BatchPage extends React.Component {
                                     </div>
 
                                     <div className="nav_container4">
-                                        <a href="/algorithmpage"><button type="Continue" className="button batch_cont">Continue</button></a>
+                                        <button type="Continue" className="button batch_cont">Continue</button>
                                     </div>
                                 </div>
 

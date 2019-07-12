@@ -28,6 +28,18 @@ class ds:
     def df_from_csv_name(csv_name):
         self.df = read_csv(csv_name)
 
+    # from Matthew to make a list of dataframes
+    def make_groups(self, group_lists):
+        temp_df_list = []
+        for group in group_lists:
+            temp_df = self.df.iloc[:,0].to_frame()
+            temp_df.rename(columns={temp_df.columns[0]: group[0]}, inplace=True)
+            for sample_name in group[1:]:
+                temp_df[sample_name] = self.df[sample_name]
+            temp_df_list.append(temp_df)	
+                    
+        return temp_df_list
+
      # graphs avg tpm per chromosome (avg over all n of patients)
      # Don't graph this
     def g1(self):
@@ -76,6 +88,7 @@ class ds:
        L = (chromosomeList, L2s)
 
        patientAvgsTpmList = []
+
        for i in range(len(L[1][0])):
           M = []
           for j in range(len(L[0])):
