@@ -118,16 +118,20 @@ class GtexModule extends React.Component {
                 arr.push(item)
             }
         })
-        this.setState({ tissueType: arr })
-        axios.post('http://127.0.0.1:8000/backend/detail', {
-            //axios.post('http://oscar19.orc.gmu.edu/backend/detail', {
-            gtex: [[], this.state.sex, this.state.ages, this.state.death, [], this.state.tissueType]
-        }).then(() => {
-            console.log('im posted')
-        })
+        this.setState({ tissueType: arr },
+            () => {
+                this.axiosCall()
+            }
 
+        )
     }
 
+    axiosCall() {
+        axios.post('http://127.0.0.1:8000/backend/detail', {
+        //axios.post('http://oscar19.orc.gmu.edu/backend/detail', {
+            gtex: [[], this.state.sex, this.state.ages, this.state.death, [], this.state.tissueType]
+        })
+    }
 
     /* End of tissue type handling */
 
