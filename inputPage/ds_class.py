@@ -133,7 +133,7 @@ class ds:
     def pca_graph(self):
         df = self.df
         # NB next two lines do the transposing in particular the set index() gets rid of the unnamed row
-        df = df.set_index('ENS ID').transpose()
+        df = df.set_index(df.columns.values[0]).transpose()
         x = df.loc[:,list(df.columns[1:])]
         y = list(df.index.values)
         x = StandardScaler().fit_transform(x)
