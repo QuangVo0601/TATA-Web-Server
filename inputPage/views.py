@@ -6,6 +6,7 @@ from .serializers import InputSerializer
 from django.shortcuts import render
 from .ds_class import ds # import from Math team's file for validationPage
 from .GTEXDataAnalyzer import GTEXDataAnalyzer # import from Math team's file for batch correction page
+import random #delete later
 
 # Create your views here.
 def index_page(request):
@@ -31,12 +32,13 @@ def input_list(request):
         for i in dataArray2:
             i[0] = i[0][:15] # get only first 15 characters of ENS IDs. Ex: ENSG00000223972.4 will become ENSG00000223972 (no decimal)
 
-        dataArray2[0][0] = "ENS ID" # change the header to "ENS ID" to be used by ds_class.py
+        #dataArray2[0][0] = "ENS ID" # change the header to "ENS ID" to be used by ds_class.py
         dataArray = [','.join(dataArray2[i]) for i in range(len(dataArray2))] # convert back to 1d array
         dataString = '\n'.join(dataArray) # convert the array back to string to be used in ds_class.py
 
         # Use Django session to save the 'dataString' in database for later use
         request.session['dataString'] = dataString
+        print(request.session['dataString'])
 
         # Import and use dataSet object from ds_class.py
         dataSet= ds(5)
@@ -104,35 +106,31 @@ def input_list2(request):
         # 'dataframes' is a list of dataframes, and each dataframe
         # has 5 columns: overlapping ensIDs, fold change, t-values, p-values, log(p-values)
         # pass 0 to get analyzed dataframes for 'uncorrected' PCA graph
-        dataframes_uncorrected = analyzer.do_statistical_analysis(0) 
-
-        ''' [[x,y],[x,y],[x,y]...], may delete later
-        L = [[list(dataframes[i].iloc[:,1]),list(dataframes[i].iloc[:,4])] for i in range(len(dataframes))]'''
-
-        # only use 'fold change' col for x_axis, 'log(p-values)' for y_axis
-        # [[x_df1...], [x_df2...], [x_df3...],...]
-        x_uncorrected = [list(dataframes_uncorrected[i].iloc[:,1]) for i in range(len(dataframes_uncorrected))] 
-        # [[y_df1...], [y_df2...], [y_df3...],...]
-        y_uncorrected = [list(dataframes_uncorrected[i].iloc[:,4]) for i in range(len(dataframes_uncorrected))]
-
-        # pass 1 to get analyzed dataframes for 'corrected' PCA graph, same steps as above
-        dataframes_corrected = analyzer.do_statistical_analysis(1) 
-        x_corrected = [list(dataframes_corrected[i].iloc[:,1]) for i in range(len(dataframes_corrected))]
-        y_corrected = [list(dataframes_corrected[i].iloc[:,4]) for i in range(len(dataframes_corrected))]
-
-        # number of lines on each graph
-        no_of_dataframes = len(x_uncorrected)
-        # number of ordered pairs for each line
-        no_of_ordered_pairs = len(x_uncorrected[0])
-
-        # Send as dictionary type 
-        # After data processing, send it back to front end 
-        return JsonResponse({'x_uncorrected': x_uncorrected,'y_uncorrected': y_uncorrected,
-                             'x_corrected': x_corrected,'y_corrected': y_corrected,
-                             'no_of_dataframes': no_of_dataframes,'no_of_ordered_pairs':no_of_ordered_pairs}, status=201)  
 
 
 
+        #uncorrected_df_list = analyzer.get_uncorrected_data()
+        #print(uncorrected_df_list)
+        uncorrected_pca_coordinates = []
+        for df in analyzer.get_uncorrected_dataframes():
+            data_set_object = ds(5,df) 
+            pca_coordinates = data_set_object.pca_graph()
+            uncorrected_pca_coordinates.append(pca_coordinates)
+        print(uncorrected_pca_coordinates)
+
+        corrected_df_list = analyzer.get_batch_corrected_dataframes()
+        #print(corrected_df_list)
+
+
+
+
+        return JsonResponse({}, status=201)
+
+
+
+ 
+
+# for gtexModal.js, saved in urls.py
 @csrf_exempt
 def input_detail(request):
     """
@@ -147,8 +145,40 @@ def input_detail(request):
         data = JSONParser().parse(request) # Receive data from front end
         gtexData = data['gtex'] # syntax: data[key], key = package's name being sent
         print(gtexData)
-        return JsonResponse({}, status=201) 
 
+        # need Jon's gtex algorithm here
+        # return a list of sample names and sample count
+
+        #fake sample count to return to gtexModal.js
+        sample_count = random.randrange(0, 1000, 3)
+
+        return JsonResponse({'sample_count': sample_count}, status=201) 
+
+'''@csrf_exempt
+def input_detail(request, pk):
+    """
+    Retrieve, update or delete a code input.
+    """
+    try:
+        input = Input.objects.get(pk=pk)
+    except Input.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'GET': # retrieve data
+        serializer = InputSerializer(input)
+        return JsonResponse(serializer.data)
+
+    elif request.method == 'PUT': # update data
+        data = JSONParser().parse(request)
+        serializer = InputSerializer(input, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=400)
+
+    elif request.method == 'DELETE': 
+        input.delete()
+        return HttpResponse(status=204)'''
 
 
 
