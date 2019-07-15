@@ -1,5 +1,3 @@
-
-
 import React, { Component } from "react";
 import Multiselect from 'react-multiselect-checkboxes'
 import "../styles/tata.css";
@@ -11,6 +9,8 @@ class GtexModule extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            gtexGroupName: "",
+            sampleCount: 0,
             // ---- //
             ageOpt: [
                 { label: "20-29", value: "20-29" },
@@ -47,6 +47,7 @@ class GtexModule extends React.Component {
             tissueType: [],
             tissueObj: {},
         }
+        this.handleGtexGroupName = this.handleGtexGroupName.bind(this);
 
     }
     componentDidMount() {
@@ -105,7 +106,7 @@ class GtexModule extends React.Component {
 
     }
 
-    // toggle 'create'
+    // toggle 'create' button
     createHandler = () => {
         let arr = []
         this.state.tissue1.forEach(item => {
@@ -130,10 +131,21 @@ class GtexModule extends React.Component {
         axios.post('http://127.0.0.1:8000/backend/detail', {
         //axios.post('http://oscar19.orc.gmu.edu/backend/detail', {
             gtex: [[], this.state.sex, this.state.ages, this.state.death, [], this.state.tissueType]
+        }).then((arr) => { // to receive data from back end 
+            this.setState({sampleCount: arr.data.sample_count}) // receive sample count from back end
         })
     }
 
     /* End of tissue type handling */
+
+    handleRefreshButton = () =>{
+
+    }
+
+    // this stores the gtex group name entered by the user
+    handleGtexGroupName(event) {
+        this.setState({gtexGroupName: event.target.value});
+    }
 
     render() {
         return (
@@ -148,12 +160,6 @@ class GtexModule extends React.Component {
                         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Oswald&display=swap" rel="stylesheet" />
                         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap" rel="stylesheet" />
 
-                        {/* <!-- jQuery library --> */}
-                        {/* <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> */}
-
-                        {/* <!-- MultiSelect CSS & JS library --> */}
-                        {/* <script src="jQuery/jquery.built.js"></script> */}
-
                     </head>
                     <body>
                         <div id="wrapper4">
@@ -163,16 +169,17 @@ class GtexModule extends React.Component {
                                 </div>
                                 <div id="controlgroup">
                                     <h2>GTEX Group Name:</h2>
-                                    <input type="controlgroup" placeholder="" autocomplete="off" required />
+                                    {/* <input type="controlgroup" placeholder="" autocomplete="off" required /> */}
+                                    <input type="text" value={this.state.gtexGroupName} onChange={this.handleGtexGroupName} />
                                 </div>
                                 <div id="sample">
                                     <h2>Sample Count:</h2>
                                     <div className="sample2">
-                                        <h3>0</h3>
+                                        <h3>{this.state.sampleCount}</h3>
                                         {/*refresh button part starts*/}
-                                        <button id="refresh"><i className="fa fa-refresh" style={{ 'font-size': '20px' }}></i>
+                                        <button id="refresh" onClick={this.createHandler}><i className="fa fa-refresh" style={{ 'font-size': '20px' }}></i>
                                             <span className="text-block">
-                                                Refresh this page
+                                                Refresh sample count
                                         </span>
                                         </button>
                                         {/*refresh button part ends*/}

@@ -1497,7 +1497,7 @@ margin-top:95px;
 	margin-left:35px;
 }
 #sample{
-	margin-left:35px;
+	margin-left:20px;
 }
 #sample h3{
 	font-size:35px;
@@ -1656,14 +1656,14 @@ color:white;
   visibility: hidden;
   position: relative;
   top: 9px;
-  right: 40px;
+  right: 45px;
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.8em;
+  font-size: 1em;
   color: #817e7e;
-  width: 97px;
+  width: 125px;
   border: .5px solid black;
   box-shadow: 2px 2px #D4D1D1;
-  padding: 4px;
+	padding: 3px;
   margin: 0;
 }
 /*refresh button part ends*/

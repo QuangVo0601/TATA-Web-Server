@@ -4,6 +4,8 @@ import statsmodels.api as sm
 import statsmodels.formula.api as smf
 import matplotlib.pyplot as plt
 import math
+from scipy import stats
+from datetime import datetime
 
 class GTEXDataAnalyzer:
 	#dfList should be of a certain format
@@ -27,32 +29,71 @@ class GTEXDataAnalyzer:
 		self.ensIDs = self.dfList[0].iloc[:,0]
 
 		#called as we will always want filtered dataframes
-		self.filteredDfs = self.__matchENS()
+		self.filteredDfs = self.__find_overlapping_ENS()
+
+		self.big_dataframes = self.get_pca_data()
+
+	# big dataframe, don't use it now
+	def get_big_dataframes(self):
+		return self.big_dataframes
+
+	# list of dfs for raw (uncorrected) pca graph
+	def get_uncorrected_dataframes(self):
+		return self.filteredDfs
+
+	# list of dfs for corrected pca graph
+	def get_batch_corrected_dataframes(self):
+		return self.batch_corrected_dfs
+
+	def get_pca_data(self):
+		self.__do_batch_correction()
+		big_raw_data = pd.DataFrame()
+		big_batch_data = pd.DataFrame()
+		for idx, (fdf, bdf) in enumerate(zip(self.filteredDfs, self.batch_corrected_dfs)):
+			# label = "Group" + str(idx+1)
+			# label_list = [label] * len(fdf.columns)
+			# print(label_list)
+
+			temp_df = fdf.copy()
+			temp_df.loc[-1] = ["Group" + str(idx+1)] * len(fdf.columns)
+			temp_df.index = temp_df.index + 1
+			temp_df = temp_df.sort_index()
+			big_raw_data = pd.concat([big_raw_data, temp_df], axis = 1)
+
+			temp_df = bdf.copy()
+			temp_df.loc[-1] = ["Group" + str(idx+1)] * len(bdf.columns)
+			temp_df.index = temp_df.index + 1
+			temp_df = temp_df.sort_index()
+			big_batch_data = pd.concat([big_batch_data, temp_df], axis = 1)
+
+		return [big_raw_data, big_batch_data]
+		
 
 	#****************************************************************************************
-	#**ONLY NEED TO CALL THIS METHOD AFTER INSTANTIATING OBJECT 	 					   **
+	#**ONLY CALL AFTER CALLING get_pca_data												   **
 	#**parameter to pass in is test_mode 												   **
-	#**test_mode = 0; use raw data AND equal variance t test (uncorrected)  			   **
-	#**test_mode = 1; use batch corrected data AND equal variance t test (corrected) 	   **
+	#**test_mode = 0; use raw data AND equal variance t test   							   **
+	#**test_mode = 1; use batch corrected data AND equal variance t test  				   **
 	#**test_mode = 2; use raw data AND unequal variance t test 							   **
 	#**test_mode = 3; use batch corrected data AND unequal variance t t test 			   **
 	#**																					   **	
-	#**this return a dataframe with overlapping ensIDs, fold change, t-values, p-values, log(p-values)**
+	#**this return a dataframe with overlapping ensIDs, fold change, t-values, and p-values**
 	#**use is:																			   **
 	#**analyzer = GTEXDataAnalyzer(data_groups, data_group_names)						   **
 	#**results = analyzer.do_statistical_analysis(test_mode)																					   **
 	#****************************************************************************************
 	def do_statistical_analysis(self, test_mode):
-		self.__do_batch_correction()
-		if test_mode == 0: # for uncorrected pca graph
-			return self.__equal_var_test(0)
-		elif test_mode == 1: # for corrected pca graph
-			return self.__equal_var_test(1)
+		if test_mode == 0:
+			results = self.__equal_var_test(0)
+		elif test_mode == 1:
+			results =  self.__equal_var_test(1)
 		elif test_mode == 2:
-			return self.__unequal_var_test(0)
+			results =  self.__unequal_var_test(0)
 		elif test_mode == 3:
-			return self.__unequal_var_test(1)
-		
+			results = self.__unequal_var_test(1)
+		return results	
+		#ens_df_list = self.__filter_alpha_and_fold_change(.05, 2, results)
+		#print(ens_df_list)
 
 	def __do_batch_correction(self):
 		meanDf = self.__compute_log_avg(self.filteredDfs)
@@ -61,7 +102,8 @@ class GTEXDataAnalyzer:
 
 	#	matchENS() operates on the given dataframes in self.dfList and finds the overlapping ensIDs from all groups
 	#	After finding the intersection between the group's ensIDs, it returned the filtered dataframes in a list
-	def __matchENS(self):
+	def __find_overlapping_ENS(self):
+		print("\n\n\n FINDING OVERLAPPING ENS IDS \n\n\n")		
 		#self.ensIDs starts out with the control group ensIDs, if the count is greater than another group's ensIDs, that will be stored in self.ensIDs
 		for dataf in self.dfList:
 			if self.ensIDs.count() > dataf.iloc[:,0].count():
@@ -71,16 +113,15 @@ class GTEXDataAnalyzer:
 		for dataf in self.dfList:
 			self.ensIDs = pd.Series(np.intersect1d(self.ensIDs.values,dataf.iloc[:,0].values))
 
-		#filters through each dataframe while also sorting by ensIDs, the index is then reset to keep it consistent in the dataframes
+		#filters through each dataframe while also sorting by ensIDs, the index is then reset to keep it consistent in the dataframes	
 		tempFilteredList = []																		   
 		for df in self.dfList:
-			tempDf = df.loc[df.iloc[:,0].isin(self.ensIDs)]   			#get new dataframe with only wanted ensIDs
-			tempDf.sort_values(tempDf.columns[0], inplace=True)		#sort by ensIDs
+			tempDf = df.loc[df.iloc[:,0].isin(self.ensIDs)]   		#get new dataframe with only wanted ensIDs
+			tempDf.sort_values(tempDf.columns[0], inplace=True)		#sort by ensIDs, throws a warning, it says we are operating on a slice of another dataframe which is what we want so we are fine
 			tempDf.reset_index(inplace=True, drop = True)
 			tempFilteredList.append(tempDf)
 
-		#deep copy as to keep a unmodified version of filtered dataframes
-		return tempFilteredList
+		return tempFilteredList			
 
 	#computes log avg for each dataframe, also takes the log10 of each cell in each dataframe, if a cell negative or 0, it becomes 0
 	#input is either the filtered dataframe or the batch corrected dataframes
@@ -137,6 +178,7 @@ class GTEXDataAnalyzer:
 
 	#returns a single dataframe with all the groups concatenated, but modifies self.modDfList with dataframes corrected with the linear regression parameters using the first dataframe as control
 	def __batch_correction(self, meanDf):
+		print("\n\n\n DOING BATCH CORRECTION \n\n\n")		
 		#form is
 		#controlgroup = a_n * group_n + c_n 
 
@@ -186,6 +228,8 @@ class GTEXDataAnalyzer:
 		#self.getCSV(self.modDfList, "no log_10 corrected ")
 
 	def __compute_fold_change(self, control_df, compare_df, dfMode):
+		print("\n\n\n COMPUTING FOLD CHANGE \n\n\n")
+
 		meanDf = self.__compute_mean([control_df, compare_df])
 		
 		#mode = 0 for non batch corrected data
@@ -200,6 +244,8 @@ class GTEXDataAnalyzer:
 		return fold_change.tolist()
 
 	def __equal_var_test(self, dfMode):
+		print("\n\n\n DOING T TESTS \n\n\n")
+
 		#use filtered raw data
 		t_test_res_list = []
 		logFilteredDfs = self.__compute_log(self.filteredDfs)
@@ -218,10 +264,10 @@ class GTEXDataAnalyzer:
 				tempDf["fold change"] = self.__compute_fold_change(self.filteredDfs[0], self.filteredDfs[dfNum], 0)
 				tempDf["t_values"] = t_values
 				tempDf["p_values"] = p_values
-				log_p_values = [-(math.log10(x)) if x > 0 else 0 for x in tempDf["p_values"]]
-				tempDf["log_p_values"] = log_p_values
+				log_p_values = [-(math.log10(x)) if x > 0 else 0 for x in tempDf['p_values']]
+				tempDf['log p values'] = log_p_values				
 				t_test_res_list.append(tempDf)					
-			#print(t_test_res_list)
+			# print(t_test_res_list)
 
 		#use filtered batch corrected data
 		elif dfMode == 1:
@@ -236,14 +282,15 @@ class GTEXDataAnalyzer:
 				tempDf["fold change"] = self.__compute_fold_change(self.batch_corrected_dfs[0], df, 1)
 				tempDf["t_values"] = t_values
 				tempDf["p_values"] = p_values
-				log_p_values = [-(math.log10(x)) if x > 0 else 0 for x in tempDf["p_values"]]
-				tempDf["log_p_values"] = log_p_values				
+				log_p_values = [-(math.log10(x)) if x > 0 else 0 for x in tempDf['p_values']]
+				tempDf['log p values'] = log_p_values				
 				t_test_res_list.append(tempDf)					
-			#print(t_test_res_list)
+			# print(t_test_res_list)
 
 		return t_test_res_list	
 
 	def __unequal_var_test(self, dfMode):
+		print("\n\n\n DOING T TESTS \n\n\n")
 
 		t_test_res_list = []
 
@@ -261,10 +308,10 @@ class GTEXDataAnalyzer:
 				tempDf["fold change"] = self.__compute_fold_change(self.filteredDfs[0], self.filteredDfs[dfNum], 0)
 				tempDf["t_values"] = t_values
 				tempDf["p_values"] = p_values
-				log_p_values = [-(math.log10(x)) if x > 0 else 0 for x in tempDf["p_values"]]
-				tempDf["log_p_values"] = log_p_values				
+				log_p_values = [-(math.log10(x)) if x > 0 else 0 for x in tempDf['p_values']]
+				tempDf['log p values'] = log_p_values
 				t_test_res_list.append(tempDf)					
-			print(t_test_res_list)
+			# print(t_test_res_list)
 
 		#use filtered batch corrected data
 		elif dfMode == 1:
@@ -280,69 +327,9 @@ class GTEXDataAnalyzer:
 				tempDf["fold change"] = self.__compute_fold_change(self.batch_corrected_dfs[0], df, 1)
 				tempDf["t_values"] = t_values
 				tempDf["p_values"] = p_values
-				log_p_values = [-(math.log10(x)) if x > 0 else 0 for x in tempDf["p_values"]]
-				tempDf["log_p_values"] = log_p_values				
+				log_p_values = [-(math.log10(x)) if x > 0 else 0 for x in tempDf['p_values']]
+				tempDf['log p values'] = log_p_values
 				t_test_res_list.append(tempDf)					
-			print(t_test_res_list)
+			# print(t_test_res_list)
 
 		return t_test_res_list	
-
-
-
-				
-	#***************************************************8from here is for debugging purposes, not using this code in final***************************************************
-	def print_raw_data(self):
-		print(self.dfList)
-
-	def print_filtered_data(self):
-		print(self.filteredDfs)
-
-	def print_batch_corrected_data(self):
-		print(self.batch_corrected_dfs)	
-
-	def printColumnNames(self):
-		print(list(self.dfList.columns))
-
-	def getCSV(self,dfList, prefix):
-		for idx, df in enumerate(dfList):
-			csv_path = "/home/jjh/oscar2019/sampletestdata/"+ prefix + self.group_names[idx] +".csv"
-			df.to_csv(csv_path, index = False)
-
-	def getCSVONE(self, df, name):
-		csv_path = "/home/jjh/oscar2019/sampletestdata/"+ name +".csv"
-		df.to_csv(csv_path, index = False)
-
-	def check_for_nan_in_base_data(self):
-		for df in self.filteredDfs:
-			print(df.isnull().values.any())
-		for df in self.batch_corrected_dfs:
-			print(df.isnull().values.any())		
-
-	def check_for_nan(self, some_df):
-		print(some_df.isnull().values.any())
-
-	def t_test_pseudo(self):
-		s1 = [0]*50
-		s2 = [0]*50
-		print(s1)
-		print(s2)
-
-		res = sm.stats.ttest_ind(s1, s2, alternative = 'two-sided', usevar = 'pooled')
-		print(res)
-
-	#alpha divided by number of ensIDs
-	def volcano_plot(self, t_test_results):
-		#data passed through is filtered raw data
-
-		some_df = t_test_results[0]
-
-		below_thresh = some_df[some_df['p_values'] < .000000588]
-		print(below_thresh)
-
-
-		log_p_values = [-(math.log10(x)) for x in some_df['p_values']]
-		some_df['log p values'] = log_p_values
-		print(some_df)
-
-		some_df.plot(kind='scatter',x='fold change',y='log p values',color='red')
-		plt.show()	
