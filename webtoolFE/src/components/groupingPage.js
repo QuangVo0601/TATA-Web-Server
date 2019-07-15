@@ -1,7 +1,6 @@
 import React from "react";
 import "../styles/tata.css";
 import Footer from './botNav';
-//import DragAndDrop from './groupingPageDrag&Drop';
 import Select from "react-select"; // to use dropbox
 import Popup from './gtexModal';
 
@@ -25,6 +24,7 @@ class GroupingPage extends React.Component {
                 '1': [],
                 '2': []
             },
+            gtexGroup:{},
             dragFrom: '',
             selectedNumberOfGroups: [],
 
@@ -32,6 +32,14 @@ class GroupingPage extends React.Component {
         };
     }
 
+    // gtex group handler
+    handleGtex = (name, array) => {
+        this.state.gtexGroup[name] = array
+    }
+
+    handleResetGtex = () => {
+        this.setState({gtexGroup:{}})
+    }
     // This method is used to store new number of groups from Select dropbox
     handleChange = (selected) => {
         let newO = {
@@ -197,13 +205,14 @@ class GroupingPage extends React.Component {
                                             </button>
                                             {this.state.showPopup ?
                                                 <Popup
+                                                    handleGtex={this.handleGtex}
                                                     closePopup={this.togglePopup.bind(this)}
                                                 />
                                                 : null
                                             }
                                             {/* <!-- End of pop up module button --> */}
-
-                                            <button type="Reset Groups" className="reset_group">Reset Groups</button>
+                                            <button  type="Reset Groups" className="reset_group">Reset All Groups</button>
+                                            <button onClick={this.handleResetGtex} type="Reset Groups" className="reset_group">Reset Gtex Groups</button>
                                         </div>
                                     </div>
                                     {/* <!-- end of top of the group bottom section --> */}
@@ -292,6 +301,36 @@ class GroupingPage extends React.Component {
                                                                         id={id}
                                                                         draggable
                                                                         onDragStart={event => this.onDragStartHandler(event, sample)}
+                                                                    >
+                                                                        <label className="sample-container">
+                                                                            <span className="grippy"></span> {sample}
+                                                                            <input type="checkbox" checked="checked" />
+                                                                            <span className="checkmark-sample"></span>
+                                                                        </label>
+                                                                    </li>
+                                                                )
+                                                            })}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )
+                                        })}
+                                        {/* End of populating group boxes after selecting number of groups*/}
+
+                                        {/* Start of populating gtex group boxes after selecting number of groups*/}
+                                        {Object.keys(this.state.gtexGroup).map((key) => {
+                                            return (
+                                                <div id="sample-drop-field">
+                                                    <div id="nav_group2">
+                                                        <form className="signIn">
+                                                            {key}
+                                                        </form>
+                                                    </div>
+                                                    <div className="group-box" >
+                                                        <div className="data-draggable" >
+                                                            {this.state.gtexGroup[key].map((sample) => {
+                                                                return (
+                                                                    <li
                                                                     >
                                                                         <label className="sample-container">
                                                                             <span className="grippy"></span> {sample}

@@ -151,8 +151,8 @@ def input_detail(request):
 
         #fake sample count to return to gtexModal.js
         sample_count = random.randrange(0, 1000, 3)
-
-        return JsonResponse({'sample_count': sample_count}, status=201) 
+        sample_array = ['sample 1','sample 2']
+        return JsonResponse({'sample_count': sample_count,'sample_array': sample_array}, status=201) 
 
 '''@csrf_exempt
 def input_detail(request, pk):

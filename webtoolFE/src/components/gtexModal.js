@@ -3,13 +3,11 @@ import Multiselect from 'react-multiselect-checkboxes'
 import "../styles/tata.css";
 import axios from 'axios'; // to send data to back end
 
-
-
 class GtexModule extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            gtexGroupName: "",
+            gtexGroupName: 'Gtex group',
             sampleCount: 0,
             // ---- //
             ageOpt: [
@@ -131,16 +129,13 @@ class GtexModule extends React.Component {
         axios.post('http://127.0.0.1:8000/backend/detail', {
         //axios.post('http://oscar19.orc.gmu.edu/backend/detail', {
             gtex: [[], this.state.sex, this.state.ages, this.state.death, [], this.state.tissueType]
-        }).then((arr) => { // to receive data from back end 
-            this.setState({sampleCount: arr.data.sample_count}) // receive sample count from back end
+        }).then((gtex) => { // to receive data from back end 
+            this.setState({sampleCount: gtex.data.sample_count}) // receive sample count from back end
+            this.props.handleGtex(this.state.gtexGroupName, gtex.data.sample_array)
+            
         })
     }
-
     /* End of tissue type handling */
-
-    handleRefreshButton = () =>{
-
-    }
 
     // this stores the gtex group name entered by the user
     handleGtexGroupName(event) {
@@ -237,11 +232,12 @@ class GtexModule extends React.Component {
                             </div>
                             <div id="gtexbuttons">
                                 <button type="Continue" className="buttoncancel" onClick={this.props.closePopup}>Cancel</button>
-                                <button type="Back" className="buttongroup" onClick={this.createHandler}>Create</button>
+                                <button type="Back" className="buttongroup" onClick={this.props.closePopup}>Create</button>
                             </div>
                         </div>
                     </body>
                 </div>
+                
             </div>
         );
     }
