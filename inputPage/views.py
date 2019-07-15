@@ -38,7 +38,6 @@ def input_list(request):
 
         # Use Django session to save the 'dataString' in database for later use
         request.session['dataString'] = dataString
-        print(request.session['dataString'])
 
         # Import and use dataSet object from ds_class.py
         dataSet= ds(5)
@@ -103,32 +102,33 @@ def input_list2(request):
 
         # Create an analyzer object from imported GTEXDataAnalyzer.py
         analyzer = GTEXDataAnalyzer(CListDfs, group_names_list) 
-        # 'dataframes' is a list of dataframes, and each dataframe
-        # has 5 columns: overlapping ensIDs, fold change, t-values, p-values, log(p-values)
-        # pass 0 to get analyzed dataframes for 'uncorrected' PCA graph
 
-
-
-        #uncorrected_df_list = analyzer.get_uncorrected_data()
-        #print(uncorrected_df_list)
-        uncorrected_pca_coordinates = []
+        # for uncorrected pca graph in batchPage.js
+        x_uncorrected_pca = [] # list of lists of x-axis of all dataframes
+        y_uncorrected_pca = [] # list of lists of y-axis of all dataframes
         for df in analyzer.get_uncorrected_dataframes():
             data_set_object = ds(5,df) 
-            pca_coordinates = data_set_object.pca_graph()
-            uncorrected_pca_coordinates.append(pca_coordinates)
-        print(uncorrected_pca_coordinates)
+            x, y = data_set_object.pca_graph() # call pca_graph func from ds_class.py
+            x_uncorrected_pca.append(x)
+            y_uncorrected_pca.append(y)
+        #print(x_uncorrected_pca)
+        #print(y_uncorrected_pca)
 
-        corrected_df_list = analyzer.get_batch_corrected_dataframes()
-        #print(corrected_df_list)
+        # for corrected pca graph in batchPage.js
+        x_corrected_pca = [] # list of lists of x-axis of all dataframes
+        y_corrected_pca = [] # list of lists of y-axis of all dataframes
+        for df in analyzer.get_batch_corrected_dataframes():
+            data_set_object = ds(5,df) 
+            x, y = data_set_object.pca_graph() # call pca_graph func from ds_class.py
+            x_corrected_pca.append(x)
+            y_corrected_pca.append(y)
+        #print(x_corrected_pca)
+        #print(y_corrected_pca)
 
+        return JsonResponse({'x_uncorrected_pca':x_uncorrected_pca,'y_uncorrected_pca':y_uncorrected_pca,
+                             'x_corrected_pca':x_corrected_pca,'y_corrected_pca':y_corrected_pca,
+                             'group_names_list':group_names_list }, status=201)
 
-
-
-        return JsonResponse({}, status=201)
-
-
-
- 
 
 # for gtexModal.js, saved in urls.py
 @csrf_exempt
@@ -149,7 +149,7 @@ def input_detail(request):
         # need Jon's gtex algorithm here
         # return a list of sample names and sample count
 
-        #fake sample count to return to gtexModal.js
+        #fake sample count and sample names to return to gtexModal.js
         sample_count = random.randrange(0, 1000, 3)
         sample_array = ['sample 1','sample 2']
         return JsonResponse({'sample_count': sample_count,'sample_array': sample_array}, status=201) 
