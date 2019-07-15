@@ -8,12 +8,12 @@ class AlgorithmPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            algorithmOptions: [{ value: "option1", label: "Option 1" },
-            { value: "option2", label: "Option 2" }],
+            algorithmOptions: [{ value: "Option1", label: "Option 1" },
+            { value: "Option2", label: "Option 2" }],
             selectedAlgorithm: "",
 
-            sampleVarianceOptions: [{ value: "equal", label: "Equal" },
-            { value: "unequal", label: "Unequal" }],
+            sampleVarianceOptions: [{ value: "Equal", label: "Equal" },
+            { value: "Unequal", label: "Unequal" }],
             selectedSampleVariance: "",
 
             falseDiscoveryRate_value: 0,
