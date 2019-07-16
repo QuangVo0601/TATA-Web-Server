@@ -22,8 +22,8 @@ class GtexModule extends React.Component {
             // ---- //
 
             sexOpt: [
-                { label: "Male", value: "Male" },
-                { label: "Female", value: "Female" }
+                { label: "Male", value: "M" },
+                { label: "Female", value: "F" }
             ],
             sex: [],
             // ---- //
@@ -41,7 +41,7 @@ class GtexModule extends React.Component {
             tissue1: ['Adipose Tissue', 'Adrenal Gland', 'Bladder', 'Brain', 'Breast', 'Cervix Uteri', 'Colon', 'Esophagus',
                 'Fallopian Tube', 'Heart', 'Kidney', 'Liver', 'Lung', 'Muscle', 'Nerve'],
             tissue2: ['Ovary', 'Pancreas', 'Pituitary', 'Prostate', 'Salivary Gland', 'Skin', 'Small Intestine', 'Spleen',
-                'Stomach', 'Testis', 'Thyroid', 'Uterus', 'Vagina', 'Whole Blood'],
+                'Stomach', 'Testis', 'Thyroid', 'Uterus', 'Blood', 'Blood Vessel'],
             tissueType: [],
             tissueObj: {},
         }

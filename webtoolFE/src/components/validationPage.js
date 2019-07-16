@@ -59,7 +59,7 @@ class ValidationPage extends React.Component {
             tpc_traces: traces_temp
         })
         // remove everything from local storage for safety
-        localStorage.removeItem('x_tpc', 'y_tpc', 'x_pca', 'y_pca', 'x_dge', 'y_dge')
+        // localStorage.removeItem('x_tpc', 'y_tpc', 'x_pca', 'y_pca', 'x_dge', 'y_dge')
     }
   
     handleSubmit = () => {
@@ -137,7 +137,7 @@ class ValidationPage extends React.Component {
                                             <div className="plot_title distribution">DISTRIBUTION OF GENES <img src={require('../assets/Help Icon.png')} className="helpicon" alt="help" /></div>
                                             <div className="helpcontent PCA">Top 100 TPMs is generally a function of tissue type. Outliers are generally only expected for variation in tissue or cell types.  If your data is from multiple tissue sources, we recommend keeping not creating groups with more than one tissue type.</div>
                                         </div>
-                                        <div className="graphsize">
+                                        {/* <div className="graphsize"> */}
                                             <Plot
                                                 data={[
                                                     {
@@ -153,7 +153,7 @@ class ValidationPage extends React.Component {
                                                     hovermode: 'closest',
                                                     title: 'Distribution of Gene Expression',
                                                     font: { family: 'Oswald,sans-serif', size: 18, color: '#114b5f' },
-                                                    width: 900, height: 450,
+                                                    // width: 900, height: 450,
                                                     xaxis: {
                                                         showticklabels: false, autorange: true, showgrid: false, title: {
                                                             text: 'Gene',
@@ -166,16 +166,19 @@ class ValidationPage extends React.Component {
                                                             text: 'Avg TPM',
                                                             font: { family: 'Oswald,sans-serif', size: 18, color: '#114b5f' }
                                                         }
-                                                    }
+                                                    },
+                                                    autosize: true
                                                 }}
+                                                {...{useResizeHandler: true}}
+                                                {...{style: {width: "100%", height: "100%"}}}
                                             />
-                                        </div>
+                                        {/* </div> */}
                                         <div className="drophelp">
                                             <div className="plot_title">TPC <img src={require('../assets/Help Icon.png')} className="helpicon" alt="help" /></div>
                                             <div className="helpcontent TPC"> Total TPM/chromosome
 								may vary based on tissue source and gender. Outliers samples may be an expected outcome if your data is derived from diseased groups or from different tissue types. If your data is derived from multiple batches there should be shifts across all chromosomes. Batch correction option is recommended.</div>
                                         </div>
-                                        <div className="graphsize">
+                                        {/* <div className="graphsize"> */}
                                             <Plot
 
                                                 data={this.state.tpc_traces}
@@ -183,7 +186,7 @@ class ValidationPage extends React.Component {
                                                 layout={{
                                                     hovermode: 'closest', showlegend: false, title: 'TPM per Chromosome (TPC)',
                                                     font: { family: 'Oswald,sans-serif', size: 18, color: '#114b5f' },
-                                                    width: 900, height: 450,
+                                                    // width: 900, height: 450,
                                                     xaxis: {
                                                         range: [0, 25.5], showgrid: false, title: {
                                                             text: 'Chromosome',
@@ -196,7 +199,9 @@ class ValidationPage extends React.Component {
                                                         dtick: 1,
                                                         ticklen: 4,
                                                         tickwidth: 4,
-                                                        tickcolor: '#000'
+                                                        tickcolor: '#000',
+                                                        // tickangle: 1,
+                                                        tickfont:{size: 12},
                                                     },
                                                     yaxis: {
                                                         autorange: true, type: 'log', showgrid: false, title: {
@@ -204,14 +209,17 @@ class ValidationPage extends React.Component {
                                                             font: { family: 'Oswald,sans-serif', size: 18, color: '#114b5f' }
                                                         }
                                                     },
+                                                    autosize: true
                                                 }}
+                                                {...{useResizeHandler: true}}
+                                                {...{style: {width: "100%", height: "100%"}}}
                                             />
-                                        </div>
+                                        {/* </div> */}
                                         <div className="drophelp">
                                             <div className="plot_title">PCA <img src={require('../assets/Help Icon.png')} className="helpicon" alt="help" /></div>
                                             <div className="helpcontent PCA">Distribution of samples is expected to fall into clusters based on samples state (e.g. disease) Highly heterogeneous data may not cluster in initial PCA. If samples cluster based on assay condition such as different sequencing runs, batch correction option is recommended.</div>
                                         </div>
-                                        <div className="graphsize">
+                                        {/* <div className="graphsize"> */}
                                             <Plot
                                                 data={[
                                                     {
@@ -228,7 +236,7 @@ class ValidationPage extends React.Component {
                                                     hovermode: 'closest',
                                                     title: 'Principal Component Analysis (PCA)',
                                                     font: { family: 'Oswald,sans-serif', size: 18, color: '#114b5f' },
-                                                    width: 900, height: 450,
+                                                    // width: 900, height: 450,
                                                     xaxis: {
                                                         autorange: true, showgrid: false, title: {
                                                             text: 'PC1',
@@ -240,10 +248,13 @@ class ValidationPage extends React.Component {
                                                             text: 'PC2',
                                                             font: { family: 'Oswald,sans-serif', size: 18, color: '#114b5f' }
                                                         }
-                                                    }
+                                                    },
+                                                    autosize: true
                                                 }}
+                                                {...{useResizeHandler: true}}
+                                                {...{style: {width: "100%", height: "100%"}}}
                                             />
-                                        </div>
+                                        {/* </div> */}
                                     </div>
                                 </div>
                                 <div id="initial_header">Exploratory Plots</div>
@@ -254,7 +265,7 @@ class ValidationPage extends React.Component {
                                 </div>
 
                                 <div className="nav_container1">
-                                    <a href={this.state.href} style={{'text-decoration': 'none'}}> {/*added by Quang for button testing*/}
+                                    <a href={this.state.href} style={{'text-decoration': 'none'}}> 
                                         <button type="Continue" 
                                                 className="button validation_cont"
                                                 onClick={this.handleSubmit}>Continue</button>
