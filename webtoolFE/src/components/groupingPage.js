@@ -200,8 +200,6 @@ class GroupingPage extends React.Component {
                                                 >
                                                     <label className="sample-container">
                                                         <span className="grippy"></span> {sample}
-                                                        <input type="checkbox" checked="checked" />
-                                                        <span className="checkmark-sample"></span>
                                                     </label>
                                                 </li>
                                             ))}
@@ -252,7 +250,7 @@ class GroupingPage extends React.Component {
                                         <div id="sample-drop-field">
                                             <div id="nav_group2">
                                                 <form className="signIn">
-                                                    <input type="controlgroup" placeholder="Control Group" autocomplete='off' required />
+                                                    <input className="groupingInput" type="controlgroup" placeholder="Control Group" autocomplete='off' required />
                                                     <label className="container">Null Hypothesis</label>
                                                 </form>
                                             </div>
@@ -271,8 +269,6 @@ class GroupingPage extends React.Component {
                                                             >
                                                                 <label className="sample-container">
                                                                     <span className="grippy"></span> {sample}
-                                                                    <input type="checkbox" checked="checked" />
-                                                                    <span className="checkmark-sample"></span>
                                                                 </label>
                                                             </li>
                                                         )
@@ -286,7 +282,7 @@ class GroupingPage extends React.Component {
                                         <div id="sample-drop-field">
                                             <div id="nav_group2">
                                                 <form className="signIn">
-                                                    <input type="groupname" placeholder="Group Name" autocomplete='off' required />
+                                                    <input className="groupingInput" type="groupname" placeholder="Group Name" autocomplete='off' required />
                                                 </form>
                                             </div>
                                             <div className="group-box" id='2'
@@ -302,8 +298,6 @@ class GroupingPage extends React.Component {
                                                             >
                                                                 <label className="sample-container">
                                                                     <span className="grippy"></span> {sample}
-                                                                    <input type="checkbox" checked="checked" />
-                                                                    <span className="checkmark-sample"></span>
                                                                 </label>
                                                             </li>
                                                         )
@@ -318,7 +312,7 @@ class GroupingPage extends React.Component {
                                                 <div id="sample-drop-field">
                                                     <div id="nav_group2">
                                                         <form className="signIn">
-                                                            <input type="groupname" placeholder="Group Name" autocomplete='off' required />
+                                                            <input className="groupingInput" type="groupname" placeholder="Group Name" autocomplete='off' required />
                                                         </form>
                                                     </div>
                                                     <div className="group-box" id={id}
@@ -334,8 +328,6 @@ class GroupingPage extends React.Component {
                                                                     >
                                                                         <label className="sample-container">
                                                                             <span className="grippy"></span> {sample}
-                                                                            <input type="checkbox" checked="checked" />
-                                                                            <span className="checkmark-sample"></span>
                                                                         </label>
                                                                     </li>
                                                                 )
@@ -364,8 +356,6 @@ class GroupingPage extends React.Component {
                                                                     >
                                                                         <label className="sample-container">
                                                                             <span className="grippy"></span> {sample}
-                                                                            <input type="checkbox" checked="checked" />
-                                                                            <span className="checkmark-sample"></span>
                                                                         </label>
                                                                     </li>
                                                                 )

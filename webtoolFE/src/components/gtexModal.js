@@ -41,7 +41,7 @@ class GtexModule extends React.Component {
             tissue1: ['Adipose Tissue', 'Adrenal Gland', 'Bladder', 'Brain', 'Breast', 'Cervix Uteri', 'Colon', 'Esophagus',
                 'Fallopian Tube', 'Heart', 'Kidney', 'Liver', 'Lung', 'Muscle', 'Nerve'],
             tissue2: ['Ovary', 'Pancreas', 'Pituitary', 'Prostate', 'Salivary Gland', 'Skin', 'Small Intestine', 'Spleen',
-                'Stomach', 'Testis', 'Thyroid', 'Uterus', 'Blood', 'Blood Vessel'],
+                'Stomach', 'Testis', 'Thyroid', 'Uterus', 'Vagina', 'Blood', 'Blood Vessel'],
             tissueType: [],
             tissueObj: {},
         }
@@ -160,15 +160,15 @@ class GtexModule extends React.Component {
                         <div id="wrapper4">
                             <div id="topcontent">
                                 <div id="gtex">
-                                    <h1>Select Gtex <br />Characteristics</h1>
+                                    <h1>Select GTEx <br />Characteristics</h1>
                                 </div>
                                 <div id="controlgroup">
-                                    <h2>GTEX Group Name:</h2>
+                                    <h2 className="gtexh2">GTEx Group Name:</h2>
                                     {/* <input type="controlgroup" placeholder="" autocomplete="off" required /> */}
                                     <input type="text" value={this.state.gtexGroupName} onChange={this.handleGtexGroupName} />
                                 </div>
                                 <div id="sample">
-                                    <h2>Sample Count:</h2>
+                                    <h2 className="gtexh2">Sample Count:</h2>
                                     <div className="sample2">
                                         <h3>{this.state.sampleCount}</h3>
                                         {/*refresh button part starts*/}
@@ -183,7 +183,7 @@ class GtexModule extends React.Component {
                             </div>
                             <div id="bottomcontent">
                                 <div id="age">
-                                    <h2>Age Range:</h2></div> {/*<!--pick one or more, send to Math team, click refresh to update sample count-->*/}
+                                    <h2 className="gtexh2">Age Range:</h2></div> {/*<!--pick one or more, send to Math team, click refresh to update sample count-->*/}
                                 <div id="age_drop_down">
                                     <Multiselect
                                         isMulti
@@ -195,7 +195,7 @@ class GtexModule extends React.Component {
                                 </div>
 
                                 <div id="sex">
-                                    <h2>Sex:</h2></div> {/*<!--pick one or more, send to Math team, click refresh to update sample count-->*/}
+                                    <h2 className="gtexh2">Sex:</h2></div> {/*<!--pick one or more, send to Math team, click refresh to update sample count-->*/}
                                 <div className="sex-dropdown">
                                     <Multiselect
                                         isMulti
@@ -206,7 +206,7 @@ class GtexModule extends React.Component {
                                 </div>
 
                                 <div id="death">
-                                    <h2>Death:</h2></div> {/*<!--pick one or more, send to Math team, click refresh to update sample count-->*/}
+                                    <h2 className="gtexh2">Death:</h2></div> {/*<!--pick one or more, send to Math team, click refresh to update sample count-->*/}
                                 <div className="death-dropdown">
                                     <Multiselect
                                         isMulti
@@ -219,7 +219,7 @@ class GtexModule extends React.Component {
 
                             </div>
                             <div id="title">
-                                <h2>Select Tissue type(s):</h2></div> {/*<!--pick one or more, send to Math team, click refresh to update sample count-->*/}
+                                <h2 className="gtexh2">Select Tissue type(s):</h2></div> {/*<!--pick one or more, send to Math team, click refresh to update sample count-->*/}
                             <div id="all">
                                 <div id="set1">
                                     <ul>
