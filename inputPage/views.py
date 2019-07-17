@@ -145,20 +145,19 @@ def input_detail(request):
         data = JSONParser().parse(request) # Receive data from front end
         gtexData = data['gtex'] # syntax: data[key], key = package's name being sent
         print(gtexData)
-        # return a list of sample names and sample count
 
         #fake sample names to return to gtexModal.js
         sample_array = ['sample 1','sample 2']
-
         
-        # max: 15598
-        '''if not gtexData:
-            sample_count = 15598
-        else:'''
         # call function from query.py to get sample count, 
         # based on "gtexData" received from front end
-        # "gtexData" example: [[],['F'],['20-29', '30-39'],['Ventilator'],[],[ 'Skin','Blood']] = 192
-        sample_count = get_sample_size(gtexData) 
+        # Ex:"gtexData" [[],['F'],['20-29', '30-39'],['Ventilator'],[],[ 'Skin','Blood']] = 192 samples
+        for i in range(len(gtexData)):
+            if (gtexData[i]): # if gtexData is not empty, call function
+                sample_count = get_sample_size(gtexData) 
+                break
+            else: # if gtexData is empty [[], [], [], [], [], []], sample count will be max: 15598
+                sample_count = 15598 # max sample count
         
         print(sample_count)
         return JsonResponse({'sample_count': sample_count,'sample_array': sample_array}, status=201) 
