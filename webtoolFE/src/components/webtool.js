@@ -15,7 +15,7 @@ class WebTool extends React.Component {
             // this is a list which contain dictionaries inside, for unit dropbox option
             outputOptions: [{ value: "RPKM", label: "RPKM" },
             { value: "FPKM", label: "FPKM" },
-            { value: "TPM", label: "TPM" },],
+            { value: "TPM", label: "TPM" }],
             // to store selected unit option
             selectedOption: "TPM",
             loadingDiv: "csv-reader",
@@ -31,7 +31,6 @@ class WebTool extends React.Component {
         this.setState({ [event.target.name]: event.target.value })
     }
     
-
     // This method is used to store click option from dropbox
     selectedOption = (selected) => {
         this.setState({ selectedOption: selected })

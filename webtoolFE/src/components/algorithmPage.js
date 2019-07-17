@@ -8,41 +8,43 @@ class AlgorithmPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            algorithmOptions: [{ value: "Option1", label: "Option 1" },
-            { value: "Option2", label: "Option 2" }],
+            algorithmOptions: [{ value: "option1", label: "Option 1" },
+            { value: "option2", label: "Option 2" }],
             selectedAlgorithm: "",
 
-            sampleVarianceOptions: [{ value: "Equal", label: "Equal" },
-            { value: "Unequal", label: "Unequal" }],
+            sampleVarianceOptions: [{ value: "equal", label: "Equal" },
+            { value: "unequal", label: "Unequal" }],
             selectedSampleVariance: "",
 
-            falseDiscoveryRate_value: 0,
-            bonferroniAlpha_value: 0,
-            
+            falseDiscoveryRate_value: "0.050",
+            bonferroniAlpha_value: "0.050",
+            batch_correction_value: "Correction Applied",
+
         }
         this.handleChangeFalseDiscovery = this.handleChangeFalseDiscovery.bind(this);
         this.handleChangeBonferroni = this.handleChangeBonferroni.bind(this);
-
     }
 
     // This method is used to store "algorithm" option from dropbox
     selectedAlgorithm = (selected) => {
         this.setState({ selectedAlgorithm: selected })
-    }   
+    }
 
     // This method is used to store "sample variance" option from dropbox
     selectedSampleVariance = (selected) => {
         this.setState({ selectedSampleVariance: selected })
-    }       
+    }
 
     // This method is used to store "False Discovery Rate" from slider 1
     handleChangeFalseDiscovery(event) {
-        this.setState({falseDiscoveryRate_value: event.target.value});
+        this.setState({ falseDiscoveryRate_value: event.target.value });
+        console.log("false is " + this.state.falseDiscoveryRate_value)
+        console.log("type of false " + typeof(this.state.falseDiscoveryRate_value))
     }
 
     // This method is used to store "Bonferroni Alpha" from slider 2
     handleChangeBonferroni(event) {
-        this.setState({bonferroniAlpha_value: event.target.value});
+        this.setState({ bonferroniAlpha_value: event.target.value });
     }
 
     /*runTaskHandler = () => {
@@ -61,11 +63,19 @@ class AlgorithmPage extends React.Component {
         this.setState({ href: '/resultpage' }) 
     }*/
 
+    //get the "batch_correction_value" (yes/no?) from batchPage.js
+    componentDidMount(){
+        let batch_correction_value = JSON.parse(localStorage.getItem('batch_correction_value'))
+        this.setState({batch_correction_value: batch_correction_value})
+    }
+
+
     render() {
+        
         return (
             <div>
                 <head>
-                    <meta charset="UTF-8" />
+                    <meta charSet="UTF-8" />
                     <title>Untitled Document</title>
                     <link href="tata.css" rel="stylesheet" />
                     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Oswald&display=swap" rel="stylesheet" />
@@ -98,7 +108,7 @@ class AlgorithmPage extends React.Component {
                                     <div id="stepnav">
                                         <dl>
                                             <div id="task">
-                                                <dt><div className="active2">Exploratpry Plots</div></dt>
+                                                <dt><div className="active2">Exploratory Plots</div></dt>
                                                 <dt><div className="active2">Choose Task</div></dt>
                                                 <dt><div className="active2">Group Samples</div></dt>
                                                 <dd>Group Samples & create Gtex group</dd>
@@ -120,39 +130,52 @@ class AlgorithmPage extends React.Component {
                             {/* <!--end of nav--> */}
                             <div id="content5">
                                 <div id="sections5">
-                                    <div id="selection1">
-                                        <div id="algorithm"	>
-                                            <h2>Algorithm:</h2></div>
-                                        <div id="algorithmselection">
-                                            {/* <select name="langOpt[]" multiple id="langOpt">
+                                    <div className="batch-container-sections">
+                                        <div id="selection3">
+                                            <div id="batch-action">
+                                                <h2>BATCH CORRECTION:</h2>
+                                            </div>
+                                            <span className="batch-text-block">{this.state.batch_correction_value}</span>
+                                        </div>
+                                    </div>
+                                    <div className="container-sections">
+                                        <div id="selection1">
+                                            <div id="algorithm"	>
+                                                <h2>ALGORITHM:</h2>
+                                            </div>
+                                            <div id="algorithmselection">
+                                                {/* <select name="langOpt[]" multiple id="langOpt">
                                                 <option value="option1">Option 1</option>
                                                 <option value="option2">Option 2</option>
                                             </select> */}
-                                            <Select
-                                                styles={{control: (base) => ({...base, boxShadow: "none", width: "120px"})}}
-                                                placeholder={this.state.selectedAlgorithm}
-                                                value={this.state.selectedAlgorithm}
-                                                onChange={this.selectedAlgorithm}
-                                                options={this.state.algorithmOptions}
-                                            />                                            
+                                                <Select
+                                                    styles={{ control: (base) => ({ ...base, boxShadow: "none", width: "162px" }) }}
+                                                    placeholder={this.state.selectedAlgorithm}
+                                                    value={this.state.selectedAlgorithm}
+                                                    onChange={this.selectedAlgorithm}
+                                                    options={this.state.algorithmOptions}
+                                                />
 
+                                            </div>
                                         </div>
                                     </div>
-                                    <div id="section2">
-                                        <div id="samplevariance">
-                                            <h2>Sample Variance:</h2></div>
-                                        <div id="varianceselection">
-                                            {/* <select name="langOpt2[]" multiple id="langOpt2">
+                                    <div className="container-sections">
+                                        <div id="section2">
+                                            <div id="samplevariance">
+                                                <h2>SAMPLE VARIANCE:</h2></div>
+                                            <div id="varianceselection">
+                                                {/* <select name="langOpt2[]" multiple id="langOpt2">
                                                 <option value="equal">Equal</option>
                                                 <option value="unequal">Unequal</option>
                                             </select> */}
-                                            <Select
-                                                styles={{control: (base) => ({...base, boxShadow: "none", width: "120px"})}}
-                                                placeholder={this.state.selectedSampleVariance}
-                                                value={this.state.selectedSampleVariance}
-                                                onChange={this.selectedSampleVariance}
-                                                options={this.state.sampleVarianceOptions}
-                                            />                                                
+                                                <Select
+                                                    styles={{ control: (base) => ({ ...base, boxShadow: "none", width: "162px" }) }}
+                                                    placeholder={this.state.selectedSampleVariance}
+                                                    value={this.state.selectedSampleVariance}
+                                                    onChange={this.selectedSampleVariance}
+                                                    options={this.state.sampleVarianceOptions}
+                                                />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -163,7 +186,7 @@ class AlgorithmPage extends React.Component {
                                     </div>
                                     <div id="falseDiscoverySlider">
                                         <input type="range" min="0" max="1" value={this.state.falseDiscoveryRate_value} step="0.025" className="slider" id="myRange" onChange={this.handleChangeFalseDiscovery} />
-                                        <span id="demo">{this.state.falseDiscoveryRate_value}</span>
+                                        <input type="text" value={this.state.falseDiscoveryRate_value} onChange={this.handleChangeFalseDiscovery} />
                                     </div>
 
                                     <div className="drophelp5">
@@ -171,8 +194,8 @@ class AlgorithmPage extends React.Component {
                                         <div className="helpcontent5 TPC">based on tissue source and gender. Outliers samples may be an expected outcome if your data is derived from diseased groups or from different tissue types. </div>
                                     </div>
                                     <div id="bonferroniSlider">
-                                        <input type="range" min="0" max="1" value={this.state.bonferroniAlpha_value} step="0.025" className="slider" id="myRange2" onChange={this.handleChangeBonferroni}/>
-                                        <span id="demo2">{this.state.bonferroniAlpha_value}</span>
+                                        <input type="range" min="0.001" max="1" value={this.state.bonferroniAlpha_value} step="0.025" className="slider" id="myRange2" onChange={this.handleChangeBonferroni} />
+                                        <input type="text" value={this.state.bonferroniAlpha_value} onChange={this.handleChangeBonferroni} />
                                     </div>
                                 </div>
 
@@ -182,7 +205,7 @@ class AlgorithmPage extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <Footer/>
+                        <Footer />
                     </div>
                     {/* <!--end of wrapper--> */}
                 </body>

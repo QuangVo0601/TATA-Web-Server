@@ -9,16 +9,13 @@ class BatchPage extends React.Component {
         super(props)
         this.state = {
             outputOptions: [
-                { value: "Yes", label: "Yes" },
-                { value: "No", label: "No" }
+                { value: "Correction Applied", label: "Yes" },
+                { value: "No Correction", label: "No" }
             ],
-            selectedOption: "Yes",
+            selectedOption: { value: "Correction Applied", label: "Yes" },
+            href: "",
             uncorrected_pca_traces: [],
             corrected_pca_traces: [],
-            // x_uncorrected: [], //maybe localStorage.getItem('x_pca').split(",") ?
-            // y_uncorrected: [], //maybe localStorage.getItem('y_pca').split(",") ?
-            // x_corrected: [], //maybe localStorage.getItem('x_corrected').split(",") ?
-            // y_corrected: [], //maybe localStorage.getItem('y_corrected').split(",") ?
         }
     }
 
@@ -27,48 +24,54 @@ class BatchPage extends React.Component {
         this.setState({ selectedOption: selected })
     }
 
-    // As soon as the page route, it executes
+    // go to algorithm page, save the "batch_correction_value" in localStorage
+    // to be used in algorithmPage.js
+    handleSubmit = () => {
+        localStorage.setItem('batch_correction_value', JSON.stringify(this.state.selectedOption.value))
+        this.setState({ href: '/algorithmpage' }) 
+    }
+
+    // Retrieve from back end the data needed for uncorrected & corrected pca graphs
     /*componentDidMount() {
 
-        console.log()
+        var group_names_list = JSON.parse(localStorage.getItem('group_names_list'))
+
+        var x_uncorrected_pca = JSON.parse(localStorage.getItem('x_uncorrected_pca'))
+        var y_uncorrected_pca = JSON.parse(localStorage.getItem('y_uncorrected_pca'))
+        // console.log(x_uncorrected_pca)
+        // console.log(y_uncorrected_pca)
 
         // number of lines on each graph
-        let no_of_dataframes = parseInt(localStorage.getItem('no_of_dataframes'))
-        // number of ordered pairs for each line
-        let no_of_ordered_pairs = parseInt(localStorage.getItem('no_of_ordered_pairs'))
-        let j = 0 // for slice begin
-        let k = no_of_ordered_pairs // for slice end
+        let no_of_dataframes = x_uncorrected_pca.length
 
         // for uncorrected pca graph
         let uncorrected_traces_temp = []
         for(let i = 0; i < no_of_dataframes; i++){
-            let x = localStorage.getItem('x_uncorrected').split(",").slice(j, k)
-            let y = localStorage.getItem('y_uncorrected').split(",").slice(j, k)
-            j = k // set new begin index
-            k += no_of_ordered_pairs // set new end index
-            //let name = names[i] //sample name
+            let x = x_uncorrected_pca[i]
+            let y = y_uncorrected_pca[i]
+            let name = group_names_list[i] //sample name
             let type = 'scatter'
             let mode = 'markers'
-            //let hoverinfo = "name"
-            let trace = { x, y, type, mode} // create a new trace obj
+            let hoverinfo = "name"
+            let trace = { x, y, name, type, mode, hoverinfo} // create a new trace obj
             uncorrected_traces_temp.push(trace) // add that trace obj into our tpc_trace
         }
 
-        j = 0 // reset slice begin
-        k = no_of_ordered_pairs // reset slice end
+        var x_corrected_pca = JSON.parse(localStorage.getItem('x_corrected_pca'))
+        var y_corrected_pca = JSON.parse(localStorage.getItem('y_corrected_pca'))
+        // console.log(x_corrected_pca)
+        // console.log(y_corrected_pca)
 
         // for corrected pca graph
         let corrected_traces_temp = []
         for(let i = 0; i < no_of_dataframes; i++){
-            let x = localStorage.getItem('x_corrected').split(",").slice(j, k)
-            let y = localStorage.getItem('y_corrected').split(",").slice(j, k)
-            j = k // set new begin index
-            k += no_of_ordered_pairs // set new end index
-            //let name = names[i] //sample name
+            let x = x_corrected_pca[i]
+            let y = y_corrected_pca[i]
+            let name = group_names_list[i] //sample name
             let type = 'scatter'
             let mode = 'markers'
-            //let hoverinfo = "name"
-            let trace = { x, y, type, mode} // create a new trace obj
+            let hoverinfo = "name"
+            let trace = { x, y, name, type, mode, hoverinfo} // create a new trace obj
             corrected_traces_temp.push(trace) // add that trace obj into our tpc_trace
         }
 
@@ -78,7 +81,6 @@ class BatchPage extends React.Component {
             uncorrected_pca_traces: uncorrected_traces_temp,
             corrected_pca_traces: corrected_traces_temp
         })
-
 
     }*/
 
@@ -93,7 +95,7 @@ class BatchPage extends React.Component {
                 <body>
                     <div id="batch-wrapper">
                         <div className="batch-flex-container">
-                            <div id="content">
+                            {/* <div id="content"> */}
                                 <div id="nav-batch">
                                     <div id="logo">
                                         <img src={require('../assets/Group 257.png')} width="46px" height="46px" alt="logo" />
@@ -140,7 +142,7 @@ class BatchPage extends React.Component {
                                     {/* <!--end of mainnav--> */}
                                 </div>
                                 {/* <!--end of nav--> */}
-                            </div>
+                            {/* </div> */}
                             {/* <!-- beginning of batch section --> */}
                             <div id="batch-section">
                                 <div id="batch-content">
@@ -153,25 +155,29 @@ class BatchPage extends React.Component {
                                             <Plot
                                                 data={this.state.corrected_pca_traces}
 
-                                
                                                 layout={{
                                                     hovermode: 'closest',
                                                     title: 'Corrected PCA',
-                                                    font: { family: 'Oswald,sans-serif', size: 15, color: '#114b5f' },
-                                                    width: 460, height: 450,
+                                                    font: { family: 'Oswald,sans-serif', size: 13, color: '#114b5f' },
+                                                    // width: 460, height: 450,
                                                     xaxis: {
                                                         autorange: true, showgrid: false, title: {
                                                             text: 'PC1',
-                                                            font: { family: 'Oswald,sans-serif', size: 15, color: '#114b5f' }
+                                                            font: { family: 'Oswald,sans-serif', size: 12, color: '#114b5f' }
                                                         },
                                                     },
                                                     yaxis: {
                                                         autorange: true, showgrid: false, title: {
                                                             text: 'PC2',
-                                                            font: { family: 'Oswald,sans-serif', size: 15, color: '#114b5f' }
+                                                            font: { family: 'Oswald,sans-serif', size: 12, color: '#114b5f' }
                                                         }
-                                                    }
+                                                    },
+                                                    autosize: true,
+                                                    showlegend: true,
+                                                    legend: {"orientation": "v", "font": {size: 11}}
                                                 }}
+                                                {...{useResizeHandler: true}}
+                                                {...{style: {width: "100%", height: "100%"}}}
                                             />
                                         </div>
                                     </div>
@@ -185,25 +191,29 @@ class BatchPage extends React.Component {
                                             <Plot
                                                 data={this.state.uncorrected_pca_traces}
 
-
                                                 layout={{
                                                     hovermode: 'closest',
                                                     title: 'Uncorrected PCA',
-                                                    font: { family: 'Oswald,sans-serif', size: 15, color: '#114b5f' },
-                                                    width: 460, height: 450,
+                                                    font: { family: 'Oswald,sans-serif', size: 13, color: '#114b5f' },
+                                                    // width: 460, height: 450,
                                                     xaxis: {
                                                         autorange: true, showgrid: false, title: {
                                                             text: 'PC1',
-                                                            font: { family: 'Oswald,sans-serif', size: 15, color: '#114b5f' }
+                                                            font: { family: 'Oswald,sans-serif', size: 12, color: '#114b5f' }
                                                         },
                                                     },
                                                     yaxis: {
                                                         autorange: true, showgrid: false, title: {
                                                             text: 'PC2',
-                                                            font: { family: 'Oswald,sans-serif', size: 15, color: '#114b5f' }
+                                                            font: { family: 'Oswald,sans-serif', size: 12, color: '#114b5f' }
                                                         }
-                                                    }
+                                                    },
+                                                    autosize: true,
+                                                    showlegend: true,
+                                                    legend: {"orientation": "v", "font": {size: 11}}
                                                 }}
+                                                {...{useResizeHandler: true}}
+                                                {...{style: {width: "100%", height: "100%"}}}
                                             />
                                         </div>
                                     </div>
@@ -228,8 +238,11 @@ class BatchPage extends React.Component {
                                     </div>
 
                                     <div className="nav_container4">
-                                        <a href='algorithmpage'><button type="Continue" className="button batch_cont">Continue</button></a>
-                                        
+                                    <a href={this.state.href} style={{'text-decoration': 'none'}}>
+                                        <button type="Continue" 
+                                                className="button batch_cont"
+                                                onClick={this.handleSubmit}>Continue</button>
+                                    </a>
                                     </div>
                                 </div>
 

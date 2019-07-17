@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/tata.css";
 import Footer from './botNav';
+import axios from 'axios'; // to send data to back end
 import Select from "react-select"; // to use dropbox
 import Popup from './gtexModal';
 
@@ -28,9 +29,20 @@ class GroupingPage extends React.Component {
             dragFrom: '',
             selectedNumberOfGroups: [],
 
-            showPopUp: false
+            showPopUp: false,
+            
+            /*--------Quang's part, Phuong em don't delete this pls-------*/
+            //dummy group list to send to back end
+            dummy_group_lists: [['control group','#Patient1 (Gene Score)','#Patient3','#Patient5'],
+                                ['group1','#Patient2','#Patient4'],
+                                ['group2','#Patient6','#Patient7'],
+                                ['gtex group','#Patient2','#Patient3','#Patient4']],
+            href: "",
+            /*-------------------Quang's part ends-------------------------*/
         };
     }
+
+
 
     // gtex group handler
     handleGtex = (name, array) => {
@@ -84,11 +96,29 @@ class GroupingPage extends React.Component {
         event.preventDefault()//stop everything from happening at once
     }
 
-
     // To make pop up module
     togglePopup() {
         this.setState({ showPopup: (!this.state.showPopup) })
     }
+
+    /*--------Quang's part, Phuong em don't delete this pls-------*/
+    // handle "Continue" button, go to batchPage.js
+    handleGroups = () => {
+        // sending request to back end need to be together
+        //axios call (get in header) to send to back end
+        axios.post('http://127.0.0.1:8000/backend/list2', {
+        //axios.post('http://oscar19.orc.gmu.edu/backend/list2', {
+            groupsList: this.state.dummy_group_lists
+        }).then((arr) => { // to receive data from back end 
+            localStorage.setItem('x_uncorrected_pca', JSON.stringify(arr.data.x_uncorrected_pca))
+            localStorage.setItem('y_uncorrected_pca', JSON.stringify(arr.data.y_uncorrected_pca))
+            localStorage.setItem('x_corrected_pca', JSON.stringify(arr.data.x_corrected_pca))
+            localStorage.setItem('y_corrected_pca', JSON.stringify(arr.data.y_corrected_pca))
+            localStorage.setItem('group_names_list', JSON.stringify(arr.data.group_names_list))
+        })
+        this.setState({ href: '/batchpage' }) 
+    }   
+    /*-------------------Quang's part ends-------------------------*/
 
     render() {
         return (
@@ -220,7 +250,7 @@ class GroupingPage extends React.Component {
                                         <div id="sample-drop-field">
                                             <div id="nav_group2">
                                                 <form className="signIn">
-                                                    <input type="controlgroup" placeholder="Control Group" autocomplete='off' required />
+                                                    <input className="groupingInput" type="controlgroup" placeholder="Control Group" autocomplete='off' required />
                                                     <label className="container">Null Hypothesis</label>
                                                 </form>
                                             </div>
@@ -252,7 +282,7 @@ class GroupingPage extends React.Component {
                                         <div id="sample-drop-field">
                                             <div id="nav_group2">
                                                 <form className="signIn">
-                                                    <input type="groupname" placeholder="Group Name" autocomplete='off' required />
+                                                    <input className="groupingInput" type="groupname" placeholder="Group Name" autocomplete='off' required />
                                                 </form>
                                             </div>
                                             <div className="group-box" id='2'
@@ -282,7 +312,7 @@ class GroupingPage extends React.Component {
                                                 <div id="sample-drop-field">
                                                     <div id="nav_group2">
                                                         <form className="signIn">
-                                                            <input type="groupname" placeholder="Group Name" autocomplete='off' required />
+                                                            <input className="groupingInput" type="groupname" placeholder="Group Name" autocomplete='off' required />
                                                         </form>
                                                     </div>
                                                     <div className="group-box" id={id}
@@ -342,7 +372,9 @@ class GroupingPage extends React.Component {
                                     {/* <!--............................... --> */}
 
                                     <div className="nav_container3">
-                                        <a href='/batchpage'><button type="Continue" className="buttontask_cont">Continue</button></a>
+                                        <a href={this.state.href} style={{'text-decoration': 'none'}}>
+                                            <button type="Continue" className="buttontask_cont" onClick={this.handleGroups}>Continue</button>
+                                        </a>
                                     </div>
                                 </div>
 
