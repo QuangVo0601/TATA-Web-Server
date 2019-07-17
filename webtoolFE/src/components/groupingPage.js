@@ -170,8 +170,6 @@ class GroupingPage extends React.Component {
                                                 >
                                                     <label className="sample-container">
                                                         <span className="grippy"></span> {sample}
-                                                        <input type="checkbox" checked="checked" />
-                                                        <span className="checkmark-sample"></span>
                                                     </label>
                                                 </li>
                                             ))}
@@ -241,8 +239,6 @@ class GroupingPage extends React.Component {
                                                             >
                                                                 <label className="sample-container">
                                                                     <span className="grippy"></span> {sample}
-                                                                    <input type="checkbox" checked="checked" />
-                                                                    <span className="checkmark-sample"></span>
                                                                 </label>
                                                             </li>
                                                         )
@@ -272,8 +268,6 @@ class GroupingPage extends React.Component {
                                                             >
                                                                 <label className="sample-container">
                                                                     <span className="grippy"></span> {sample}
-                                                                    <input type="checkbox" checked="checked" />
-                                                                    <span className="checkmark-sample"></span>
                                                                 </label>
                                                             </li>
                                                         )
@@ -304,8 +298,6 @@ class GroupingPage extends React.Component {
                                                                     >
                                                                         <label className="sample-container">
                                                                             <span className="grippy"></span> {sample}
-                                                                            <input type="checkbox" checked="checked" />
-                                                                            <span className="checkmark-sample"></span>
                                                                         </label>
                                                                     </li>
                                                                 )
@@ -334,8 +326,6 @@ class GroupingPage extends React.Component {
                                                                     >
                                                                         <label className="sample-container">
                                                                             <span className="grippy"></span> {sample}
-                                                                            <input type="checkbox" checked="checked" />
-                                                                            <span className="checkmark-sample"></span>
                                                                         </label>
                                                                     </li>
                                                                 )
