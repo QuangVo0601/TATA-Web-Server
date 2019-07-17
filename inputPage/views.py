@@ -6,7 +6,7 @@ from .serializers import InputSerializer
 from django.shortcuts import render
 from .ds_class import ds # import from ds_class.py for validationPage.js
 from .GTEXDataAnalyzer import GTEXDataAnalyzer # import from GTEXDataAnalyzer.py for batchPage.js
-from .query import get_sample_size # import from query.py for gtexModal.js
+from .query import get_sample_names # import from query.py for gtexModal.js
 
 # Create your views here.
 def index_page(request):
@@ -145,22 +145,22 @@ def input_detail(request):
         data = JSONParser().parse(request) # Receive data from front end
         gtexData = data['gtex'] # syntax: data[key], key = package's name being sent
         print(gtexData)
-
-        #fake sample names to return to gtexModal.js
-        sample_array = ['sample 1','sample 2']
         
         # call function from query.py to get sample count, 
         # based on "gtexData" received from front end
         # Ex:"gtexData" [[],['F'],['20-29', '30-39'],['Ventilator'],[],[ 'Skin','Blood']] = 192 samples
         for i in range(len(gtexData)):
             if (gtexData[i]): # if gtexData is not empty, call function
-                sample_count = get_sample_size(gtexData) 
+                sample_names = get_sample_names(gtexData) 
+                sample_count = len(sample_names)
                 break
             else: # if gtexData is empty [[], [], [], [], [], []], sample count will be max: 15598
+                sample_names = [] # no sample names returned
                 sample_count = 15598 # max sample count
         
+        print(sample_names)
         print(sample_count)
-        return JsonResponse({'sample_count': sample_count,'sample_array': sample_array}, status=201) 
+        return JsonResponse({'sample_count': sample_count,'sample_array': sample_names}, status=201) 
 
 '''@csrf_exempt
 def input_detail(request, pk):

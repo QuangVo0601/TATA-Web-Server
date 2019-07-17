@@ -89,10 +89,10 @@ def seperate_by_tissue(query):
 def get_sample_size(query):
 	return len(df.query(make_query(query)).index)
 
-
+def get_sample_names(query): #given a query, q , returns list of sample names satisfying q
+	return list(df.query(make_query(query)).iloc[:,0])
 
 #print(get_sample_size(q))
-
 
 def query_by_tissue_type(q): # given a query with multiple tissue types
 # query the metadata file to get a smaller df
@@ -105,6 +105,11 @@ def query_by_tissue_type(q): # given a query with multiple tissue types
 	M = [[query[5],list(subdf.query(make_query(query)).iloc[:,0])] for query in query_list]
 	print(M)
 	return M
+
+
+
+
+
 #M = query_by_tissue_type(L)
 
 
