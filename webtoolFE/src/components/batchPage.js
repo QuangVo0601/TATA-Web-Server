@@ -9,10 +9,10 @@ class BatchPage extends React.Component {
         super(props)
         this.state = {
             outputOptions: [
-                { value: "Yes", label: "Yes" },
-                { value: "No", label: "No" }
+                { value: "Correction Applied", label: "Yes" },
+                { value: "No Correction", label: "No" }
             ],
-            selectedOption: "Yes",
+            selectedOption: { value: "Correction Applied", label: "Yes" },
             href: "",
             uncorrected_pca_traces: [],
             corrected_pca_traces: [],
@@ -24,13 +24,15 @@ class BatchPage extends React.Component {
         this.setState({ selectedOption: selected })
     }
 
-    // go to algorithm page
+    // go to algorithm page, save the "batch_correction_value" in localStorage
+    // to be used in algorithmPage.js
     handleSubmit = () => {
+        localStorage.setItem('batch_correction_value', JSON.stringify(this.state.selectedOption.value))
         this.setState({ href: '/algorithmpage' }) 
     }
 
     // Retrieve from back end the data needed for uncorrected & corrected pca graphs
-    componentDidMount() {
+    /*componentDidMount() {
 
         var group_names_list = JSON.parse(localStorage.getItem('group_names_list'))
 
@@ -80,7 +82,7 @@ class BatchPage extends React.Component {
             corrected_pca_traces: corrected_traces_temp
         })
 
-    }
+    }*/
 
     render() {
         return (
@@ -93,7 +95,7 @@ class BatchPage extends React.Component {
                 <body>
                     <div id="batch-wrapper">
                         <div className="batch-flex-container">
-                            <div id="content">
+                            {/* <div id="content"> */}
                                 <div id="nav-batch">
                                     <div id="logo">
                                         <img src={require('../assets/Group 257.png')} width="46px" height="46px" alt="logo" />
@@ -140,7 +142,7 @@ class BatchPage extends React.Component {
                                     {/* <!--end of mainnav--> */}
                                 </div>
                                 {/* <!--end of nav--> */}
-                            </div>
+                            {/* </div> */}
                             {/* <!-- beginning of batch section --> */}
                             <div id="batch-section">
                                 <div id="batch-content">
@@ -156,23 +158,26 @@ class BatchPage extends React.Component {
                                                 layout={{
                                                     hovermode: 'closest',
                                                     title: 'Corrected PCA',
-                                                    font: { family: 'Oswald,sans-serif', size: 15, color: '#114b5f' },
-                                                    width: 460, height: 450,
+                                                    font: { family: 'Oswald,sans-serif', size: 13, color: '#114b5f' },
+                                                    // width: 460, height: 450,
                                                     xaxis: {
                                                         autorange: true, showgrid: false, title: {
                                                             text: 'PC1',
-                                                            font: { family: 'Oswald,sans-serif', size: 15, color: '#114b5f' }
+                                                            font: { family: 'Oswald,sans-serif', size: 12, color: '#114b5f' }
                                                         },
                                                     },
                                                     yaxis: {
                                                         autorange: true, showgrid: false, title: {
                                                             text: 'PC2',
-                                                            font: { family: 'Oswald,sans-serif', size: 15, color: '#114b5f' }
+                                                            font: { family: 'Oswald,sans-serif', size: 12, color: '#114b5f' }
                                                         }
                                                     },
+                                                    autosize: true,
                                                     showlegend: true,
-                                                    legend: {"orientation": "h"}
+                                                    legend: {"orientation": "v", "font": {size: 11}}
                                                 }}
+                                                {...{useResizeHandler: true}}
+                                                {...{style: {width: "100%", height: "100%"}}}
                                             />
                                         </div>
                                     </div>
@@ -189,23 +194,26 @@ class BatchPage extends React.Component {
                                                 layout={{
                                                     hovermode: 'closest',
                                                     title: 'Uncorrected PCA',
-                                                    font: { family: 'Oswald,sans-serif', size: 15, color: '#114b5f' },
-                                                    width: 460, height: 450,
+                                                    font: { family: 'Oswald,sans-serif', size: 13, color: '#114b5f' },
+                                                    // width: 460, height: 450,
                                                     xaxis: {
                                                         autorange: true, showgrid: false, title: {
                                                             text: 'PC1',
-                                                            font: { family: 'Oswald,sans-serif', size: 15, color: '#114b5f' }
+                                                            font: { family: 'Oswald,sans-serif', size: 12, color: '#114b5f' }
                                                         },
                                                     },
                                                     yaxis: {
                                                         autorange: true, showgrid: false, title: {
                                                             text: 'PC2',
-                                                            font: { family: 'Oswald,sans-serif', size: 15, color: '#114b5f' }
+                                                            font: { family: 'Oswald,sans-serif', size: 12, color: '#114b5f' }
                                                         }
                                                     },
+                                                    autosize: true,
                                                     showlegend: true,
-                                                    legend: {"orientation": "h"}
+                                                    legend: {"orientation": "v", "font": {size: 11}}
                                                 }}
+                                                {...{useResizeHandler: true}}
+                                                {...{style: {width: "100%", height: "100%"}}}
                                             />
                                         </div>
                                     </div>

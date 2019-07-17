@@ -16,14 +16,13 @@ class AlgorithmPage extends React.Component {
             { value: "unequal", label: "Unequal" }],
             selectedSampleVariance: "",
 
-            falseDiscoveryRate_value: 0,
-            bonferroniAlpha_value: 0,
-            batch_correction: "No",
+            falseDiscoveryRate_value: "0.050",
+            bonferroniAlpha_value: "0.050",
+            batch_correction_value: "Correction Applied",
 
         }
         this.handleChangeFalseDiscovery = this.handleChangeFalseDiscovery.bind(this);
         this.handleChangeBonferroni = this.handleChangeBonferroni.bind(this);
-
     }
 
     // This method is used to store "algorithm" option from dropbox
@@ -39,6 +38,8 @@ class AlgorithmPage extends React.Component {
     // This method is used to store "False Discovery Rate" from slider 1
     handleChangeFalseDiscovery(event) {
         this.setState({ falseDiscoveryRate_value: event.target.value });
+        console.log("false is " + this.state.falseDiscoveryRate_value)
+        console.log("type of false " + typeof(this.state.falseDiscoveryRate_value))
     }
 
     // This method is used to store "Bonferroni Alpha" from slider 2
@@ -62,11 +63,11 @@ class AlgorithmPage extends React.Component {
         this.setState({ href: '/resultpage' }) 
     }*/
 
-    //still trying
-    // componentDidMount(){
-    //     const { batch_correction_value } = this.props.location.state
-    //     this.setState({batch_correction: batch_correction_value})
-    // }
+    //get the "batch_correction_value" (yes/no?) from batchPage.js
+    componentDidMount(){
+        let batch_correction_value = JSON.parse(localStorage.getItem('batch_correction_value'))
+        this.setState({batch_correction_value: batch_correction_value})
+    }
 
 
     render() {
@@ -74,7 +75,7 @@ class AlgorithmPage extends React.Component {
         return (
             <div>
                 <head>
-                    <meta charset="UTF-8" />
+                    <meta charSet="UTF-8" />
                     <title>Untitled Document</title>
                     <link href="tata.css" rel="stylesheet" />
                     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Oswald&display=swap" rel="stylesheet" />
@@ -134,7 +135,7 @@ class AlgorithmPage extends React.Component {
                                             <div id="batch-action">
                                                 <h2>BATCH CORRECTION:</h2>
                                             </div>
-                                            <span className="batch-text-block">{this.state.batch_correction} correction</span>
+                                            <span className="batch-text-block">{this.state.batch_correction_value}</span>
                                         </div>
                                     </div>
                                     <div className="container-sections">
@@ -185,9 +186,7 @@ class AlgorithmPage extends React.Component {
                                     </div>
                                     <div id="falseDiscoverySlider">
                                         <input type="range" min="0" max="1" value={this.state.falseDiscoveryRate_value} step="0.025" className="slider" id="myRange" onChange={this.handleChangeFalseDiscovery} />
-                                        <span id="demo">{this.state.falseDiscoveryRate_value}</span>
-                                        {/* <input className="algorithmInput" type="text" value={this.state.falseDiscoveryRate_value} onChange={this.handleChangeFalseDiscovery} /> */}
-                                        {/* <span className="underline"></span> */}
+                                        <input type="text" value={this.state.falseDiscoveryRate_value} onChange={this.handleChangeFalseDiscovery} />
                                     </div>
 
                                     <div className="drophelp5">
@@ -195,9 +194,8 @@ class AlgorithmPage extends React.Component {
                                         <div className="helpcontent5 TPC">based on tissue source and gender. Outliers samples may be an expected outcome if your data is derived from diseased groups or from different tissue types. </div>
                                     </div>
                                     <div id="bonferroniSlider">
-                                        <input type="range" min="0" max="1" value={this.state.bonferroniAlpha_value} step="0.025" className="slider" id="myRange2" onChange={this.handleChangeBonferroni} />
-                                        <span id="demo2">{this.state.bonferroniAlpha_value}</span>
-                                        {/* <input type="text" value={this.state.bonferroniAlpha_value} onChange={this.handleChangeBonferroni} /> */}
+                                        <input type="range" min="0.001" max="1" value={this.state.bonferroniAlpha_value} step="0.025" className="slider" id="myRange2" onChange={this.handleChangeBonferroni} />
+                                        <input type="text" value={this.state.bonferroniAlpha_value} onChange={this.handleChangeBonferroni} />
                                     </div>
                                 </div>
 
