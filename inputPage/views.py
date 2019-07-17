@@ -4,9 +4,9 @@ from rest_framework.parsers import JSONParser
 from .models import Input
 from .serializers import InputSerializer
 from django.shortcuts import render
-from .ds_class import ds # import from Math team's file for validationPage
-from .GTEXDataAnalyzer import GTEXDataAnalyzer # import from Math team's file for batch correction page
-import random #delete later
+from .ds_class import ds # import from ds_class.py for validationPage.js
+from .GTEXDataAnalyzer import GTEXDataAnalyzer # import from GTEXDataAnalyzer.py for batchPage.js
+from .query import get_sample_size # import from query.py for gtexModal.js
 
 # Create your views here.
 def index_page(request):
@@ -145,13 +145,22 @@ def input_detail(request):
         data = JSONParser().parse(request) # Receive data from front end
         gtexData = data['gtex'] # syntax: data[key], key = package's name being sent
         print(gtexData)
-
-        # need Jon's gtex algorithm here
         # return a list of sample names and sample count
 
-        #fake sample count and sample names to return to gtexModal.js
-        sample_count = random.randrange(0, 1000, 3)
+        #fake sample names to return to gtexModal.js
         sample_array = ['sample 1','sample 2']
+
+        
+        # max: 15598
+        '''if not gtexData:
+            sample_count = 15598
+        else:'''
+        # call function from query.py to get sample count, 
+        # based on "gtexData" received from front end
+        # "gtexData" example: [[],['F'],['20-29', '30-39'],['Ventilator'],[],[ 'Skin','Blood']] = 192
+        sample_count = get_sample_size(gtexData) 
+        
+        print(sample_count)
         return JsonResponse({'sample_count': sample_count,'sample_array': sample_array}, status=201) 
 
 '''@csrf_exempt
