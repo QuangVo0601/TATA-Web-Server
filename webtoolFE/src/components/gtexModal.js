@@ -105,7 +105,7 @@ class GtexModule extends React.Component {
     }
 
     // toggle 'create' button
-    createHandler = () => {
+    refHandler = () => {
         let arr = []
         this.state.tissue1.forEach(item => {
             if (this.state.tissueObj[item]) {
@@ -119,21 +119,48 @@ class GtexModule extends React.Component {
         })
         this.setState({ tissueType: arr },
             () => {
-                this.axiosCall()
+                this.axiosCallRef()
             }
 
         )
-    }
 
-    axiosCall() {
+    }
+    createHandler = () => {
+        this.setState({refClick: !this.state.refClick})
+        let arr = []
+        this.state.tissue1.forEach(item => {
+            if (this.state.tissueObj[item]) {
+                arr.push(item)
+            }
+        })
+        this.state.tissue2.forEach(item => {
+            if (this.state.tissueObj[item]) {
+                arr.push(item)
+            }
+        })
+        this.setState({ tissueType: arr },
+            () => {
+                this.axiosCallCreate()
+            }
+
+        )
+
+    }
+    axiosCallRef() {
         axios.post('http://127.0.0.1:8000/backend/detail', {
         //axios.post('http://oscar19.orc.gmu.edu/backend/detail', {
             gtex: [[], this.state.sex, this.state.ages, this.state.death, [], this.state.tissueType]
         }).then((gtex) => { // to receive data from back end 
             this.setState({sampleCount: gtex.data.sample_count}) // receive sample count from back end
-            this.props.handleGtex(this.state.gtexGroupName, gtex.data.sample_array)
-            
         })
+    }
+    axiosCallCreate() {
+        axios.post('http://127.0.0.1:8000/backend/detail', {
+        //axios.post('http://oscar19.orc.gmu.edu/backend/detail', {
+            gtex: [[], this.state.sex, this.state.ages, this.state.death, [], this.state.tissueType]
+        }).then((gtex) => { // to receive data from back end 
+            this.props.handleGtex(this.state.gtexGroupName, gtex.data.sample_array)
+        }).then(()=>{this.props.closePopup()})
     }
     /* End of tissue type handling */
 
@@ -172,7 +199,7 @@ class GtexModule extends React.Component {
                                     <div className="sample2">
                                         <h3>{this.state.sampleCount}</h3>
                                         {/*refresh button part starts*/}
-                                        <button id="refresh" onClick={this.createHandler}><i className="fa fa-refresh" style={{ 'font-size': '20px' }}></i>
+                                        <button id="refresh" onClick={this.refHandler}><i className="fa fa-refresh" style={{ 'font-size': '20px' }}></i>
                                             <span className="text-block">
                                                 Refresh sample count
                                         </span>
@@ -232,7 +259,7 @@ class GtexModule extends React.Component {
                             </div>
                             <div id="gtexbuttons">
                                 <button type="Continue" className="buttoncancel" onClick={this.props.closePopup}>Cancel</button>
-                                <button type="Back" className="buttongroup" onClick={this.props.closePopup}>Create</button>
+                                <button type="Back" className="buttongroup" onClick={this.createHandler}>Create</button>
                             </div>
                         </div>
                     </body>
