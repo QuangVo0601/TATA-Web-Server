@@ -60,7 +60,7 @@ class GroupingPage extends React.Component {
             '2': []
         }
         let newA = []
-        for (let i = 2; i <= selected.value; i++) {
+        for (let i = 3; i <= selected.value; i++) {
             if (i < selected.value) { newA.push([`${i}`]) }
             newO[`${i}`] = []
         }

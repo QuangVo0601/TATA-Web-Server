@@ -191,7 +191,7 @@ class AlgorithmPage extends React.Component {
 
                                     <div className="drophelp5">
                                         <h2 className="parameters_title">Bonferroni Alpha Tunning Parameters <img src={require('../assets/Help Icon.png')} className="helpicon5" alt="help" /></h2>
-                                        <div className="helpcontent5 TPC">based on tissue source and gender. Outliers samples may be an expected outcome if your data is derived from diseased groups or from different tissue types. </div>
+                                        <div className="helpcontent5 TPC">Based on tissue source and gender. Outliers samples may be an expected outcome if your data is derived from diseased groups or from different tissue types. </div>
                                     </div>
                                     <div id="bonferroniSlider">
                                         <input type="range" min="0.001" max="1" value={this.state.bonferroniAlpha_value} step="0.025" className="slider" id="myRange2" onChange={this.handleChangeBonferroni} />
