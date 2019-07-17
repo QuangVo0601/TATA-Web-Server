@@ -9,6 +9,7 @@ class GroupingPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            arr:[],
             //by default is 2 groups (1st group is control group)
             groupLabel: '2 groups',
             numberOfGroupsOptions: [{ value: 2, label: "2 groups" },
@@ -22,7 +23,7 @@ class GroupingPage extends React.Component {
             { value: 10, label: "10 groups" }],
             dndGroup: {
                 'samples': localStorage.getItem('pca_text').split(','),
-                '1': [],
+                'Control group': [],
                 '2': []
             },
             gtexGroup:{},
@@ -33,15 +34,28 @@ class GroupingPage extends React.Component {
             
             /*--------Quang's part, Phuong em don't delete this pls-------*/
             //dummy group list to send to back end
-            dummy_group_lists: [['control group','#Patient1 (Gene Score)','#Patient3','#Patient5'],
+            dummy_group_lists: [['Control group','#Patient1 (Gene Score)','#Patient3','#Patient5'],
                                 ['group1','#Patient2','#Patient4'],
-                                ['group2','#Patient6','#Patient7'],
-                                ['gtex group','#Patient2','#Patient3','#Patient4']],
+                                ['group2','#Patient6','#Patient7']],
+
+            dummy_gtexGroup_lists: [['gtex group 1','GTEX-11DXW-0008-SM-5Q59V', 'GTEX-11DXW-0226-SM-5H122', 'GTEX-11DXW-0826-SM-5H118']
+                   ['gtex group 2','GTEX-15CHC-0826-SM-686YW', 'GTEX-15CHQ-0226-SM-6EU2S', 'GTEX-15CHQ-1126-SM-686YY', 'GTEX-15CHR-0626-SM-7938V']],
             href: "",
             /*-------------------Quang's part ends-------------------------*/
         };
     }
 
+    // // from dict to array
+    // handleArray=(dict)=>{
+
+    //     Object.keys(dict).forEach(key =>{
+    //         let temp = dict[key]
+    //         temp.unshift(key)
+    //         this.state.arr.push(temp)
+    //     })
+
+    //     console.log(this.state.arr)
+    // }
 
 
     // gtex group handler
@@ -56,12 +70,12 @@ class GroupingPage extends React.Component {
     handleChange = (selected) => {
         let newO = {
             'samples': localStorage.getItem('pca_text').split(','),
-            '1': [],
+            'Control group': [],
             '2': []
         }
         let newA = []
         for (let i = 3; i <= selected.value; i++) {
-            if (i < selected.value) { newA.push([`${i}`]) }
+            newA.push([`${i}`]) 
             newO[`${i}`] = []
         }
         this.setState({
@@ -239,7 +253,7 @@ class GroupingPage extends React.Component {
                                                 : null
                                             }
                                             {/* <!-- End of pop up module button --> */}
-                                            <button  type="Reset Groups" className="reset_group">Reset All Groups</button>
+                                            <button type="Reset Groups" className="reset_group">Reset All Groups</button>
                                             <button onClick={this.handleResetGtex} type="Reset Groups" className="reset_group">Reset Gtex Groups</button>
                                         </div>
                                     </div>
@@ -255,15 +269,15 @@ class GroupingPage extends React.Component {
                                                 </form>
                                             </div>
                                             <div
-                                                className="group-box" id='1'
+                                                className="group-box" id='Control group'
                                                 onDragOver={event => this.onDragOverHandler(event)}
                                                 onDrop={event => this.onDropHandler(event)}
                                             >
-                                                <div className="data-draggable" id="1">
-                                                    {this.state.dndGroup['1'].map((sample) => {
+                                                <div className="data-draggable" id="Control group">
+                                                    {this.state.dndGroup['Control group'].map((sample) => {
                                                         return (
                                                             <li
-                                                                id='1'
+                                                                id='Control group'
                                                                 draggable
                                                                 onDragStart={event => this.onDragStartHandler(event, sample)}
                                                             >
