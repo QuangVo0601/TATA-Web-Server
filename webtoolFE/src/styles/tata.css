@@ -630,13 +630,13 @@ margin-top:60px;
 svg{
   color: #797979;
 }
-h3{
+.content h3{
   font-family: 'Oswald', sans-serif;
   font-size: 16px;
   color:#797979;
   line-height:22px;
 }
-p{
+.content p{
   font-family: 'Montserrat', sans-serif;
   color: #797979;
 	font-size:15px;
@@ -645,7 +645,7 @@ p{
 /* text hover */
 
 /*  box hover*/
-p:hover, .icon:hover, h3:hover{
+.content p:hover, .icon:hover, h3:hover{
   color: white;
   fill: white;
 }
@@ -747,7 +747,7 @@ margin:0;
 	
 }
 
-h3{
+.content h3{
   font-size: 18px;
   line-height:23px;
 }
@@ -791,7 +791,7 @@ margin-top:20px;
 	height: 32px;
 }
 
-h3{
+.content h3{
   font-size: 2em;
   line-height:45px;
   margin-top:20px;
@@ -3074,3 +3074,4 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 /*algorithm and tuning page code ends*/
+
