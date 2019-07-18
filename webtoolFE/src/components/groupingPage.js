@@ -31,6 +31,7 @@ class GroupingPage extends React.Component {
             selectedNumberOfGroups: [],
 
             showPopUp: false,
+            dndSelectedValue:{},
             
             /*--------Quang's part, Phuong em don't delete this pls-------*/
             //dummy group list to send to back end
@@ -44,19 +45,6 @@ class GroupingPage extends React.Component {
             /*-------------------Quang's part ends-------------------------*/
         };
     }
-
-    // // from dict to array
-    // handleArray=(dict)=>{
-
-    //     Object.keys(dict).forEach(key =>{
-    //         let temp = dict[key]
-    //         temp.unshift(key)
-    //         this.state.arr.push(temp)
-    //     })
-
-    //     console.log(this.state.arr)
-    // }
-
 
     // gtex group handler
     handleGtex = (name, array) => {
@@ -109,7 +97,23 @@ class GroupingPage extends React.Component {
     onDragOverHandler = (event) => {
         event.preventDefault()//stop everything from happening at once
     }
-
+    handleDnDSelect=(event,sample)=>{
+        let obj=this.state.dndSelectedValue
+        if(!obj.hasOwnProperty(sample)){
+            obj[sample]=true
+            event.target.classList.add('selectedLI')
+        }
+        else if (obj.hasOwnProperty(sample)){
+            if(obj[sample]){
+                event.target.classList.add('selectedLI')
+            }
+            else if(!obj[sample]){
+                event.target.classList.remove('selectedLI')
+            }
+            obj[sample]=!obj[sample]
+        }
+        this.setState({dndSelectedValue:obj})
+    } 
     // To make pop up module
     togglePopup() {
         this.setState({ showPopup: (!this.state.showPopup) })
@@ -131,7 +135,8 @@ class GroupingPage extends React.Component {
             localStorage.setItem('group_names_list', JSON.stringify(arr.data.group_names_list))
         })
         this.setState({ href: '/batchpage' }) 
-    }   
+    }  
+
     /*-------------------Quang's part ends-------------------------*/
 
     render() {
@@ -211,6 +216,7 @@ class GroupingPage extends React.Component {
                                                     id='samples'
                                                     draggable
                                                     onDragStart={event => this.onDragStartHandler(event, sample)}
+                                                    onClick={event=>this.handleDnDSelect(event,sample)}
                                                 >
                                                     <label className="sample-container">
                                                         <span className="grippy"></span> {sample}
