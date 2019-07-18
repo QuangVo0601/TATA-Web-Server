@@ -36,8 +36,11 @@ class ResultPage extends React.Component {
                                         <button type="Continue" className="button-result">Batch Correction</button>
                                     </div>
                                     <div id="result-final">
-                                        <button type="Continue" className="button-result">Final Results</button>
+                                        <button type="Continue" className="button-result">Final Plots</button>
                                     </div>
+                                    <div id="result-table">
+                                        <button type="Continue" className="button-result">Results Table</button>
+                                    </div>                                    
                                     <div id="download-data">
                                         <button type="Continue" className="download">Download Data</button>
                                     </div>

@@ -3,22 +3,24 @@ import "../styles/tata.css";
 import axios from 'axios'; // to send data to back end
 import Select from "react-select" // to use dropbox
 import Footer from './botNav';
-
+// to math team: ask Luis, choose from taskPage.js, and use here
 class AlgorithmPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            algorithmOptions: [{ value: "option1", label: "Option 1" },
-            { value: "option2", label: "Option 2" }],
-            selectedAlgorithm: "",
+            algorithmOptions: [{value: "Co-Differential Expression Analysis", label: "Co-Differential Expression Analysis"},
+                               {value: "Co-Expression Network Analysis", label: "Co-Expression Network Analysis"},
+                               {value: "Differential Expression Analysis", label: "Differential Expression Analysis"}],
+            selectedAlgorithm: "", //default is the one chosen from taskPage.js
 
-            sampleVarianceOptions: [{ value: "equal", label: "Equal" },
-            { value: "unequal", label: "Unequal" }],
-            selectedSampleVariance: "",
+            sampleVarianceOptions: [{ value: "Equal", label: "Equal" },
+                                    { value: "Unequal", label: "Unequal" }],
+            selectedSampleVariance: "Unequal", //default is "Unequal"
 
             falseDiscoveryRate_value: "0.050",
             bonferroniAlpha_value: "0.050",
-            batch_correction_value: "Correction Applied",
+            batch_correction_value: "", //depends on the one chosen from batchPage.js
+            href: "",
 
         }
         this.handleChangeFalseDiscovery = this.handleChangeFalseDiscovery.bind(this);
@@ -38,8 +40,6 @@ class AlgorithmPage extends React.Component {
     // This method is used to store "False Discovery Rate" from slider 1
     handleChangeFalseDiscovery(event) {
         this.setState({ falseDiscoveryRate_value: event.target.value });
-        console.log("false is " + this.state.falseDiscoveryRate_value)
-        console.log("type of false " + typeof(this.state.falseDiscoveryRate_value))
     }
 
     // This method is used to store "Bonferroni Alpha" from slider 2
@@ -47,8 +47,19 @@ class AlgorithmPage extends React.Component {
         this.setState({ bonferroniAlpha_value: event.target.value });
     }
 
-    /*runTaskHandler = () => {
-        // sending request to back end need to be together
+    // when user clicks on "Run Task" button
+    runTaskHandler = () => {
+
+        //to be sent to back end
+        let falseDiscoveryRate_value = parseFloat(this.state.falseDiscoveryRate_value)
+        let bonferroniAlpha_value = parseFloat(this.state.bonferroniAlpha_value)
+
+        console.log("false is " + falseDiscoveryRate_value)
+        console.log("type of false " + typeof(falseDiscoveryRate_value))
+        console.log("bon is " + bonferroniAlpha_value)
+        console.log("type of bon " + typeof(bonferroniAlpha_value))
+
+        /*// sending request to back end need to be together
         //axios call (get in header) to send to back end
         axios.post('http://127.0.0.1:8000/backend/list3', {
         //axios.post('http://oscar19.orc.gmu.edu/backend/list3', {
@@ -60,15 +71,21 @@ class AlgorithmPage extends React.Component {
         //     this.setState({ href: '/resultpage' }) 
         // })
 
-        this.setState({ href: '/resultpage' }) 
-    }*/
-
-    //get the "batch_correction_value" (yes/no?) from batchPage.js
-    componentDidMount(){
-        let batch_correction_value = JSON.parse(localStorage.getItem('batch_correction_value'))
-        this.setState({batch_correction_value: batch_correction_value})
+        this.setState({ href: '/resultpage' }) */
     }
 
+    
+    // As soon as the page route, it executes
+    componentDidMount(){
+        //get the "batch_correction_value" (yes/no?) from batchPage.js
+        let batch_correction_value = JSON.parse(localStorage.getItem('batch_correction_value'))
+        //get the "taskChosen" from taskPage.js
+        let taskChosen = {value: JSON.parse(localStorage.getItem('taskChosen')), 
+                          label: JSON.parse(localStorage.getItem('taskChosen'))}
+
+        this.setState({batch_correction_value: batch_correction_value,
+                       selectedAlgorithm: taskChosen})
+    }
 
     render() {
         
@@ -191,7 +208,7 @@ class AlgorithmPage extends React.Component {
 
                                     <div className="drophelp5">
                                         <h2 className="parameters_title">Bonferroni Alpha Tunning Parameters <img src={require('../assets/Help Icon.png')} className="helpicon5" alt="help" /></h2>
-                                        <div className="helpcontent5 TPC">Based on tissue source and gender. Outliers samples may be an expected outcome if your data is derived from diseased groups or from different tissue types. </div>
+                                        <div className="helpcontent5 TPC">based on tissue source and gender. Outliers samples may be an expected outcome if your data is derived from diseased groups or from different tissue types. </div>
                                     </div>
                                     <div id="bonferroniSlider">
                                         <input type="range" min="0.001" max="1" value={this.state.bonferroniAlpha_value} step="0.025" className="slider" id="myRange2" onChange={this.handleChangeBonferroni} />
@@ -201,7 +218,11 @@ class AlgorithmPage extends React.Component {
 
 
                                 <div id="button5">
-                                    <button type="Back" className="runtask">Run Task</button>
+                                    {/* <a href={this.state.href} style={{textDecoration: 'none'}}> */}
+                                        <button type="Back" 
+                                                className="runtask"
+                                                onClick={this.runTaskHandler}>Run Task</button>
+                                    {/* </a> */}
                                 </div>
                             </div>
                         </div>

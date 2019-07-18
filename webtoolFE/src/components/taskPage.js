@@ -17,29 +17,20 @@ class TaskPage extends React.Component {
 
 	//change the task when click on 1 of 4 task buttons
 	selectedTask = (selected) => {
-        this.setState({ selectedTask: selected })
+		this.setState({ selectedTask: selected })
 	}
 	
-	//get the link to the next page based on the selected task
-	//show alert when no task is selected
+	//get the link to the next page 
 	getLink = () => {
-		if(this.state.selectedTask === this.state.taskOptions[0]){ // first task button
-			this.setState({href: "/groupingpage"})
-		}
-		
-		/*remove the comments when new tasks are added*/
+		// save "taskChosen" in localStorage for use in algorithmPage.js
+		localStorage.setItem('taskChosen', JSON.stringify(this.state.selectedTask))
 
-		// else if(this.state.selectedTask === this.state.taskOptions[1]){ //coming soon
-		// 	//this.setState({href: "/task2"})
-		// }
-		// else if(this.state.selectedTask === this.state.taskOptions[2]){ //coming soon
-		// 	//this.setState({href: "/task3"})
-		// }
-		// else if(this.state.selectedTask === this.state.taskOptions[3]){ //coming soon
-		// 	//this.setState({href: "/task4"})
-		// }
-		else {
+		if(this.state.selectedTask === "") {
+			//show alert when no task is selected
 			alert(`Oops, please choose a task first!`);
+		}
+		else{
+			this.setState({href: "/groupingpage"})
 		}	  
 	}
 		
@@ -270,7 +261,7 @@ class TaskPage extends React.Component {
 									</button>
 									{/* </div> */}
 									{/*Box 2*/}
-									<button className="box" onClick={this.selectedTask.bind(this, this.state.taskOptions[1])} disabled={true}> {/*remove "disabled" when new task is added*/}
+									<button className="box" onClick={this.selectedTask.bind(this, this.state.taskOptions[1])}> 
 										<div className="content">
 											<svg className="icon" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" version="1.1"
 												id="Layer_1" x="0px" y="0px" viewBox="0 0 242.11 237.63"
@@ -392,7 +383,7 @@ class TaskPage extends React.Component {
 									</button>
 									<div className="task2">
 										{/*Box 3*/}
-										<button className="box" onClick={this.selectedTask.bind(this, this.state.taskOptions[2])} disabled={true}> {/*remove "disabled" when new task is added*/}
+										<button className="box" onClick={this.selectedTask.bind(this, this.state.taskOptions[2])}> 
 											<div className="content">
 												<svg className="icon" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" version="1.1"
 													id="Layer_1" x="0px" y="0px" viewBox="0 0 242.11 237.63"
