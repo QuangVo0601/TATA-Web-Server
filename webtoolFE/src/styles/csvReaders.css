@@ -19,7 +19,7 @@ input[type="file"] + label {
   .next-butt {
     padding: 5px;
     border-radius: 4px;
-    background-color: #FF8C42; 
+    background-color:  grey;
     color: white;
     font-family: Montserrat;
     font-size: 14px;
@@ -29,7 +29,7 @@ input[type="file"] + label {
   .nextbutt-after {
     padding: 5px;
     border-radius: 4px;
-    background-color:red; 
+    background-color:#FF8C42;; 
     color: white;
     font-family: Montserrat;
     font-size: 14px;

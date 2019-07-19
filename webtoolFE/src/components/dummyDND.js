@@ -13,6 +13,7 @@ class DragDrop extends Component {
             dragFrom: ''
         }
     }
+    
     componentWillMount() {
         for (let i = 3; i <= this.state.group; i++) {
             let newObject = this.state.droppedNumbers

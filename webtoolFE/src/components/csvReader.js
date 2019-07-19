@@ -12,8 +12,8 @@ class csvReader extends React.Component {
             csvName: "file_name.csv",
             href: "",
             waiting: false,
-            disableButt: "nextbutt-after",
-            bgColor:'#FF8C42'
+            disableButt: "next-butt",
+            bgColor: '#FF8C42'
         }
     }
     handleFileRead = () => {
@@ -24,15 +24,15 @@ class csvReader extends React.Component {
         // sending request to back end need to be together
         //axios call (get in header) to send to back end
         axios.post('http://127.0.0.1:8000/backend/list', {
-        //axios.post('http://oscar19.orc.gmu.edu/backend/list', {
+            //axios.post('http://oscar19.orc.gmu.edu/backend/list', {
             csvFile: content
         }).then((arr) => { // to receive data from back end 
-            localStorage.setItem('x_dge',arr.data.x_dge)
-            localStorage.setItem('y_dge',arr.data.y_dge)
-            localStorage.setItem('x_tpc',arr.data.x_tpc)
-            localStorage.setItem('y_tpc',arr.data.y_tpc)
-            localStorage.setItem('x_pca',arr.data.x_pca)
-            localStorage.setItem('y_pca',arr.data.y_pca)
+            localStorage.setItem('x_dge', arr.data.x_dge)
+            localStorage.setItem('y_dge', arr.data.y_dge)
+            localStorage.setItem('x_tpc', arr.data.x_tpc)
+            localStorage.setItem('y_tpc', arr.data.y_tpc)
+            localStorage.setItem('x_pca', arr.data.x_pca)
+            localStorage.setItem('y_pca', arr.data.y_pca)
             localStorage.setItem('pca_text', arr.data.pca_text)
 
         })
@@ -42,13 +42,12 @@ class csvReader extends React.Component {
         this.setState({ csvName: file.name })
         this.setState({ className: "after-upload" })
         this.props.setWaitingTime()
-        this.setState({buttonText: "Next"})
+        this.setState({ buttonText: "Next" })
 
         // for time out
         this.setDisable()
         console.log(this.state.disableButt)
-        setTimeout(this.setDisable,5000)
-        this.setState({disableButt: "next-butt"})
+        setTimeout(this.setDisable, 5000)
         console.log(this.state.disablbeButt)
         /* ------ End of timeout ----- */
 
@@ -58,13 +57,21 @@ class csvReader extends React.Component {
         fileReader.onloadend = this.handleFileRead; // calling method
         fileReader.readAsText(file); // return a result
     }
-    
-    setDisable=()=>{
-        this.setState({waiting: !this.state.waiting})
+
+    setDisable = () => {
+        this.setState({ waiting: !this.state.waiting }, (() => {
+            if (this.state.waiting) {
+                this.state.disableButt = 'nextbutt-after'
+            }
+            else {
+                this.state.disableButt= 'next-butt'
+            }
+        }))
+
     }
     handleSubmit = () => {
         if (this.state.buttonText === "Next") {
-            this.setState({ href: '/validation' }) 
+            this.setState({ href: '/validation' })
         }
     }
 
@@ -75,14 +82,14 @@ class csvReader extends React.Component {
                     <link href="https://fonts.googleapis.com/css?family=Montserrat:600&display=swap" rel="stylesheet" />
                     <div className={this.state.className}>{this.state.csvName}</div>
                     <a href={this.state.href} target="_blank">
-                        <button 
-                            className={this.state.disableButt} 
-                            disabled={this.state.waiting} 
+                        <button
+                            className={this.state.disableButt}
+                            disabled={this.state.waiting}
                             onClick={this.handleSubmit}
-                            >
-                                Next
+                        >
+                            Next
                         </button>
-                    </a>         
+                    </a>
                 </div>
             )
         }

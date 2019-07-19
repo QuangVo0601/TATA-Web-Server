@@ -55,6 +55,8 @@
   }
 
   .can-click {
+    color: #114B5F;
+    font-family: 'Oswald', sans-serif;
     display: block;
   }
 

@@ -9,7 +9,7 @@ class GroupingPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            arr:[],
+            gtexQueries: [], // new added 
             //by default is 2 groups (1st group is control group)
             groupLabel: '2 groups',
             numberOfGroupsOptions: [{ value: 2, label: "2 groups" },
@@ -26,34 +26,37 @@ class GroupingPage extends React.Component {
                 'Control group': [],
                 '2': []
             },
-            gtexGroup:{},
+            //sampleCLick: false,
+            gtexGroup: {},
             dragFrom: '',
             selectedNumberOfGroups: [],
 
             showPopUp: false,
-            dndSelectedValue:{},
-            
+            dndSelectedValue: {},
+
             /*--------Quang's part, Phuong em don't delete this pls-------*/
             //dummy group list to send to back end
-            dummy_group_lists: [['Control group','#Patient1 (Gene Score)','#Patient3','#Patient5'],
-                                ['group1','#Patient2','#Patient4'],
-                                ['group2','#Patient6','#Patient7']],
+            dummy_group_lists: [['Control group', '#Patient1 (Gene Score)', '#Patient3', '#Patient5'],
+            ['group1', '#Patient2', '#Patient4'],
+            ['group2', '#Patient6', '#Patient7']],
 
-            dummy_gtexGroup_lists: [['gtex group 1','GTEX-11DXW-0008-SM-5Q59V', 'GTEX-11DXW-0226-SM-5H122', 'GTEX-11DXW-0826-SM-5H118']
-                   ['gtex group 2','GTEX-15CHC-0826-SM-686YW', 'GTEX-15CHQ-0226-SM-6EU2S', 'GTEX-15CHQ-1126-SM-686YY', 'GTEX-15CHR-0626-SM-7938V']],
+            dummy_gtexGroup_lists: [['gtex group 1', 'GTEX-11DXW-0008-SM-5Q59V', 'GTEX-11DXW-0226-SM-5H122', 'GTEX-11DXW-0826-SM-5H118']
+            ['gtex group 2', 'GTEX-15CHC-0826-SM-686YW', 'GTEX-15CHQ-0226-SM-6EU2S', 'GTEX-15CHQ-1126-SM-686YY', 'GTEX-15CHR-0626-SM-7938V']],
             href: "",
             /*-------------------Quang's part ends-------------------------*/
         };
     }
 
     // gtex group handler
-    handleGtex = (name, array) => {
+    handleGtex = (name, array, gtexQuery) => {
         this.state.gtexGroup[name] = array
+        this.state.gtexQueries.push(gtexQuery) // new added 
     }
 
     handleResetGtex = () => {
-        this.setState({gtexGroup:{}})
+        this.setState({ gtexGroup: {} , gtexQueries:{}})
     }
+
     // This method is used to store new number of groups from Select dropbox
     handleChange = (selected) => {
         let newO = {
@@ -63,7 +66,7 @@ class GroupingPage extends React.Component {
         }
         let newA = []
         for (let i = 3; i <= selected.value; i++) {
-            newA.push([`${i}`]) 
+            newA.push([`${i}`])
             newO[`${i}`] = []
         }
         this.setState({
@@ -72,48 +75,79 @@ class GroupingPage extends React.Component {
             selectedNumberOfGroups: newA
         });
     }
+    
+    // for Drag and Drop
     onDragStartHandler = (event, value) => {
         console.log(value, 'value is dragged')
         console.log(event.target.id, 'id is dragged')
-        this.setState({ dragFrom: event.target.id })//store which array data is removed from
-        event.dataTransfer.setData("value", value)//store value in event object
+        this.setState({ dragFrom: event.target.id }) //store which array data is removed from
+        event.dataTransfer.setData("value", value) //store value in event object
 
     }
     onDropHandler = (event) => {
-        let newObject = this.state.dndGroup//create new objectt
-        const data = event.dataTransfer.getData("value")//get value from event object
+        let newObject = this.state.dndGroup //create new objectt
+        const data = event.dataTransfer.getData("value") //get value from event object
         const id = event.target.id //getting dropped to id
         console.log(event, 'this is event')
         console.log(event.target, 'this is target')
         console.log(id, 'id is in drop')
-        const removeData = this.state.dndGroup[`${this.state.dragFrom}`].filter(value => {
-            return value != data
-        })
-        newObject[`${this.state.dragFrom}`] = removeData
-        newObject[`${id}`].push(data)
-        this.setState({ dndGroup: newObject })
+        if (this.state.dragFrom == 'samples' && this.state) {
+            console.log('multi drag from samples')
+            const removeData = []
+            const addData = this.state.dndGroup[`${id}`]
+            this.state.dndGroup[`${this.state.dragFrom}`].map((item) => {
+                if (this.state.dndSelectedValue[`${item}`]) {
+                    addData.push(item)
+                }
+                else if (!this.state.dndSelectedValue[`${item}`]) {
+                    removeData.push(item)
+                }
+            })
+            console.log(removeData)
+            newObject[`${this.state.dragFrom}`] = removeData
+            newObject[`${id}`] = addData
+            this.setState({ dndGroup: newObject })  // added
+        }
+        else if(this.state.dragFrom != 'samples'){
+            const removeData = this.state.dndGroup[`${this.state.dragFrom}`].filter(value => {
+                return value != data
+            })
+            newObject[`${this.state.dragFrom}`] = removeData
+            newObject[`${id}`].push(data)
+            this.setState({ dndGroup: newObject })    
+        }
 
     }
+
     onDragOverHandler = (event) => {
-        event.preventDefault()//stop everything from happening at once
+        event.preventDefault() //stop everything from happening at once
     }
-    handleDnDSelect=(event,sample)=>{
-        let obj=this.state.dndSelectedValue
-        if(!obj.hasOwnProperty(sample)){
-            obj[sample]=true
-            event.target.classList.add('selectedLI')
+   // End of Drag and Drop 
+
+    componentDidMount() {
+        let obj = {}
+        this.state.dndGroup['samples'].map(item => {
+            obj[`${item}`] = false
+        })
+        this.setState({ dndSelectedValue: obj })
+    }
+ 
+    handleDnDSelect = (event, sample) => {
+        console.log(event.target.classList)
+        let obj = this.state.dndSelectedValue
+        obj[sample] = !obj[sample]
+        if (obj[sample]) {
+            event.target.classList.remove('sample-false')
+            event.target.classList.add('sample-true')
         }
-        else if (obj.hasOwnProperty(sample)){
-            if(obj[sample]){
-                event.target.classList.add('selectedLI')
-            }
-            else if(!obj[sample]){
-                event.target.classList.remove('selectedLI')
-            }
-            obj[sample]=!obj[sample]
+        if (!obj[sample]) {
+            event.target.classList.remove('sample-true')
+            event.target.classList.add('sample-false')
         }
-        this.setState({dndSelectedValue:obj})
-    } 
+        this.setState({ dndSelectedValue: obj })
+    }
+
+
     // To make pop up module
     togglePopup() {
         this.setState({ showPopup: (!this.state.showPopup) })
@@ -125,7 +159,7 @@ class GroupingPage extends React.Component {
         // sending request to back end need to be together
         //axios call (get in header) to send to back end
         axios.post('http://127.0.0.1:8000/backend/list2', {
-        //axios.post('http://oscar19.orc.gmu.edu/backend/list2', {
+            //axios.post('http://oscar19.orc.gmu.edu/backend/list2', {
             groupsList: this.state.dummy_group_lists
         }).then((arr) => { // to receive data from back end 
             localStorage.setItem('x_uncorrected_pca', JSON.stringify(arr.data.x_uncorrected_pca))
@@ -134,8 +168,8 @@ class GroupingPage extends React.Component {
             localStorage.setItem('y_corrected_pca', JSON.stringify(arr.data.y_corrected_pca))
             localStorage.setItem('group_names_list', JSON.stringify(arr.data.group_names_list))
         })
-        this.setState({ href: '/batchpage' }) 
-    }  
+        this.setState({ href: '/batchpage' })
+    }
 
     /*-------------------Quang's part ends-------------------------*/
 
@@ -213,14 +247,13 @@ class GroupingPage extends React.Component {
                                             {/* Samples input code goes here */}
                                             {this.state.dndGroup['samples'].map((sample) => (
                                                 <li
+                                                    className="sample-false"
                                                     id='samples'
                                                     draggable
                                                     onDragStart={event => this.onDragStartHandler(event, sample)}
-                                                    onClick={event=>this.handleDnDSelect(event,sample)}
+                                                    onClick={event => this.handleDnDSelect(event, sample)}
                                                 >
-                                                    <label className="sample-container">
-                                                        <span className="grippy"></span> {sample}
-                                                    </label>
+                                                    <span className="grippy"></span> {sample}
                                                 </li>
                                             ))}
                                             {/* End of JSX dynamic code */}
@@ -283,13 +316,12 @@ class GroupingPage extends React.Component {
                                                     {this.state.dndGroup['Control group'].map((sample) => {
                                                         return (
                                                             <li
+                                                                className='sample-false'
                                                                 id='Control group'
                                                                 draggable
                                                                 onDragStart={event => this.onDragStartHandler(event, sample)}
                                                             >
-                                                                <label className="sample-container">
                                                                     <span className="grippy"></span> {sample}
-                                                                </label>
                                                             </li>
                                                         )
                                                     })}
@@ -312,13 +344,12 @@ class GroupingPage extends React.Component {
                                                     {this.state.dndGroup['2'].map((sample) => {
                                                         return (
                                                             <li
+                                                                className='sample-false'
                                                                 id='2'
                                                                 draggable
                                                                 onDragStart={event => this.onDragStartHandler(event, sample)}
                                                             >
-                                                                <label className="sample-container">
                                                                     <span className="grippy"></span> {sample}
-                                                                </label>
                                                             </li>
                                                         )
                                                     })}
@@ -342,13 +373,12 @@ class GroupingPage extends React.Component {
                                                             {this.state.dndGroup[id].map((sample) => {
                                                                 return (
                                                                     <li
+                                                                        className='sample-false'
                                                                         id={id}
                                                                         draggable
                                                                         onDragStart={event => this.onDragStartHandler(event, sample)}
                                                                     >
-                                                                        <label className="sample-container">
                                                                             <span className="grippy"></span> {sample}
-                                                                        </label>
                                                                     </li>
                                                                 )
                                                             })}
@@ -392,7 +422,7 @@ class GroupingPage extends React.Component {
                                     {/* <!--............................... --> */}
 
                                     <div className="nav_container3">
-                                        <a href={this.state.href} style={{'text-decoration': 'none'}}>
+                                        <a href={this.state.href} style={{ 'text-decoration': 'none' }}>
                                             <button type="Continue" className="buttontask_cont" onClick={this.handleGroups}>Continue</button>
                                         </a>
                                     </div>

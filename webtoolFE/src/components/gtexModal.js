@@ -62,6 +62,7 @@ class GtexModule extends React.Component {
         })
         this.setState({ ages: arr })
     }
+    
     // Sex update handling
     handleSexOnChange = (selected) => {
         let arr = []
@@ -70,6 +71,7 @@ class GtexModule extends React.Component {
         }
         this.setState({ sex: arr });
     }
+
     // Death update handling
     handleDeathOnChange = (selected) => {
         let arr = []
@@ -125,6 +127,7 @@ class GtexModule extends React.Component {
         )
 
     }
+
     createHandler = () => {
         this.setState({refClick: !this.state.refClick})
         let arr = []
@@ -146,6 +149,7 @@ class GtexModule extends React.Component {
         )
 
     }
+
     axiosCallRef() {
         axios.post('http://127.0.0.1:8000/backend/detail', {
         //axios.post('http://oscar19.orc.gmu.edu/backend/detail', {
@@ -154,12 +158,14 @@ class GtexModule extends React.Component {
             this.setState({sampleCount: gtex.data.sample_count}) // receive sample count from back end
         })
     }
+
     axiosCallCreate() {
         axios.post('http://127.0.0.1:8000/backend/detail', {
         //axios.post('http://oscar19.orc.gmu.edu/backend/detail', {
             gtex: [[], this.state.sex, this.state.ages, this.state.death, [], this.state.tissueType]
         }).then((gtex) => { // to receive data from back end 
-            this.props.handleGtex(this.state.gtexGroupName, gtex.data.sample_array)
+            let query = [[], this.state.sex, this.state.ages, this.state.death, [], this.state.tissueType,[this.state.gtexGroupName]]
+            this.props.handleGtex(this.state.gtexGroupName, gtex.data.sample_array, query)
         }).then(()=>{this.props.closePopup()})
     }
     /* End of tissue type handling */

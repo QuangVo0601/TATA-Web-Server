@@ -40,7 +40,6 @@ class WebTool extends React.Component {
     setWaitingTime = () => {
         this.setCanClick()
         setTimeout(this.setNextClick,5000)
-        
     }
 
     setCanClick = () => {
@@ -80,10 +79,11 @@ class WebTool extends React.Component {
                                     />
                                 </div>
                                 <div>
-                                    <div className={this.state.loadingDiv}>Loading</div>
+                                    
                                     <CSVReader
                                         setWaitingTime={this.setWaitingTime}
                                     />
+                                    <div className={this.state.loadingDiv}>Please wait while we process ur data</div>
                                 </div>
 
                             </div>
