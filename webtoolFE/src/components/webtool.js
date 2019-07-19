@@ -83,7 +83,7 @@ class WebTool extends React.Component {
                                     <CSVReader
                                         setWaitingTime={this.setWaitingTime}
                                     />
-                                    <div className={this.state.loadingDiv}>Please wait while we process ur data</div>
+                                    <div className={this.state.loadingDiv}>Please wait while we process your data</div>
                                 </div>
 
                             </div>
