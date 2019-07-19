@@ -36,9 +36,11 @@ class ErrorPage extends Component {
                                 </div>
                             </div>
                         </article>
+                        
                     </div>
+                 <BotNav/>   
                 </body>
-                <BotNav/>
+                
             </div>
                         )
                     }

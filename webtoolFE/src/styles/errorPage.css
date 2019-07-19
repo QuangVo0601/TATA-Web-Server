@@ -4,7 +4,8 @@
 	border: 0;
 	font-size: 100%;
 	font: inherit;
-	vertical-align: baseline;
+    vertical-align: baseline;
+    border: solid black 1px;
 }
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
@@ -35,16 +36,18 @@ footer, header, hgroup, menu, nav, section {
 
 .wrapper-error{
 	width:768px;
-	/* border: 2px solid red; */
+	border: 2px solid red; 
 	margin:0 auto;
 }
-.error-nav-content{
+{/* .error-nav-content{
+    border: solid pink 1px;
 	height:150px;
 	width:223px;
 	display:flex;
 	flex-direction:row;
 
-}
+} */}
+
 .errorlogo img{
 	margin-left:70px;
 	margin-top:45px;

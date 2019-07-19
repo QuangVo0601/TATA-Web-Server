@@ -179,7 +179,7 @@ class GroupingPage extends React.Component {
                 <head>
                     <meta charset="UTF-8" />
                     <title>768 Nav &amp; Footer</title>
-                    <link href="tata.css" rel="stylesheet" />
+                    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700%7COswald:500,600,700&display=swap" rel="stylesheet"/>
                 </head>
 
                 <body>
@@ -266,7 +266,7 @@ class GroupingPage extends React.Component {
                                     <div id="nav_group1">
                                         <div className="styled-select rounded">
                                             <Select
-                                                placeholder="Number of Groups"
+                                                placeholder="# of Groups"
                                                 value={this.state.groupLabel}
                                                 onChange={this.handleChange}
                                                 options={this.state.numberOfGroupsOptions}

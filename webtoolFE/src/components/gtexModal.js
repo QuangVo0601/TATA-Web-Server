@@ -219,6 +219,7 @@ class GtexModule extends React.Component {
                                     <h2 className="gtexh2">Age Range:</h2></div> {/*<!--pick one or more, send to Math team, click refresh to update sample count-->*/}
                                 <div id="age_drop_down">
                                     <Multiselect
+                                        className='select-boxes'
                                         isMulti
                                         value={this.state.age}
                                         onChange={this.handleAgeOnChange}
