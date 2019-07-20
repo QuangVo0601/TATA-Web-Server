@@ -27,13 +27,13 @@ class csvReader extends React.Component {
             //axios.post('http://oscar19.orc.gmu.edu/backend/list', {
             csvFile: content
         }).then((arr) => { // to receive data from back end 
-            localStorage.setItem('x_dge', arr.data.x_dge)
-            localStorage.setItem('y_dge', arr.data.y_dge)
-            localStorage.setItem('x_tpc', arr.data.x_tpc)
-            localStorage.setItem('y_tpc', arr.data.y_tpc)
-            localStorage.setItem('x_pca', arr.data.x_pca)
-            localStorage.setItem('y_pca', arr.data.y_pca)
-            localStorage.setItem('pca_text', arr.data.pca_text)
+            localStorage.setItem('x_dge',JSON.stringify(arr.data.x_dge))
+            localStorage.setItem('y_dge',JSON.stringify(arr.data.y_dge))
+            localStorage.setItem('x_tpc',JSON.stringify(arr.data.x_tpc))
+            localStorage.setItem('y_tpc',JSON.stringify(arr.data.y_tpc))
+            localStorage.setItem('x_pca',JSON.stringify(arr.data.x_pca))
+            localStorage.setItem('y_pca',JSON.stringify(arr.data.y_pca))
+            localStorage.setItem('pca_text',arr.data.pca_text)
 
         })
 
