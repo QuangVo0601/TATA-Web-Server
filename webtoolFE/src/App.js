@@ -9,6 +9,7 @@ import BatchPage from './components/batchPage'
 import AlgorithmPage from './components/algorithmPage'
 import Dnd from './components/dummyDND'
 import Error from './components/errorPage'
+import Loading from './components/loadingPage'
 
 class App extends React.Component {
   constructor(props) {
@@ -71,6 +72,13 @@ class App extends React.Component {
         <Route exact path="/error"
           render={() => (
             <Error
+            />
+          )
+          }
+        />
+        <Route exact path="/loading"
+          render={() => (
+            <Loading
             />
           )
           }
