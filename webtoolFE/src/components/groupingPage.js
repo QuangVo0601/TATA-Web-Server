@@ -160,7 +160,8 @@ class GroupingPage extends React.Component {
         //axios call (get in header) to send to back end
         axios.post('http://127.0.0.1:8000/backend/list2', {
             //axios.post('http://oscar19.orc.gmu.edu/backend/list2', {
-            groupsList: this.state.dummy_group_lists
+            groupsList: this.state.dummy_group_lists,
+            gtexQueries: this.state.gtexQueries
         }).then((arr) => { // to receive data from back end 
             localStorage.setItem('x_uncorrected_pca', JSON.stringify(arr.data.x_uncorrected_pca))
             localStorage.setItem('y_uncorrected_pca', JSON.stringify(arr.data.y_uncorrected_pca))

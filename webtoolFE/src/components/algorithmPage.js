@@ -95,8 +95,7 @@ class AlgorithmPage extends React.Component {
                     <meta charSet="UTF-8" />
                     <title>Untitled Document</title>
                     <link href="tata.css" rel="stylesheet" />
-                    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Oswald&display=swap" rel="stylesheet" />
-                    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap" rel="stylesheet" />
+                    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700%7COswald:500,600,700&display=swap" rel="stylesheet"/>
                 </head>
 
                 <body>
