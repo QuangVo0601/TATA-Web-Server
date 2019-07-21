@@ -6,7 +6,7 @@ from .serializers import InputSerializer
 from django.shortcuts import render
 from .ds_class import ds # import from ds_class.py for validationPage.js
 from .GTEXDataAnalyzer import GTEXDataAnalyzer # import from GTEXDataAnalyzer.py for batchPage.js
-from .query import get_sample_names, process_group_query # import from query.py for gtexModal.js
+from .query import get_sample_names # import from query.py for gtexModal.js
 
 # Create your views here.
 def index_page(request):
