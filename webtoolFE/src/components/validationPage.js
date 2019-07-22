@@ -21,25 +21,16 @@ class ValidationPage extends React.Component {
     // As soon as the page route, it executes
     componentDidMount() {
         let traces_temp = []
-        // localStorage stores everything as String
-        // split by commas ',' to type cast it to array
-
-        // This is number of chromosomes. Ex: 24
-        let no_of_chromosome = (localStorage.getItem('x_tpc').split(",")).length
-        // .split(',') = number of patients * number of chromosomes. Ex: 168
-        // to find number of patients, take .split(',') / number of chromosomes. Ex: 168 / 24 = 7 patients
-        let no_of_patients = (localStorage.getItem('y_tpc').split(",")).length / no_of_chromosome
-        let j = 0 // for slice begin
-        let k = no_of_chromosome // for slice end
-        let names = localStorage.getItem('pca_text').split(",") //array of sample names
+ 
+        // number of patients is number of traces in tpc graph .Ex: 7 patients
+        let no_of_patients = JSON.parse(localStorage.getItem('y_tpc')).length 
+        //array of sample names
+        let names = localStorage.getItem('pca_text').split(",") 
 
         // This takes care of TPC multilines graph
         for (let i = 0; i < no_of_patients; i++) {
-            let x = localStorage.getItem('x_tpc').split(",")
-            // slice(begin index, end index)
-            let y = localStorage.getItem('y_tpc').split(",").slice(j, k)
-            j = k // set new begin index
-            k += no_of_chromosome // set new end index
+            let x = JSON.parse(localStorage.getItem('x_tpc'))
+            let y = JSON.parse(localStorage.getItem('y_tpc'))[i]
             let name = names[i] //sample name
             let type = 'scatter'
             let mode = 'markers'
@@ -48,14 +39,18 @@ class ValidationPage extends React.Component {
             let trace = { x, y, name, type, mode, hoverinfo, marker } // create a new trace obj
             traces_temp.push(trace) // add that trace obj into our tpc_trace
         }
+
+        //just for testing 07/19
+        localStorage.setItem('tpc_traces', JSON.stringify(traces_temp))
+
         // this.setState works the same as setters
         // syntax: this.setState( {target value : value to change} )
         this.setState({
-            x_dge: localStorage.getItem('x_dge').split(","),
-            y_dge: localStorage.getItem('y_dge').split(","),
-            x_pca: localStorage.getItem('x_pca').split(","),
-            y_pca: localStorage.getItem('y_pca').split(","),
-            pca_text: localStorage.getItem('pca_text').split(","),
+            x_dge: JSON.parse(localStorage.getItem('x_dge')),
+            y_dge: JSON.parse(localStorage.getItem('y_dge')),
+            x_pca: JSON.parse(localStorage.getItem('x_pca')),
+            y_pca: JSON.parse(localStorage.getItem('y_pca')),
+            pca_text: localStorage.getItem('pca_text').split(','),
             tpc_traces: traces_temp
         })
         // remove everything from local storage for safety
@@ -63,6 +58,7 @@ class ValidationPage extends React.Component {
     }
   
     handleSubmit = () => {
+
             this.setState({ href: '/taskpage' }) 
     }
 

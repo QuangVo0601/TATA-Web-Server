@@ -91,6 +91,7 @@ class BatchPage extends React.Component {
                     <meta charset="UTF-8" />
                     <title>Batch Page</title>
                     <link href="css/batchPage.css" rel="stylesheet" />
+                    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700%7COswald:500,600,700&display=swap" rel="stylesheet"/>
                 </head>
                 <body>
                     <div id="batch-wrapper">
@@ -174,7 +175,8 @@ class BatchPage extends React.Component {
                                                     },
                                                     autosize: true,
                                                     showlegend: true,
-                                                    legend: {"orientation": "v", "font": {size: 11}}
+                                                    legend: {"orientation": "v", "font": {size: 11}},
+                                                    // plot_bgcolor: "rgb(182, 215, 168)"
                                                 }}
                                                 {...{useResizeHandler: true}}
                                                 {...{style: {width: "100%", height: "100%"}}}
