@@ -9,7 +9,7 @@ import BatchPage from './components/batchPage'
 import AlgorithmPage from './components/algorithmPage'
 import Dnd from './components/dummyDND'
 import Error from './components/errorPage'
-//import Loading from './components/loadingPage'
+import Loading from './components/loadingPage'
 import ResultPage from './components/resultPage'
 
 class App extends React.Component {
@@ -77,13 +77,13 @@ class App extends React.Component {
           )
           }
         />
-        {/* <Route exact path="/loading"
+        <Route exact path="/loading"
           render={() => (
             <Loading
             />
           )
           }
-        /> */}
+        /> 
         <Route exact path="/resultpage"
           render={() => (
             <ResultPage

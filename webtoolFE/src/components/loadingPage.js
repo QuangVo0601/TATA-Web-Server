@@ -18,14 +18,14 @@ class LoadingPage extends Component {
                     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700|Oswald:400,500&display=swap" rel="stylesheet" />
                     <link href="jobCodePage.css" rel="stylesheet" type="text/css" />
                 </head>
-                <div id="wrapper">
+                <div className="loading-wrapper">
                     <TopNav />
 
-                    <div id="jobCode">JOB CODE:<span>1A253M4</span></div>
-                    <div id="etaInfo">
+                    <div className="loading-jobcode">JOB CODE:<span>1A253M4</span></div>
+                    <div className="loading-etaInfo">
                         <span className="percentage">47%</span>
                     </div>
-                    <div className="loader">
+                    <div className="node-loader">
                         <span className="node"></span>
                         <span className="node"></span>
                         <span className="node"></span>
@@ -45,9 +45,9 @@ class LoadingPage extends Component {
                         <span className="node"></span>
                         <span className="node"></span>
                     </div>
-                    <div className="jobOptions">
-                        <div id="email">
-                            <div id="emailContent">
+                    <div className="loading-jobOptions">
+                        <div className="loading-email">
+                            <div className="emailContent">
                                 Make sure to remember your job code or input your email for a reminder when the job is done.
 
                                 <input type="email" id="emailInput" name="emailAddress" placeholder="Email..." />
@@ -55,8 +55,8 @@ class LoadingPage extends Component {
                             </div>
                         </div>
 
-                        <div id="taskOptions">
-                            <div className="task_container">
+                        <div className="loading-taskOptions">
+                            <div className="loading-task_container">
                                 <button type="Continue" className="button job_new">Start New Task</button>
                                 <button type="Back" className="button job_cancel">Cancel This Task</button>
                             </div>

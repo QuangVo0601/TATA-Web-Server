@@ -39,14 +39,6 @@ footer, header, hgroup, menu, nav, section {
 	border: 2px solid red; 
 	margin:0 auto;
 }
-{/* .error-nav-content{
-    border: solid pink 1px;
-	height:150px;
-	width:223px;
-	display:flex;
-	flex-direction:row;
-
-} */}
 
 .errorlogo img{
 	margin-left:70px;
