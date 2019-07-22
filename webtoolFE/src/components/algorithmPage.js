@@ -218,9 +218,11 @@ class AlgorithmPage extends React.Component {
 
                                 <div id="button5">
                                     {/* <a href={this.state.href} style={{textDecoration: 'none'}}> */}
+                                    <a href="loading">
                                         <button type="Back" 
                                                 className="runtask"
                                                 onClick={this.runTaskHandler}>Run Task</button>
+                                            </a>
                                     {/* </a> */}
                                 </div>
                             </div>
