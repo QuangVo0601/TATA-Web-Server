@@ -579,7 +579,6 @@ input:focus {
 }
 .percentage {
 	z-index: 3;
-	
 	display: block;
 	margin-top: 10px;
 	font-size: 65px;
