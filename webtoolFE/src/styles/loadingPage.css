@@ -1,0 +1,694 @@
+@charset "UTF-8";
+/* CSS Document */
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+#wrapper{
+	height:1030px;
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+
+/* Email Style //////////////////////////////////////////////////////*/
+
+input  {
+	margin-top: 30px;
+	border-radius: 10px;
+	border: .5px solid #E4E4E4;
+	width: 380px;
+	padding: 7px 15px;
+	box-sizing: border-box;
+	display: inline-block;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 600;
+	font-size: 13.5pt;
+	color: #525252;
+}
+
+input:focus {
+	outline:none;
+}
+
+#emailContent {
+	padding: 20px;
+	color: #818181;
+	font-size: 12pt;
+
+}
+
+input[type="submit"] {
+    margin-left: -103px;
+    height: 36px;
+    width: 98px;
+	border: none;
+	background-color: #2EC4B6;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 600;
+	font-size: 13.5pt;
+	color: white;
+}
+
+input[type="submit"]:hover {
+	background-color: #28A599;
+	cursor: pointer;
+}
+/* task Button Style //////////////////////////////////////////////////////*/
+
+.job_new {
+	background-color: #FF8C42;
+}
+
+.job_new:hover {
+	background-color: #FF7B26;
+}
+
+.job_cancel {
+	background-color: #124B5F;
+}
+
+.job_cancel:hover {
+	background-color: #0E3A49;
+}
+
+
+/* job options container ///////////////////////////////////////////////////////*/
+
+.jobOptions {
+	margin-top: 230px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+	width: 700px;
+	height: 195px;
+	position: absolute;
+	left: 50%;
+	margin-left: -350px;
+}
+
+#email {
+	border-right: .5px solid #BDBDBD;
+	width: 470px;
+	height: 175px;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 200;
+	color: #114B5F;
+	font-size: 13.5pt;
+}
+
+#taskOptions {
+	width: 290px;
+	height: 175px;
+}
+
+/* the general button style ///////////////////////////////////////////////////////*/
+
+
+.button:focus {
+	outline:none;	
+}
+
+.button {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 600;
+	font-size: 13.5pt;
+	color: white;
+	text-align: center;
+	display: block;
+	border: none;
+	width: 198px;
+	height: 32px;
+	border-radius: 8px;
+	margin-bottom: 20px;
+	cursor: pointer;
+}
+
+
+/* task Container Style  ///////////////////////////////////////////////////////*/
+
+
+.task_container {
+	width: 198px;
+	height: 100px;
+	position: relative;
+	margin-left: -99px;
+	margin-top: -45px;
+	top: 50%;
+	left: 50%;
+	
+}
+
+
+/*/////////////////////////////// DNA Loading Bar //////////////////////////////*/
+
+#jobCode {
+    display: block;
+    color: #124B5F;
+    text-align: center;
+    padding-bottom: 130px;
+    font-size: 40px;
+    font-weight: 500;
+    font-family: 'Oswald', sans-serif;
+}
+
+#etaInfo {
+	z-index: 4;
+	position: absolute;
+	left: 50%;
+	margin-left: -100px;
+	width: 200px;
+	margin-top: -55px;
+	height: 200px;
+	color: #585858;
+	
+}
+.percentage {
+	z-index: 3;
+	
+	display: block;
+	margin-top: 10px;
+	font-size: 55px;
+    font-weight: 600;
+	text-align: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.time {
+  z-index: 2;
+  display: block;
+  margin-top: -6px;
+  font-size: 15px;
+  font-weight: 500;
+  /*text-transform: uppercase;*/
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+}
+
+.loader {
+  z-index: 1;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  width: 610px;
+  height: 100%;
+  max-height: 120px;
+	
+}
+.node {
+  display: inline-block;
+  position: relative;
+  height: 100%;
+  width: 20px;
+  margin: 0 5px;
+}
+.node:before {
+  content: "";
+  position: absolute;
+  top: 1px;
+  width: 20px;
+  height: 20px;
+  background-color: #FF8C42;
+  border-radius: 50%;
+}
+.node:after {
+  content: "";
+  position: absolute;
+  bottom: 1px;
+  width: 20px;
+  height: 20px;
+  background-color: #6BEFE3;
+  border-radius: 50%;
+  animation: bounce-node-2 5s infinite;
+}
+.node:nth-child(1):before {
+  animation: bounce-node 2s 100ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(1):after {
+  animation: bounce-node-2 2s 100ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(2):before {
+  animation: bounce-node 2s 200ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(2):after {
+  animation: bounce-node-2 2s 200ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(3):before {
+  animation: bounce-node 2s 300ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(3):after {
+  animation: bounce-node-2 2s 300ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(4):before {
+  animation: bounce-node 2s 400ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(4):after {
+  animation: bounce-node-2 2s 400ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(5):before {
+  animation: bounce-node 2s 500ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(5):after {
+  animation: bounce-node-2 2s 500ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(6):before {
+  animation: bounce-node 2s 600ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(6):after {
+  animation: bounce-node-2 2s 600ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(7):before {
+  animation: bounce-node 2s 700ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(7):after {
+  animation: bounce-node-2 2s 700ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(8):before {
+  animation: bounce-node 2s 800ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(8):after {
+  animation: bounce-node-2 2s 800ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(9):before {
+  animation: bounce-node 2s 900ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(9):after {
+  animation: bounce-node-2 2s 900ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(10):before {
+  animation: bounce-node 2s 1000ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(10):after {
+  animation: bounce-node-2 2s 1000ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(11):before {
+  animation: bounce-node 2s 1100ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(11):after {
+  animation: bounce-node-2 2s 1100ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(12):before {
+  animation: bounce-node 2s 1300ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+	
+}
+.node:nth-child(12):after {
+  animation: bounce-node-2 2s 1300ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(13):before {
+  animation: bounce-node 2s 1400ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(13):after {
+  animation: bounce-node-2 2s 1400ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(14):before {
+  animation: bounce-node 2s 1500ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(14):after {
+  animation: bounce-node-2 2s 1500ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(15):before {
+  animation: bounce-node 2s 1600ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(15):after {
+  animation: bounce-node-2 2s 1600ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(16):before {
+  animation: bounce-node 2s 1700ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(16):after {
+  animation: bounce-node-2 2s 1700ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(17):before {
+  animation: bounce-node 2s 1800ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(17):after {
+  animation: bounce-node-2 2s 1800ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(18):before {
+  animation: bounce-node 2s 1900ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.node:nth-child(18):after {
+  animation: bounce-node-2 2s 1900ms infinite cubic-bezier(0.46, 0.03, 0.52, 0.96);
+  
+}
+@keyframes bounce-node {
+  0% {
+    top: 1px;
+    transform: scale(1);
+    background-color: #FF8C42;
+    z-index: 0;
+  }
+  25% {
+    transform: scale(0.75);
+  }
+  50% {
+    top: calc(100% - 10px);
+    transform: scale(1);
+    background-color: #FDC972;
+    z-index: 1;
+  }
+  75% {
+    transform: scale(1.25);
+    z-index: 1;
+  }
+  100% {
+    top: 1px;
+    transform: scale(1);
+    background-color: #FF8C42;
+    z-index: 1;
+  }
+}
+@keyframes bounce-node-2 {
+  0% {
+    bottom: 1px;
+    transform: scale(1);
+    background-color: #6BEFE3;
+    z-index: 1;
+  }
+  25% {
+    transform: scale(1.25);
+  }
+  50% {
+    bottom: calc(100% - 10px);
+    transform: scale(1);
+    background-color: #2EC4B6;
+    z-index: 0;
+  }
+  75% {
+    transform: scale(0.75);
+    z-index: 0;
+  }
+  100% {
+    bottom: 1px;
+    transform: scale(1);
+    background-color: #6BEFE3;
+    z-index: 0;
+  }
+}
+
+#x1270Nodes {
+		visibility: hidden;
+  }
+  
+/*//////////////////////////// begining of 1270 nav /////////////////////////*/
+
+@media only screen and (min-width: 1270px) {
+	#wrapper{
+	height:916px;
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+
+/* Email Style //////////////////////////////////////////////////////*/
+
+input  {
+	margin-top: 30px;
+	border-radius: 10px;
+	border: .5px solid #E4E4E4;
+	width: 410px;
+	padding: 7px 15px;
+	box-sizing: border-box;
+	display: inline-block;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 600;
+	font-size: 13.5pt;
+	color: #525252;
+}
+
+input:focus {
+	outline:none;
+}
+
+#emailContent {
+	padding: 20px;
+	color: #818181;
+
+}
+
+input[type="submit"] {
+    margin-left: -103px;
+    height: 36px;
+    width: 98px;
+	border: none;
+	background-color: #2EC4B6;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 600;
+	font-size: 13.5pt;
+	color: white;
+}
+
+input[type="submit"]:hover {
+	background-color: #28A599;
+	cursor: pointer;
+}
+/* task Button Style //////////////////////////////////////////////////////*/
+
+.job_new {
+	background-color: #FF8C42;
+}
+
+.job_new:hover {
+	background-color: #FF7B26;
+}
+
+.job_cancel {
+	background-color: #124B5F;
+}
+
+.job_cancel:hover {
+	background-color: #0E3A49;
+}
+
+/* task options container ///////////////////////////////////////////////////////*/
+
+.jobOptions {
+	margin-top: 230px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+	width: 827px;
+	height: 195px;
+	position: absolute;
+	left: 50%;
+	margin-left: -413.5px;
+}
+
+#email {
+	border-right: .5px solid #BDBDBD;
+	width: 500px;
+	height: 175px;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 200;
+	color: #114B5F;
+	font-size: 13.5pt;
+}
+
+#taskOptions {
+	width: 290px;
+	height: 175px;
+}
+
+/* the general button style ///////////////////////////////////////////////////////*/
+
+
+.button:focus {
+	outline:none;	
+}
+
+.button {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 600;
+	font-size: 13.5pt;
+	color: white;
+	text-align: center;
+	display: block;
+	border: none;
+	width: 198px;
+	height: 32px;
+	border-radius: 8px;
+	margin-bottom: 20px;
+	cursor: pointer;
+}
+
+
+/* task Container Style  ///////////////////////////////////////////////////////*/
+
+
+.task_container {
+	width: 198px;
+	height: 100px;
+	position: relative;
+	margin-left: -99px;
+	margin-top: -45px;
+	top: 50%;
+	left: 50%;
+	
+}
+
+
+/*/////////////////////////////// DNA Loading Bar //////////////////////////////*/
+
+#jobCode {
+    display: block;
+    color: #124B5F;
+    text-align: center;
+    padding-bottom: 130px;
+    font-size: 50px;
+    font-weight: 500;
+    font-family: 'Oswald', sans-serif;
+}
+
+#etaInfo {
+	z-index: 4;
+	position: absolute;
+	left: 50%;
+	margin-left: -100px;
+	width: 200px;
+	margin-top: -55px;
+	height: 200px;
+	color: #585858;
+	
+}
+.percentage {
+	z-index: 3;
+	
+	display: block;
+	margin-top: 10px;
+	font-size: 65px;
+    font-weight: 600;
+	text-align: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.time {
+  z-index: 2;
+  display: block;
+  margin-top: -6px;
+  font-size: 15px;
+  font-weight: 500;
+  /*text-transform: uppercase;*/
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+}
+
+.loader {
+  z-index: 1;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  width: 878px;
+  height: 100%;
+  max-height: 120px;
+	
+}
+.node {
+  display: inline-block;
+  position: relative;
+  height: 100%;
+  width: 35px;
+  margin: 0 5px;
+}
+.node:before {
+  content: "";
+  position: absolute;
+  top: 1px;
+  width: 23px;
+  height: 23px;
+  background-color: #FF8C42;
+  border-radius: 50%;
+}
+.node:after {
+  content: "";
+  position: absolute;
+  bottom: 1px;
+  width: 23px;
+  height: 23px;
+  background-color: #6BEFE3;
+  border-radius: 50%;
+  animation: bounce-node-2 5s infinite;
+}
+	
+@keyframes bounce-node {
+  0% {
+    top: 1px;
+    transform: scale(1);
+    background-color: #FF8C42;
+    z-index: 0;
+  }
+  25% {
+    transform: scale(0.75);
+  }
+  50% {
+    top: calc(100% - 10px);
+    transform: scale(1);
+    background-color: #FDC972;
+    z-index: 1;
+  }
+  75% {
+    transform: scale(1.25);
+    z-index: 1;
+  }
+  100% {
+    top: 1px;
+    transform: scale(1);
+    background-color: #FF8C42;
+    z-index: 1;
+  }
+	}
+@keyframes bounce-node-2 {
+  0% {
+    bottom: 1px;
+    transform: scale(1);
+    background-color: #6BEFE3;
+    z-index: 1;
+  }
+  25% {
+    transform: scale(1.25);
+  }
+  50% {
+    bottom: calc(100% - 10px);
+    transform: scale(1);
+    background-color: #2EC4B6;
+    z-index: 0;
+  }
+  75% {
+    transform: scale(0.75);
+    z-index: 0;
+  }
+  100% {
+    bottom: 1px;
+    transform: scale(1);
+    background-color: #6BEFE3;
+    z-index: 0;
+  }
+}
+}
+
+
