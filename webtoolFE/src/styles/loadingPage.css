@@ -38,7 +38,7 @@ footer, header, hgroup, menu, nav, section {
 
 /* Email Style //////////////////////////////////////////////////////*/
 
-input  {
+.emailInput  {
 	margin-top: 30px;
 	border-radius: 10px;
 	border: .5px solid #E4E4E4;
@@ -63,7 +63,7 @@ input:focus {
 
 }
 
-input[type="submit"] {
+.submitButton {
     margin-left: -103px;
     height: 36px;
     width: 98px;
@@ -75,7 +75,7 @@ input[type="submit"] {
 	color: white;
 }
 
-input[type="submit"]:hover {
+.submitButton:hover {
 	background-color: #28A599;
 	cursor: pointer;
 }
@@ -427,7 +427,7 @@ input[type="submit"]:hover {
 
 /* Email Style //////////////////////////////////////////////////////*/
 
-input  {
+.emailInput  {
 	margin-top: 30px;
 	border-radius: 10px;
 	border: .5px solid #E4E4E4;
@@ -451,11 +451,12 @@ input:focus {
 
 }
 
-input[type="submit"] {
+.submitButton {
     margin-left: -103px;
     height: 36px;
     width: 98px;
-	border: none;
+  border: none;
+  border-radius: 10px;
 	background-color: #2EC4B6;
 	font-family: 'Montserrat', sans-serif;
 	font-weight: 600;
@@ -463,7 +464,7 @@ input[type="submit"] {
 	color: white;
 }
 
-input[type="submit"]:hover {
+.submitButton:hover {
 	background-color: #28A599;
 	cursor: pointer;
 }

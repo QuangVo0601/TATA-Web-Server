@@ -403,11 +403,11 @@ class GroupingPage extends React.Component {
                                                         <div className="data-draggable" >
                                                             {this.state.gtexGroup[key].map((sample) => {
                                                                 return (
-                                                                    <li
+                                                                    <li className='sample-false'
                                                                     >
-                                                                        <label className="sample-container">
+                                                                      
                                                                             <span className="grippy"></span> {sample}
-                                                                        </label>
+                                                                       
                                                                     </li>
                                                                 )
                                                             })}
