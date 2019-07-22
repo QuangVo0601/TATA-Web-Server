@@ -11,6 +11,7 @@ import Dnd from './components/dummyDND'
 import Error from './components/errorPage'
 import Loading from './components/loadingPage'
 import ResultPage from './components/resultPage'
+import LoadModal from './components/loadingModal'
 
 class App extends React.Component {
   constructor(props) {
@@ -87,6 +88,14 @@ class App extends React.Component {
         <Route exact path="/resultpage"
           render={() => (
             <ResultPage
+            />
+          )
+          }
+        />
+        {/*  For testing purpose only */}
+        <Route exact path="/loadmodal"
+          render={() => (
+            <LoadModal
             />
           )
           }
