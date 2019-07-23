@@ -62,7 +62,8 @@ class GroupingPage extends React.Component {
         }
         this.setState({
             dndGroup: newO,
-            selectedNumberOfGroups:[]
+            selectedNumberOfGroups:[],
+            groupLabel: '2 groups'
         });
     }
 
