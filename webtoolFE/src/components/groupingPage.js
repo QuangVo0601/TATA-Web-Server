@@ -54,7 +54,7 @@ class GroupingPage extends React.Component {
     }
 
     handleResetGtex = () => {
-        this.setState({ gtexGroup: {} , gtexQueries:{}})
+        this.setState({ gtexGroup: {}, gtexQueries: {} })
     }
 
     // This method is used to store new number of groups from Select dropbox
@@ -75,7 +75,7 @@ class GroupingPage extends React.Component {
             selectedNumberOfGroups: newA
         });
     }
-    
+
     // for Drag and Drop
     onDragStartHandler = (event, value) => {
         console.log(value, 'value is dragged')
@@ -107,14 +107,19 @@ class GroupingPage extends React.Component {
             newObject[`${this.state.dragFrom}`] = removeData
             newObject[`${id}`] = addData
             this.setState({ dndGroup: newObject })  // added
+            let obj = {}
+            this.state.dndGroup['samples'].map(item => {
+                obj[`${item}`] = false
+            })
+            this.setState({ dndSelectedValue: obj })
         }
-        else if(this.state.dragFrom != 'samples'){
+        else if (this.state.dragFrom != 'samples') {
             const removeData = this.state.dndGroup[`${this.state.dragFrom}`].filter(value => {
                 return value != data
             })
             newObject[`${this.state.dragFrom}`] = removeData
             newObject[`${id}`].push(data)
-            this.setState({ dndGroup: newObject })    
+            this.setState({ dndGroup: newObject })
         }
 
     }
@@ -122,7 +127,7 @@ class GroupingPage extends React.Component {
     onDragOverHandler = (event) => {
         event.preventDefault() //stop everything from happening at once
     }
-   // End of Drag and Drop 
+    // End of Drag and Drop 
 
     componentDidMount() {
         let obj = {}
@@ -131,7 +136,7 @@ class GroupingPage extends React.Component {
         })
         this.setState({ dndSelectedValue: obj })
     }
- 
+
     handleDnDSelect = (event, sample) => {
         console.log(event.target.classList)
         let obj = this.state.dndSelectedValue
@@ -180,7 +185,7 @@ class GroupingPage extends React.Component {
                 <head>
                     <meta charset="UTF-8" />
                     <title>768 Nav &amp; Footer</title>
-                    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700%7COswald:500,600,700&display=swap" rel="stylesheet"/>
+                    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700%7COswald:500,600,700&display=swap" rel="stylesheet" />
                 </head>
 
                 <body>
@@ -322,7 +327,7 @@ class GroupingPage extends React.Component {
                                                                 draggable
                                                                 onDragStart={event => this.onDragStartHandler(event, sample)}
                                                             >
-                                                                    <span className="grippy"></span> {sample}
+                                                                <span className="grippy"></span> {sample}
                                                             </li>
                                                         )
                                                     })}
@@ -350,7 +355,7 @@ class GroupingPage extends React.Component {
                                                                 draggable
                                                                 onDragStart={event => this.onDragStartHandler(event, sample)}
                                                             >
-                                                                    <span className="grippy"></span> {sample}
+                                                                <span className="grippy"></span> {sample}
                                                             </li>
                                                         )
                                                     })}
@@ -379,7 +384,7 @@ class GroupingPage extends React.Component {
                                                                         draggable
                                                                         onDragStart={event => this.onDragStartHandler(event, sample)}
                                                                     >
-                                                                            <span className="grippy"></span> {sample}
+                                                                        <span className="grippy"></span> {sample}
                                                                     </li>
                                                                 )
                                                             })}
@@ -405,9 +410,9 @@ class GroupingPage extends React.Component {
                                                                 return (
                                                                     <li className='sample-false'
                                                                     >
-                                                                      
-                                                                            <span className="grippy"></span> {sample}
-                                                                       
+
+                                                                        <span className="grippy"></span> {sample}
+
                                                                     </li>
                                                                 )
                                                             })}
