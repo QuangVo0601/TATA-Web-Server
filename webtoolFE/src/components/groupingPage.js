@@ -33,6 +33,7 @@ class GroupingPage extends React.Component {
 
             showPopUp: false,
             dndSelectedValue: {},
+            groupName: ['control group','2','3','4','5','6','7','8','9','10'],
 
             /*--------Quang's part, Phuong em don't delete this pls-------*/
             //dummy group list to send to back end
@@ -53,14 +54,27 @@ class GroupingPage extends React.Component {
         this.state.gtexQueries.push(gtexQuery) // new added 
     }
 
+    handleResetGroup = () => {
+        let newO = {
+            'samples':localStorage.getItem('pca_text').split(','),
+            'Control group': [],
+            '2': []
+        }
+        this.setState({
+            dndGroup: newO,
+            selectedNumberOfGroups:[]
+        });
+    }
+
     handleResetGtex = () => {
         this.setState({ gtexGroup: {}, gtexQueries: {} })
     }
 
     // This method is used to store new number of groups from Select dropbox
     handleChange = (selected) => {
+        let oldO= this.state.dndGroup
         let newO = {
-            'samples': localStorage.getItem('pca_text').split(','),
+            'samples':[],
             'Control group': [],
             '2': []
         }
@@ -69,6 +83,18 @@ class GroupingPage extends React.Component {
             newA.push([`${i}`])
             newO[`${i}`] = []
         }
+        Object.keys(oldO).map(key=>{
+            if(newO.hasOwnProperty(key)){
+                oldO[key].map(item=>{
+                    newO[key].push(item)
+                })
+            }
+            else{
+                oldO[key].map(item=>{
+                    newO['samples'].push(item)
+                })
+            }
+        })
         this.setState({
             groupLabel: selected.labbel,
             dndGroup: newO,
@@ -135,6 +161,17 @@ class GroupingPage extends React.Component {
             obj[`${item}`] = false
         })
         this.setState({ dndSelectedValue: obj })
+    }
+
+    handleGroupName=(event)=>{
+        event.preventDefault()
+    }
+    handleNameChange=(event)=>{
+        let index = parseInt(event.target.id)
+        index=index-1
+        let arr= this.state.groupName
+        arr[index]=event.target.value
+        this.setState({groupName:arr})
     }
 
     handleDnDSelect = (event, sample) => {
@@ -298,7 +335,7 @@ class GroupingPage extends React.Component {
                                                 : null
                                             }
                                             {/* <!-- End of pop up module button --> */}
-                                            <button type="Reset Groups" className="reset_group">Reset All Groups</button>
+                                            <button onClick={this.handleResetGroup} type="Reset Groups" className="reset_group">Reset All Groups</button>
                                             <button onClick={this.handleResetGtex} type="Reset Groups" className="reset_group">Reset Gtex Groups</button>
                                         </div>
                                     </div>
@@ -368,8 +405,20 @@ class GroupingPage extends React.Component {
                                             return (
                                                 <div id="sample-drop-field">
                                                     <div id="nav_group2">
-                                                        <form className="signIn">
-                                                            <input className="groupingInput" type="groupname" placeholder="Group Name" autocomplete='off' required />
+                                                        <form  
+                                                            id={id} 
+                                                            className="signIn"
+                                                            onSubmit={this.handleGroupName}
+                                                        >
+                                                            <input id={id}
+                                                                className="groupingInput" 
+                                                                type="groupname" 
+                                                                placeholder="Group Name" 
+                                                                autocomplete='off' 
+                                                                value={this.state.groupName[(parseInt(id)-1)]}
+                                                                required
+                                                                onChange={this.handleNameChange}
+                                                               />
                                                         </form>
                                                     </div>
                                                     <div className="group-box" id={id}
