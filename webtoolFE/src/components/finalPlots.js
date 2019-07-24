@@ -59,7 +59,7 @@ class FinalPlots extends React.Component {
                             font: { family: 'Oswald,sans-serif', size: 18, color: '#114b5f' },
                             // width: 900, height: 450,
                             xaxis: {
-                                autorange: true, showgrid: false, title: {
+                                range: [-15, 15], showgrid: false, title: {
                                     text: 'Fold Change',
                                     font: { family: 'Oswald,sans-serif', size: 18, color: '#114b5f' }
                                 },
@@ -104,7 +104,7 @@ class FinalPlots extends React.Component {
                                 },
                             },
                             yaxis: {
-                                autorange: true, showgrid: false, title: {
+                                range: [-15, 15], showgrid: false, title: {
                                     text: 'Fold Change',
                                     font: { family: 'Oswald,sans-serif', size: 18, color: '#114b5f' }
                                 }
