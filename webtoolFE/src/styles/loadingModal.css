@@ -3,3 +3,15 @@
 	overflow-x: hidden;
 	overflow-y: hidden;
 }
+
+.modal-inner {  
+	margin-top: 40px;
+	position: absolute; 
+	border-radius: 10px;
+	left: 10%;
+	right: 10%; 
+	width:568px;
+	height:580px;  
+	top: 2%; 
+    margin: 0 auto;   
+	}

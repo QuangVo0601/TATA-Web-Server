@@ -6,13 +6,15 @@ class LoadingModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            percent: 0,
         }
     }
     render() {
         return (
-            <div className='loadingmodal-wrapper'>
+            <div className='modal-inner'>
+                <div className='loadingmodal-wrapper'>
                     <div className="loading-etaInfo">
-                        <span className="percentage">47%</span>
+                        <span className="percentage">{this.state.percent}%</span>
                     </div>
                     <div className="node-loader">
                         <span className="node"></span>
@@ -35,6 +37,8 @@ class LoadingModal extends Component {
                         <span className="node"></span>
                     </div>
             </div>
+            </div>
+            
             
         )
     }

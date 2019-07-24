@@ -4,14 +4,20 @@ import Footer from './botNav';
 import axios from 'axios'; // to send data to back end
 import Select from "react-select"; // to use dropbox
 import Popup from './gtexModal';
+import Loading from './loadingModal'
 
 class GroupingPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            gtexQueries: [], // new added 
+            // For modal progess bar handle
+            showModal: false,
+
+            // to store GTEx
+            gtexQueries: [], 
             //by default is 2 groups (1st group is control group)
             groupLabel: '2 groups',
+            // For dropdown box option
             numberOfGroupsOptions: [{ value: 2, label: "2 groups" },
             { value: 3, label: "3 groups" },
             { value: 4, label: "4 groups" },
@@ -21,18 +27,26 @@ class GroupingPage extends React.Component {
             { value: 8, label: "8 groups" },
             { value: 9, label: "9 groups" },
             { value: 10, label: "10 groups" }],
+            // Default html format
             dndGroup: {
                 'samples': localStorage.getItem('pca_text').split(','),
                 'Control group': [],
                 '2': []
             },
-            //sampleCLick: false,
+            // To store created GTEx
             gtexGroup: {},
+            
+            // ----- For drag and drop ----- //
             dragFrom: '',
             selectedNumberOfGroups: [],
+            // ----- drag and drop section end ----- //
+            
+            // For popup
+            showGTExPopup: false,
 
-            showPopUp: false,
             dndSelectedValue: {},
+            
+            // to control groupname 
             groupName: ['control group','2','3','4','5','6','7','8','9','10'],
 
             /*--------Quang's part, Phuong em don't delete this pls-------*/
@@ -54,6 +68,7 @@ class GroupingPage extends React.Component {
         this.state.gtexQueries.push(gtexQuery) // new added 
     }
 
+    // If reset group, reset those states
     handleResetGroup = () => {
         let newO = {
             'samples':localStorage.getItem('pca_text').split(','),
@@ -67,6 +82,7 @@ class GroupingPage extends React.Component {
         });
     }
 
+    // Set gtex dict to empty if reset gtex is clicked
     handleResetGtex = () => {
         this.setState({ gtexGroup: {}, gtexQueries: {} })
     }
@@ -103,7 +119,7 @@ class GroupingPage extends React.Component {
         });
     }
 
-    // for Drag and Drop
+    // ---------- for Drag and Drop ------------- //
     onDragStartHandler = (event, value) => {
         console.log(value, 'value is dragged')
         console.log(event.target.id, 'id is dragged')
@@ -154,8 +170,9 @@ class GroupingPage extends React.Component {
     onDragOverHandler = (event) => {
         event.preventDefault() //stop everything from happening at once
     }
-    // End of Drag and Drop 
+    // ----------------- End of Drag and Drop  ------------------- //
 
+    // Give id for those samples
     componentDidMount() {
         let obj = {}
         this.state.dndGroup['samples'].map(item => {
@@ -164,6 +181,7 @@ class GroupingPage extends React.Component {
         this.setState({ dndSelectedValue: obj })
     }
 
+    // -------- Update group name for every onChange ------------- //
     handleGroupName=(event)=>{
         event.preventDefault()
     }
@@ -174,7 +192,10 @@ class GroupingPage extends React.Component {
         arr[index]=event.target.value
         this.setState({groupName:arr})
     }
+    // -------------- End of update groupname -------------------// 
 
+    // Handle className change for styling when samples is click
+    // FIX: UI bug need fixed. sample-false css get override
     handleDnDSelect = (event, sample) => {
         console.log(event.target.classList)
         let obj = this.state.dndSelectedValue
@@ -191,10 +212,14 @@ class GroupingPage extends React.Component {
     }
 
 
-    // To make pop up module
+    // ----- To make pop up modals ----- //
     togglePopup() {
-        this.setState({ showPopup: (!this.state.showPopup) })
+        this.setState({ showGTExPopup: (!this.state.showGTExPopup) })
     }
+    toggleModalPopup() {
+        this.setState({showModal: (!this.state.showModal) })
+    }
+    // ----- End of toggle popup ----- //
 
     /*--------Quang's part, Phuong em don't delete this pls-------*/
     // handle "Continue" button, go to batchPage.js
@@ -328,7 +353,7 @@ class GroupingPage extends React.Component {
                                             >
                                                 Create Gtex Group
                                             </button>
-                                            {this.state.showPopup ?
+                                            {this.state.showGTExPopup ?
                                                 <Popup
                                                     handleGtex={this.handleGtex}
                                                     closePopup={this.togglePopup.bind(this)}
@@ -478,9 +503,14 @@ class GroupingPage extends React.Component {
                                     {/* <!--............................... --> */}
 
                                     <div className="nav_container3">
-                                        <a href={this.state.href} style={{ 'text-decoration': 'none' }}>
+                                        <button type="Continue" className="buttontask_cont" onClick={this.toggleModalPopup.bind(this)}>Continue</button>
+                                        {this.state.showModal ?
+                                                <Loading/>
+                                                : null
+                                            }
+                                        {/*<a href={this.state.href} style={{ 'text-decoration': 'none' }}>
                                             <button type="Continue" className="buttontask_cont" onClick={this.handleGroups}>Continue</button>
-                                        </a>
+                                        </a>*/}
                                     </div>
                                 </div>
 
