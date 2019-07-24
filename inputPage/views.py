@@ -161,6 +161,98 @@ def input_list2(request):
                              'x_corrected_pca':x_corrected_pca,'y_corrected_pca':y_corrected_pca,
                              'group_names_list':group_names_list }, status=201)
 
+# for algorithmPage.js, saved in urls.py
+@csrf_exempt
+def input_list3(request):
+    """
+    List all code input, or create a new input obj.
+    """
+    if request.method == 'GET': # Back End send, Front End request
+        inputs = Input.objects.all()
+        serializer = InputSerializer(inputs, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+    elif request.method == 'POST': # Back End request, Front End send
+        '''data = JSONParser().parse(request) # Receive data from front end
+
+        # 'selections' is the selections sent from algorithmPage.js
+        # batch correction (yes/no), algorithm, sample variance, false discovery rate, bonferroni alpha
+        # Ex: ['Correction Applied', 'Differential Expression Analysis', 'Equal', 0.55, 0.276]
+        selections = data['selections'] # syntax: data[key], key = package's name being sent
+        print(selections)
+
+        test_mode = None
+        if(selections[0] == "No Correction" and selections[2] == "Equal"):
+            test_mode = 0 # pass 0 for batch Uncorrected data AND equal variance t test
+        elif(selections[0] == "Correction Applied" and selections[2] == "Equal"):
+            test_mode = 1 # pass 1 for batch corrected data AND equal variance t test
+        elif(selections[0] == "No Correction" and selections[2] == "Unequal"):
+            test_mode = 2 # pass 2 for batch Uncorrected data AND Unequal variance t test
+        elif(selections[0] == "Correction Applied" and selections[2] == "Unequal"):
+            test_mode = 3 # pass 3 for batch corrected data AND Unequal variance t t test
+        #print(test_mode)
+
+        # Retrieve everything saved from list2
+        group_lists = request.session['group_lists']
+        gtex_groups_queries = request.session['gtex_groups_queries']
+        group_names_list = request.session['group_names_list']
+        tf_ens_ids = request.session['tf_ens_ids']
+
+        # Retrieve the 'dataString' saved in database
+        dataString = request.session['dataString']
+        # import and use def from ds_class.py (from Math Team)
+        dataSet= ds(5)
+        # build the dataframe from 'dataString' 
+        dataSet.dataframe_from_string(dataString)
+
+        # pass in list of groups, return list of associated dataframes  
+        CListDfs = dataSet.make_groups(group_lists) 
+        # pass in list of GTEx groups, return list of associated dataframes          
+        gtex_groups_dataframes = process_group_query(gtex_groups_queries)   
+        # append GTEx dataframes to group dataframes
+        CListDfs.extend(gtex_groups_dataframes)
+        #print(CListDfs)        
+
+        # Create an analyzer object from imported GTEXDataAnalyzer.py
+        analyzer = GTEXDataAnalyzer(CListDfs, group_names_list, tf_ens_ids) 
+        # 'dataframes' is a list of dataframes, and each dataframe
+        # has 8 columns(for now): overlapping ensIDs, fold change, t-values, p-values, log(p-values),
+        # control group mean, group? mean, mean of Control group and group? averages (mean TPM)
+
+        dataframes_for_graph = analyzer.do_statistical_analysis(test_mode)  
+
+        print(dataframes_for_graph[0].iloc[:,1])
+        print(dataframes_for_graph[0].iloc[:,4])
+        print(dataframes_for_graph[0].iloc[:,7])        
+
+        #---------------for Graph 1 (Volcano Plot)-------------#       
+        # only use 'fold change' col for x_axis, 'log(p-values)' for y_axis
+        # [[x_df1...], [x_df2...], [x_df3...],...]
+        x_volcano = [list(dataframes_for_graph[i].iloc[:,1]) for i in range(len(dataframes_for_graph))] 
+        # [[y_df1...], [y_df2...], [y_df3...],...]
+        y_volcano = [list(dataframes_for_graph[i].iloc[:,4]) for i in range(len(dataframes_for_graph))]
+        #---------------------Graph 1 ends---------------------#
+
+        print(len(x_volcano))
+        print(len(y_volcano))
+        #print(x_volcano[0])
+        #print(y_volcano[0])
+
+       
+
+        #---------------for Graph 2 (Differential Expression TPM Plot)-------------#
+        # only use 'mean TPM' col for x_axis, 'fold change' for y_axis
+        x_differential = [list(dataframes_for_graph[i].iloc[:,7]) for i in range(len(dataframes_for_graph))]
+        y_differential = [list(dataframes_for_graph[i].iloc[:,1]) for i in range(len(dataframes_for_graph))]
+        #---------------------Graph 2 ends---------------------#
+
+        test_list = [x_volcano[0],y_volcano[0]]
+        test_list2 = [x_differential[0],y_differential[0]]
+
+        '''
+        # working on the copy version
+
+    return JsonResponse({}, status=201)
 
 # for gtexModal.js, saved in urls.py
 @csrf_exempt
