@@ -68,7 +68,7 @@ class ValidationPage extends React.Component {
                 <head>
                     <meta charset="UTF-8" />
                     <title>Initial Validation</title>
-                    <link href="CSS/Inital_validation_responsive.css" rel="stylesheet" />
+                    {/* <link href="CSS/Inital_validation_responsive.css" rel="stylesheet" /> */}
                     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Oswald&display=swap" rel="stylesheet" />
                 </head>
                 <body>
@@ -142,7 +142,7 @@ class ValidationPage extends React.Component {
                                                         type: 'scattergl',
                                                         mode: 'markers',
                                                         hoverinfo: 'x',
-                                                        marker: { color: 'blue' },
+                                                        marker: { color: '#517C8A' },
                                                     },
                                                 ]}
                                                 layout={{
@@ -225,7 +225,7 @@ class ValidationPage extends React.Component {
                                                         mode: 'markers', //lines or markers
                                                         text: this.state.pca_text,
                                                         hoverinfo: "text",
-                                                        marker: { color: 'green' },
+                                                        marker: { color: '#2EC4B6' },
                                                     },
                                                 ]}
                                                 layout={{
