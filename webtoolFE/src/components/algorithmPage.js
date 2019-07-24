@@ -1,5 +1,6 @@
 import React from "react";
-import "../styles/tata.css";
+// import "../styles/tata.css";
+import "../styles/algorithmPage.css";
 import axios from 'axios'; // to send data to back end
 import Select from "react-select" // to use dropbox
 import Footer from './botNav';
@@ -15,7 +16,7 @@ class AlgorithmPage extends React.Component {
 
             sampleVarianceOptions: [{ value: "Equal", label: "Equal" },
                                     { value: "Unequal", label: "Unequal" }],
-            selectedSampleVariance: "Unequal", //default is "Unequal"
+            selectedSampleVariance: { value: "Unequal", label: "Unequal" }, //default is "Unequal"
 
             falseDiscoveryRate_value: "0.050",
             bonferroniAlpha_value: "0.050",
@@ -59,19 +60,24 @@ class AlgorithmPage extends React.Component {
         console.log("bon is " + bonferroniAlpha_value)
         console.log("type of bon " + typeof(bonferroniAlpha_value))
 
-        /*// sending request to back end need to be together
+        // sending request to back end need to be together
         //axios call (get in header) to send to back end
         axios.post('http://127.0.0.1:8000/backend/list3', {
         //axios.post('http://oscar19.orc.gmu.edu/backend/list3', {
-            
+            selections: [this.state.batch_correction_value,
+                         this.state.selectedAlgorithm.value,
+                         this.state.selectedSampleVariance.value,
+                         falseDiscoveryRate_value,
+                         bonferroniAlpha_value]
         }).then((arr) => { // to receive data from back end 
-
+            localStorage.setItem('test_list', JSON.stringify(arr.data.test_list))
+            localStorage.setItem('test_list2', JSON.stringify(arr.data.test_list2))
         })
         // }).then(()=>{
         //     this.setState({ href: '/resultpage' }) 
         // })
 
-        this.setState({ href: '/resultpage' }) */
+        //this.setState({ href: '/resultpage' }) 
     }
 
     
@@ -201,16 +207,16 @@ class AlgorithmPage extends React.Component {
                                         <div className="helpcontent5 TPC"> Outliers samples may be an expected outcome if your data is derived from diseased groups or from different tissue types. If your data is derived from multiple batches there should be shifts across all chromosomes. Batch correction option is recommended.</div>
                                     </div>
                                     <div id="falseDiscoverySlider">
-                                        <input type="range" min="0" max="1" value={this.state.falseDiscoveryRate_value} step="0.025" className="slider" id="myRange" onChange={this.handleChangeFalseDiscovery} />
+                                        <input type="range" min="0" max="1" value={this.state.falseDiscoveryRate_value} step="0.001" className="slider" id="myRange" onChange={this.handleChangeFalseDiscovery} />
                                         <input type="text" value={this.state.falseDiscoveryRate_value} onChange={this.handleChangeFalseDiscovery} />
                                     </div>
 
                                     <div className="drophelp5">
                                         <h2 className="parameters_title">Bonferroni Alpha Tunning Parameters <img src={require('../assets/Help Icon.png')} className="helpicon5" alt="help" /></h2>
-                                        <div className="helpcontent5 TPC">based on tissue source and gender. Outliers samples may be an expected outcome if your data is derived from diseased groups or from different tissue types. </div>
+                                        <div className="helpcontent5 TPC">Based on tissue source and gender. Outliers samples may be an expected outcome if your data is derived from diseased groups or from different tissue types. </div>
                                     </div>
                                     <div id="bonferroniSlider">
-                                        <input type="range" min="0.001" max="1" value={this.state.bonferroniAlpha_value} step="0.025" className="slider" id="myRange2" onChange={this.handleChangeBonferroni} />
+                                        <input type="range" min="0.001" max="1" value={this.state.bonferroniAlpha_value} step="0.001" className="slider" id="myRange2" onChange={this.handleChangeBonferroni} />
                                         <input type="text" value={this.state.bonferroniAlpha_value} onChange={this.handleChangeBonferroni} />
                                     </div>
                                 </div>
@@ -222,7 +228,7 @@ class AlgorithmPage extends React.Component {
                                         <button type="Back" 
                                                 className="runtask"
                                                 onClick={this.runTaskHandler}>Run Task</button>
-                                            </a>
+                                    </a>
                                     {/* </a> */}
                                 </div>
                             </div>
