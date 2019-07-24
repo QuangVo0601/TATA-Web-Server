@@ -1,0 +1,275 @@
+/*task page code*/
+/*768*/
+#wrapper{
+	height:1130px;
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+.flex-container{
+	width:768px;
+	display:flex;
+	margin:0 auto;
+}
+#section {
+  display: flex;
+flex-direction:row;
+	flex-wrap:wrap;
+	margin-top:63px;
+	height:784px;
+	width:500px;
+}
+.task2{
+margin-top:60px;
+}
+#boxes{
+	display:flex;
+	flex-wrap:wrap;
+}
+.box{
+  width:189px;
+  height:356px;
+  border-radius: 20px;
+  background-color:#F5F5F5;
+  margin-right:53px;
+  transition: box-shadow .3s;
+}
+
+.content{
+  text-align: center;
+  transition:  0.3s;
+}
+.task-img img{/*new changes 7/23/19*/
+	width:103.5px ;
+	height:101.75px;
+	margin-top:40px;
+	margin-bottom:20px;
+}
+.content h3{ /*new changes 7/23/19*/
+  font-family: 'Oswald', sans-serif;
+  font-size: 16px;
+  color:#797979;
+  line-height:22px;
+}
+.content p{ /*new changes 7/23/19*/
+  font-family: 'Montserrat', sans-serif;
+  color: #797979;
+	font-size:9px;
+	margin-top:15px;
+	width:170px;
+	margin-left:7px;
+}
+/* text hover */
+
+/*  box hover*/
+.content:hover h3{ /*new changes 7/23/19*/
+  color: white;
+  fill: white;
+}
+.content:hover p{ /*new changes 7/23/19*/
+  color: white;
+  fill: white;
+}
+
+.nav_container {
+    display:flex;
+	flex-wrap:wrap;
+	margin-top:40px;
+	margin-left: 350px;
+
+	
+}
+.box:hover {
+  cursor: pointer;
+  box-shadow: 0 0 30px #CCCCCC;
+  color: white;
+  background-color: #FF8C42;
+}
+
+/* .button {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 600;
+	font-size: 9pt;
+	color: white;
+	text-align: center;
+	display: block;
+	border: none;
+	width: 76px;
+	height: 25px;
+	border-radius: 8px;
+	cursor: pointer;
+}
+.task_cont {
+	background-color: #FF8C42;
+	
+}
+
+.task_cont:hover {
+	background-color: #FF7B26;
+} */
+
+.button-task-cont {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 600;
+	font-size: 9pt;
+	color: white;
+	text-align: center;
+	display: block;
+	border: none;
+	width: 76px;
+	height: 25px;
+	border-radius: 8px;
+	cursor: pointer;
+	background-color: #FF8C42;
+}
+
+.button-task-cont:hover {
+	background-color: #FF7B26;
+}
+
+.content:hover h3{ /*new changes 7/23/19*/
+  color: white;
+  fill: white;
+}
+.content:hover p{ /*new changes 7/23/19*/
+  color: white;
+  fill: white;
+}
+.content:hover #white{
+	content:url("../assets/taskPageImages/Asset2.2.png");
+}
+.content:hover #white2{
+	content:url("../assets/taskPageImages/Distinguishgroups.2.png");
+}
+.content:hover #white3{
+	content:url("../assets/taskPageImages/Search.2.png");
+}
+.content:hover #white4{
+	content:url("../assets/taskPageImages/Asset1.2.png");
+}
+/*begining of responsive code for 1280*/
+@media only screen and (min-width: 1270px){
+
+	#wrapper{
+		height:800px;
+	}
+
+	.flex-container{
+	width:1280px;
+	display:flex;
+	margin:0 auto;
+}
+
+	
+	#section {
+	flex-direction:row;
+	margin-top:63px;
+	height:400px;
+	width:801px;
+}
+
+.task2{
+margin-top:0;
+}
+
+	.box{/*new changes 7/23/19*/
+  width:181px;
+  height:396px;
+  margin-right:18px;
+	margin-top:70px;
+		flex-wrap:nowrap;
+		display:flex;
+}
+
+
+.nav_container {
+	margin-top:30px;
+	margin-left: 695px;	
+}
+
+.button-task-cont {
+	font-size: 15px;
+	width: 85px;
+	height: 29px;
+	
+}
+
+.content h3{/*new changes 7/23/19*/
+  font-size: 18px;
+  line-height:23px;
+	margin-left:10px;
+}
+	.task-img img{/*new changes 7/23/19*/
+	width:138px ;
+	height:135.67px;
+	margin-top:25px;
+	margin-bottom:20px;
+	margin-left:20px;
+}
+
+.content p{ /*new changes 7/23/19*/
+	margin-top:15px;
+	width:145px;
+	margin-left:15px;
+}
+
+}
+/*end of 1280*/
+@media only screen and (min-width: 1850px){
+	#wrapper{
+		height:1342px;
+	}
+	
+	.flex-container{
+	width:1920px;
+	display:flex;
+	margin:0 auto;
+	}
+	#section {
+	margin-top:231px;
+	height:670px;
+	width:1400px;
+}
+	#task2{
+		margin-top:0px;
+	}
+
+	.box{
+  width:275px;
+  height:654.09px;
+  border-radius: 20px;
+  margin-right:50px;
+margin-top:20px;
+}
+
+.nav_container {
+	margin-left:1145px;
+	margin-top:80px;
+	
+}
+.button-task-cont {
+	font-size: 13.5px;
+	width: 98px;
+	height: 32px;
+}
+	.content h3{/*new changes 7/23/19*/
+  font-size: 28px;
+  line-height:40px;
+		margin-left:15px;
+}
+	.task-img img{/*new changes 7/23/19*/
+	width:207px ;
+	height:203.5px;
+	margin-top:40px;
+	margin-bottom:30px;
+	margin-left:20px;
+}
+
+.content p{ /*new changes 7/23/19*/
+	margin-top:18px;
+	width:230px;
+	margin-left:18px;
+	font-size:15px;
+}
+	
+}
+/*task page code ends*/
