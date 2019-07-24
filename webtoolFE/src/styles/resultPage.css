@@ -51,6 +51,7 @@ font-family: 'Montserrat', sans-serif;
 	margin-left:44px;
 	background-color:#F5F5F5;
 	border:.5px solid #D3D3D3;
+	
 }
 .download {
 	font-family: 'Montserrat', sans-serif;
@@ -130,8 +131,22 @@ em {
 	margin-left:34px;
 	margin-top:40px;
 }
+
 .graph-result:first-child{
 	margin-top:47px;
+}
+
+.batch-display{
+	height:725px;
+	margin-top: 63px;
+	
+}
+.batch-result{
+	width:465px;
+	height:337px;
+	border:2px solid grey;
+	margin-left:34px;
+	margin-top:40px;
 }
 
 /* /////////////////////////////////////////////// */
@@ -182,14 +197,32 @@ em {
 	margin-top:63px;
 }
 
+.batch-display{
+	height:725px;
+	margin-top: 63px;
+	display: flex;
+	flex-direction: row;	
+	
+}
+.batch-result{
+	width:460px;
+	height:450px;
+	border:2px solid grey;
+	margin-left:34px;
+	margin-top:40px;
+}
+
 .delete {
 	margin-left:73px;
 	margin-top: 10px;
 	margin-bottom:30px;
 
 }
-#download-data{
+/* #download-data{
 	margin-left: 29px;
+} */
+.download{
+	margin-left: 73px;
 }
 #graphresult-content{
 	width:173px;
@@ -264,6 +297,21 @@ em {
 }
 .graph-result:first-child{
 	margin-top:63px;
+}
+
+.batch-display{
+	height:725px;
+	margin-top: 63px;
+	display: flex;
+	flex-direction: row;	
+	
+}
+.batch-result{
+	width:650px;
+	height:605px;
+	border:2px solid grey;
+	margin-left:34px;
+	margin-top:40px;
 }
 
 #download-data{
