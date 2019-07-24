@@ -11,6 +11,7 @@ class GroupingPage extends React.Component {
         super(props)
         this.state = {
             // For modal progess bar handle
+            percent:0,
             showModal: false,
 
             // to store GTEx
@@ -218,6 +219,10 @@ class GroupingPage extends React.Component {
     }
     toggleModalPopup() {
         this.setState({showModal: (!this.state.showModal) })
+        // while(this.state.percent<=80){
+        //     this.setState({percent: this.state.percent+2})      
+        // }
+        
     }
     // ----- End of toggle popup ----- //
 
@@ -505,7 +510,9 @@ class GroupingPage extends React.Component {
                                     <div className="nav_container3">
                                         <button type="Continue" className="buttontask_cont" onClick={this.toggleModalPopup.bind(this)}>Continue</button>
                                         {this.state.showModal ?
-                                                <Loading/>
+                                                <Loading
+                                                    percent={this.state.percent}
+                                                />
                                                 : null
                                             }
                                         {/*<a href={this.state.href} style={{ 'text-decoration': 'none' }}>
