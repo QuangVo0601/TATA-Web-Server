@@ -1,5 +1,6 @@
 import React from "react";
-import "../styles/tata.css";
+//import "../styles/tata.css";
+import styles from  "../styles/batchPage.module.css";
 import Plot from 'react-plotly.js';
 import Select from "react-select" // to use dropbox
 import Footer from './botNav';
@@ -82,6 +83,8 @@ class BatchPage extends React.Component {
             corrected_pca_traces: corrected_traces_temp
         })
 
+        // localStorage.removeItem('x_uncorrected_pca', 'y_uncorrected_pca', 'x_corrected_pca', 'y_corrected_pca', 'group_names_list')
+
     }*/
 
     render() {
@@ -94,43 +97,43 @@ class BatchPage extends React.Component {
                     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700%7COswald:500,600,700&display=swap" rel="stylesheet"/>
                 </head>
                 <body>
-                    <div id="batch-wrapper">
-                        <div className="batch-flex-container">
+                    <div id={styles["batch-wrapper"]}>
+                        <div className={styles["batch-flex-container"]}>
                             {/* <div id="content"> */}
-                                <div id="nav-batch">
-                                    <div id="logo">
+                                <div id={styles["nav-batch"]}>
+                                    <div id={styles["logo"]}>
                                         <img src={require('../assets/Group 257.png')} width="46px" height="46px" alt="logo" />
                                     </div>
                                     {/* <!--end of log--> */}
 
-                                    <div id="mainnav">
-                                        <div id="circles">
+                                    <div id={styles["mainnav"]}>
+                                        <div id={styles["circles"]}>
                                             <ul>
-                                                <li><span className="circles" id="complete">1</span></li>
-                                                <li><div className="line1" id="active3"></div></li>
-                                                <li><span className="circles" id="complete" >2</span></li>
-                                                <li><div className="line1" id="active3"></div></li>
-                                                <li><span className="circles" id="complete">3</span></li>
-                                                <li><div className="line" id="active3"></div></li>
-                                                <li><span className="circles" id="complete">4</span></li>
-                                                <li><div className="line"></div></li>
-                                                <li><span className="circles">5</span></li>
+                                                <li><span className={styles["circles"]} id="complete">1</span></li>
+                                                <li><div className={styles["line1"]} id="active3"></div></li>
+                                                <li><span className={styles["circles"]} id="complete" >2</span></li>
+                                                <li><div className={styles["line1"]} id="active3"></div></li>
+                                                <li><span className={styles["circles"]} id="complete">3</span></li>
+                                                <li><div className={styles["line"]} id="active3"></div></li>
+                                                <li><span className={styles["circles"]} id="complete">4</span></li>
+                                                <li><div className={styles["line"]}></div></li>
+                                                <li><span className={styles["circles"]}>5</span></li>
                                             </ul>
                                         </div>
                                         {/* <!--end of circles--> */}
 
-                                        <div id="stepnav">
+                                        <div id={styles["stepnav"]}>
                                             <dl>
-                                                <div id="task">
-                                                    <dt><div className="active2">Exploratory Plots</div></dt>
-                                                    <dt><div className="active2">Choose Task</div></dt>
-                                                    <dt><div className="active2">Group Samples</div></dt>
+                                                <div id={styles["task"]}>
+                                                    <dt><div className={styles["active2"]}>Exploratory Plots</div></dt>
+                                                    <dt><div className={styles["active2"]}>Choose Task</div></dt>
+                                                    <dt><div className={styles["active2"]}>Group Samples</div></dt>
                                                     <dd>Group Samples & create Gtex group</dd>
                                                 </div>
                                                 {/* <!--end of task--> */}
 
-                                                <div id="samples">
-                                                    <dt><div className="active2">Choose Batch Correction</div></dt>
+                                                <div id={styles["samples"]}>
+                                                    <dt><div className={styles["active2"]}>Choose Batch Correction</div></dt>
                                                     <dd>Choose correction & View Plots</dd>
                                                     <dt>Algorithms & Tuning Parameters</dt>
                                                     <dd>Choose algoithims & set parameters</dd>
@@ -145,14 +148,14 @@ class BatchPage extends React.Component {
                                 {/* <!--end of nav--> */}
                             {/* </div> */}
                             {/* <!-- beginning of batch section --> */}
-                            <div id="batch-section">
-                                <div id="batch-content">
-                                    <div id="batch_corrected_section" >
-                                        <div className="drophelp">
-                                            <div className="batch_title">Corrected Data <img src={require('../assets/Help Icon.png')} className="helpicon" alt="help" /></div>
-                                            <div className="helpcontent_batch"> Add content here.</div>
+                            <div id={styles["batch-section"]}>
+                                <div id={styles["batch-content"]}>
+                                    <div id={styles["batch_corrected_section"]} >
+                                        <div className={styles["drophelp"]}>
+                                            <div className={styles["batch_title"]}>Corrected Data <img src={require('../assets/Help Icon.png')} className="helpicon" alt="help" /></div>
+                                            <div className={styles["helpcontent_batch"]}> Add content here.</div>
                                         </div>
-                                        <div className="corrected-graphsize">
+                                        <div className={styles["corrected-graphsize"]}>
                                             <Plot
                                                 data={this.state.corrected_pca_traces}
 
@@ -184,12 +187,12 @@ class BatchPage extends React.Component {
                                         </div>
                                     </div>
 
-                                    <div id="batch_corrected_section" >
-                                        <div className="drophelp">
-                                            <div className="batch_title">Uncorrected Data <img src={require('../assets/Help Icon.png')} className="helpicon" alt="help" /></div>
-                                            <div className="helpcontent_batch ">Add content here.</div>
+                                    <div id={styles["batch_corrected_section"]} >
+                                        <div className={styles["drophelp"]}>
+                                            <div className={styles["batch_title"]}>Uncorrected Data <img src={require('../assets/Help Icon.png')} className="helpicon" alt="help" /></div>
+                                            <div className={styles["helpcontent_batch"]}>Add content here.</div>
                                         </div>
-                                        <div className="corrected-graphsize">
+                                        <div className={styles["corrected-graphsize"]}>
                                             <Plot
                                                 data={this.state.uncorrected_pca_traces}
 
@@ -222,15 +225,17 @@ class BatchPage extends React.Component {
                                 </div>
 
                                 {/* <!-- correction dropdown --> */}
-                                <div id="batch-bottom-container">
-                                    <div id="batch-bottom-container2" >
-                                        <div id="correction_header">Would you like to use batch corrected data?</div>
-                                        <div className="batch-styled-select rounded">
+                                <div id={styles["batch-bottom-container"]}>
+                                    <div id={styles["batch-bottom-container2"]} >
+                                        <div id={styles["correction_header"]}>Would you like to use batch corrected data?</div>
+                                        <div className={styles.select}>
                                             {/* <select>
                                                 <option>Yes</option>
                                                 <option>No</option>
                                             </select> */}
                                             <Select
+                                                // styles={{ control: (base) => ({ ...base, boxShadow: "none", width: "95px" }) }}
+                                                // className={styles.select}
                                                 placeholder={this.state.selectedOption}
                                                 value={this.state.selectedOption}
                                                 onChange={this.selectedOption}
@@ -239,10 +244,10 @@ class BatchPage extends React.Component {
                                         </div>
                                     </div>
 
-                                    <div className="nav_container4">
+                                    <div className={styles["nav_container4"]}>
                                     <a href={this.state.href} style={{'text-decoration': 'none'}}>
                                         <button type="Continue" 
-                                                className="button batch_cont"
+                                                className={styles.button}
                                                 onClick={this.handleSubmit}>Continue</button>
                                     </a>
                                     </div>
