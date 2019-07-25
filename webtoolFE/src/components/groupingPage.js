@@ -133,11 +133,7 @@ class GroupingPage extends React.Component {
         let newObject = this.state.dndGroup //create new objectt
         const data = event.dataTransfer.getData("value") //get value from event object
         const id = event.target.id //getting dropped to id
-        console.log(event, 'this is event')
-        console.log(event.target, 'this is target')
-        console.log(id, 'id is in drop')
         if (this.state.dragFrom == 'samples' && this.state) {
-            console.log('multi drag from samples')
             const removeData = []
             const addData = this.state.dndGroup[`${id}`]
             this.state.dndGroup[`${this.state.dragFrom}`].map((item) => {
@@ -148,12 +144,14 @@ class GroupingPage extends React.Component {
                     removeData.push(item)
                 }
             })
-            console.log(removeData)
             newObject[`${this.state.dragFrom}`] = removeData
             newObject[`${id}`] = addData
             this.setState({ dndGroup: newObject })  // added
             let obj = {}
             this.state.dndGroup['samples'].map(item => {
+                // added for ui debugged purpose
+                // event.target.classList.remove('sample-true')
+                // event.target.classList.add('sample-false')
                 obj[`${item}`] = false
             })
             this.setState({ dndSelectedValue: obj })
