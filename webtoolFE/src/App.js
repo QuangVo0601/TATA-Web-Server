@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { Route } from 'react-router-dom';
 import WebTool from './components/webtool';
+import HomePage from './components/homePage';
 import ValidationPage from './components/validationPage'
 import TaskPage from './components/taskPage'
 import GroupingPage from './components/groupingPage'
@@ -100,6 +101,13 @@ class App extends React.Component {
           )
           }
         />
+        <Route exact path="/homepage" //need to be changed to Webtool later
+          render={() => (
+            <HomePage
+            />
+          )
+          }
+        />        
       </div>
     )
   }
