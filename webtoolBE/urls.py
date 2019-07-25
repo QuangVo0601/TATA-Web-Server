@@ -15,13 +15,14 @@ Including another URLconf
 """
 from django.urls import path, include, re_path
 from core.views import index
-from inputPage.views import index_page, input_detail, input_list, input_list2
+from inputPage.views import index_page, input_detail, input_list, input_list2, input_list3
 
 
 urlpatterns = [
     path('backend', index_page),
-    path('backend/list', input_list), # First route
+    path('backend/list', input_list), # for csvReader.js
     path('backend/list2', input_list2), # for groupingPage.js
+    path('backend/list3', input_list3), # for algorithmPage.js
     path('backend/detail', input_detail), # gtex route
     path('', index),
     re_path(r'^(?:.*)/?$',index)
