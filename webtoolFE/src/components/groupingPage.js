@@ -10,12 +10,14 @@ class GroupingPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            // this to send back
+            groupLists: [],
             // For modal progess bar handle
-            percent:0,
+            percent: 0,
             showModal: false,
-
+            divState: 'groupflex-section',
             // to store GTEx
-            gtexQueries: [], 
+            gtexQueries: [],
             //by default is 2 groups (1st group is control group)
             groupLabel: '2 groups',
             // For dropdown box option
@@ -30,34 +32,33 @@ class GroupingPage extends React.Component {
             { value: 10, label: "10 groups" }],
             // Default html format
             dndGroup: {
-                'samples': localStorage.getItem('pca_text').split(','),
+                // replace() to eliminate line break
+                'samples': (localStorage.getItem('pca_text').replace(/(\r\n|\n|\r)/gm,"")).split(','),
                 'Control group': [],
                 '2': []
             },
             // To store created GTEx
             gtexGroup: {},
-            
+
             // ----- For drag and drop ----- //
             dragFrom: '',
             selectedNumberOfGroups: [],
             // ----- drag and drop section end ----- //
-            
+
             // For popup
             showGTExPopup: false,
 
             dndSelectedValue: {},
-            
+
             // to control groupname 
-            groupName: ['control group','2','3','4','5','6','7','8','9','10'],
+            groupName: ['Control group', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+            controlgroupname: 'Control group',
 
             /*--------Quang's part, Phuong em don't delete this pls-------*/
             //dummy group list to send to back end
-            dummy_group_lists: [['Control group', '#Patient1 (Gene Score)', '#Patient3', '#Patient5'],
-            ['group1', '#Patient2', '#Patient4'],
-            ['group2', '#Patient6', '#Patient7']],
-
-            dummy_gtexGroup_lists: [['gtex group 1', 'GTEX-11DXW-0008-SM-5Q59V', 'GTEX-11DXW-0226-SM-5H122', 'GTEX-11DXW-0826-SM-5H118']
-            ['gtex group 2', 'GTEX-15CHC-0826-SM-686YW', 'GTEX-15CHQ-0226-SM-6EU2S', 'GTEX-15CHQ-1126-SM-686YY', 'GTEX-15CHR-0626-SM-7938V']],
+            // dummy_group_lists: [['Control group', '#Patient1 (Gene Score)', '#Patient3', '#Patient5'],
+            // ['group1', '#Patient2', '#Patient4'],
+            // ['group2', '#Patient6', '#Patient7']],
             href: "",
             /*-------------------Quang's part ends-------------------------*/
         };
@@ -72,13 +73,13 @@ class GroupingPage extends React.Component {
     // If reset group, reset those states
     handleResetGroup = () => {
         let newO = {
-            'samples':localStorage.getItem('pca_text').split(','),
+            'samples': localStorage.getItem('pca_text').split(','),
             'Control group': [],
             '2': []
         }
         this.setState({
             dndGroup: newO,
-            selectedNumberOfGroups:[],
+            selectedNumberOfGroups: [],
             groupLabel: '2 groups'
         });
     }
@@ -90,9 +91,9 @@ class GroupingPage extends React.Component {
 
     // This method is used to store new number of groups from Select dropbox
     handleChange = (selected) => {
-        let oldO= this.state.dndGroup
+        let oldO = this.state.dndGroup
         let newO = {
-            'samples':[],
+            'samples': [],
             'Control group': [],
             '2': []
         }
@@ -101,14 +102,14 @@ class GroupingPage extends React.Component {
             newA.push([`${i}`])
             newO[`${i}`] = []
         }
-        Object.keys(oldO).map(key=>{
-            if(newO.hasOwnProperty(key)){
-                oldO[key].map(item=>{
+        Object.keys(oldO).map(key => {
+            if (newO.hasOwnProperty(key)) {
+                oldO[key].map(item => {
                     newO[key].push(item)
                 })
             }
-            else{
-                oldO[key].map(item=>{
+            else {
+                oldO[key].map(item => {
                     newO['samples'].push(item)
                 })
             }
@@ -183,15 +184,24 @@ class GroupingPage extends React.Component {
     }
 
     // -------- Update group name for every onChange ------------- //
-    handleGroupName=(event)=>{
+    handleGroupName = (event) => {
         event.preventDefault()
     }
-    handleNameChange=(event)=>{
+    handleNameChange = (event) => {
         let index = parseInt(event.target.id)
-        index=index-1
-        let arr= this.state.groupName
-        arr[index]=event.target.value
-        this.setState({groupName:arr})
+        index = index - 1
+        let arr = this.state.groupName
+        let value = this.state.groupName[(parseInt(event.target.id) - 1)]
+        arr[index] = event.target.value
+        this.setState({ groupName: arr })
+    }
+    handleControlGroupName = (event) => {
+        this.setState({ controlgroupname: event.target.value }, () => {
+            let arr = this.state.groupName
+            arr[0] = this.state.controlgroupname
+            this.setState({ groupName: arr })
+        })
+
     }
     // -------------- End of update groupname -------------------// 
 
@@ -217,32 +227,62 @@ class GroupingPage extends React.Component {
     togglePopup() {
         this.setState({ showGTExPopup: (!this.state.showGTExPopup) })
     }
+    // loading from grouping to batch
     toggleModalPopup() {
-        this.setState({showModal: (!this.state.showModal) })
-        // while(this.state.percent<=80){
-        //     this.setState({percent: this.state.percent+2})      
-        // }
-        
+        this.setState({ showModal: (!this.state.showModal) }, (() => {
+            if (this.state.showModal) {
+                this.setState({ divState: 'groupflex-section' })
+            }
+            else {
+                this.setState({ divState: 'groupflex-section-blur' })
+            }
+        }))
+
+        setTimeout(() => {
+            clearInterval(this.progress)
+        }, 29000)
     }
+    progress = setInterval(() => {
+        this.setState({ percent: this.state.percent += 3.33 })
+    }, 1000)
+
     // ----- End of toggle popup ----- //
 
     /*--------Quang's part, Phuong em don't delete this pls-------*/
     // handle "Continue" button, go to batchPage.js
-    handleGroups = () => {
-        // sending request to back end need to be together
-        //axios call (get in header) to send to back end
-        axios.post('http://127.0.0.1:8000/backend/list2', {
-            //axios.post('http://oscar19.orc.gmu.edu/backend/list2', {
-            groupsList: this.state.dummy_group_lists,
-            gtexQueries: this.state.gtexQueries
-        }).then((arr) => { // to receive data from back end 
-            localStorage.setItem('x_uncorrected_pca', JSON.stringify(arr.data.x_uncorrected_pca))
-            localStorage.setItem('y_uncorrected_pca', JSON.stringify(arr.data.y_uncorrected_pca))
-            localStorage.setItem('x_corrected_pca', JSON.stringify(arr.data.x_corrected_pca))
-            localStorage.setItem('y_corrected_pca', JSON.stringify(arr.data.y_corrected_pca))
-            localStorage.setItem('group_names_list', JSON.stringify(arr.data.group_names_list))
+    handleGroups = () => { 
+        let arr = []
+        let control = [this.state.groupName[0]] // index 0 is default to control grroup's name
+        this.state.dndGroup['Control group'].forEach(item => {
+            control.push(item)
         })
-        this.setState({ href: '/batchpage' })
+        arr.push(control)
+        let groupNumber = Object.keys(this.state.dndGroup).length // checking how many group
+        for (let i = 1; i <= groupNumber - 2; i++) {
+            let temp = [this.state.groupName[i]]
+            let key = (i + 1).toString(10)
+            this.state.dndGroup[key].forEach(item => {
+                temp.push(item)
+            })
+            arr.push(temp)
+        }
+        this.setState({ groupLists: arr }, (() => {
+            // sending request to back end need to be together
+            //axios call (get in header) to send to back end
+            axios.post('http://127.0.0.1:8000/backend/list2', {
+                //axios.post('http://oscar19.orc.gmu.edu/backend/list2', {
+                groupsList: this.state.groupLists,
+                gtexQueries: this.state.gtexQueries
+            }).then((arr) => { // to receive data from back end 
+                localStorage.setItem('x_uncorrected_pca', JSON.stringify(arr.data.x_uncorrected_pca))
+                localStorage.setItem('y_uncorrected_pca', JSON.stringify(arr.data.y_uncorrected_pca))
+                localStorage.setItem('x_corrected_pca', JSON.stringify(arr.data.x_corrected_pca))
+                localStorage.setItem('y_corrected_pca', JSON.stringify(arr.data.y_corrected_pca))
+                localStorage.setItem('group_names_list', JSON.stringify(arr.data.group_names_list))
+            })
+            this.setState({ href: '/batchpage', percent: 100.00 })
+        }))
+
     }
 
     /*-------------------Quang's part ends-------------------------*/
@@ -258,7 +298,7 @@ class GroupingPage extends React.Component {
 
                 <body>
                     <div id="wrapper3">
-                        <div className="flex-container3">
+                        <div className='flex-container3'>
                             <div id="content">
                                 <div id="nav3">
                                     <div id="logo">
@@ -308,7 +348,7 @@ class GroupingPage extends React.Component {
                                 {/* <!--end of nav--> */}
 
                             </div>
-                            <div id="groupflex-section">
+                            <div id='groupflex-section'>
                                 {/* <!-- samples section --> */}
                                 <div id="sample-section">
                                     <div
@@ -377,7 +417,15 @@ class GroupingPage extends React.Component {
                                         <div id="sample-drop-field">
                                             <div id="nav_group2">
                                                 <form className="signIn">
-                                                    <input className="groupingInput" type="controlgroup" placeholder="Control Group" autocomplete='off' required />
+                                                    <input
+                                                        className="groupingInput"
+                                                        type="controlgroup"
+                                                        autocomplete='off'
+                                                        required
+                                                        placeholder="Group Name"
+                                                        value={this.state.controlgroupname}
+                                                        onChange={this.handleControlGroupName}
+                                                    />
                                                     <label className="container">Null Hypothesis</label>
                                                 </form>
                                             </div>
@@ -407,8 +455,16 @@ class GroupingPage extends React.Component {
 
                                         <div id="sample-drop-field">
                                             <div id="nav_group2">
-                                                <form className="signIn">
-                                                    <input className="groupingInput" type="groupname" placeholder="Group Name" autocomplete='off' required />
+                                                <form className="signIn" id='2'>
+                                                    <input
+                                                        id='2'
+                                                        className="groupingInput"
+                                                        type="groupname"
+                                                        placeholder="Group Name"
+                                                        autocomplete='off'
+                                                        onChange={this.handleNameChange}
+                                                        required
+                                                    />
                                                 </form>
                                             </div>
                                             <div className="group-box" id='2'
@@ -436,20 +492,20 @@ class GroupingPage extends React.Component {
                                             return (
                                                 <div id="sample-drop-field">
                                                     <div id="nav_group2">
-                                                        <form  
-                                                            id={id} 
+                                                        <form
+                                                            id={id}
                                                             className="signIn"
                                                             onSubmit={this.handleGroupName}
                                                         >
-                                                            <input id={id}
-                                                                className="groupingInput" 
-                                                                type="groupname" 
-                                                                placeholder="Group Name" 
-                                                                autocomplete='off' 
-                                                                value={this.state.groupName[(parseInt(id)-1)]}
+                                                            <input
+                                                                id={id}
+                                                                className="groupingInput"
+                                                                type="groupname"
+                                                                placeholder="Group Name"
+                                                                autocomplete='off'
                                                                 required
                                                                 onChange={this.handleNameChange}
-                                                               />
+                                                            />
                                                         </form>
                                                     </div>
                                                     <div className="group-box" id={id}
@@ -508,23 +564,23 @@ class GroupingPage extends React.Component {
                                     {/* <!--............................... --> */}
 
                                     <div className="nav_container3">
-                                        <button type="Continue" className="buttontask_cont" onClick={this.toggleModalPopup.bind(this)}>Continue</button>
-                                        {this.state.showModal ?
-                                                <Loading
-                                                    percent={this.state.percent}
-                                                />
-                                                : null
-                                            }
-                                        {/*<a href={this.state.href} style={{ 'text-decoration': 'none' }}>
-                                            <button type="Continue" className="buttontask_cont" onClick={this.handleGroups}>Continue</button>
-                                        </a>*/}
+                                        {/* <button type="Continue" className="buttontask_cont" onClick={this.toggleModalPopup.bind(this)}>Continue</button> */}
+                                        <button type="Continue" className="buttontask_cont" onClick={this.handleGroups}>Continue</button>
+                                        {/* <a href={this.state.href} style={{ 'text-decoration': 'none' }}>
+                                            
+                                        </a> */}
                                     </div>
                                 </div>
 
                                 {/* <!-- end of group bottom section --> */}
                             </div>
-
                         </div>
+                        {this.state.showModal ?
+                            <Loading
+                                percent={this.state.percent}
+                            />
+                            : null
+                        }
                         <Footer />
                     </div>
                 </body>

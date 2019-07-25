@@ -82,7 +82,7 @@ def input_list2(request):
         # 'gtex_groups_queries' is the list of gtex group queries sent from groupingPage.js
         #gtex_groups_queries = data['gtexQueries']
 
-        #print(group_lists)
+        print(group_lists)
         #print(gtex_groups_queries)
         
         # Retrieve the 'dataString' saved in database
