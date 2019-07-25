@@ -152,7 +152,7 @@ class BatchPage extends React.Component {
                                 <div id={styles["batch-content"]}>
                                     <div id={styles["batch_corrected_section"]} >
                                         <div className={styles["drophelp"]}>
-                                            <div className={styles["batch_title"]}>Corrected Data <img src={require('../assets/Help Icon.png')} className="helpicon" alt="help" /></div>
+                                            <div className={styles["batch_title"]}>Corrected Data <img src={require('../assets/Help Icon.png')} className={styles.helpicon} alt="help" /></div>
                                             <div className={styles["helpcontent_batch"]}> Add content here.</div>
                                         </div>
                                         <div className={styles["corrected-graphsize"]}>
@@ -189,7 +189,7 @@ class BatchPage extends React.Component {
 
                                     <div id={styles["batch_corrected_section"]} >
                                         <div className={styles["drophelp"]}>
-                                            <div className={styles["batch_title"]}>Uncorrected Data <img src={require('../assets/Help Icon.png')} className="helpicon" alt="help" /></div>
+                                            <div className={styles["batch_title"]}>Uncorrected Data <img src={require('../assets/Help Icon.png')} className={styles.helpicon} alt="help" /></div>
                                             <div className={styles["helpcontent_batch"]}>Add content here.</div>
                                         </div>
                                         <div className={styles["corrected-graphsize"]}>
