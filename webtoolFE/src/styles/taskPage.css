@@ -84,6 +84,21 @@ margin-top:60px;
   color: white;
   background-color: #FF8C42;
 }
+/*added by Quang*/
+.box:focus {
+	outline: none;
+  cursor: pointer;
+  box-shadow: 0 0 30px #CCCCCC;
+  color: white;
+  background-color: #FF8C42;
+}
+.box:active {
+	outline: none;
+  cursor: pointer;
+  box-shadow: 0 0 30px #CCCCCC;
+  color: white;
+  background-color: #FF8C42;
+}
 
 /* .button {
 	font-family: 'Montserrat', sans-serif;
@@ -146,6 +161,9 @@ margin-top:60px;
 .content:hover #white4{
 	content:url("../assets/taskPageImages/Asset1.2.png");
 }
+
+
+
 /*begining of responsive code for 1280*/
 @media only screen and (min-width: 1270px){
 

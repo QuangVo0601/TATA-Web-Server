@@ -114,7 +114,7 @@ class TaskPage extends React.Component {
 							<div id="section">
 								<div id="boxes">
 									{/*Box 1*/}
-									<div className="box" onClick={this.selectedTask.bind(this, this.state.taskOptions[0])}>
+									<div className="box" tabindex="0" onClick={this.selectedTask.bind(this, this.state.taskOptions[0])}>
                                     	<div className="content">
                                             <div className="task-img"> <img id="white" src={require('../assets/taskPageImages/Asset2.png')}/> </div>
                                             <h3>CO-DIFFERENTIAL<br/> EXPRESSION ANALYSIS</h3>
@@ -122,7 +122,7 @@ class TaskPage extends React.Component {
 										</div>
                                     </div>
 									{/*Box 2*/}
-									<div className="box" onClick={this.selectedTask.bind(this, this.state.taskOptions[1])}> 
+									<div className="box" tabindex="0" onClick={this.selectedTask.bind(this, this.state.taskOptions[1])}> 
 										<div className="content">
                                             <div className="task-img"> <img id="white2" src={require('../assets/taskPageImages/Distinguishgroups.png')}/> </div>
                                             <h3>CO-EXPRESSION <br/> NETWORK ANALYSIS</h3>
@@ -131,7 +131,7 @@ class TaskPage extends React.Component {
 									</div>
 									<div className="task2">
 										{/*Box 3*/}
-										<div className="box" onClick={this.selectedTask.bind(this, this.state.taskOptions[2])}> 
+										<div className="box" tabindex="0" onClick={this.selectedTask.bind(this, this.state.taskOptions[2])}> 
 											<div className="content">
                                                 <div className="task-img"><img id="white3" src={require('../assets/taskPageImages/Search.png')}/> </div>
                                                 <h3>DIFFERENTIAL <br/> EXPRESSION ANALYSIS</h3>
@@ -141,7 +141,7 @@ class TaskPage extends React.Component {
 									</div>
 									<div className="task2">
 										{/*Box 4*/}
-										<div className="box" onClick={this.selectedTask.bind(this, this.state.taskOptions[3])} disabled={true}> {/*remove "disabled" when new task is added*/}
+										<div className="box">
 											<div className="content">
                                                 <div class="task-img"><img id="white4" src={require('../assets/taskPageImages/Asset1.png')}/> </div>
                                                 <h3>Coming <br/> Soon</h3>
