@@ -166,7 +166,7 @@ margin-top:60px;
   	display: flex;
 	flex-direction:row;
 	flex-wrap:wrap;
-	margin-top:63px;
+	margin-top:53px;
 	height:784px;
 	width:500px;
 }
@@ -475,7 +475,7 @@ background-color: #F4F4F4;
 
 	#batch-section{
 	flex-direction:row;
-	margin-top:63px;
+	margin-top:53px;
 	height:400px;
 	width:1000px;
 }
