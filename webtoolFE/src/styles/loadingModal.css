@@ -2,12 +2,10 @@
 	margin-top: 400px;
 	overflow-x: hidden;
 	overflow-y: hidden;
-	border: red solid 1px;
 }
 
 .modal-inner { 
-	overflow: hidden; 
-	border: solid black 1px;
+	position: fixed;
 	margin-top: 40px;
 	position: absolute; 
 	border-radius: 10px;
