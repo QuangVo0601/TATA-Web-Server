@@ -119,7 +119,7 @@ class HomePage extends React.Component {
 														setWaitingTime={this.setWaitingTime}
 													/>
 													<div className={this.state.loadingDiv}>Please wait while we process your data...</div>
-													<a href={require("../assets/DummyCSV/example_csv.csv")}>Example CSV file</a>
+													<a href={require("../assets/Sample File.csv")}>Example CSV file</a>
 												</div>
 
 											</div>
