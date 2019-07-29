@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c10de81a.chunk.css",
+    "main.js": "/static/js/main.9a1d2526.chunk.js",
+    "main.js.map": "/static/js/main.9a1d2526.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
+    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
+    "static/js/2.a75593e8.chunk.js": "/static/js/2.a75593e8.chunk.js",
+    "static/js/2.a75593e8.chunk.js.map": "/static/js/2.a75593e8.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.eaddc3d8e34e6df7e5ccaf710e61324f.js": "/precache-manifest.eaddc3d8e34e6df7e5ccaf710e61324f.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.c10de81a.chunk.css.map": "/static/css/main.c10de81a.chunk.css.map",
+    "static/media/homePage.module.css": "/static/media/Asset 6.09b78f84.png",
+    "static/media/taskPage.css": "/static/media/Search.2.01210c4b.png",
+    "static/media/Asset1.png": "/static/media/Asset1.bff1a327.png",
+    "static/media/Asset2.png": "/static/media/Asset2.4537b9fb.png",
+    "static/media/Distinguishgroups.png": "/static/media/Distinguishgroups.6c7ab240.png",
+    "static/media/Help Icon.png": "/static/media/Help Icon.7a22539e.png",
+    "static/media/Search.png": "/static/media/Search.d0912c15.png",
+    "static/media/webtool.css": "/static/media/home.b902a75a.png",
+    "static/media/adult-chart-diagram-1181346.jpg": "/static/media/adult-chart-diagram-1181346.c74cd702.jpg",
+    "static/media/annie-spratt-QckxruozjRg-unsplash.jpg": "/static/media/annie-spratt-QckxruozjRg-unsplash.cc1f089e.jpg",
+    "static/media/brainstorming-collaborate-collaboration-1204649.jpg": "/static/media/brainstorming-collaborate-collaboration-1204649.3224ae5e.jpg",
+    "static/media/brainstorming-colleagues-communication-1374363.jpg": "/static/media/brainstorming-colleagues-communication-1374363.d4c21e1e.jpg",
+    "static/media/circle-bg.png": "/static/media/circle-bg.99a131f2.png",
+    "static/media/error-11.png": "/static/media/error-11.dafa03f6.png",
+    "static/media/example_csv.csv": "/static/media/example_csv.5015fec9.csv",
+    "static/media/headway-jfR5wu2hMI0-unsplash.jpg": "/static/media/headway-jfR5wu2hMI0-unsplash.b4208b0c.jpg",
+    "static/media/you-x-ventures-Oalh2MojUuk-unsplash.jpg": "/static/media/you-x-ventures-Oalh2MojUuk-unsplash.53877578.jpg"
+  }
+}
