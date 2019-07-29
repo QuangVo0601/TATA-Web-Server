@@ -106,7 +106,6 @@ class csvReader extends React.Component {
                 <label for="csv-id">
                     {this.state.buttonText}
                 </label>
-
             </div>
         )
     }
