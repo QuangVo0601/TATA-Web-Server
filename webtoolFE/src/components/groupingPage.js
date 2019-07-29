@@ -1,4 +1,7 @@
 import React from "react";
+import {
+    withRouter
+  } from 'react-router-dom'
 import "../styles/tata.css";
 import Footer from './botNav';
 import axios from 'axios'; // to send data to back end
@@ -10,6 +13,7 @@ class GroupingPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            blur: 'flex-container3',
             // this to send back
             groupLists: [],
             // For modal progess bar handle
@@ -227,8 +231,11 @@ class GroupingPage extends React.Component {
     }
     // loading from grouping to batch
     toggleModalPopup() {
-        this.setState({ showModal: (!this.state.showModal)})
-        
+        this.setState({ showModal: (!this.state.showModal)},(()=>{
+            if (this.state.showModal) {
+            this.setState({blur: 'grouping-blur'})
+        }
+        }))
     }
     //###############################################################################################
     // include this in continue button handler
@@ -236,7 +243,7 @@ class GroupingPage extends React.Component {
     startProgress() {
         this.toggleModalPopup()
         setInterval(() => {
-            this.setState({ percent: this.state.percent += 3.33 })
+            this.setState({ percent: this.state.percent += 1.23 })
         }, 1000) 
     } 
     /*
@@ -287,8 +294,11 @@ class GroupingPage extends React.Component {
                 localStorage.setItem('x_corrected_pca', JSON.stringify(arr.data.x_corrected_pca))
                 localStorage.setItem('y_corrected_pca', JSON.stringify(arr.data.y_corrected_pca))
                 localStorage.setItem('group_names_list', JSON.stringify(arr.data.group_names_list))
+                
+                
+            }).then(()=>{
                 this.stopProgress()
-                this.props.history.push('/batchpage')
+                this.props.history.push('/batchpage') // auto route to batch page
             })
         }))
 
@@ -307,7 +317,7 @@ class GroupingPage extends React.Component {
 
                 <body>
                     <div id="wrapper3">
-                        <div className='flex-container3'>
+                        <div className={this.state.blur}>
                             <div id="content">
                                 <div id="nav3">
                                     <div id="logo">
@@ -597,4 +607,4 @@ class GroupingPage extends React.Component {
         );
     }
 }
-export default GroupingPage;
+export default withRouter(GroupingPage);

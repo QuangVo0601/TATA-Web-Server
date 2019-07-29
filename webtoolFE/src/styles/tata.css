@@ -314,21 +314,16 @@ span{
 	display:flex;
 	margin:0 auto;
 	height:1310px;
-	border: solid red 1px;
-	/* filter: blur(8px);
-	-webkit-filter: blur(8px);
-	z-index: -1; */
 }
 
-.flex-container3-blur{
+.grouping-blur{
 	width:768px;
 	display:flex;
 	margin:0 auto;
 	height:1310px;
 	filter: blur(8px);
-	-webkit-filter: blur(8px);
-	z-index: -1;
 }
+
 #wrapper3{
 	height:1500px;
 }
@@ -656,6 +651,14 @@ label.container{
 	margin:0 auto;
 	
 }
+.grouping-blur{
+	width:1280px;
+	height: 900px;
+	display:flex;
+	margin:0 auto;
+	filter: blur(8px);
+}
+
 	#wrapper3{
 		height:1077px;
 	}
@@ -699,6 +702,13 @@ label.container{
 	display:flex;
 	margin-bottom:60px;
 }
+ .grouping-blur {
+	width:1920px;
+	height:1080px;
+	display:flex;
+	margin-bottom:60px;
+	filter: blur(8px);
+ }
 	#wrapper3{
 		height:1344px;
 	}
