@@ -227,28 +227,38 @@ class GroupingPage extends React.Component {
     }
     // loading from grouping to batch
     toggleModalPopup() {
-        this.setState({ showModal: (!this.state.showModal) }, (() => {
-            if (this.state.showModal) {
-                this.setState({ divState: 'groupflex-section' })
-            }
-            else {
-                this.setState({ divState: 'groupflex-section-blur' })
-            }
-        }))
-
-        setTimeout(() => {
-            clearInterval(this.progress)
-        }, 29000)
+        this.setState({ showModal: (!this.state.showModal)})
+        
     }
-    progress = setInterval(() => {
-        this.setState({ percent: this.state.percent += 3.33 })
-    }, 1000)
-
+    //###############################################################################################
+    // include this in continue button handler
+    // interval will start on button click
+    startProgress() {
+        this.toggleModalPopup()
+        setInterval(() => {
+            this.setState({ percent: this.state.percent += 3.33 })
+        }, 1000) 
+    } 
+    /*
+    include this in your axios call then block
+    also route to another page using this.props.history.push('/somelink')
+    example:
+    axios.post('linl', datat).then(()=>{
+        this.stopProgress()
+        this.props.history.push('/somelink')
+    })
+    */
+    stopProgress= ()=>{
+        clearInterval(this.startProgress);
+        this.setState({percent:100.00})
+    }
+    //#################################################################################################
     // ----- End of toggle popup ----- //
 
     /*--------Quang's part, Phuong em don't delete this pls-------*/
     // handle "Continue" button, go to batchPage.js
     handleGroups = () => { 
+        this.startProgress()
         let arr = []
         let control = [this.state.groupName[0]] // index 0 is default to control grroup's name
         this.state.dndGroup['Control group'].forEach(item => {
@@ -277,8 +287,9 @@ class GroupingPage extends React.Component {
                 localStorage.setItem('x_corrected_pca', JSON.stringify(arr.data.x_corrected_pca))
                 localStorage.setItem('y_corrected_pca', JSON.stringify(arr.data.y_corrected_pca))
                 localStorage.setItem('group_names_list', JSON.stringify(arr.data.group_names_list))
+                this.stopProgress()
+                this.props.history.push('/batchpage')
             })
-            this.setState({ href: '/batchpage', percent: 100.00 })
         }))
 
     }
