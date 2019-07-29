@@ -315,20 +315,9 @@ span{
 	margin:0 auto;
 	height:1310px;
 	border: solid red 1px;
-	/* filter: blur(8px);
-	-webkit-filter: blur(8px);
-	z-index: -1; */
+	/* filter: blur(8px); */
 }
 
-.flex-container3-blur{
-	width:768px;
-	display:flex;
-	margin:0 auto;
-	height:1310px;
-	filter: blur(8px);
-	-webkit-filter: blur(8px);
-	z-index: -1;
-}
 #wrapper3{
 	height:1500px;
 }
