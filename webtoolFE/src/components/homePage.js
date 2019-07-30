@@ -17,7 +17,7 @@ class HomePage extends React.Component {
             { value: "FPKM", label: "FPKM" },
             { value: "TPM", label: "TPM" }],
             // to store selected unit option
-            selectedOption: "TPM",
+            selectedOption: "Select Unit",
             loadingDiv: "csv-reader",
         }
     }
@@ -33,7 +33,8 @@ class HomePage extends React.Component {
     
     // This method is used to store click option from dropbox
     selectedOption = (selected) => {
-        this.setState({ selectedOption: selected })
+		console.log(selected.value)
+        this.setState({ selectedOption: selected.value })
     }
     
     /* Functions go here */
@@ -112,10 +113,12 @@ class HomePage extends React.Component {
 														value={this.state.selectedOption}
 														onChange={this.selectedOption}
 														options={this.state.outputOptions}
+														placeholder={this.state.selectedOption}
 													/>
 												</div>
 												<div>
 													<CSVReader
+														selectedUnit = {this.state.selectedOption}
 														setWaitingTime={this.setWaitingTime}
 													/>
 													<div className={this.state.loadingDiv}>Please wait while we process your data...</div>
@@ -168,7 +171,7 @@ class HomePage extends React.Component {
 									</div>
 									
 									<ul className={styles.slides}>
-													<input type="radio" name={styles["radio-btn"]} id={styles["img-1"]}  checked />
+													<input type="radio" name="radio-btn" id={styles["img-1"]}  checked />
 													<li className={styles["slide-container"]}>
 														<div className={styles.slide}>
 															<img src={require('../assets/homePageImages/annie-spratt-QckxruozjRg-unsplash.jpg')} alt="LOGO" />
@@ -179,7 +182,7 @@ class HomePage extends React.Component {
 														</div>
 													</li>
 
-													<input type="radio" name={styles["radio-btn"]} id={styles["img-2"]} />
+													<input type="radio" name="radio-btn" id={styles["img-2"]} />
 													<li className={styles["slide-container"]}>
 														<div className={styles.slide}>
 														<img src={require('../assets/homePageImages/headway-jfR5wu2hMI0-unsplash.jpg')} alt="LOGO"/>
@@ -190,7 +193,7 @@ class HomePage extends React.Component {
 														</div>
 													</li>
 
-													<input type="radio" name={styles["radio-btn"]} id={styles["img-3"]} />
+													<input type="radio" name="radio-btn" id={styles["img-3"]} />
 													<li className={styles["slide-container"]}>
 														<div className={styles.slide}>
 														<img src={require('../assets/homePageImages/you-x-ventures-Oalh2MojUuk-unsplash.jpg')} alt="LOGO" />
@@ -201,7 +204,7 @@ class HomePage extends React.Component {
 														</div>
 													</li>
 
-													<input type="radio" name={styles["radio-btn"]} id={styles["img-4"]} />
+													<input type="radio" name="radio-btn" id={styles["img-4"]} />
 													<li className={styles["slide-container"]}>
 														<div className={styles.slide}>
 														<img src={require('../assets/homePageImages/adult-chart-diagram-1181346.jpg')} alt="LOGO"/>
@@ -212,7 +215,7 @@ class HomePage extends React.Component {
 														</div>
 													</li>
 
-													<input type="radio" name={styles["radio-btn"]} id={styles["img-5"]}/>
+													<input type="radio" name="radio-btn" id={styles["img-5"]}/>
 													<li className={styles["slide-container"]}>
 														<div className={styles.slide}>
 														<img src={require('../assets/homePageImages/brainstorming-collaborate-collaboration-1204649.jpg')} alt="LOGO"/>
@@ -223,7 +226,7 @@ class HomePage extends React.Component {
 														</div>
 													</li>
 
-													<input type="radio" name={styles["radio-btn"]} id={styles["img-6"]} />
+													<input type="radio" name="radio-btn" id={styles["img-6"]} />
 													<li className={styles["slide-container"]}>
 														<div className={styles.slide}>
 														<img src={require('../assets/homePageImages/brainstorming-colleagues-communication-1374363.jpg')} alt="LOGO"/>
