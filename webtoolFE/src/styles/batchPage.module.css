@@ -228,6 +228,11 @@ background-color: #F4F4F4;
 	font-size:14.2px;
 }
 
+.helpcontent_batch i{
+	font-style: italic;
+	font-size: 12px;
+}
+
 .drophelp:hover .helpcontent_batch {
 	display: block;
 
