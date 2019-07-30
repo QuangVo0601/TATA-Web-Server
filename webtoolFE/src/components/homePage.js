@@ -166,7 +166,7 @@ class HomePage extends React.Component {
 							<div className={styles["the-team"]}>
 								<div className={styles["team-inside"]}>
 									<div className={styles.team}>THE TEAM</div>
-									<p className={styles["team-p"]}>Lorem ipsum dolor sit amet, sectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ercitation ullamco Lorepsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.. incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+									<p className={styles["team-p"]}>The students below were recruited from the departments of Math, Biology, and Computer Science as well as the School of Art.  Each summer the project has more than 80 highly qualified applicants with a rigorous application process.  Profiles describing the student and mentors can be seen by clicking on the individual picture.</p>
 								</div>
 
 								<ul className={styles.slides}>
