@@ -316,6 +316,29 @@ class GroupingPage extends React.Component {
                 </head>
 
                 <body>
+                <div class="stepsContainer-group">
+						
+                        <div id="step1-group">
+                            <dt>1. Select Number of Groups</dt>
+                            <dd>Don’t count GTEx in number of groups total and name groups</dd>
+                        </div>
+                        
+                        <div id="step2-group">
+                            <dt>2. Drag Samples</dt>
+                            <dd>Drag samples into created groups</dd>
+                        </div>
+                        
+      
+                        <div id="step3-group">
+                            <dt>3. Optional: Create GTEx</dt>
+                            <dd>Use an unique name for GTEx group </dd>
+                        </div>
+                   <div id="step4-group">
+                            <dt>4. Continue</dt>
+                            <dd>Double check  samples in groups before continuing</dd>
+                        
+                    </div>
+     </div>
                     <div id="wrapper3">
                         <div className={this.state.blur}>
                             <div id="content">
