@@ -212,7 +212,7 @@ class AlgorithmPage extends React.Component {
                                     <div id="slider">
                                         <div className="drophelp5">
                                             <h2 className="parameters_title">False Discovery Rate Tunning Parameters <img src={require('../assets/Help Icon.png')} className="helpicon5" alt="help" /></h2>
-                                            <div className="helpcontent5 TPC"> Outliers samples may be an expected outcome if your data is derived from diseased groups or from different tissue types. If your data is derived from multiple batches there should be shifts across all chromosomes. Batch correction option is recommended.</div>
+                                            <div className="helpcontent5 TPC"> The false discovery rate refers to a statistical methodology to determine the likelihood that a type 1 error will occur.  This is also known as a “false positive”.  Setting FDR low will results in low type 1 errors but this may also increase likelihood of “false negatives” or type 2 errors.</div>
                                         </div>
                                         <div id="falseDiscoverySlider">
                                             <input type="range" min="0" max="1" value={this.state.falseDiscoveryRate_value} step="0.001" className="slider" id="myRange" onChange={this.handleChangeFalseDiscovery} />
@@ -221,7 +221,7 @@ class AlgorithmPage extends React.Component {
 
                                         <div className="drophelp5">
                                             <h2 className="parameters_title">Bonferroni Alpha Tunning Parameters <img src={require('../assets/Help Icon.png')} className="helpicon5" alt="help" /></h2>
-                                            <div className="helpcontent5 TPC">Based on tissue source and gender. Outliers samples may be an expected outcome if your data is derived from diseased groups or from different tissue types. </div>
+                                            <div className="helpcontent5 TPC">The alpha value is analogous to the p-value in a t-test.  Bonferroni correction is applied to evaluate significance based on the large size of a data set.  Smaller values of alpha will decrease type 1 error, however this may also increase the likelihood of type 2 errors.  Significance will be determined as p values &#60; alpha/number of gene IDs.</div>
                                         </div>
                                         <div id="bonferroniSlider">
                                             <input type="range" min="0.001" max="1" value={this.state.bonferroniAlpha_value} step="0.001" className="slider" id="myRange2" onChange={this.handleChangeBonferroni} />
