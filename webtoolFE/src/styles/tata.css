@@ -52,6 +52,117 @@ footer, header, hgroup, menu, nav, section {
   background: #7E7E7E; 
 }
 /*end scroll bar style*/
+ 
+/*  Direction code */
+.stepsContainer-group {
+	display: flex;
+	margin: 20px 20px 20px;
+	width: 500px; 
+}
+
+.stepsContainer-group dt {
+	color: #114B5F;
+   font-family: 'Oswald', sans-serif;
+   text-transform: uppercase;
+   font-size: 10px;
+   font-weight: 500;
+}
+.stepsContainer-group dd {
+	color: #114B5F;
+   font-family: 'Montserrat', sans-serif;
+   font-weight: 400;
+   font-size: 6pt;
+}
+#step1-group {
+	border-right: solid .5px #9E9E9E;
+	width: 135px;
+	margin-right: 10px;
+}
+#step2-group {
+	width: 80px;
+		border-right: solid .5px #9E9E9E;
+	margin-right: 10px;
+	
+
+}
+#step3-group {
+	border-right: solid .5px #9E9E9E;
+	width: 110px;
+	margin-right: 10px;
+	
+}
+
+#step4-group {
+	width: 110px;
+	margin-right: 0px;
+	
+}
+@media only screen and (min-width: 1270px){
+		.stepsContainer-group {
+		width: 800px; 
+	}
+
+	.stepsContainer-group dt {
+		font-size: 15px;
+	}
+
+	.stepsContainer-group dd {
+		font-size: 9pt;
+	}
+
+
+	#step1-group {
+		width: 200px;
+	}
+
+	#step2-group {
+		width: 125px;
+		
+	}
+	#step3-group {
+		width: 165px;
+		
+	}
+
+	#step4-group {
+		width: 163px;
+		
+	}
+}
+@media only screen and (min-width: 1850px){
+		.stepsContainer-group {
+		width: 1200px; 
+	}
+
+	.stepsContainer-group dt {
+		font-size: 20px;
+	}
+
+	.stepsContainer-group dd {
+		font-size: 15pt;
+	}
+
+
+	#step1-group {
+		width: 325px;
+	}
+
+	#step2-group {
+		width: 195px;
+		
+	}
+	#step3-group {
+		width: 226px;
+		
+	}
+
+	#step4-group {
+		width: 305px;
+		
+	}
+}
+/* End of direction */
+
 /*nav code*/
 #nav{
 	width:165px;
