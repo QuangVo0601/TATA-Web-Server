@@ -17,6 +17,13 @@ class csvReader extends React.Component {
         }
     }
     handleFileRead = () => {
+
+        // get selected unit from homePage.js
+        let selectedUnit = this.props.selectedUnit
+
+        // console.log(selectedUnit)
+
+        // content from uploaded csv
         const content = fileReader.result;
         //console.log(content);
         // console.log(option);
@@ -25,7 +32,8 @@ class csvReader extends React.Component {
         //axios call (get in header) to send to back end
         axios.post('http://127.0.0.1:8000/backend/list', {
             //axios.post('http://oscar19.orc.gmu.edu/backend/list', {
-            csvFile: content
+            csvFile: content,
+            selectedUnit: selectedUnit
         }).then((arr) => { // to receive data from back end 
             localStorage.setItem('x_dge',JSON.stringify(arr.data.x_dge))
             localStorage.setItem('y_dge',JSON.stringify(arr.data.y_dge))
