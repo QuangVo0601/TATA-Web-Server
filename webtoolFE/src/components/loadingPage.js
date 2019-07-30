@@ -23,7 +23,7 @@ class LoadingPage extends Component {
 
                     <div className="loading-jobcode">JOB CODE:<span>1A253M4</span></div>
                     <div className="loading-etaInfo">
-                        <span className="percentage">47%</span>
+                        <span className="percentage">{this.props.percent}%</span>
                     </div>
                     <div className="node-loader">
                         <span className="node"></span>

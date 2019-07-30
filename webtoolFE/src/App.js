@@ -65,13 +65,6 @@ class App extends React.Component {
           )
           }
         />
-        <Route exact path="/dummydnd"
-          render={() => (
-            <Dnd
-            />
-          )
-          }
-        />
         <Route exact path="/error"
           render={() => (
             <Error
@@ -79,13 +72,13 @@ class App extends React.Component {
           )
           }
         />
-        <Route exact path="/loading"
+        {/* <Route exact path="/loading"
           render={() => (
             <Loading
             />
           )
           }
-        /> 
+        />  */}
         <Route exact path="/resultpage"
           render={() => (
             <ResultPage
