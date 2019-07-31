@@ -60,24 +60,26 @@ footer, header, hgroup, menu, nav, section {
 	width: 500px; 
 }
 
-.stepsContainer-group dt {
+.direction-dt {
 	color: #114B5F;
    font-family: 'Oswald', sans-serif;
    text-transform: uppercase;
    font-size: 10px;
    font-weight: 500;
 }
-.stepsContainer-group dd {
+.direction-dd {
 	color: #114B5F;
    font-family: 'Montserrat', sans-serif;
    font-weight: 400;
    font-size: 6pt;
 }
+
 #step1-group {
 	border-right: solid .5px #9E9E9E;
 	width: 135px;
 	margin-right: 10px;
 }
+
 #step2-group {
 	width: 80px;
 		border-right: solid .5px #9E9E9E;

@@ -228,11 +228,11 @@ footer, header, hgroup, menu, nav, section {
     width: 300px;
   }
 
-  .csv-reader {
+  .csv-reader-none {
     display: None;
   }
 
-  .can-click {
+  .can-click-to-validation {
     display: block;
   }
 

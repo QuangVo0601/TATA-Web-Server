@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import { Route } from 'react-router-dom';
-import WebTool from './components/webtool';
 import HomePage from './components/homePage';
 import ValidationPage from './components/validationPage'
 import TaskPage from './components/taskPage'
@@ -11,6 +10,7 @@ import AlgorithmPage from './components/algorithmPage'
 import Error from './components/errorPage'
 import ResultPage from './components/resultPage'
 import LoadModal from './components/loadingModal'
+//import Contribute from './components/Contributions'
 
 class App extends React.Component {
   constructor(props) {
@@ -23,9 +23,10 @@ class App extends React.Component {
     return (
       // Render and route specific js file depend on given exact path
       <div className="app-container">
-        <Route exact path="/"
+        <Route exact path="/" //need to be changed to Webtool later
           render={() => (
-            <WebTool />
+            <HomePage
+            />
           )
           }
         />
@@ -92,13 +93,14 @@ class App extends React.Component {
           )
           }
         />
-        <Route exact path="/homepage" //need to be changed to Webtool later
+
+        {/* <Route exact path="/contributions" //need to be changed to Webtool later
           render={() => (
-            <HomePage
+            <Contribute
             />
           )
           }
-        />        
+        /> */}
       </div>
     )
   }

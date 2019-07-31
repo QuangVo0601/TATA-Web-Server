@@ -153,7 +153,9 @@ class BatchPage extends React.Component {
                                     <div id={styles["batch_corrected_section"]} >
                                         <div className={styles["drophelp"]}>
                                             <div className={styles["batch_title"]}>Corrected Data <img src={require('../assets/Help Icon.png')} className={styles.helpicon} alt="help" /></div>
-                                            <div className={styles["helpcontent_batch"]}> Add content here.</div>
+                                            <div className={styles["helpcontent_batch"]}>Data correction is applied to remove the variance introduced by non-biological features such as technical variation during sequencing runs. The data correction is done using the R function ASCA Removal of Systematic Noise for sequencing data (ARSyNseq) that is implemented in the NOIseq package.  Decisions on the use of batch correction can be made based on the resulting PCA.  If there is significant clustering after batch correction based on biological features such as disease, then the user may elect to use this correction.
+                                                <br/><br/> <i>M. Nueda, A. Conesa, and A. Ferrer. ARSyN: a method for the identification and removal of systematic noise in multifactorial time-course microarray experiments. Biostatistics, 13(3):553–566, 2012.</i>
+                                            </div>
                                         </div>
                                         <div className={styles["corrected-graphsize"]}>
                                             <Plot
@@ -190,7 +192,7 @@ class BatchPage extends React.Component {
                                     <div id={styles["batch_corrected_section"]} >
                                         <div className={styles["drophelp"]}>
                                             <div className={styles["batch_title"]}>Uncorrected Data <img src={require('../assets/Help Icon.png')} className={styles.helpicon} alt="help" /></div>
-                                            <div className={styles["helpcontent_batch"]}>Add content here.</div>
+                                            <div className={styles["helpcontent_batch"]}>This PCA is derived from the raw data after grouping.  Only genes found in all data sets will be used moving forward.  If you have elected to add a GTEx group to your analysis then there may be unexpected variability due to non-biological features.  Please evaluate the uncorrected PCA for expected clustering.  If the clustering is primarily due to a biological feature such as tissue type then you may decide to move forward with the uncorrected data.  If you have already provided data corrected for a batch effect or if the data is from a single sequencing run, then batch correction may introduce variance.</div>
                                         </div>
                                         <div className={styles["corrected-graphsize"]}>
                                             <Plot

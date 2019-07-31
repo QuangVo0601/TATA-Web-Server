@@ -143,7 +143,7 @@ class TaskPage extends React.Component {
 										{/*Box 4*/}
 										<div className="box">
 											<div className="content">
-                                                <div class="task-img"><img id="white4" src={require('../assets/taskPageImages/Asset1.png')}/> </div>
+                                                <div className="task-img"><img id="white4" src={require('../assets/taskPageImages/Asset1.png')}/> </div>
                                                 <h3>Coming <br/> Soon</h3>
 												<p>We are devloping new algorithms to analyze your data!  </p>
 											</div>
