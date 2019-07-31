@@ -10,7 +10,7 @@ import AlgorithmPage from './components/algorithmPage'
 import Error from './components/errorPage'
 import ResultPage from './components/resultPage'
 import LoadModal from './components/loadingModal'
-//import Contribute from './components/Contributions'
+import Contribute from './components/Contributions'
 
 class App extends React.Component {
   constructor(props) {
@@ -94,13 +94,13 @@ class App extends React.Component {
           }
         />
 
-        {/* <Route exact path="/contributions" //need to be changed to Webtool later
+        <Route exact path="/contributions" //need to be changed to Webtool later
           render={() => (
             <Contribute
             />
           )
           }
-        /> */}
+        />
       </div>
     )
   }
