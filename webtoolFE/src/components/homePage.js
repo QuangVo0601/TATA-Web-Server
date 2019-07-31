@@ -71,6 +71,7 @@ class HomePage extends React.Component {
 
 										<img src={require('../assets/homePageImages/Group 257.png')} alt="LOGO" width="77px" height="74px" href="/home" />
 										<nav>
+											<a href="/Contribute"> Contributors </a>
 											<a href="/FAQ"> FAQ </a>
 											<a href="#about"> About us </a>
 										</nav>
