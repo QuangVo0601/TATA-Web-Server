@@ -468,7 +468,7 @@ class GroupingPage extends React.Component {
                                                         value={this.state.controlgroupname}
                                                         onChange={this.handleControlGroupName}
                                                     />
-                                                    <label className="container">Null Hypothesis</label>
+                                                    <label className="nullhyp-container">Null Hypothesis</label>
                                                 </form>
                                             </div>
                                             <div

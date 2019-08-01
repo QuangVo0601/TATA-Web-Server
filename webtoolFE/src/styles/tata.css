@@ -645,7 +645,8 @@ form {
 }
 
 .signIn{
-	display: block;
+	display: flex;
+	justify-content: space-between;
 	border-bottom: 2px solid #CCCCCC;
 	border-radius: 1px;
 	width: 92%;
@@ -654,18 +655,18 @@ form {
 }
 
 .groupingInput{
-	outline: none !important;
+	/* outline: none !important; */
 	border: none;
 	font-family: 'Montserrat', sans-serif;
   font-weight:700;
 	color:#114B5F;
-	text-align: left;
+	/* text-align: left; */
 	font-size: 15px;
-  margin-left: 3px;
-  padding-right: 60px
+  /* margin-left: 3px; */
+  /* /padding-right: 60px */
 }
 
-label.container{
+.nullhyp-container{
   color:#CCCCCC;
   font-weight:400;
   font-size: 12px;
