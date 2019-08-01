@@ -365,20 +365,20 @@ class Contributions extends React.Component {
                                 {/* <!----------------- 12th item --> */}
                                 <div className="o-grid__item c-gallery__item perfundo">
                                     <a className="perfundo__link" href="#perfundo-img12_2">
-                                        <img className="headshot" src={require('../assets/2019_team/Jorge_Fernandez_Davila_2018_H.jpg')} alt="Jorge_Fernandez" />
+                                        <img className="headshot" src={require('../assets/2019_team/yemeen_ayub_2019_h.jpg')} alt="Yemeen_Ayub" />
                                     </a>
                                     <div id="perfundo-img12_2" className="perfundo__overlay fadeIn qa-overlay-img3">
                                         <figure className="perfundo__content perfundo__figure">
-                                            <img src={require('../assets/2019_team/Jorge_Fernandez_Davila_2018_H.jpg')} alt="Jorge_Fernandez" />
+                                            <img src={require('../assets/2019_team/yemeen_ayub_2019_h.jpg')} alt="Yemeen_Ayub" />
                                             <div className="perfundo__image">
                                                 <div className="popup">
                                                     <div className="leftContent">
-                                                        <div className="name">Jorge Fernandez Davila</div>
+                                                        <div className="name">Yemeen Ayub</div>
                                                         <div className="postion">Graphic Designer</div>
                                                         <div className="contribution-line"></div>
                                                         <div className="bio">Something here</div>
                                                     </div>
-                                                    <div className="rightPhoto" id="Jorge_Fernandez"></div>
+                                                    <div className="rightPhoto" id="Yemeen_Ayub"></div>
                                                 </div>
                                             </div>
                                         </figure>

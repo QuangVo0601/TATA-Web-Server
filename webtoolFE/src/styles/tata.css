@@ -639,23 +639,22 @@ span.grippy::after {
 
 form {
 	text-align: left;
-
 	width: 310px;
 	border-radius: 5px;
 
 }
 
 .signIn{
+	display: block;
 	border-bottom: 2px solid #CCCCCC;
 	border-radius: 1px;
 	width: 92%;
 		z-index: 1;
 		opacity: 3;
 }
-input .groupingInput{
+
+.groupingInput{
 	outline: none !important;
-}
-input .groupingInput{
 	border: none;
 	font-family: 'Montserrat', sans-serif;
   font-weight:700;
