@@ -7,7 +7,7 @@ function topNav() {
     return (
         <div className="topnav">
             <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700|Oswald:400,500&display=swap" rel="stylesheet" />
-            <img src={require("../assets/Logo.png")} alt="LOGO" width='77px' height='74px'/>
+            <img src={require("../assets/Group 257.png")} alt="LOGO" width='77px' />
             <nav>
                 <a href="/FAQ"> FAQ </a>
                 <a href="#about"> About us </a>

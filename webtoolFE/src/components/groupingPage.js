@@ -154,9 +154,6 @@ class GroupingPage extends React.Component {
             this.setState({ dndGroup: newObject })  // added
             let obj = {}
             this.state.dndGroup['samples'].map(item => {
-                // added for ui debugged purpose
-                // event.target.classList.remove('sample-true')
-                // event.target.classList.add('sample-false')
                 obj[`${item}`] = false
             })
             this.setState({ dndSelectedValue: obj })
@@ -215,7 +212,6 @@ class GroupingPage extends React.Component {
     // -------------- End of update groupname -------------------// 
 
     // Handle className change for styling when samples is click
-    // FIX: UI bug need fixed. sample-false css get override
     handleDnDSelect = (event, sample) => {
         console.log(event.target.classList)
         let obj = this.state.dndSelectedValue
@@ -315,7 +311,7 @@ class GroupingPage extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="test-height">
                 <head>
                     <meta charset="UTF-8" />
                     <title>768 Nav &amp; Footer</title>
@@ -323,35 +319,13 @@ class GroupingPage extends React.Component {
                 </head>
 
                 <body>
-                <div className="stepsContainer-group">
-						
-                        <div id="step1-group">
-                            <dt className='direction-dt'>1. Select Number of Groups</dt>
-                            <dd className='direction-dd'>Don’t count GTEx in number of groups total and name groups</dd>
-                        </div>
-                        
-                        <div id="step2-group">
-                            <dt className='direction-dt'>2. Drag Samples</dt>
-                            <dd className='direction-dd'>Drag samples into created groups</dd>
-                        </div>
-                        
-      
-                        <div id="step3-group">
-                            <dt className='direction-dt'>3. Optional: Create GTEx</dt>
-                            <dd className='direction-dd'>Use an unique name for GTEx group </dd>
-                        </div>
-                   <div id="step4-group">
-                            <dt className='direction-dt'>4. Continue</dt>
-                            <dd className='direction-dd'>Double check  samples in groups before continuing</dd>
-                        
-                    </div>
-     </div>
+
                     <div id="wrapper3">
                         <div className={this.state.blur}>
                             <div id="content">
                                 <div id="nav3">
                                     <div id="logo">
-                                        <img src={require('../assets/Group 257.png')} width="46px" height="46px" alt="logo" />
+                                        <img src={require('../assets/Group 257.png')} width="46px"  alt="logo" />
                                     </div>
                                     {/* <!--end of log--> */}
 
@@ -397,6 +371,32 @@ class GroupingPage extends React.Component {
                                 {/* <!--end of nav--> */}
 
                             </div>
+                            <div className="grouping-rightsection">
+                                <div className="stepsContainer-group">
+						
+                        <div id="step1-group">
+                            <dt className='direction-dt'>1. Select Number of Groups</dt>
+                            <dd className='direction-dd'>Don’t count GTEx in number of groups total and name groups</dd>
+                        </div>
+                        
+                        <div id="step2-group">
+                            <dt className='direction-dt'>2. Drag Samples</dt>
+                            <dd className='direction-dd'>Drag samples into created groups</dd>
+                        </div>
+                        
+      
+                        <div id="step3-group">
+                            <dt className='direction-dt'>3. Optional: Create GTEx</dt>
+                            <dd className='direction-dd'>Use an unique name for GTEx group </dd>
+                        </div>
+                   <div id="step4-group">
+                            <dt className='direction-dt'>4. Continue</dt>
+                            <dd className='direction-dd'>Double check  samples in groups before continuing</dd>
+                        
+                    </div>
+     </div>
+                        
+                            
                             <div id='groupflex-section'>
                                 {/* <!-- samples section --> */}
                                 <div id="sample-section">
@@ -614,24 +614,23 @@ class GroupingPage extends React.Component {
                                     {/* <!--............................... --> */}
 
                                     <div className="nav_container3">
-                                        {/* <button type="Continue" className="buttontask_cont" onClick={this.toggleModalPopup.bind(this)}>Continue</button> */}
                                         <button type="Continue" className="buttontask_cont" onClick={this.handleGroups}>Continue</button>
-                                        {/* <a href={this.state.href} style={{ 'text-decoration': 'none' }}>
-                                            
-                                        </a> */}
                                     </div>
                                 </div>
 
                                 {/* <!-- end of group bottom section --> */}
                             </div>
                         </div>
+                        
+                        </div> 
+                        <Footer />
+                        {/*  Don't change the postition of this, app will break */}
                         {this.state.showModal ?
                             <Loading
                                 percent={this.state.percent}
                             />
                             : null
                         }
-                        <Footer />
                     </div>
                 </body>
             </div>

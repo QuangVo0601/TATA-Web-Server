@@ -47,10 +47,10 @@ class LoadingPage extends Component {
                     </div>
                     <div className="loading-jobOptions">
                         <div className="loading-email">
-                            <div className="emailContent">
+                            <div className="loading-emailContent">
                                 Make sure to remember your job code or input your email for a reminder when the job is done.
                                 <input type="email" className="emailInput" name="emailAddress" placeholder="Email..." />
-                                <input type="submit" className="submitButton"/>
+                                <button type="submit" className="submitButton">Submit</button>
                             </div>
                         </div>
 

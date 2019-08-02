@@ -59,7 +59,7 @@ class ResultPage extends React.Component {
                             <nav>
                                 <div id="sidenav-content">
                                     <div id="tatalogo">
-                                        <img src={require('../assets/Group 257.png')} alt="tatalogo" width="48px" height="49px" />
+                                        <img src={require('../assets/Group 257.png')} alt="tatalogo" width="48px"  />
                                     </div>
                                     <div id="graph-selection">
 

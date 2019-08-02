@@ -1,5 +1,9 @@
 import React from 'react';
 import '../styles/Contributions.css';
+import {
+    withRouter
+  } from 'react-router-dom'
+import BotNav from '../components/botNav'
 
 class Contributions extends React.Component {
     constructor(props) {
@@ -8,6 +12,9 @@ class Contributions extends React.Component {
         }
     }
 
+    handleAbout = () => {
+        this.props.history.push('/#about')
+    }
     render() {
         return (
             <div>
@@ -23,10 +30,10 @@ class Contributions extends React.Component {
                         <div className="skewed-bg-contribution">
                             <div className="contributors-page content">
                                 <div className="topnav-contribution-contribution">
-                                    <img id="home-button" src={require('../assets/Group 257.png')} alt="LOGO" width="77px" height="74px" href="/home" />
+                                    <img id="home-button" src={require('../assets/White_TATA_Logo.png')} alt="LOGO" width="109px" height="68.67px" href="/home" />
                                     <nav>
                                         <a className="nav_contributor" href="/contributors">Contributors</a>
-                                        <a className="nav_contributor" href="#about"> About us </a>
+                                        <a className="nav_contributor" onClick={this.handleAbout}> About us </a>
                                         <a className="nav_contributor" href="/FAQ"> FAQ </a>
                                     </nav>
                                 </div>
@@ -641,10 +648,10 @@ class Contributions extends React.Component {
                         </div>
                         {/* <!---------------------------------------------------------- End of 2018 Gallery item --> */}
                     </div>
-
                 </body>
+                <BotNav/>
             </div>
         )
     }
 }
-export default Contributions;
+export default withRouter(Contributions);

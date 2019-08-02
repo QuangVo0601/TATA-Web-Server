@@ -66,3 +66,16 @@ input[type="file"] + label {
   .csv-des {
       color: #BCBEC0;
   }
+
+  @media only screen and (min-width: 1850px) {
+    .csv-container {
+      height: 30px;
+      display: flex;
+      justify-content: space-between;
+      padding: 7px;
+      background-color: #FFFFFF;
+      border-radius: 9px;
+      align-items: baseline;
+    }
+  
+  }

@@ -69,13 +69,12 @@ class HomePage extends React.Component {
 								<div className={styles["container-img"]}>
 									<div className={styles.topnav}>
 
-										<img src={require('../assets/homePageImages/Group 257.png')} alt="LOGO" width="77px" height="74px" href="/home" />
+										<img src={require('../assets/Group 257.png')} alt="LOGO" width="77px"  href="/home" />
 										<nav>
 											<a href="/contributions"> Contributors </a>
 											<a href="/FAQ"> FAQ </a>
 											<a href="#about"> About us </a>
 										</nav>
-
 									</div>
 
 									<div className={styles.container} id="home">
@@ -108,8 +107,9 @@ class HomePage extends React.Component {
 										<div className={styles["right-col"]}>
 											<h3 className={styles["new-project"]}>NEW PROJECT</h3>
 											<div className={styles.input}>
-												<div className={styles.select}>
+												<div className={styles["select"]}>
 													<Select
+														className={styles["homepage-select"]}
 														value={this.state.selectedOption}
 														onChange={this.selectedOption}
 														options={this.state.outputOptions}
@@ -122,22 +122,25 @@ class HomePage extends React.Component {
 														setWaitingTime={this.setWaitingTime}
 													/>
 													<div className={styles[this.state.loadingDiv]}>Please wait while we process your data...</div>
-													<a href={require("../assets/Sample File.csv")}>Example CSV file</a>
+													<div className={styles["example-csvfile"]}><a href={require("../assets/Sample File.csv")}>Example CSV file</a></div>
 												</div>
 
 											</div>
-											<h3 className={styles["code-search"]}>JOB CODE SEARCH</h3>
-											<div className={styles["codeinput-container"]}>
-												<div className={styles["codeinput-box"]}>
-													<input
-														className={styles["code-input"]}
-														type={styles['text']}
-														placeholder='Job Code ...'
-													/>
-													<button className={styles["jobcode-button"]}>Submit</button>
-												</div>
+											<div className={styles["homepage-jobcode"]}>
+												<h3 className={styles["code-search"]}>JOB CODE SEARCH</h3>
+												<div className={styles["codeinput-container"]}>
+													<div className={styles["codeinput-box"]}>
+														<input
+															className={styles["code-input"]}
+															type={styles['text']}
+															placeholder='Job Code ...'
+														/>
+														<button className={styles["jobcode-button"]}>Submit</button>
+													</div>
 
+												</div>
 											</div>
+
 										</div>
 									</div>
 									{/* <!-- End of "container" --> */}
@@ -149,18 +152,10 @@ class HomePage extends React.Component {
 							<div className={styles["about-content"]} id="about">
 								<div className={styles["about-inside"]}>
 									<div className={styles["about-header"]}>WHAT IS TATA?</div>
-									<div className={styles["about-para"]}>The Tool for the Analysis of Transaction
-									factor Associations is designed for the analysis of transcription
-									factor to target gene associations in RNA-seq data. The association database has been mine from
-									publicly available data and is freely available for download here. TATA runs a preliminary validation on
-									uploaded data and compares it to tissue matched control data derived from the GTEx database. The
-									user then has the option to choose from a variety of algorithms aimed at identifying significant
-									differences within samples groups derived from the user’s data. TATA also allows the user to build
-									samples groups from the GTEx data set for use in their analysis. Finally, TATA provides multiple
-									publication quality and user friendly graphical output plots for the exploration of transcription factor regulatory networks.
+									<div className={styles["about-para"]}>
+									TATA is a collaborative project funded by the George Mason University Office of Student Scholarship, Creative Activities, and Research (OSCAR).  OSCAR targets undergraduate students and every summer the office funds an 8 member multidisciplinary collaboration between departments.  TATA was started in the summer of 2018 and continued in 2019.  Undergraduate students with background in Biology, Bioengineering, Computer Science, Graphic Design, and Mathematics came together to create this tool.  Faculty mentors guided the project while the students carried out the goals.  The unique combination of talents from a number of departments across campus over a two year period resulted in an elegant design for this novel tool.
 											</div>
 								</div>
-								<img id={styles["circle-bg"]} src={require('../assets/homePageImages/circle-bg.png')} alt="circle" />
 							</div>
 
 
@@ -172,6 +167,7 @@ class HomePage extends React.Component {
 
 								<ul className={styles.slides}>
 									{/*dont use this 'img-0', but don't delete it either*/}
+									{/* Has to identical with 1 */}
 									<input type="radio" id={styles["img-0"]} checked />
 									<li className={styles["slide-container"]}>
 										<div className={styles.slide}>
@@ -183,7 +179,7 @@ class HomePage extends React.Component {
 										</div>
 									</li>
 
-									<input type="radio" name="radio-btn" id={styles["img-1"]}  />
+									<input type="radio" name="radio-btn" id={styles["img-1"]} />
 									<li className={styles["slide-container"]}>
 										<div className={styles.slide}>
 											<img src={require('../assets/homePageImages/annie-spratt-QckxruozjRg-unsplash.jpg')} alt="LOGO" />

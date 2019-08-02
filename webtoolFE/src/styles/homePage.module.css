@@ -166,14 +166,14 @@ footer, header, hgroup, menu, nav, section {
 	display: flex;
 	margin-top: 20px;
 	justify-content: space-between;
-	width: 395px; 
+	width: 310px; 
 }
 
 .stepsContainer dt {
 	 color: #114B5F;
     font-family: 'Oswald', sans-serif;
 	text-transform: uppercase;
-    font-size: 1em;
+    font-size: 12px;
     font-weight: 500;
 }
 
@@ -181,7 +181,7 @@ footer, header, hgroup, menu, nav, section {
 	 color: #114B5F;
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
-    font-size: 8pt;
+    font-size: 8px;
 }
 
 .stepsContainer dd a {
@@ -195,14 +195,18 @@ footer, header, hgroup, menu, nav, section {
 
 #step1 {
 	border-right: solid .5px #9E9E9E;
-	width: 115px;
+	width: 88px;
 	margin-right: 0px;
 }
 
 #step2 {
 	border-right: solid .5px #9E9E9E;
-	width: 110px;
+	width: 94px;
 	margin-right: 0px;
+}
+
+#step3 {
+  width: 119px;
 }
 
   .title {
@@ -211,7 +215,7 @@ footer, header, hgroup, menu, nav, section {
     font-size: 35px;
     font-weight: 500;
     line-height: 46px;
-	  width: 340px;
+	  width: 305px;
 	margin-top: 0px;
   }
 
@@ -225,7 +229,8 @@ footer, header, hgroup, menu, nav, section {
 	line-height: 11pt;
   }
   .right-col {
-    width: 300px;
+  
+    width: 232px;
   }
 
   .csv-reader-none {
@@ -236,6 +241,28 @@ footer, header, hgroup, menu, nav, section {
     display: block;
   }
 
+  .example-csvfile {
+    /* color: white; */
+    margin-top: 9px;
+    font-size: 8px;
+  }
+
+  .can-click-to-validation {
+    margin-top: 5px;
+    font-size: 10px;
+    color: white;
+  }
+
+  .example-csvfile a:link {
+    color: white;
+    border: none;
+    text-decoration: none;
+  }
+
+  .homepage-jobcode {
+    margin-top: 20px;
+  }
+
   .new-project, .code-search {
 	margin-bottom: 5px;
     color: #114B5F;
@@ -244,7 +271,8 @@ footer, header, hgroup, menu, nav, section {
   }
 
   .input{
-    width: 260px;
+    height: 109px;
+    width: 232px;
     padding:20px;
     background: #FF8C42;
     border-radius: 20px;
@@ -262,7 +290,7 @@ footer, header, hgroup, menu, nav, section {
   }
 
   .codeinput-container {
-    width: 89%;
+    width: 232px;
     padding:20px;
     background: #2EC4B6;
     border-radius: 20px;
@@ -306,14 +334,8 @@ footer, header, hgroup, menu, nav, section {
   }
 
   .about-content {
-	  z-index: 1;
-    margin: 0 auto;
-    width: 750px;
-    display: flex;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-	padding: 50px 0px 50px 0px;
-	border-radius: 20px;
+    margin-left: 425px;
+    width: 309px;
   }
 	
 	.about-inside {
@@ -330,31 +352,32 @@ footer, header, hgroup, menu, nav, section {
 	position: absolute;
 }
   .about-header {
-    width: 100%;
+    width: 302px;
     text-align: left;
     color: #114B5F;
     font-weight:400;
 	  margin-bottom: 10px;
     font-family: 'Oswald';
-    font-size: 60px;
+    font-size: 45px;
     line-height: 67px;
   }
 
-  .about-para {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-  }
-
   .team-p {
-  }
-
-  .about-para, .team-p {
+    width: 260px;
     color: #114B5F;
     font-weight: 600;
     font-family: 'Montserrat';
     font-size: 10px;
-    line-height: 0.5cm;
+    line-height: 15px;
+  }
+
+  .about-para{
+    width: 303px;
+    color: #114B5F;
+    font-weight: 600;
+    font-family: 'Montserrat';
+    font-size: 10px;
+    line-height: 15px;
   }
 
   .the-team{
@@ -587,35 +610,6 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
   transform: skew(0deg, 0deg);
 } 
 
-.topnav a
-{
-    float: right;
-    display: block;
-    color: #114B5F;
-    text-align: center;
-    padding: 50px 15px;
-    text-decoration: none;
-    font-size: 20px;
-    font-weight: 500;
-    font-family: 'Montserrat', sans-serif;
-}
-
-
-.topnav a:hover
-{
-    text-decoration: none;
-	border-bottom: 1.5px solid #FF8C42;
-    padding-bottom: 5px;
-}
-
-.topnav{
-    max-width: 100%;
-    padding: 10px 4%;
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 80px;
-}
 
   .home-page {
     width: 100%;
@@ -623,13 +617,6 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 	height: 700px;
 	
   }
-
-  /* p {
-    color: #114B5F;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 400;
-    font-size: 10pt;
-  } */
 
   .container-img {
     width: 100%;
@@ -653,21 +640,22 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 	display: flex;
 	margin-top: 20px;
 	justify-content: space-between;
-	width: 617px;
+	width: 465px;
 }
 
 .stepsContainer dt {
 	 color: #114B5F;
     font-family: 'Oswald', sans-serif;
 	text-transform: uppercase;
-    font-size: 1.5em;
+    font-size: 15px;
     font-weight: 500;
 }
 .stepsContainer dd {
-	 color: #114B5F;
+   color: #114B5F;
+   margin-top: 5px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
-    font-size: 9pt;
+    font-size: 8pt;
 }
 
 .stepsContainer dd a {
@@ -681,33 +669,41 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 
 #step1 {
 	border-right: solid .5px #9E9E9E;
-	width: 188px;
+	width: 153px;
 	margin-right: 0px;
 }
 
 #step2 {
 	border-right: solid .5px #9E9E9E;
-	width: 170px;
+	width: 123px;
 	margin-right: 0px;
+}
+
+#step3{
+  width: 149px;
+}
+
+.homepage-jobcode {
+  margin-top:61px;
 }
 
   .title {
     color: #114B5F;
     font-family: 'Oswald', sans-serif;
-    font-size: 70px;
+    font-size: 45px;
     font-weight: 500;
-    line-height: 80px;
-	width: 617px;
+    line-height: 60px;
+	  width: 389px;
   }
 
   .description {
 	margin-top: -24px;
-    width: 617px;
+    width: 389px;
     color: #114B5F;
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
-    font-size: 10pt;
-
+    font-size: 15px;
+    line-height: 20px;
   }
   .right-col {
     width: 350px;
@@ -721,6 +717,10 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
     display: block;
   }
 
+  .homepage-jobbcode {
+    border: solid black 1px;
+    margin-top: 40px;
+  }
   .new-project, .code-search {
 	margin-bottom: 5px;
     color: #114B5F;
@@ -729,7 +729,7 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
   }
 
   .input{
-    width: 360px;
+    width: 315px;
     padding:20px;
     background: #FF8C42;
     border-radius: 20px;
@@ -747,7 +747,7 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
   }
 
   .codeinput-container {
-    width: 89%;
+    width: 315px;
     padding:20px;
     background: #2EC4B6;
     border-radius: 20px;
@@ -814,11 +814,6 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
     line-height: 90px;
   }
 
-  .about-para {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-  }
 	
 	#circle-bg {
 	z-index: 0;
@@ -829,18 +824,23 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 		visibility: visible;
 }
 
-  .team-p {
-
-  }
-
-  .about-para, .team-p {
+  .about-para {
+    width: 456px;
     color: #114B5F;
     font-weight: 600;
     font-family: 'Montserrat';
-    font-size: 13px;
-    line-height: 0.6cm;
+    font-size: 12px;
+    line-height: 25px;
   }
 
+.team-p {
+  width: 409px;
+  color: #114B5F;
+  font-weight: 600;
+  font-family: 'Montserrat';
+  font-size: 12px;
+  line-height: 25px;
+}
   .the-team{
 	display: flex;
 	align-items: flex-start;
@@ -1051,13 +1051,6 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 	
   }
 
-  /* p {
-    color: #114B5F;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 400;
-    font-size: 10pt;
-  } */
-
   .container-img {
     width: 100%;
     height: 900px;
@@ -1066,7 +1059,7 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 
   .container {
     width: 1400px;
-	padding-top: 40px;
+	  margin-top: 40px;
     margin: 0 auto;
     justify-content: space-around;
     display: flex;
@@ -1080,14 +1073,14 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 	display: flex;
 	margin-top: 20px;
 	justify-content: space-between;
-	width: 700px;
+	width: 706px;
 }
 
 .stepsContainer dt {
 	 color: #114B5F;
     font-family: 'Oswald', sans-serif;
 	text-transform: uppercase;
-    font-size: 1.7em;
+    font-size: 28px;
     font-weight: 500;
 }
 
@@ -1095,7 +1088,7 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 	 color: #114B5F;
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
-    font-size: 10pt;
+    font-size: 10px;
 }
 
 .stepsContainer dd a {
@@ -1109,34 +1102,42 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 
 #step1 {
 	border-right: solid .5px #9E9E9E;
-	width: 220px;
+	width: 192px;
 	margin-right: 0px;
 }
 
 #step2 {
 	border-right: solid .5px #9E9E9E;
-	width: 185px;
+	width: 195px;
 	margin-right: 0px;
+}
+
+#step3 {
+  width: 287px;
+}
+
+.homepage-jobcode {
+  margin-top: 80px;
 }
 
   .title {
     color: #114B5F;
     font-family: 'Oswald', sans-serif;
-    font-size: 3.9em;
+    font-size: 80px;
     font-weight: 500;
-    line-height: 72px;
-	margin-top: -12px;
-    width: 700px;
+    line-height: 100px;
+	  margin-top: -12px;
+    width: 706px;
   }
 
   .description {
-	margin-top: -17px;
-    width: 700px;
+	  margin-top: -17px;
+    width: 677px;
     color: #114B5F;
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
-    font-size: 10pt;
-
+    font-size: 20px;
+    line-height: 24px;
   }
   .right-col {
     width: 400px;
@@ -1151,13 +1152,26 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
   }
 
   .new-project, .code-search {
-	margin-bottom: 5px;
+	  margin-bottom: 10px;
     color: #114B5F;
     font-family: 'Oswald', sans-serif;
     font-weight: 500;
+    font-size: 25px;
+
+  }
+
+  .can-click-to-validation{
+    font-size: 18px;
+    margin-top: 5px;
+  }
+
+  .example-csvfile {
+    font-size: 15px;
+    margin-top: 10px;
   }
 
   .input{
+    height: 150px;
     width: 360px;
     padding:20px;
     background: #FF8C42;
@@ -1165,6 +1179,8 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
   }
 
   .select { 
+    height: 30px;
+    margin-top: 20px;
     padding: 1px;
     margin-bottom: 20px;
     border-radius: 10px;
@@ -1219,38 +1235,36 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
   }
 
   .about-content {
-    margin: 0 auto;
-    width: 1500px;
+    margin-bottom: 40px;
     display: flex;
     justify-content: flex-end;
     flex-wrap: wrap;
-	padding: 100px 0px 100px 0px;
 	border-radius: 20px;
 	background-color: #FFFFFF;
   }
-	.about-inside {
-		width: 450px;
-		padding: 20px;
-	}
+
+  .team-p {
+    width: 532px;
+    color: #114B5F;
+    font-weight: 400;
+    font-family: 'Montserrat';
+    font-size: 20px;
+    line-height: 35px;
+
+  }
 
 	
   .about-header {
-    width: 100%;
+    width: 706px;
     text-align: left;
     color: #114B5F;
     font-weight:400;
 	  margin-bottom: 20px;
     font-family: 'Oswald';
-    font-size: 80px;
-    line-height: 90px;
+    font-size: 120px;
+    line-height: 178px;
   }
 
-  .about-para {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-  }
-	
 	#circle-bg {
 	z-index: 0;
 	height: 700px;
@@ -1260,16 +1274,15 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 	visibility: visible;
 }
 
-  .team-p {
 
-  }
 
-  .about-para, .team-p {
+  .about-para {
+    width: 669px;
     color: #114B5F;
-    font-weight: 600;
+    font-weight: 400;
     font-family: 'Montserrat';
-    font-size: 16px;
-    line-height: 0.6cm;
+    font-size: 20px;
+    line-height: 35px;
   }
 
   .the-team{

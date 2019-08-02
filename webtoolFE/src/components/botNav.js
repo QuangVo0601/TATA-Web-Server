@@ -10,8 +10,7 @@ function botNav() {
                             <div id="footer">
                                 <div id="footernav">
                                     <div id="footerlogo">
-
-                                        <img src={require('../assets/White_TATA_Logo.png')} alt="LOGO" width="90px" height="90px" />
+                                        <img src={require('../assets/White_TATA_Logo.png')} alt="LOGO" width="109px" height="68.67px" />
                                         <p>TATA was developed as a Summer Impact Project Funded by the Office of Student Scholarship, Creative Activates, and Research</p>
                                     </div>
                                     {/* <!--end of footerlogo--> */}

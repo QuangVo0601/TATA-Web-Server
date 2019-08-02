@@ -101,6 +101,7 @@ footer, header, hgroup, menu, nav, section {
 }
 @media only screen and (min-width: 1270px){
 		.stepsContainer-group {
+			margin-top: 60px;
 		width: 800px; 
 	}
 
@@ -133,6 +134,8 @@ footer, header, hgroup, menu, nav, section {
 }
 @media only screen and (min-width: 1850px){
 		.stepsContainer-group {
+			margin-top: 60px;
+		height: 90px;
 		width: 1200px; 
 	}
 
@@ -273,6 +276,7 @@ span{
 #complete{
 	background:#FF8C42;
 }
+
 @media only screen and (min-width: 1270px){ /*changed from 1280px to 1270px by Quang*/
 #nav{
 	width:208px;
@@ -426,7 +430,7 @@ span{
 	width:768px;
 	display:flex;
 	margin:0 auto;
-	height:1310px;
+	height:1410px;
 }
 
 .grouping-blur{
@@ -438,17 +442,14 @@ span{
 }
 
 #wrapper3{
-	height:1500px;
+	height:1600px;
 }
 #nav3{
+	height: 1410px;
 	width:165px;
 	border-right:2px solid #d3d3d3;
-	height:1310px;
-	flex-wrap:wrap;
 	margin-right:30px;
 	margin-left:46px;
-	
-
 }
 #groupflex-section{
 	display: flex;
@@ -619,6 +620,7 @@ span.grippy::after {
 	border-radius: 8px;
 	margin-bottom: 10px;
   cursor: pointer;
+  margin-right: 15px;
 }
 /* ------------------------------------------------------- */
 .grid-container{
@@ -759,7 +761,7 @@ form {
 @media only screen and (min-width: 1270px) {
 		.flex-container3{
 	width:1280px;
-	height: 900px;
+	height: 1000px;
 	display:flex;
 	margin:0 auto;
 	
@@ -776,7 +778,7 @@ form {
 		height:1077px;
 	}
 	#nav3{
-		    height:900px;
+		    height:1000px;
 				margin-right:60px;
 		margin-left:66px;
 	}
@@ -823,10 +825,11 @@ form {
 	filter: blur(8px);
  }
 	#wrapper3{
-		height:1344px;
+		height:1600px;
 	}
+
 #nav3{
-			height: 1140px;
+			height: 1141px;
 			margin-right:60px;
 	width:300px;
 }
@@ -839,21 +842,26 @@ form {
 #groupflex-section{
 	display: flex;
 	flex-direction: row;
-	margin-top:63px;
-	margin-bottom: 63px;
+	/* margin-top:63px;
+	margin-bottom: 63px; */
 	
 }
 #sample-section{
 	justify-content: space-around;
-	height: 955px;
+	height: 855px;
 	width: 490px;
-	margin-right: 20ptarrx;
-	padding: 35px 35px 35px;
-	
+	margin-right: 20px;
+	margin-bottom: 40px;
+	padding: 35px 35px 35px;	
 }
+
+.grouping-rightsection {
+	height: 922px;
+}
+
 #group-section{
-	height: 1025px;
-	margin: 0 auto;
+	height: 922px;
+	margin-bottom: 40px;
 	width: 860px;
 	overflow-y: hidden;
 		
@@ -1031,7 +1039,7 @@ border-radius:10px;
 	text-align: center;
 	display: block;
 	border: none;
-	width: 166px;
+	width: 109px;
 	height: 32px;
 	border-radius: 8px;
 	margin: 5px;

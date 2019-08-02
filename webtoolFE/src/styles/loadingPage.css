@@ -59,19 +59,20 @@ input:focus {
 .loading-emailContent {
 	padding: 20px;
 	color: #818181;
-	font-size: 12pt;
+	font-size: 10pt;
 
 }
 
 .submitButton {
     margin-left: -103px;
     height: 36px;
-    width: 98px;
+    width: 103px;
 	border: none;
 	background-color: #2EC4B6;
 	font-family: 'Montserrat', sans-serif;
 	font-weight: 600;
-	font-size: 13.5pt;
+  font-size: 13.5pt;
+  border-radius: 8px;
 	color: white;
 }
 
@@ -454,7 +455,7 @@ input:focus {
 .submitButton {
     margin-left: -103px;
     height: 36px;
-    width: 98px;
+    width: 103px;
   border: none;
   border-radius: 10px;
 	background-color: #2EC4B6;
