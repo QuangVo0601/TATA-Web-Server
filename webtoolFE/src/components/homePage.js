@@ -101,7 +101,7 @@ class HomePage extends React.Component {
 
 												<div id={styles.step3}>
 													<dt>3. Upload & validate</dt>
-													<dd><a href="https://www.youtube.com/watch?v=atNosTtdUaE">Demo of the tool.</a></dd>
+													<dd><a href="https://www.youtube.com/watch?v=atNosTtdUaE" target="__blank">Demo of the tool.</a></dd>
 												</div>
 											</div>
 										</div>

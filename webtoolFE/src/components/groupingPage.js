@@ -66,6 +66,7 @@ class GroupingPage extends React.Component {
             href: "",
             /*-------------------Quang's part ends-------------------------*/
         };
+        this.myRef={}
     }
 
     // gtex group handler
@@ -159,6 +160,12 @@ class GroupingPage extends React.Component {
                 obj[`${item}`] = false
             })
             this.setState({ dndSelectedValue: obj })
+            Object.keys(this.myRef).map(key=>{
+                if(this.myRef[key].classList.contains('sample-true') && this.myRef[key]!==null){
+                    this.myRef[key].classList.remove('sample-true')
+                    this.myRef[key].classList.add('sample-false')
+                }
+            })
         }
         else if (this.state.dragFrom != 'samples') {
             const removeData = this.state.dndGroup[`${this.state.dragFrom}`].filter(value => {
@@ -404,6 +411,7 @@ class GroupingPage extends React.Component {
                                             {this.state.dndGroup['samples'].map((sample) => (
                                                 <li
                                                     className="sample-false"
+                                                    ref={(ref)=>{this.myRef[`${sample}`]=ref;}}
                                                     id='samples'
                                                     draggable
                                                     onDragStart={event => this.onDragStartHandler(event, sample)}

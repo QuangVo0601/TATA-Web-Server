@@ -1345,6 +1345,7 @@ color:white;
 }
 
 .popup-inner {  
+	background-color: white;
 	position: absolute; 
 	border-radius: 10px;
 	left: 10%;
