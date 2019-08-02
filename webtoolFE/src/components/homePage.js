@@ -171,7 +171,7 @@ class HomePage extends React.Component {
 									<input type="radio" id={styles["img-0"]} checked />
 									<li className={styles["slide-container"]}>
 										<div className={styles.slide}>
-											<img src={require('../assets/homePageImages/annie-spratt-QckxruozjRg-unsplash.jpg')} alt="LOGO" />
+											<img src={require('../assets/homePageImages/1.jpg')} alt="LOGO" />
 										</div>
 										<div className={styles.nav}>
 											<label htmlFor={styles["img-6"]} className={styles.prev}>&#x2039;</label>
@@ -182,7 +182,7 @@ class HomePage extends React.Component {
 									<input type="radio" name="radio-btn" id={styles["img-1"]} />
 									<li className={styles["slide-container"]}>
 										<div className={styles.slide}>
-											<img src={require('../assets/homePageImages/annie-spratt-QckxruozjRg-unsplash.jpg')} alt="LOGO" />
+											<img src={require('../assets/homePageImages/1.jpg')} alt="LOGO" />
 										</div>
 										<div className={styles.nav}>
 											<label htmlFor={styles["img-6"]} className={styles.prev}>&#x2039;</label>
@@ -193,7 +193,7 @@ class HomePage extends React.Component {
 									<input type="radio" name="radio-btn" id={styles["img-2"]} />
 									<li className={styles["slide-container"]}>
 										<div className={styles.slide}>
-											<img src={require('../assets/homePageImages/headway-jfR5wu2hMI0-unsplash.jpg')} alt="LOGO" />
+											<img src={require('../assets/homePageImages/2.jpg')} alt="LOGO" />
 										</div>
 										<div className={styles.nav}>
 											<label htmlFor={styles["img-1"]} className={styles.prev}>&#x2039;</label>
@@ -204,7 +204,7 @@ class HomePage extends React.Component {
 									<input type="radio" name="radio-btn" id={styles["img-3"]} />
 									<li className={styles["slide-container"]}>
 										<div className={styles.slide}>
-											<img src={require('../assets/homePageImages/you-x-ventures-Oalh2MojUuk-unsplash.jpg')} alt="LOGO" />
+											<img src={require('../assets/homePageImages/3.jpg')} alt="LOGO" />
 										</div>
 										<div className={styles.nav}>
 											<label htmlFor={styles["img-2"]} className={styles.prev}>&#x2039;</label>
@@ -215,7 +215,7 @@ class HomePage extends React.Component {
 									<input type="radio" name="radio-btn" id={styles["img-4"]} />
 									<li className={styles["slide-container"]}>
 										<div className={styles.slide}>
-											<img src={require('../assets/homePageImages/adult-chart-diagram-1181346.jpg')} alt="LOGO" />
+											<img src={require('../assets/homePageImages/4.jpg')} alt="LOGO" />
 										</div>
 										<div className={styles.nav}>
 											<label htmlFor={styles["img-3"]} className={styles.prev}>&#x2039;</label>
@@ -226,7 +226,7 @@ class HomePage extends React.Component {
 									<input type="radio" name="radio-btn" id={styles["img-5"]} />
 									<li className={styles["slide-container"]}>
 										<div className={styles.slide}>
-											<img src={require('../assets/homePageImages/brainstorming-collaborate-collaboration-1204649.jpg')} alt="LOGO" />
+											<img src={require('../assets/homePageImages/5.JPG')} alt="LOGO" />
 										</div>
 										<div className={styles.nav}>
 											<label htmlFor={styles["img-4"]} className={styles.prev}>&#x2039;</label>
@@ -237,10 +237,21 @@ class HomePage extends React.Component {
 									<input type="radio" name="radio-btn" id={styles["img-6"]} />
 									<li className={styles["slide-container"]}>
 										<div className={styles.slide}>
-											<img src={require('../assets/homePageImages/brainstorming-colleagues-communication-1374363.jpg')} alt="LOGO" />
+											<img src={require('../assets/homePageImages/6.jpg')} alt="LOGO" />
 										</div>
 										<div className={styles.nav}>
 											<label htmlFor={styles["img-5"]} className={styles.prev}>&#x2039;</label>
+											<label htmlFor={styles["img-7"]} className={styles.next}>&#x203a;</label>
+										</div>
+									</li>
+
+									<input type="radio" name="radio-btn" id={styles["img-7"]} />
+									<li className={styles["slide-container"]}>
+										<div className={styles.slide}>
+											<img src={require('../assets/homePageImages/7.jpg')} alt="LOGO" />
+										</div>
+										<div className={styles.nav}>
+											<label htmlFor={styles["img-6"]} className={styles.prev}>&#x2039;</label>
 											<label htmlFor={styles["img-1"]} className={styles.next}>&#x203a;</label>
 										</div>
 									</li>
@@ -253,6 +264,7 @@ class HomePage extends React.Component {
 										<label htmlFor={styles["img-4"]} className={styles["nav-dot"]} id={styles["img-dot-4"]}></label>
 										<label htmlFor={styles["img-5"]} className={styles["nav-dot"]} id={styles["img-dot-5"]}></label>
 										<label htmlFor={styles["img-6"]} className={styles["nav-dot"]} id={styles["img-dot-6"]}></label>
+										<label htmlFor={styles["img-6"]} className={styles["nav-dot"]} id={styles["img-dot-7"]}></label>
 									</li>
 								</ul>
 
