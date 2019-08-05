@@ -117,7 +117,7 @@ class AlgorithmPage extends React.Component {
                             <div className="flex-container5">
                                 <div id="nav5">
                                     <div id="logo">
-                                        <img src={require('../assets/Group 257.png')} width="46px"  alt="logo" />
+                                        <img src={require('../assets/TATA.png')} alt="logo" />
                                     </div>
                                     {/* <!--end of log--> */}
                                     <div id="mainnav">

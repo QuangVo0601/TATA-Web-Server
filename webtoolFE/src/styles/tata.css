@@ -182,7 +182,8 @@ footer, header, hgroup, menu, nav, section {
 #logo img{
 	margin-top:63px;
 	margin-bottom:58px;
-	margin-left:30px;
+	width:96px;
+	height:60px;
 }
 #mainnav{
 	display:flex;
@@ -289,11 +290,11 @@ span{
 }
 
 	#logo img{
-	margin-top:64px;
-	margin-bottom:69px;
-	margin-left:30px;
-	width:57px;
-	height:57px;
+		margin-top:64px;
+		margin-bottom:69px;
+		margin-left:0px;
+		width:110px;
+		height:69px;
 }
 
 	span{
@@ -359,11 +360,11 @@ span{
 		margin:0 auto;
 	}
 	#logo img{
-	margin-top:92px;
-	margin-bottom:122px;
-	margin-left:20px;
-	width:90px;
-	height:90px;
+		margin-top:92px;
+		margin-bottom:122px;
+		margin-left:0px;
+		width:125px;
+		height:79px;
 }
 	span{
 	font-size:15px;

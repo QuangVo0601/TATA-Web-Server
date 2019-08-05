@@ -28,6 +28,21 @@ class ds:
     def df_from_csv_name(csv_name):
         self.df = read_csv(csv_name)
 
+    #Example usage, a dataframe containing values in FPKM
+    # Calling fpkm_to_tpm returns a dataframe in TPM
+    # Dataframe containing fpkm values should be indexed by ENS
+    #Jon's new function to convert from fpkm to tpm dataframe
+    def fpkm_to_tpm(self):
+        
+        fpkm_data = self.df
+        for i in range(1,len(fpkm_data.columns.values)):
+                sum_over_sample = fpkm_data.iloc[:,i].sum()
+                fpkm_data.iloc[:,i] = fpkm_data.iloc[:,i].multiply(1000000/sum_over_sample)
+        self.df = fpkm_data
+
+        print('FPKM/RPKM was converted to TPM')
+
+
     # from Matthew to make a list of dataframes
     def make_groups(self, group_lists):
         temp_df_list = []

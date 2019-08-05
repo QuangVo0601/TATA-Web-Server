@@ -27,7 +27,12 @@ def input_list(request):
     elif request.method == 'POST': # Back End request, Front End send
         data = JSONParser().parse(request) # Receive data from front end
         dataString = data['csvFile'] # syntax: data[key], key = package's name being sent
-        
+        selectedUnit = data['selectedUnit']
+
+        print("Selected unit is: " + selectedUnit)
+
+        #selected_unit = "FPKM" # for now, change later
+
         dataArray1 =  dataString.split('\n') # change the string to an array
         dataArray2 = [dataArray1[i].split(',') for i in range(len(dataArray1))] # change 1d array to 2d aray
         for i in dataArray2:
@@ -45,6 +50,10 @@ def input_list(request):
         # build the dataframe from 'dataString'
         dataSet.dataframe_from_string(dataString)
 
+        # if unit is FPKM or RPKM, call func to convert it to TPM dataframe
+        if(selectedUnit == 'FPKM' or selectedUnit == 'RPKM'):
+            dataSet.fpkm_to_tpm()
+
         # Graph 1: Distribution of Gene Expression
         x_dge, y_dge = dataSet.dge_graph()
 
@@ -56,6 +65,15 @@ def input_list(request):
 
         # to get the header line from col 1 to col n
         pca_text = dataString.split('\n')[0:1][0].split(',')[1:] 
+
+        # Use Django session to save the coordinates for 3 graphs in database for later use
+        request.session['x_dge'] = x_dge
+        request.session['y_dge'] = y_dge
+        request.session['x_tpc'] = x_tpc
+        request.session['y_tpc'] = y_tpc
+        request.session['x_pca'] = x_pca
+        request.session['y_pca'] = y_pca
+        request.session['pca_text'] = pca_text    
 
         #print(pca_text)
  
@@ -135,7 +153,7 @@ def input_list2(request):
 
         print(group_names_list)
 
-        tf_ens_ids = pd.read_csv("Transcription Factor List for Jae Moon.csv")
+        tf_ens_ids = pd.read_csv("Transcription Factor List.csv")
         tf_ens_ids = tf_ens_ids.squeeze().tolist()
 
         # to be used in list3
