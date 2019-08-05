@@ -174,7 +174,7 @@ class HomePage extends React.Component {
 											<img src={require('../assets/homePageImages/1.jpg')} alt="LOGO" />
 										</div>
 										<div className={styles.nav}>
-											<label htmlFor={styles["img-6"]} className={styles.prev}>&#x2039;</label>
+											<label htmlFor={styles["img-7"]} className={styles.prev}>&#x2039;</label>
 											<label htmlFor={styles["img-2"]} className={styles.next}>&#x203a;</label>
 										</div>
 									</li>
@@ -185,7 +185,7 @@ class HomePage extends React.Component {
 											<img src={require('../assets/homePageImages/1.jpg')} alt="LOGO" />
 										</div>
 										<div className={styles.nav}>
-											<label htmlFor={styles["img-6"]} className={styles.prev}>&#x2039;</label>
+											<label htmlFor={styles["img-7"]} className={styles.prev}>&#x2039;</label>
 											<label htmlFor={styles["img-2"]} className={styles.next}>&#x203a;</label>
 										</div>
 									</li>
@@ -264,7 +264,7 @@ class HomePage extends React.Component {
 										<label htmlFor={styles["img-4"]} className={styles["nav-dot"]} id={styles["img-dot-4"]}></label>
 										<label htmlFor={styles["img-5"]} className={styles["nav-dot"]} id={styles["img-dot-5"]}></label>
 										<label htmlFor={styles["img-6"]} className={styles["nav-dot"]} id={styles["img-dot-6"]}></label>
-										<label htmlFor={styles["img-6"]} className={styles["nav-dot"]} id={styles["img-dot-7"]}></label>
+										<label htmlFor={styles["img-7"]} className={styles["nav-dot"]} id={styles["img-dot-7"]}></label>
 									</li>
 								</ul>
 
