@@ -55,7 +55,7 @@ class TaskPage extends React.Component {
 								<div id="nav">
 									<div id="logo">
 										<a href="/"> {/*added by Quang, logo linked to homepage*/}
-											<img src={require('../assets/Group 257.png')} width="46px"  alt="logo" />
+											<img src={require('../assets/TATA.png')} alt="logo" />
 										</a>
 									</div>
 									{/* <!--end of log--> */}

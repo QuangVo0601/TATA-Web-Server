@@ -22,7 +22,7 @@ class ErrorPage extends Component {
                         <nav>
                             <iv className="error-nav-content"/>
                             <div className="errorlogo">
-	                            <img src={require('../assets/Group 257.png')} alt="tatalogo" width="48px" />
+	                            <img src={require('../assets/TATA.png')} alt="tatalogo"/>
 		                    </div>
                         </nav>
                         <article>
