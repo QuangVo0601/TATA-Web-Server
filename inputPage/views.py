@@ -16,12 +16,15 @@ from django.core.files.storage import default_storage
 def index_page(request):
     return HttpResponse("<h1>Server is running correctly</h1>") # Provide initial route 
 
-# for csvReader.js, saved in urls.py
+
+'''  Each of the below def corresponding with a specific Front End Axios. If create another axios, copy and paste one of these def
+    and change the def's name into another unquie name, make sure to add comment what axios route it is linked to. 
+    Remember to add the def's name into urls.py (Open urls.py for more details). Axios POST/GET route should have the right path in urls.py
+'''
+
+# for csvReader.js axios, saved in urls.py
 @csrf_exempt
 def input_list(request):
-    """
-    List all code input, or create a new input obj.
-    """
     if request.method == 'GET': # Back End send, Front End request
         inputs = Input.objects.all()
         serializer = InputSerializer(inputs, many=True)

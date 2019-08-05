@@ -25,7 +25,7 @@ SECRET_KEY = '!(&+^yulfd000%2(kqa$nx2=zu&ss!6_o!0_p2isa_lziz$#kx'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#ALLOWED_HOSTS = ['oscar19.orc.gmu.edu'] # For mason's server
+#ALLOWED_HOSTS = ['oscar19.orc.gmu.edu'] # Use this one when deploy onto Apache server
 ALLOWED_HOSTS = [] # For local server testing only
 
 
@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'corsheaders'
 ]
 
+# These are package that need to be installed before try running the app 
+# Use pipenv shell => pip3 install []
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -54,7 +56,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware'
-    #'inputPage.CorsMiddleware'
 ]
 
 # Cross Origin Control Access
@@ -62,9 +63,9 @@ MIDDLEWARE = [
 CORS_ORIGIN_WHITELIST = [
     "https://example.com",
     "https://sub.example.com",
-    "http://localhost:3000", # This is Front End server
+    "http://localhost:3000", # This is Front End local server
     "http://127.0.0.1:9000",
-    "http://oscar19.orc.gmu.edu" # Where Front End is deployed
+    "http://oscar19.orc.gmu.edu" # This is Front End hosting server
 
 ]
 ROOT_URLCONF = 'webtoolBE.urls'
