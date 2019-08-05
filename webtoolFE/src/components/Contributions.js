@@ -414,9 +414,16 @@ class Contributions extends React.Component {
                                                 <div className="popup">
                                                     <div className="leftContent">
                                                         <div className="name">Geraldine Grant</div>
-                                                        <div className="postion">Graphic Designer</div>
+                                                        <div className="postion">Biology Mentor</div>
                                                         <div className="contribution-line"></div>
-                                                        <div className="bio">Something here</div>
+                                                        <div className="bio">
+                                                            Dr. Grant is a professor of Biology at George Mason in the department of Biology. As a member of the 2018 team Dr. 
+                                                            Grant was the faculty mentor coordinating the biology data mining of the tool. 
+                                                            Dr. Grant supervised the differential expression algorithms from the point of view of biological relevance. 
+                                                            The bioinformatics team analyzed data and confirmed their findings with Dr. Grant. 
+                                                            In addition to this she brought her significant experience with undergraduate education into the development of the RNA-seq curriculum 
+                                                            that was a key aspect of the 2018 summer project.
+                                                        </div>
                                                     </div>
                                                     <div className="rightPhoto" id="Geraldine_Grant"></div>
                                                 </div>
@@ -440,9 +447,16 @@ class Contributions extends React.Component {
                                                 <div className="popup">
                                                     <div className="leftContent">
                                                         <div className="name">Don Seto</div>
-                                                        <div className="postion">Graphic Designer</div>
+                                                        <div className="postion">Bioinformatics Mentor</div>
                                                         <div className="contribution-line"></div>
-                                                        <div className="bio">Something here</div>
+                                                        <div className="bio">
+                                                            Dr. Seto is a professor of Bioinformatics at George Mason in the School of Systems Biology. 
+                                                            As a member of the 2018 team Dr. Seto was the faculty mentor coordinating the algorithms and web architecture of the early tool. 
+                                                            Dr. Seto’s previous experience in webtool development is emplified by his group’s previous work. 
+                                                            Using virus genome data, e.g., adenoviruses and poxviruses, the Seto Research Group has developed, validated 
+                                                            and implemented two net-accessible interactive and “on-the-fly” genome comparison software tools <a href='http://binf.gmu.edu/genometools.html'>(http://binf.gmu.edu/genometools.html)</a>. 
+                                                            Dr. Seto shared much of his previous work to serve as inspiration for the early framework of TATA.
+                                                        </div>
                                                     </div>
                                                     <div className="rightPhoto" id="Don_Seto"></div>
                                                 </div>
@@ -468,9 +482,15 @@ class Contributions extends React.Component {
                                                 <div className="popup">
                                                     <div className="leftContent">
                                                         <div className="name">Brieann Sobieski</div>
-                                                        <div className="postion">Graphic Designer</div>
+                                                        <div className="postion">Biology Research</div>
                                                         <div className="contribution-line"></div>
-                                                        <div className="bio">Something here</div>
+                                                        <div className="bio">
+                                                            During the project Brieann had just completed her third year at George Mason as a biology major with a minor in kinesiology. 
+                                                            As a member of the 2018 team Brieann participated in the data mining of transcription factor associations and public RNA-seq data. 
+                                                            Brieann’s research included an investigation of the development of a course for undergraduate students to be trained in the application and theory behind RNA-seq. 
+                                                            Brieann reached out to multiple universities in the state of Virginiato compare and contrast the various undergraduate curriculums for bioinformatics. 
+                                                            Brieann hopes to continue her work in biology with a focus in clinical research as an MD or MD/PhD.
+                                                        </div>
                                                     </div>
                                                     <div className="rightPhoto" id="Brieann_Sobieski"></div>
                                                 </div>
@@ -495,9 +515,16 @@ class Contributions extends React.Component {
                                                 <div className="popup">
                                                     <div className="leftContent">
                                                         <div className="name">Anushka Prativadhi</div>
-                                                        <div className="postion">Graphic Designer</div>
+                                                        <div className="postion">Data Science/Database Research</div>
                                                         <div className="contribution-line"></div>
-                                                        <div className="bio">Something here</div>
+                                                        <div className="bio">
+                                                            During the project Anushka was a senior entering into her final year as a Computational and Data Science major at George Mason. 
+                                                            As a member of the 2018 team Anushka worked in the programming and architecture of the early version of TATA. 
+                                                            Anushka initially focused on developing a SQL database to hold the transcription factor interactions identified by the biology researchers. 
+                                                            In addition todeveloping and maintaining the database throughout the summer, Anushka also aided in the coding of the webtool. 
+                                                            The python scripts used to display and derived graphical output was first coded and researched by Anushka. 
+                                                            Anushka plans to continue using her data science experience in the professional world.
+                                                        </div>
                                                     </div>
                                                     <div className="rightPhoto" id="Anushka_Prativadhi"></div>
                                                 </div>
@@ -523,9 +550,16 @@ class Contributions extends React.Component {
                                                 <div className="popup">
                                                     <div className="leftContent">
                                                         <div className="name">Erica Bang</div>
-                                                        <div className="postion">Graphic Designer</div>
+                                                        <div className="postion">Computer Programmer</div>
                                                         <div className="contribution-line"></div>
-                                                        <div className="bio">Something here</div>
+                                                        <div className="bio">
+                                                            During the project Erica had just completed her second year at George Mason as a Computer Science major. 
+                                                            As a member of the 2018 team Erica worked on the early algorithm used in TATA. 
+                                                            Erica’s primary focus was on writing the python code that processed and analyzed the user defined data. 
+                                                            Erica also participated in developingthe early architecture of the code, including the implementation of python within Flask, connection to HTML, and interaction with SQL. 
+                                                            In the later stages of the summer Erica was also instrumental in linking the bioinformatics algorithms to the functional tool. 
+                                                            Erica is continuing her studies in computer science and hopes to enter the professional world after graduation.
+                                                        </div>
                                                     </div>
                                                     <div className="rightPhoto" id="Erica_Bang"></div>
                                                 </div>
@@ -550,9 +584,15 @@ class Contributions extends React.Component {
                                                 <div className="popup">
                                                     <div className="leftContent">
                                                         <div className="name">Jorge Fernandez Davila</div>
-                                                        <div className="postion">Graphic Designer</div>
+                                                        <div className="postion">Biology Research</div>
                                                         <div className="contribution-line"></div>
-                                                        <div className="bio">Something here</div>
+                                                        <div className="bio">
+                                                            During this project Jorge was a rising senior entering into his final year as a biology major at George Mason. 
+                                                            As a member of the 2018 team Jorge was involved in the data interpretation and transcription factor interaction investigation. 
+                                                            Amongst his tasks was the collection of publicly available RNA seq data to test the early version of TATA. 
+                                                            Jorge also mined all public data to collect as much information on transcription factor targets to be used by TATA. 
+                                                            Jorge plans to continue his studies in biology through a PhD at George Mason University.
+                                                        </div>
                                                     </div>
                                                     <div className="rightPhoto" id="Jorge_Fernandez_Davila"></div>
                                                 </div>
@@ -577,9 +617,16 @@ class Contributions extends React.Component {
                                                 <div className="popup">
                                                     <div className="leftContent">
                                                         <div className="name">Olga Kukudzhanova</div>
-                                                        <div className="postion">Graphic Designer</div>
+                                                        <div className="postion"> Computer Programmer</div>
                                                         <div className="contribution-line"></div>
-                                                        <div className="bio">Something here</div>
+                                                        <div className="bio">
+                                                            During the project Olgahad just completed her first year at George Mason as an Information Technology major. 
+                                                            As a member of the 2018 team Olga worked on the architecture and algorithm of early TATA. 
+                                                            Initially Olga focused on writing the python code required to process and analyze the user data. 
+                                                            Part of this involved thewriting of a preliminary analysis algorithm to evaluate the relationship between transcription factors and their target genes. 
+                                                            In addition to the algorithm, Olga was also integral in the development of the early architecture connecting the python classes with the HTML interface. 
+                                                            Olga is continuing her studies in computer scienceand plans to enter the professional world after graduation.
+                                                        </div>
                                                     </div>
                                                     <div className="rightPhoto" id="Olga_Kukudzhanova"></div>
                                                 </div>
@@ -604,9 +651,15 @@ class Contributions extends React.Component {
                                                 <div className="popup">
                                                     <div className="leftContent">
                                                         <div className="name">Tamia Shazer</div>
-                                                        <div className="postion">Graphic Designer</div>
+                                                        <div className="postion">Biology/Bioinformatics Research</div>
                                                         <div className="contribution-line"></div>
-                                                        <div className="bio">Something here</div>
+                                                        <div className="bio">
+                                                            During the project Tamia was a rising senior entering into her final year at George Mason with a biology major. 
+                                                            As a member of the 2018 team Tamia was tasked with research that bridged the biology research with the bioinformatics tools required to analyze the data. 
+                                                            Initially Tamia participated in the data mining of transcription factors and public RNA-seq data. 
+                                                            However, she quickly transitioned into researchingthe various differential expression algorithms used to analyze the data. 
+                                                            Her work was vital in the preliminary R scripts used in the early version of TATA and later was incorporated into the curriculum for the undergraduate course. 
+                                                        </div>
                                                     </div>
                                                     <div className="rightPhoto" id="Tamia_Shazer"></div>
                                                 </div>
@@ -631,9 +684,16 @@ class Contributions extends React.Component {
                                                 <div className="popup">
                                                     <div className="leftContent">
                                                         <div className="name">Umber Sheikh</div>
-                                                        <div className="postion">Graphic Designer</div>
+                                                        <div className="postion">Bioinformatics Research</div>
                                                         <div className="contribution-line"></div>
-                                                        <div className="bio">Something here</div>
+                                                        <div className="bio">
+                                                            During the project Umber was a rising senior entering into her final year as a bioengineering major at George Mason. 
+                                                            As a member of the 2018 team Umber participated in researching differential expression tools and writing R scripts to handle, process, and explore RNA-seq data. 
+                                                            In addition to writing the R scripts, Umber also developed a preliminary series of exercises as part of the curriculum for the RNA-seq project. 
+                                                            Umber’s work on the preliminary tool in 2018 laid the foundation for the batch correction and differential expression algorithms used in 
+                                                            the 2019 version of TATA. 
+                                                            Umber hopes to continue her work in data analytics with a graduate degree in data science.
+                                                        </div>
                                                     </div>
                                                     <div className="rightPhoto" id="Umber_Sheikh"></div>
                                                 </div>
