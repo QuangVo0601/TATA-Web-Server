@@ -142,4 +142,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'webtoolFE', "build", "static"),  # update the STATICFILES_DIRS
 )
 
+# For google cloud platform
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+GS_BUCKET_NAME = 'YOUR_BUCKET_NAME_GOES_HERE' # TODO: Need bucket name
 
