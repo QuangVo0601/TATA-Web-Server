@@ -8,9 +8,9 @@ from .ds_class import ds # import from ds_class.py for validationPage.js
 from .GTEXDataAnalyzer import GTEXDataAnalyzer # import from GTEXDataAnalyzer.py for batchPage.js
 import pandas as pd
 from .query import get_sample_names, process_group_query # import from query.py for gtexModal.js
-# Guide for GCP: 
+# Guide and usage examples of GCP: 
 # https://django-storages.readthedocs.io/en/latest/backends/gcloud.html?fbclid=IwAR2RuMjGszBVkyOQA70diWWHjDkbh1wiB-2BWLEGApm6Hv6ou31NWoWeh4k
-from django.core.files.storage import default_storage # For google cloud platform
+from django.core.files.storage import default_storage 
 
 # Create your views here.
 def index_page(request):
