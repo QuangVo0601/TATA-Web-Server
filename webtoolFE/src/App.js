@@ -11,6 +11,7 @@ import Error from './components/errorPage'
 import ResultPage from './components/resultPage'
 import LoadModal from './components/loadingModal'
 import Contribute from './components/Contributions'
+import FileUpload from './components/fileUpload'
 
 class App extends React.Component {
   constructor(props) {
@@ -67,6 +68,13 @@ class App extends React.Component {
         <Route exact path="/error"
           render={() => (
             <Error
+            />
+          )
+          }
+        />
+        <Route exact path="/fileupload"
+          render={() => (
+            <FileUpload
             />
           )
           }
