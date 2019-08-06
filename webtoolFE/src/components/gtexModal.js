@@ -164,7 +164,7 @@ class GtexModule extends React.Component {
         //axios.post('http://oscar19.orc.gmu.edu/backend/detail', {
             gtex: [[], this.state.sex, this.state.ages, this.state.death, [], this.state.tissueType]
         }).then((gtex) => { // to receive data from back end 
-            let query = [[], this.state.sex, this.state.ages, this.state.death, [], this.state.tissueType,[this.state.gtexGroupName]]
+            let query = [[], this.state.sex, this.state.ages, this.state.death, [], this.state.tissueType,this.state.gtexGroupName]
             this.props.handleGtex(this.state.gtexGroupName, gtex.data.sample_array, query)
         }).then(()=>{this.props.closePopup()})
     }

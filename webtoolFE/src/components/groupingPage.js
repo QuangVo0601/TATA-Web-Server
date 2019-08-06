@@ -250,7 +250,7 @@ class GroupingPage extends React.Component {
     startProgress() {
         this.toggleModalPopup()
         setInterval(() => {
-            this.setState({ percent: this.state.percent += 1.23 })
+            this.setState({ percent: this.state.percent += 0.01 })
         }, 1000)
     }
     /*

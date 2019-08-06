@@ -490,7 +490,7 @@ class GTEXDataAnalyzer:
 				tempDf["t_values"] = t_values
 				tempDf["p_values"] = p_values
 
-				log_p_values = [-(math.log10(x)) for x in tempDf['p_values']]
+				log_p_values = [-(math.log10(x)) if x != 0 else 0 for x in tempDf['p_values'] ]
 				tempDf['negative log 10 p values'] = log_p_values
 
 

@@ -106,10 +106,10 @@ def input_list2(request):
         # 'group_lists' is the list of lists of groups sent from groupingPage.js
         group_lists = data['groupsList'] # syntax: data[key], key = package's name being sent
         # 'gtex_groups_queries' is the list of gtex group queries sent from groupingPage.js
-        #gtex_groups_queries = data['gtexQueries']
+        gtex_groups_queries = data['gtexQueries']
 
         print(group_lists)
-        #print(gtex_groups_queries)
+        print(gtex_groups_queries)
         
         # Retrieve the 'dataString' saved in database
         dataString = request.session['dataString']
@@ -119,16 +119,16 @@ def input_list2(request):
         # build the dataframe from 'dataString' 
         dataSet.dataframe_from_string(dataString)
 
-        group_lists = [['control group','Patient1','Patient2','Patient3'],
-                  ['group1','Patient4','Patient5','Patient6'],
-                  ['group2','Patient7','Patient8','Patient9'],
-                  ['group3','Patient10','Patient11','Patient12'],
-                  ['group4','Patient13','Patient14','Patient15']]
+        # group_lists = [['control group','Patient1','Patient2','Patient3'],
+        #           ['group1','Patient4','Patient5','Patient6'],
+        #           ['group2','Patient7','Patient8','Patient9'],
+        #           ['group3','Patient10','Patient11','Patient12'],
+        #           ['group4','Patient13','Patient14','Patient15']]
 
-        # no of samples per each query: 8, 96, 58
-        gtex_groups_queries = [[[],[],['20-29', '30-39'],[],[], ['Kidney'], 'gtex group 1'],
-		                    [[],['M'],['20-29', '30-39', '40-49', '50-59'],[],[], ['Bladder'], 'gtex group 2'],
-                            [[], ['F'], ['50-59'], ['Ventilator', 'Fast Natural'], [], ['Liver'], 'gtex group 3']]
+        # # no of samples per each query: 8, 96, 58
+        # gtex_groups_queries = [[[],[],['20-29', '30-39'],[],[], ['Kidney'], 'gtex group 1'],
+		#                     [[],['M'],['20-29', '30-39', '40-49', '50-59'],[],[], ['Bladder'], 'gtex group 2'],
+        #                     [[], ['F'], ['50-59'], ['Ventilator', 'Fast Natural'], [], ['Liver'], 'gtex group 3']]
 
         # pass in list of groups, return list of associated dataframes  
         CListDfs = dataSet.make_groups(group_lists) 

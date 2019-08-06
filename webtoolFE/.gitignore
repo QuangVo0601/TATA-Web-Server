@@ -3,4 +3,5 @@ node_modules
 settings.py
 webtoolFE.zip
 src/csvDatabase
+build
 
