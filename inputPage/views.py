@@ -5,9 +5,12 @@ from .models import Input
 from .serializers import InputSerializer
 from django.shortcuts import render
 from .ds_class import ds # import from ds_class.py for validationPage.js
-from .GTEXDataAnalyzer import GTEXDataAnalyzer # import from GTEXDataAnalyzer.py for batchPage.js
+from .GTEXDataAnalyzer import GTEXDataAnalyzer # import from GTEXDataAnalyzer.py for grouping/batchPage.js & algorithm/resultPage.js
 import pandas as pd
 from .query import get_sample_names, process_group_query # import from query.py for gtexModal.js
+import os, shutil, errno
+import math
+import fastcluster
 import csv
 
 # Create your views here.
@@ -100,105 +103,8 @@ def input_list2(request):
     elif request.method == 'POST': # Back End request, Front End send
         data = JSONParser().parse(request) # Receive data from front end
 
-        # 'group_lists' is the list of lists of groups sent from groupingPage.js
-        group_lists = data['groupsList'] # syntax: data[key], key = package's name being sent
-        # 'gtex_groups_queries' is the list of gtex group queries sent from groupingPage.js
-        #gtex_groups_queries = data['gtexQueries']
 
-        print(group_lists)
-        #print(gtex_groups_queries)
-        
-        # Retrieve the 'dataString' saved in database
-        dataString = request.session['dataString']
-
-        # import and use def from ds_class.py (from Math Team)
-        dataSet= ds(5)
-        # build the dataframe from 'dataString' 
-        dataSet.dataframe_from_string(dataString)
-
-        # dummy data to send to Math team, delete later
-        group_lists = [['control group','#Patient1 (Gene Score)','#Patient3','#Patient5'],
-                  ['group1','#Patient2','#Patient4'],
-                  ['group2','#Patient6','#Patient7']]
-
-        '''group_lists = [['control group','Patient1','Patient2','Patient3'],
-                  ['group1','Patient4','Patient5','Patient6'],
-                  ['group2','Patient7','Patient8','Patient9'],
-                  ['group3','Patient10','Patient11','Patient12'],
-                  ['group4','Patient13','Patient14','Patient15']]'''
-
-         
-        # what Jon wants:
-        # dont use Skin, Blood, Brain, Muscle for now (files are too big)  
-        # no of samples per each query: 8, 96, 58
-        gtex_groups_queries = [[[],[],['20-29', '30-39'],[],[], ['Kidney','Bladder'], 'gtex group 1'],
-		                    [[],['M'],['20-29', '30-39', '40-49', '50-59'],[],[], ['Liver', 'Kidney'], 'gtex group 2'],
-                            [[], ['F'], ['50-59'], ['Ventilator', 'Fast Natural'], [], ['Liver','Ovary', 'Salivary Gland',], 'gtex group 3']]
-
-        # pass in list of groups, return list of associated dataframes  
-        CListDfs = dataSet.make_groups(group_lists) 
-        # pass in list of GTEx groups, return list of associated dataframes          
-        gtex_groups_dataframes = process_group_query(gtex_groups_queries)   
-        # append GTEx dataframes to group dataframes
-        CListDfs.extend(gtex_groups_dataframes)
-        #print(gtex_groups_dataframes)     
-        #print(CListDfs)
-
-        print(len(gtex_groups_dataframes))
-        print(len(CListDfs))
-        print(CListDfs)
-
-        # get list of all group names (1st item in each list of group_lists)
-        group_names_list = [group_lists[i][0] for i in range(len(group_lists))]
-        # get list of all gtex group names (7th item in each list of gtex_groups_queries)
-        gtex_groups_names = [gtex_groups_queries[i][6] for i in range(len(gtex_groups_queries))]
-        # combine two lists above
-        group_names_list.extend(gtex_groups_names)
-
-        print(group_names_list)
-
-        tf_ens_ids = pd.read_csv("Transcription Factor List.csv")
-        tf_ens_ids = tf_ens_ids.squeeze().tolist()
-
-        # to be used in list3
-        request.session['group_lists'] = group_lists
-        request.session['gtex_groups_queries'] = gtex_groups_queries
-        request.session['group_names_list'] = group_names_list
-        request.session['tf_ens_ids'] = tf_ens_ids
-
-        # Create an analyzer object from imported GTEXDataAnalyzer.py
-        analyzer = GTEXDataAnalyzer(CListDfs, group_names_list, tf_ens_ids) 
-
-        # for uncorrected pca graph in batchPage.js
-        x_uncorrected_pca = [] # list of lists of x-axis of all dataframes
-        y_uncorrected_pca = [] # list of lists of y-axis of all dataframes
-        for df in analyzer.get_uncorrected_dataframes():
-            #print(df)
-            data_set_object = ds(5,df) 
-            x, y = data_set_object.pca_graph() # call pca_graph func from ds_class.py
-            x_uncorrected_pca.append(x)
-            y_uncorrected_pca.append(y)
-        print(x_uncorrected_pca)
-        print(y_uncorrected_pca)
-
-        # for corrected pca graph in batchPage.js
-        x_corrected_pca = [] # list of lists of x-axis of all dataframes
-        y_corrected_pca = [] # list of lists of y-axis of all dataframes
-        for df in analyzer.get_batch_corrected_dataframes():
-            data_set_object = ds(5,df) 
-            x, y = data_set_object.pca_graph() # call pca_graph func from ds_class.py
-            x_corrected_pca.append(x)
-            y_corrected_pca.append(y)
-        print(x_corrected_pca)
-        print(y_corrected_pca)
-        # the batch correction is not done yet!!!!!
-
-        # try this later
-        #request.session['CListDfs'] = CListDfs_session
-
-        return JsonResponse({'x_uncorrected_pca':x_uncorrected_pca,'y_uncorrected_pca':y_uncorrected_pca,
-                             'x_corrected_pca':x_corrected_pca,'y_corrected_pca':y_corrected_pca,
-                             'group_names_list':group_names_list }, status=201)
+        return JsonResponse({}, status=201)
 
 # for algorithmPage.js, saved in urls.py
 @csrf_exempt
