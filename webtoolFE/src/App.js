@@ -11,6 +11,7 @@ import Error from './components/errorPage'
 import ResultPage from './components/resultPage'
 import LoadModal from './components/loadingModal'
 import Contribute from './components/Contributions'
+import Loading from './components/loadingPage'
 import FileUpload from './components/fileUpload'
 
 class App extends React.Component {
@@ -79,13 +80,13 @@ class App extends React.Component {
           )
           }
         />
-        {/* <Route exact path="/loading"
+        <Route exact path="/loading"
           render={() => (
             <Loading
             />
           )
           }
-        />  */}
+        /> 
         <Route exact path="/resultpage"
           render={() => (
             <ResultPage

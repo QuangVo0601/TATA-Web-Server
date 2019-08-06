@@ -143,9 +143,4 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'webtoolFE', "build", "static"),  # update the STATICFILES_DIRS
 )
 
-# For google cloud platform
-# Guide and usage examples of GCP: 
-# https://django-storages.readthedocs.io/en/latest/backends/gcloud.html?fbclid=IwAR2RuMjGszBVkyOQA70diWWHjDkbh1wiB-2BWLEGApm6Hv6ou31NWoWeh4k
-DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
-GS_BUCKET_NAME = 'YOUR_BUCKET_NAME_GOES_HERE' # TODO: Need bucket name
 

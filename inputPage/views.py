@@ -8,9 +8,7 @@ from .ds_class import ds # import from ds_class.py for validationPage.js
 from .GTEXDataAnalyzer import GTEXDataAnalyzer # import from GTEXDataAnalyzer.py for batchPage.js
 import pandas as pd
 from .query import get_sample_names, process_group_query # import from query.py for gtexModal.js
-# Guide and usage examples of GCP: 
-# https://django-storages.readthedocs.io/en/latest/backends/gcloud.html?fbclid=IwAR2RuMjGszBVkyOQA70diWWHjDkbh1wiB-2BWLEGApm6Hv6ou31NWoWeh4k
-from django.core.files.storage import default_storage 
+import csv
 
 # Create your views here.
 def index_page(request):
@@ -358,3 +356,20 @@ def input_detail(request, pk):
 
 
 
+@csrf_exempt
+def input_jobcode(request):
+    """
+    List all code input, or create a new input obj.
+    """
+    if request.method == 'GET': # Back End send, Front End request
+        inputs = Input.objects.all()
+        serializer = InputSerializer(inputs, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+    elif request.method == 'POST': # Back End request, Front End send
+        data = JSONParser().parse(request)
+        jobcode = data['jobcode']
+        print(jobcode)
+        pc = pd.read_csv('/Users/phuongtran/Desktop/TATA-Web-Server/webtoolFE/src/csvDatabase/'+jobcode+'/progress.csv')
+        percent=int(pc.iloc[0,0])
+        return JsonResponse({'progress':percent}, status=201)

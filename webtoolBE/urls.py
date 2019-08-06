@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.urls import path, include, re_path
 from core.views import index
-from inputPage.views import index_page, input_detail, input_list, input_list2, input_list3
+from inputPage.views import index_page, input_detail, input_list, input_list2, input_list3, input_jobcode
 
 
 urlpatterns = [
@@ -24,6 +24,7 @@ urlpatterns = [
     path('backend/list2', input_list2), # for groupingPage.js
     path('backend/list3', input_list3), # for algorithmPage.js
     path('backend/detail', input_detail), # gtex route
+    path('backend/jobcode', input_jobcode), # homepage jobcode input
     path('', index),
     re_path(r'^(?:.*)/?$',index)
 ]

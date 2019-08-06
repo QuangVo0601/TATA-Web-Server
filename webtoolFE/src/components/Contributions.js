@@ -165,7 +165,7 @@ class Contributions extends React.Component {
                                                 <div className="popup">
                                                     <div className="leftContent">
                                                         <div className="name">Humberto Portillo</div>
-                                                        <div className="postion">Graphic Designer</div>
+                                                        <div className="postion">Graphic Designer/Front End Developer</div>
                                                         <div className="contribution-line"></div>
                                                         <div className="bio">Something here</div>
                                                     </div>

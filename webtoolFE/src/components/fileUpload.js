@@ -11,7 +11,7 @@ class FileUpload extends React.Component{
     }
   
     render(){
-        let file =require(`../csvDatabase/${this.state.jobcode}/results/${this.state.filename}`)
+        let file = require(`../csvDatabase/${this.state.jobcode}/results/${this.state.filename}`)
         return(
             <div>
                 <a href={file}>{`download ${this.state.filename}`}</a>
