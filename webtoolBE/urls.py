@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.urls import path, include, re_path
 from core.views import index
-from inputPage.views import index_page, input_detail, input_list, input_list2, input_list3, input_jobcode,,input_results,input_finalPlots,input_finalTables
+from inputPage.views import index_page, input_detail, input_list, input_list2, input_list3, input_jobcode,input_results,input_finalPlots,input_finalTables
 
 
 urlpatterns = [
