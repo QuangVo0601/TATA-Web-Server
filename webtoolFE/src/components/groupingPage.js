@@ -158,7 +158,7 @@ class GroupingPage extends React.Component {
             })
             this.setState({ dndSelectedValue: obj })
             Object.keys(this.myRef).map(key=>{
-                if(this.myRef[key].classList.contains('sample-true') && this.myRef[key]!==null){
+                if(this.myRef[key]!==null && this.myRef[key].classList.contains('sample-true') ){
                     this.myRef[key].classList.remove('sample-true')
                     this.myRef[key].classList.add('sample-false')
                 }
