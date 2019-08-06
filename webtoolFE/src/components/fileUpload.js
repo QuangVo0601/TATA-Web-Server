@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { storage } from '../config/index';
+//import { storage } from '../config/index';
 
 class FileUpload extends React.Component{
     constructor(props){
