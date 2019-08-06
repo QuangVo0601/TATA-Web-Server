@@ -33,7 +33,7 @@ class BatchPage extends React.Component {
     }
 
     // Retrieve from back end the data needed for uncorrected & corrected pca graphs
-    /*componentDidMount() {
+    componentDidMount() {
 
         var group_names_list = JSON.parse(localStorage.getItem('group_names_list'))
 
@@ -60,8 +60,8 @@ class BatchPage extends React.Component {
 
         var x_corrected_pca = JSON.parse(localStorage.getItem('x_corrected_pca'))
         var y_corrected_pca = JSON.parse(localStorage.getItem('y_corrected_pca'))
-        // console.log(x_corrected_pca)
-        // console.log(y_corrected_pca)
+        console.log(x_corrected_pca)
+        console.log(y_corrected_pca)
 
         // for corrected pca graph
         let corrected_traces_temp = []
@@ -85,7 +85,7 @@ class BatchPage extends React.Component {
 
         // localStorage.removeItem('x_uncorrected_pca', 'y_uncorrected_pca', 'x_corrected_pca', 'y_corrected_pca', 'group_names_list')
 
-    }*/
+    }
 
     render() {
         return (

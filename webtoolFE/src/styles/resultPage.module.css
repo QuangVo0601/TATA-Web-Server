@@ -1,0 +1,658 @@
+#wrapper-result{
+	width:768px;
+	display:flex;
+	margin:0 auto;
+}
+#sidenav-content{
+	height:1024px;
+	border-right:1px solid #d3d3d3;
+	width:223px;
+	display:flex;
+	flex-direction:column;
+
+}
+#tatalogo img{
+	margin-left:70px;
+	margin-top:45px;
+	margin-bottom:46px;
+}
+/* #nav-result{
+	display:flex;
+	width:520px;
+	margin-top:67px;
+}
+#nav-result li{
+	list-style:none;
+	display:inline;
+	margin-right:30px;
+	color:#114B5F;
+	font-size:15px;
+font-family: 'Montserrat', sans-serif;
+	font-weight:700px;
+}
+#nav-result li:first-child{
+	margin-left:350px;
+} */
+
+#graph-selection{
+    margin-left: 25px;
+}
+
+/* jobe code */
+#jobCode-section{
+border-bottom: 4px solid #D3D3D3;
+margin-left: 22px;
+width: 122px;
+margin-bottom: 40px;
+padding-bottom: 5px;
+}
+#jobCode{
+   margin: 0 auto;
+   color: #A5A5A5;
+   text-align: center;
+   font-size: 12px;
+   font-weight: 500;
+   font-family: 'Montserrat', sans-serif;
+}
+
+
+.button-result {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 500;
+	font-size: 8pt;
+	/* font-size: 8.75pt; */
+	color: #A5A5A5;
+	outline: none;
+	text-align: center;
+	display: inline-block;
+	width: 120px;
+	height: 25px;
+	/* height: 18px; */
+	border-radius: 8px;
+	cursor: pointer;
+	margin-top:10px;
+	margin-left:24px;
+	background-color:#F5F5F5;
+	border:.5px solid #D3D3D3;
+	/* padding-top: 10px; */
+	padding-bottom: -100px;
+	
+}
+
+.download {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 500;
+	font-size: 8pt;
+	background-color: #114B5F;
+		outline: none;
+	color:white;
+	text-align: center;
+	display: block;
+	border: none;
+	width: 120px;
+	height: 25px;
+	border-radius: 8px;
+	cursor: pointer;
+	margin-left:24px;
+	margin-top:10px;
+}
+
+
+.delete {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 500;
+	font-size: 8pt;
+	background-color: #BA4C4C;
+	outline: none;
+	color:white;
+	text-align: center;
+	display: block;
+	border: none;
+	width: 120px;
+	height: 25px;
+	border-radius: 8px;
+	cursor: pointer;
+	margin-left:24px;
+	margin-top:10px;
+}
+.button-result:hover {
+	background-color: #FF7B26;
+	color:white;
+	border:none;
+}
+.download:hover{
+	background-color: #0F3E4E;
+}
+.delete:hover {
+	background-color: #D32323;
+}
+
+#graphresult-content{
+    display: flex;
+    justify-content: center;
+    font-size:12px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    line-height: 1.65;
+    color:#114B5F;
+}
+em {
+ font-style: italic;
+}
+#graphresult-content p{
+margin-top: 15px;
+}
+#graphresult-content p:first-child{
+margin-top: 0px;
+}
+
+#graph-display{
+    height:625px;
+	margin-top: 63px;
+	margin-left: 30px;
+}
+
+.graph-result{
+	width:465px;
+	height:337px;
+	border:2px solid grey;
+	margin-left:34px;
+	margin-top:40px;
+}
+
+.graph-result:first-child{
+	margin-top:47px;
+}
+
+.batch-display{
+	height:725px;
+	margin-top: 63px;
+	
+}
+.batch-result{
+	width:465px;
+	height:337px;
+	border:2px solid grey;
+	margin-left:34px;
+	margin-top:40px;
+}
+
+.drophelp:hover .helpcontent_result {
+    display: block;
+}
+.helpicon {
+    position: relative;
+ 	/* top: 5px; */
+    margin-left: 1px;
+    margin-bottom: 1px;
+    height: 15px;
+}
+.helpcontent_result {
+    margin-top: 6px;
+    display: none;
+    position: absolute;
+    background-color: #2EC4B6;
+    min-width: 350px;
+    max-width: 350px;
+    padding: 15px;
+    border-radius: 10px;
+    z-index: 1;
+    font-family: 'Montserrat', sans-serif;
+    /* color:white; */
+    font-weight: 500;
+    line-height: 1.4em;
+    font-size:14.2px;
+}
+.text-color{
+	color: white;
+}
+
+.drophelp:hover .helpcontent_result {
+    display: block;
+}
+
+#graphresult-content{
+	margin-top: 5px;
+}
+.result_title{
+font-size:10px;
+font-family: 'Montserrat', sans-serif;
+font-weight: 600;
+line-height: 1.65;
+color:#114B5F;
+}
+
+#top_container
+{
+margin-top: -45px;
+padding: 15px;
+width: 459px;
+height: 900px;
+margin-bottom: 15px;
+overflow-y: scroll;
+overflow-x: scroll;
+background-color: #F2F2F2;
+border-radius: 20px;
+
+} 
+#contents
+{ 	margin-right: 10px;
+display: flex;
+flex-direction: column;
+
+
+}
+.helpicon {
+margin-left: 1px;
+margin-bottom: 1px;
+height: 15px;
+}
+
+.plot_title {
+font-family: 'Oswald', sans-serif;
+font-size: 20px;
+color:#797979;
+line-height:22px;
+margin-bottom: 5px;
+display: inline-block;
+margin: 5px 0;
+}
+
+.drophelp {
+position: relative;
+margin-left: 6px;
+display: inline-block;
+float: left;
+}
+
+.helpcontent {
+margin-top: 6px;
+display: none;
+position: absolute;
+background-color: #2EC4B6;
+/*background-color: #F5F5F5;*/
+/*border: 1px solid #E5E5E5;*/
+min-width: 220px;
+max-width: 350px;
+padding: 15px;
+border-radius: 10px;
+z-index: 1;
+font-family: 'Montserrat', sans-serif;
+  color:white;
+  /*color: #797979;*/
+font-weight: 500;
+line-height: 1.4em;
+font-size:14.2px;
+}
+
+.drophelp:hover .helpcontent {
+display: block;
+
+}
+.graphsize {
+/*width: 1035px;*/
+width: 900px; /* changed by Quang*/
+/*height: 650px;*/
+height: 450px; /* changed by Quang*/
+margin-top: 0px;
+margin-bottom: 15px;
+background: #FFFFFF;
+}
+
+/*////////////// batch Text Info ////////////////////*/
+#batch-section {
+	margin: 0 auto;
+  	display: flex;
+	flex-direction:row;
+	flex-wrap:wrap;
+	margin-top:63px;
+	height:784px;
+	width:500px;
+	margin-left: 50px;
+}
+
+#batch-content
+{ margin-right: 10px;
+	display: flex;
+	flex-direction: column;
+
+}
+
+#batch_corrected_section{
+border: 1px solid #E5E5E5;
+width: 410px;
+margin-bottom: 17px;
+padding: 15px;
+border-radius: 20px;
+background-color: #F4F4F4;
+}
+
+.drophelp {
+	position: relative;
+	margin-left: 6px;
+	display: inline-block;
+	float: left;
+}
+.batch_title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 16px;
+  color:#114B5F;
+  line-height:22px;
+	margin-bottom: 5px;
+	display: inline-block;
+}
+
+.helpicon {
+	margin-left: 1px;
+	margin-bottom: 1px;
+	height: 15px;
+}
+
+.helpcontent_batch {
+	margin-top: 6px;
+	display: none;
+	position: absolute;
+	background-color: #2EC4B6;
+	/*background-color: #F5F5F5;*/
+	/*border: 1px solid #E5E5E5;*/
+	min-width: 220px;
+	max-width: 350px;
+	padding: 15px;
+	border-radius: 10px;
+	z-index: 1;
+	font-family: 'Montserrat', sans-serif;
+  	color:white;
+  	/*color: #797979;*/
+	font-weight: 500;
+	line-height: 1.4em;
+	font-size:14.2px;
+}
+
+.drophelp:hover .helpcontent_batch {
+	display: block;
+
+}
+/* graph sizes  */
+.corrected-graphsize {
+	width: 400px;
+	height: 275px;
+	margin-top: 25px;
+	background:#ededed;
+/* place graph in this gray area */
+}
+/* end of graph sizes */
+
+
+/* /////////////////////////////////////////////// */
+
+@media only screen and (min-width: 1270px){
+	#wrapper-result{
+	width:1280px;
+}
+
+#sidenav-content{
+	height: 800px;
+	width:263px;
+}
+#tatalogo img{
+	margin-left:115px;
+	margin-top:85px;
+	margin-bottom:56px;
+	width:57px;
+	height:59px;
+}
+#nav-result{
+	width:970px;
+	margin-top:50px;
+}
+#nav-result li{
+	list-style:none;
+	display:inline;
+	margin-right:30px;
+}
+#nav-result li:first-child{
+	margin-left:765px;
+}
+
+#jobCode-section{
+	border-bottom: 4px solid #D3D3D3;
+	margin-left: 50px;
+	margin-bottom: 40px;
+	padding-bottom: 5px;
+}
+
+.button-result{
+	margin-left: 50px;
+}
+.download{
+	margin-left: 50px;
+}
+.delete{
+	margin-left: 50px;
+}
+
+#graph-selection{
+	margin-left: 30px;
+}
+
+.result_title{
+	font-size: 12px;
+}
+
+#graphresult-content{
+	margin-top: 10px;
+}
+
+#graph-display{ 
+	height:40px;
+	margin-top: 83px;
+	margin-bottom: 50px;
+	margin-left: 25px;
+}
+.graph-result{
+	width:821px;
+	height:500px;
+	margin-left:75px;
+	margin-top:48px;
+}
+.graph-result:first-child{
+	margin-top:63px;
+}
+
+.batch-display{
+	height:725px;
+	margin-top: 63px;
+	display: flex;
+	flex-direction: row;	
+	
+}
+.batch-result{
+	width:460px;
+	height:450px;
+	border:2px solid grey;
+	margin-left:34px;
+	margin-top:40px;
+}
+
+
+#top_container
+{
+margin-top: -45px;
+width: 925px;
+height: 600px;
+margin-bottom: 20px;
+overflow-y: scroll;
+overflow-x: scroll;
+}
+
+#batch-section{
+	flex-direction:row;
+	margin-top:63px;
+	height:400px;
+	width:1000px;
+	margin-left: 10px;
+}
+#batch-content
+{ margin-right: 10px;
+	display: flex;
+	flex-direction: row;
+
+}
+#batch_corrected_section{
+	display: flex;
+  flex-direction: column;
+ 	width:460px;
+	margin-right: 10px;
+	background-color: #F4F4F4;
+
+}
+.corrected-graphsize {
+	width: 460px;
+	height: 450px;
+	margin-top: 0px;
+	margin-bottom: 25px;
+	background: #ededed;
+	}
+
+}
+
+/* ///////////////////////////////////////////////////// */
+@media only screen and (min-width: 1850px){
+	#wrapper-result{
+	width:1920px;
+}
+#sidenav-content{
+	height:1080px;
+	width:413px;
+}
+#tatalogo img{
+	margin-left:190px;
+	margin-top:82px;
+	margin-bottom:67px;
+	width:89px;
+	height:91px;
+}
+#nav-result{
+	width:1343px;
+	margin-top:73px;
+}
+
+#nav-result li:first-child{
+	margin-left:1150px;
+}
+
+#jobCode-section{
+	border-bottom: 4px solid #D3D3D3;
+	margin-left: 99px;
+	width: 214px;
+	margin-bottom: 40px;
+	padding-bottom: 5px;
+}
+
+.button-result {
+	margin-left:99px;
+	width:214px;
+	height:40px;
+	font-size:20px;
+	margin-top:20px;
+}
+.download {
+	margin-left:99px;
+	width:214px;
+	height:40px;
+	font-size:20px;
+	margin-top:20px;
+
+}
+.delete {
+	margin-left:99px;
+	width:214px;
+	height:40px;
+	font-size:20px;
+	margin-top:20px;
+}
+#graph-display{
+	height:1000px;
+	margin-left: 175px;
+}
+
+.graph-result{
+	width:1198px;
+	height:624px;
+	margin-left:153px;
+	margin-top:60px;
+}
+.graph-result:first-child{
+	margin-top:63px;
+}
+
+.batch-display{
+	height:725px;
+	margin-top: 63px;
+	display: flex;
+	flex-direction: row;	
+	
+}
+.batch-result{
+	width:650px;
+	height:605px;
+	border:2px solid grey;
+	margin-left:34px;
+	margin-top:40px;
+}
+
+#download-data{
+	margin-left: 0;
+}
+
+#top_container
+{
+width: 1070px;
+height: 950px;
+margin-bottom: 20px;
+overflow-y: scroll;
+overflow-x: hidden;
+
+}
+
+#batch-section {
+	margin: 0 auto;
+		display: flex;
+	flex-direction:row;
+	flex-wrap:wrap;
+	margin-top:70px;
+	height:702px;
+	width:1400px;
+	margin-left: 70px;
+	}
+
+	#batch_corrected_section{
+		display: flex;
+		flex-direction: column;
+	 width: 645px;
+	 /* height: 605px; */
+	 margin-right: 10px;
+	 background-color: #F4F4F4;
+	}
+ .batch_title {
+	 font-size: 20px;
+ }
+	#batch-content
+	{
+	 margin-right: 10px;
+	 display: flex;
+	 flex-direction: row;
+
+	}
+
+.corrected-graphsize {
+	width: 645px;
+	height: 605px;
+	margin-top: 0px;
+	margin-bottom: 15px;
+	background: #ededed;
+	}
+
+
+}
+
