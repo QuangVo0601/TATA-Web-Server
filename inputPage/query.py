@@ -1,16 +1,30 @@
 import pandas as pd 
 
+'''---------for mason server----------'''
+'''df = pd.read_csv('/var/www/html/webtool/filtered_metadata.csv')
 
-df = pd.read_csv('filtered_metadata.csv')
+path = '/var/www/html/webtool/inputPage/GTExDatabase/'
 
 #lazy, just to get all gene names
-genes = pd.read_csv('../querying/GTEX Cervix Uteri.csv').iloc[:,0]
+genes = pd.read_csv(path+'GTEX Cervix Uteri.csv').iloc[:,0]
 
-tissue_map = {'Stomach': '../querying/GTEX Stomach.csv', 'Muscle' : '../querying/GTEX Muscle.csv', 'Thyroid' : '../querying/GTEX Thyroid.csv', 'Ovary' : '../querying/GTEX Ovary.csv', 'Breast' : '../querying/GTEX Breast.csv', 'Blood Vessel' : '../querying/GTEX Blood Vessel.csv', 
-'Small Intestine' : '../querying/GTEX Small Intestine.csv', 'Cervix Uteri': '../querying/GTEX Cervix Uteri.csv', 'Blood' : '../querying/GTEX Whole Blood.csv', 'Pituitary' : '../querying/GTEX Pituitary.csv', 'Skin' : '../querying/GTEX Skin.csv', 'Fallopian Tube': '../querying/GTEX Fallopian Tube.csv', 
-'Heart' : '../querying/GTEX Heart.csv', 'Vagina' : '../querying/GTEX Vagina.csv', 'Nerve' : '../querying/GTEX Nerve.csv', 'Liver' : '../querying/GTEX Liver.csv', 'Prostate': '../querying/GTEX Prostate.csv', 'Salivary Gland' : '../querying/GTEX Salivary Gland.csv', 'Uterus' : '../querying/GTEX Uterus.csv', 'Adipose Tissue': '../querying/GTEX Adipose Tissue.csv', 
-'Adrenal Gland':'../querying/GTEX Adrenal Gland.csv', 'Testis' : '../querying/GTEX Testis.csv', 'Lung': '../querying/GTEX Lung.csv', 'Kidney': '../querying/GTEX Kidney.csv', 'Colon': '../querying/GTEX Colon.csv', 'Spleen': '../querying/GTEX Spleen.csv', 'Brain' :'../querying/GTEX Brain.csv', 'Bladder': '../querying/GTEX Bladder.csv', 'Pancreas':'../querying/GTEX Pancreas.csv', 'Esophagus':'../querying/GTEX Esophagus.csv'}
+tissue_map = {'Stomach': path+'GTEX Stomach.csv', 'Muscle' : path+'GTEX Muscle.csv', 'Thyroid' : path+'GTEX Thyroid.csv', 'Ovary' : path+'GTEX Ovary.csv', 'Breast' : path+'GTEX Breast.csv', 'Blood Vessel' : path+'GTEX Blood Vessel.csv', 
+'Small Intestine' : path+'GTEX Small Intestine.csv', 'Cervix Uteri': path+'GTEX Cervix Uteri.csv', 'Blood' : path+'GTEX Whole Blood.csv', 'Pituitary' : path+'GTEX Pituitary.csv', 'Skin' : path+'GTEX Skin.csv', 'Fallopian Tube': path+'GTEX Fallopian Tube.csv', 
+'Heart' : path+'GTEX Heart.csv', 'Vagina' : path+'GTEX Vagina.csv', 'Nerve' : path+'GTEX Nerve.csv', 'Liver' : path+'GTEX Liver.csv', 'Prostate': path+'GTEX Prostate.csv', 'Salivary Gland' : path+'GTEX Salivary Gland.csv', 'Uterus' : path+'GTEX Uterus.csv', 'Adipose Tissue': path+'GTEX Adipose Tissue.csv', 
+'Adrenal Gland':path+'GTEX Adrenal Gland.csv', 'Testis' : path+'GTEX Testis.csv', 'Lung': path+'GTEX Lung.csv', 'Kidney': path+'GTEX Kidney.csv', 'Colon': path+'GTEX Colon.csv', 'Spleen': path+'GTEX Spleen.csv', 'Brain' :path+'GTEX Brain.csv', 'Bladder': path+'GTEX Bladder.csv', 'Pancreas':path+'GTEX Pancreas.csv', 'Esophagus':path+'GTEX Esophagus.csv'}'''
 
+'''---------for localhost----------'''
+df = pd.read_csv('filtered_metadata.csv')
+
+path = '../querying/'
+
+#lazy, just to get all gene names
+genes = pd.read_csv(path + 'GTEX Cervix Uteri.csv').iloc[:,0]
+
+tissue_map = {'Stomach': path+'GTEX Stomach.csv', 'Muscle' : path+'GTEX Muscle.csv', 'Thyroid' : path+'GTEX Thyroid.csv', 'Ovary' : path+'GTEX Ovary.csv', 'Breast' : path+'GTEX Breast.csv', 'Blood Vessel' : path+'GTEX Blood Vessel.csv', 
+'Small Intestine' : path+'GTEX Small Intestine.csv', 'Cervix Uteri': path+'GTEX Cervix Uteri.csv', 'Blood' : path+'GTEX Whole Blood.csv', 'Pituitary' : path+'GTEX Pituitary.csv', 'Skin' : path+'GTEX Skin.csv', 'Fallopian Tube': path+'GTEX Fallopian Tube.csv', 
+'Heart' : path+'GTEX Heart.csv', 'Vagina' : path+'GTEX Vagina.csv', 'Nerve' : path+'GTEX Nerve.csv', 'Liver' : path+'GTEX Liver.csv', 'Prostate': path+'GTEX Prostate.csv', 'Salivary Gland' : path+'GTEX Salivary Gland.csv', 'Uterus' : path+'GTEX Uterus.csv', 'Adipose Tissue': path+'GTEX Adipose Tissue.csv', 
+'Adrenal Gland':path+'GTEX Adrenal Gland.csv', 'Testis' : path+'GTEX Testis.csv', 'Lung': path+'GTEX Lung.csv', 'Kidney': path+'GTEX Kidney.csv', 'Colon': path+'GTEX Colon.csv', 'Spleen': path+'GTEX Spleen.csv', 'Brain' :path+'GTEX Brain.csv', 'Bladder': path+'GTEX Bladder.csv', 'Pancreas':path+'GTEX Pancreas.csv', 'Esophagus':path+'GTEX Esophagus.csv'}
 
 ## A QUERY SHOULD LOOK SOMETHING LIKE 
 ### [[NAMES (USUALLY EMPTY)], [GENDER], [AGE RANGE], [DEATH (NEED TO UPDATE THIS)], [SMRIN (USUALLY EMPTY)
