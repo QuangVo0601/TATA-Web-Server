@@ -355,7 +355,7 @@ def input_detail(request, pk):
         return HttpResponse(status=204)'''
 
 
-
+# for homepage.js, saved in urls.py
 @csrf_exempt
 def input_jobcode(request):
     """
