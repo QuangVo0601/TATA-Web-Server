@@ -89,7 +89,7 @@ def input_list(request):
         return JsonResponse({'x_dge':x_dge,'y_dge':y_dge,'x_tpc':x_tpc,'y_tpc':y_tpc, 'x_pca': x_pca, 'y_pca': y_pca, 'pca_text': pca_text}, status=201) 
     
 
-# for groupingPage.js, saved in urls.py
+# for groupingPage.js => batchPage.js, saved in urls.py
 @csrf_exempt
 def input_list2(request):
     """
@@ -103,10 +103,124 @@ def input_list2(request):
     elif request.method == 'POST': # Back End request, Front End send
         data = JSONParser().parse(request) # Receive data from front end
 
+        # 'group_lists' is the list of lists of groups sent from groupingPage.js
+        group_lists = data['groupsList'] # syntax: data[key], key = package's name being sent
+        # 'gtex_groups_queries' is the list of gtex group queries sent from groupingPage.js
+        #gtex_groups_queries = data['gtexQueries']
 
-        return JsonResponse({}, status=201)
+        print(group_lists)
+        #print(gtex_groups_queries)
+        
+        # Retrieve the 'dataString' saved in database
+        dataString = request.session['dataString']
 
-# for algorithmPage.js, saved in urls.py
+        # import and use def from ds_class.py (from Math Team)
+        dataSet= ds(5)
+        # build the dataframe from 'dataString' 
+        dataSet.dataframe_from_string(dataString)
+
+        group_lists = [['control group','Patient1','Patient2','Patient3'],
+                  ['group1','Patient4','Patient5','Patient6'],
+                  ['group2','Patient7','Patient8','Patient9'],
+                  ['group3','Patient10','Patient11','Patient12'],
+                  ['group4','Patient13','Patient14','Patient15']]
+
+        # no of samples per each query: 8, 96, 58
+        gtex_groups_queries = [[[],[],['20-29', '30-39'],[],[], ['Kidney'], 'gtex group 1'],
+		                    [[],['M'],['20-29', '30-39', '40-49', '50-59'],[],[], ['Bladder'], 'gtex group 2'],
+                            [[], ['F'], ['50-59'], ['Ventilator', 'Fast Natural'], [], ['Liver'], 'gtex group 3']]
+
+        # pass in list of groups, return list of associated dataframes  
+        CListDfs = dataSet.make_groups(group_lists) 
+        # pass in list of GTEx groups, return list of associated dataframes          
+        gtex_groups_dataframes = process_group_query(gtex_groups_queries)   
+        # append GTEx dataframes to group dataframes
+        CListDfs.extend(gtex_groups_dataframes)
+
+        print(len(CListDfs))
+
+        # get list of all group names (1st item in each list of group_lists)
+        group_names_list = [group_lists[i][0] for i in range(len(group_lists))]
+        # get list of all gtex group names (7th item in each list of gtex_groups_queries)
+        gtex_groups_names = [gtex_groups_queries[i][6] for i in range(len(gtex_groups_queries))]
+        # combine two lists above
+        group_names_list.extend(gtex_groups_names)
+
+        print(group_names_list)
+
+        # tf_ens_ids = pd.read_csv("/var/www/html/webtool/Transcription Factor List.csv") # for mason server
+        tf_ens_ids = pd.read_csv("Transcription Factor List.csv") # for localhost
+        tf_ens_ids = tf_ens_ids.squeeze().tolist()
+
+        
+        #analyzer = GTEXDataAnalyzerBatch(CListDfs, group_names_list, tf_ens_ids) 
+
+        # Create an analyzer object from imported GTEXDataAnalyzer.py
+        # need to be global because it is used in another function
+        global analyzer
+        # analyzer = GTEXDataAnalyzer(CListDfs, group_names_list, tf_ens_ids, '/var/www/html/webtool/webtoolFE/src/csvDatabase') # for mason server
+        analyzer = GTEXDataAnalyzer(CListDfs, group_names_list, tf_ens_ids, 'webtoolFE/src/csvDatabase') # for localhost
+
+        jobCode = analyzer.job_code_mgr.get_job_code()
+        print(jobCode)
+        x_corrected_pca, y_corrected_pca = analyzer.get_pca_batch_coordinates()
+        print(len(x_corrected_pca))
+        print(x_corrected_pca)
+        print(len(y_corrected_pca))
+        print(y_corrected_pca)
+
+        x_uncorrected_pca, y_uncorrected_pca = analyzer.get_pca_uncorrected_coordinates()
+        print(len(x_uncorrected_pca))
+        print(x_uncorrected_pca)
+        print(len(y_uncorrected_pca))
+        print(y_uncorrected_pca)        
+
+        # let's save dge, tpc, pca in jobCode folder for now, may move later
+        # Retrieve them from session database
+        x_dge = request.session['x_dge']
+        y_dge = request.session['y_dge']
+        x_tpc = request.session['x_tpc'] 
+        y_tpc = request.session['y_tpc']  
+        x_pca = request.session['x_pca']  
+        y_pca = request.session['y_pca']  
+        pca_text = request.session['pca_text']
+
+        # create a subfolder inside jobcode folder for exploratory plots
+        #csvDatabase_path = '/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobCode+'/exploratory/' # for mason server
+        csvDatabase_path = 'webtoolFE/src/csvDatabase/'+jobCode+'/exploratory/' # for localhost
+        try:
+            os.mkdir(csvDatabase_path) # create a subfolder here
+        except OSError as e:
+            if e.errno != errno.EEXIST:
+                #directory already exists
+                pass
+            else:
+                print(e) 
+
+        # save all the coordinates in that 'exploratory' folder  
+        # save x_dge, y_dge as a csv in the jobCode/exploratory subfolder      
+        dge_zippedList =  list(zip(x_dge, y_dge))
+        dge_df = pd.DataFrame(dge_zippedList, columns = ['x_dge' , 'y_dge']) 
+        dge_df.to_csv(csvDatabase_path + 'dge.csv')
+        #print(dge_df)
+
+        # save x_tpc, y_tpc as a csv in the jobCode/exploratory subfolder 
+        x_tpc_df = pd.DataFrame(x_tpc, columns = ['x_tpc'])
+        x_tpc_df.to_csv(csvDatabase_path + 'x_tpc.csv', index=False)
+        y_tpc_df = pd.DataFrame(y_tpc)
+        y_tpc_df.to_csv(csvDatabase_path + 'y_tpc.csv', index=False)
+
+        # save x_pca, y_pca, pca_text as a csv in the jobCode/exploratory subfolder 
+        pca_zippedList = list(zip(x_pca, y_pca, pca_text))
+        pca_df = pd.DataFrame(pca_zippedList, columns = ['x_pca', 'y_pca', 'pca_text'])
+        pca_df.to_csv(csvDatabase_path + 'pca.csv')
+        #print(pca_df)
+
+        return JsonResponse({'x_uncorrected_pca':x_uncorrected_pca,'y_uncorrected_pca':y_uncorrected_pca,
+                             'x_corrected_pca':x_corrected_pca,'y_corrected_pca':y_corrected_pca,
+                             'group_names_list':group_names_list}, status=201)
+
+# for algorithmPage.js => resultPage.js, saved in urls.py
 @csrf_exempt
 def input_list3(request):
     """
@@ -118,7 +232,7 @@ def input_list3(request):
         return JsonResponse(serializer.data, safe=False)
 
     elif request.method == 'POST': # Back End request, Front End send
-        '''data = JSONParser().parse(request) # Receive data from front end
+        data = JSONParser().parse(request) # Receive data from front end
 
         # 'selections' is the selections sent from algorithmPage.js
         # batch correction (yes/no), algorithm, sample variance, false discovery rate, bonferroni alpha
@@ -137,67 +251,49 @@ def input_list3(request):
             test_mode = 3 # pass 3 for batch corrected data AND Unequal variance t t test
         #print(test_mode)
 
-        # Retrieve everything saved from list2
-        group_lists = request.session['group_lists']
-        gtex_groups_queries = request.session['gtex_groups_queries']
-        group_names_list = request.session['group_names_list']
-        tf_ens_ids = request.session['tf_ens_ids']
-
-        # Retrieve the 'dataString' saved in database
-        dataString = request.session['dataString']
-        # import and use def from ds_class.py (from Math Team)
-        dataSet= ds(5)
-        # build the dataframe from 'dataString' 
-        dataSet.dataframe_from_string(dataString)
-
-        # pass in list of groups, return list of associated dataframes  
-        CListDfs = dataSet.make_groups(group_lists) 
-        # pass in list of GTEx groups, return list of associated dataframes          
-        gtex_groups_dataframes = process_group_query(gtex_groups_queries)   
-        # append GTEx dataframes to group dataframes
-        CListDfs.extend(gtex_groups_dataframes)
-        #print(CListDfs)        
-
-        # Create an analyzer object from imported GTEXDataAnalyzer.py
-        analyzer = GTEXDataAnalyzer(CListDfs, group_names_list, tf_ens_ids) 
         # 'dataframes' is a list of dataframes, and each dataframe
         # has 8 columns(for now): overlapping ensIDs, fold change, t-values, p-values, log(p-values),
         # control group mean, group? mean, mean of Control group and group? averages (mean TPM)
-
+        ''' Looks like this: ['Control group vs. group1', 'fold change', 't_values', 'p_values',
+                            'log p values', 'Control group mean', 'group1 mean',
+                            'mean of Control group and group1 averages']'''
+        # using the same global 'analyzer' object from list2
+        print(analyzer.job_code_mgr.get_job_code())
+        
         dataframes_for_graph = analyzer.do_statistical_analysis(test_mode)  
+
+        jobCode = analyzer.job_code_mgr.get_job_code()
+
+        #csvDatabase_path = '/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobCode+'/results/' # for mason server
+        csvDatabase_path = 'webtoolFE/src/csvDatabase/'+jobCode+'/results/' # for localhost
+
+        csv_names_list = []
+        # convert dataframes to csv files, saved in csvDatabase 
+        # for later use in resultPage.js & finalPlots.js & downloading
+        for dataframe in dataframes_for_graph:
+            csv_file_name = dataframe.columns.values[0] # get the 1st item of the header
+            csv_names_list.append(csv_file_name) # add each csv name to the name list
+
+        # create a dataframe for csv_names_list, then save as csv in database
+        csv_names_list_df = pd.DataFrame(csv_names_list, columns=["csv_file_names"])
+        csv_names_list_df.to_csv(csvDatabase_path+'csv_names_list.csv', index=False)
+
+        # bonferroni alpha from algorithmPage.js
+        alpha = selections[4] 
+        # fold change, default is 2
+        fc = 2 
+        # caused the warning, then crash :(
+        # create heatmaps png in 'jobCode' folder
+        analyzer.cluster_graphs(alpha, fc, dataframes_for_graph)
 
         print(dataframes_for_graph[0].iloc[:,1])
         print(dataframes_for_graph[0].iloc[:,4])
-        print(dataframes_for_graph[0].iloc[:,7])        
+        print(dataframes_for_graph[0].iloc[:,7])       
 
-        #---------------for Graph 1 (Volcano Plot)-------------#       
-        # only use 'fold change' col for x_axis, 'log(p-values)' for y_axis
-        # [[x_df1...], [x_df2...], [x_df3...],...]
-        x_volcano = [list(dataframes_for_graph[i].iloc[:,1]) for i in range(len(dataframes_for_graph))] 
-        # [[y_df1...], [y_df2...], [y_df3...],...]
-        y_volcano = [list(dataframes_for_graph[i].iloc[:,4]) for i in range(len(dataframes_for_graph))]
-        #---------------------Graph 1 ends---------------------#
-
-        print(len(x_volcano))
-        print(len(y_volcano))
-        #print(x_volcano[0])
-        #print(y_volcano[0])
-
-       
-
-        #---------------for Graph 2 (Differential Expression TPM Plot)-------------#
-        # only use 'mean TPM' col for x_axis, 'fold change' for y_axis
-        x_differential = [list(dataframes_for_graph[i].iloc[:,7]) for i in range(len(dataframes_for_graph))]
-        y_differential = [list(dataframes_for_graph[i].iloc[:,1]) for i in range(len(dataframes_for_graph))]
-        #---------------------Graph 2 ends---------------------#
-
-        test_list = [x_volcano[0],y_volcano[0]]
-        test_list2 = [x_differential[0],y_differential[0]]
-
-        '''
-        # working on the copy version
+        request.session['jobCode'] = jobCode # for now
 
     return JsonResponse({}, status=201)
+
 
 # for gtexModal.js, saved in urls.py
 @csrf_exempt
@@ -217,9 +313,9 @@ def input_detail(request):
         
         # call function from query.py to get sample count, 
         # based on "gtexData" received from front end . Ex: 'gtexData'
-        # [[],['F'],['20-29', '30-39'],['Ventilator'],[],['Skin','Blood']] = 192 samples
-        # [[], ['M'], ['70-79'], ['Ill Chronic'], [], []] = 38 samples
-        # [[], ['M', 'F'], ['50-59'], ['Ill Unexpected', 'Fast Natural'], [], ['Breast', 'Salivary Gland', 'Vagina']] = 43 samples
+        # [[],['F'],['20-29', '30-39'],['Ventilator'],[],['Skin','Blood']] = 80 samples
+        # [[], ['M'], ['70-79'], ['Ill Chronic'], [], []] = 31 samples
+        # [[], ['M', 'F'], ['50-59'], ['Ill Unexpected', 'Fast Natural'], [], ['Breast', 'Salivary Gland', 'Vagina']] = 38 samples
         for i in range(len(gtexData)):
             if (gtexData[i]): # if gtexData is not empty, call function
                 sample_names = get_sample_names(gtexData) 
@@ -233,6 +329,212 @@ def input_detail(request):
         print(sample_count)
         
         return JsonResponse({'sample_count': sample_count,'sample_array': sample_names}, status=201) 
+
+# for resultPage.js, saved in urls.py
+@csrf_exempt
+def input_results(request):
+    """
+    List all code input, or create a new input obj.
+    """
+    if request.method == 'GET': # Back End send, Front End request
+        inputs = Input.objects.all()
+        serializer = InputSerializer(inputs, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+    elif request.method == 'POST': # Back End request, Front End send
+        data = JSONParser().parse(request) # Receive data from front end
+
+        # for exploratory, batch, job code, csv_names_list for finalPlots & finalTables
+
+        #jobCode = data['jobCode'] # syntax: data[key], key = package's name being sent
+        jobCode = request.session['jobCode'] # for now
+        print('Job code is' + jobCode)
+
+        #---------------for Exploratory Plots-------------#    
+        # path to exploratory plots files
+        #csvDatabase_path = '/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobCode+'/exploratory/' # for mason server
+        csvDatabase_path = 'webtoolFE/src/csvDatabase/'+jobCode+'/exploratory/' # for localhost
+        # get coordinates for dge graph
+        dge_df = pd.read_csv(csvDatabase_path + 'dge.csv') 
+        x_dge = list(dge_df.iloc[:,1]) # 
+        y_dge = list(dge_df.iloc[:,2]) # 
+        # get coordinates for tpc graph
+        y_tpc_df = pd.read_csv(csvDatabase_path + 'y_tpc.csv') 
+        y_tpc = y_tpc_df.values.tolist()
+        print(y_tpc)
+        x_tpc_df = pd.read_csv(csvDatabase_path + 'x_tpc.csv') 
+        x_tpc = list(x_tpc_df.iloc[:,0])
+        print(x_tpc)
+        # get coordinates for pca graph
+        pca_df = pd.read_csv(csvDatabase_path + 'pca.csv')
+        x_pca = list(pca_df.iloc[:,1]) # need to change "dataframe to sth else"
+        y_pca = list(pca_df.iloc[:,2]) # 
+        pca_text = list(pca_df.iloc[:,3])
+        #---------------Exploratory Plots ends------------#
+
+        # path to batch correction plots files
+        #csvDatabase_path = '../csvDatabase/'+jobCode+'/batch/'+'batch.csv' # may change
+        # then do sth for corrected & uncorrected graphs'''
+        '''#---------------for Batch Correction--------------#
+        x_uncorrected_pca = list(dataframe.iloc[:,8]) 
+        y_uncorrected_pca = list(dataframe.iloc[:,2]) 
+        x_corrected_pca = 
+        y_corrected_pca = 
+        #----------------Batch Correction ends------------#'''
+
+         # path to the csv_names_list file
+        #csvDatabase_path = '/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobCode+'/results/'+'csv_names_list.csv' #for mason server
+        csvDatabase_path = 'webtoolFE/src/csvDatabase/'+jobCode+'/results/'+'csv_names_list.csv' #for localhost
+        # convert csv to a list of csv file names
+        csv_names_list_df = pd.read_csv(csvDatabase_path)   
+        csv_names_list = list(csv_names_list_df.iloc[:,0])
+
+        print(csv_names_list)  
+
+    return JsonResponse({'jobCode': jobCode, 'csv_names_list': csv_names_list,
+                         'x_dge': x_dge, 'y_dge': y_dge,
+                         'x_tpc': x_tpc, 'y_tpc': y_tpc,
+                         'x_pca': x_pca, 'y_pca': y_pca, 'pca_text': pca_text}, status=201)
+
+
+# for finalPlots.js, saved in urls.py
+@csrf_exempt
+def input_finalPlots(request):
+    """
+    List all code input, or create a new input obj.
+    """
+    if request.method == 'GET': # Back End send, Front End request
+        inputs = Input.objects.all()
+        serializer = InputSerializer(inputs, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+    elif request.method == 'POST': # Back End request, Front End send
+        data = JSONParser().parse(request) # Receive data from front end
+
+        jobCode = data['jobCode'] # syntax: data[key], key = package's name being sent
+        csvFileName = data['csvFileName']
+        print(jobCode)
+        print(csvFileName)
+        # path to the requested csv
+        #csvDatabase_path = '/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobCode+'/results/'+csvFileName+' DE results.csv' # for mason server
+        csvDatabase_path = 'webtoolFE/src/csvDatabase/'+jobCode+'/results/'+csvFileName+' DE results.csv' # for localhost
+        # convert csv to a dataframe used for graphing
+        dataframe = pd.read_csv(csvDatabase_path)
+
+        alpha = 0.05 # for now, should be from algorithm
+
+        # delete later
+        print(dataframe.iloc[:,2])
+        print(dataframe.iloc[:,5])
+        print(dataframe.iloc[:,8])        
+
+        #---------------for Graph 1 (Volcano Plot)-------------#       
+        # only use 'fold change' col for x_axis, '-log(p-values)' for y_axis
+        x_volcano = list(dataframe.iloc[:,2]) # fold change
+        y_volcano = list(dataframe.iloc[:,5]) # -log(p-values)
+        x_volcano_black = []
+        x_volcano_red = []
+        y_volcano_black = []
+        y_volcano_red = []
+
+        #---------------for Graph 2 (Differential Expression TPM Plot)-------------#
+        # only use 'mean TPM' col for x_axis, 'fold change' for y_axis
+        x_differential = list(dataframe.iloc[:,8]) # mean TPM
+        y_differential = list(dataframe.iloc[:,2]) # fold change
+        x_differential_black = []
+        x_differential_red = []
+        y_differential_black = []
+        y_differential_red = []
+
+        # if -log10(p_val) < -log10(alpha/numberOfRows)) => black else red
+        # check for both graphs
+        numberOfRows = len(x_volcano)
+        
+        for i in range(numberOfRows):
+            if y_volcano[i] < (-math.log10(alpha/numberOfRows)):
+                # volcano plot black
+                x_volcano_black.append(x_volcano[i])
+                y_volcano_black.append(y_volcano[i])
+                # differential plot black
+                x_differential_black.append(x_differential[i])
+                y_differential_black.append(y_differential[i])
+            else:
+                # volcano plot red
+                x_volcano_red.append(x_volcano[i])
+                y_volcano_red.append(y_volcano[i])
+                # differential plot red
+                x_differential_red.append(x_differential[i])
+                y_differential_red.append(y_differential[i])
+        
+        # delete later
+        print(len(x_volcano))
+        print(len(y_volcano))
+        print(len(x_volcano_black))
+        print(len(y_volcano_black))
+        print(len(x_volcano_red))
+        print(len(y_volcano_red))
+        print(len(x_differential_black))
+        print(len(y_differential_black))
+        print(len(x_differential_red))
+        print(len(y_differential_red))     
+
+        # to be returned to front end
+        x_volcano = [x_volcano_black,x_volcano_red]   
+        y_volcano = [y_volcano_black,y_volcano_red]
+        x_differential = [x_differential_black,x_differential_red]
+        y_differential = [y_differential_black,y_differential_red]
+        ensIDs = list(dataframe.iloc[:,1]) # ens ids column 
+
+        # still doesn't work in front end
+        #heatmap_png_path = '/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobCode+'/results/'+csvFileName+' heatmap.png' # for mason server
+        heatmap_png_path = 'webtoolFE/src/csvDatabase/'+jobCode+'/results/'+csvFileName+' heatmap.png' # for localhost
+      
+
+    return JsonResponse({'x_volcano': x_volcano, 'y_volcano': y_volcano,
+                         'x_differential': x_differential, 'y_differential': y_differential,
+                         'ensIDs': ensIDs, 'heatmap_png_path': heatmap_png_path}, status=201)
+
+# for finalTables.js, saved in urls.py
+@csrf_exempt
+def input_finalTables(request):
+    """
+    List all code input, or create a new input obj.
+    """
+    if request.method == 'GET': # Back End send, Front End request
+        inputs = Input.objects.all()
+        serializer = InputSerializer(inputs, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+    elif request.method == 'POST': # Back End request, Front End send
+        data = JSONParser().parse(request) # Receive data from front end
+
+        jobCode = data['jobCode'] # syntax: data[key], key = package's name being sent
+        csvFileName = data['csvFileName']
+
+        print(jobCode)
+        print(csvFileName)
+
+        # path to the requested csv
+        #csvDatabase_path = '/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobCode+'/results/'+csvFileName+' DE results.csv' #for mason server
+        csvDatabase_path = 'webtoolFE/src/csvDatabase/'+jobCode+'/results/'+csvFileName+' DE results.csv' #for localhost
+        # convert csv to a dataframe used for graphing
+        dataframe = pd.read_csv(csvDatabase_path)
+        # has 8 columns(for now): overlapping ensIDs, fold change, t-values, p-values, -log(p-values),
+        # control group mean, group? mean, mean of Control group and group? averages (mean TPM)
+        ''' Looks like this: ['Control group vs. group1', 'fold change', 't_values', 'p_values',
+                            'log p values', 'Control group mean', 'group1 mean',
+                            'mean of Control group and group1 averages']'''
+
+        # get the header for the table
+        header = list([dataframe.columns[i]] for i in range(len(dataframe.columns)))
+        header[0][0] = "" # 1st column name should be ""
+        print(header)
+
+        # convert the dataframe to a list of lists, every list is a column
+        all_columns = dataframe.transpose().values.tolist()
+        print(len(all_columns))
+    
+    return JsonResponse({'all_columns': all_columns, 'header': header}, status=201)
 
 '''@csrf_exempt
 def input_detail(request, pk):
