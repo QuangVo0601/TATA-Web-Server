@@ -649,12 +649,23 @@ form {
 
 .signIn{
 	display: flex;
+	font-family: 'Montserrat', sans-serif;
+	font-weight:700;
+	  color:#114B5F;
+	  font-size: 15px;
 	justify-content: space-between;
 	border-bottom: 2px solid #CCCCCC;
 	border-radius: 1px;
 	width: 92%;
 		z-index: 1;
 		opacity: 3;
+}
+
+.gtexname{
+	font-family: 'Montserrat', sans-serif;
+	font-weight:700;
+	  color:#114B5F;
+	  font-size: 15px;
 }
 
 .groupingInput{

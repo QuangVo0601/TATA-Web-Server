@@ -1,5 +1,7 @@
 import React from "react";
-// import "../styles/tata.css";
+import {
+    withRouter
+} from 'react-router-dom'
 import "../styles/algorithmPage.css";
 import axios from 'axios'; // to send data to back end
 import Select from "react-select" // to use dropbox
@@ -76,10 +78,9 @@ class AlgorithmPage extends React.Component {
         }).then((arr) => { // to receive data from back end 
             localStorage.setItem('test_list', JSON.stringify(arr.data.test_list))
             localStorage.setItem('test_list2', JSON.stringify(arr.data.test_list2))
+        }).then(()=>{
+            this.props.history.push('/resultpage')
         })
-        // }).then(()=>{
-        //     this.setState({ href: '/resultpage' }) 
-        // })
 
         //this.setState({ href: '/resultpage' }) 
     }
@@ -258,4 +259,4 @@ class AlgorithmPage extends React.Component {
         }
     }
 }
-export default AlgorithmPage;
+export default withRouter(AlgorithmPage);

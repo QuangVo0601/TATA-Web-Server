@@ -198,7 +198,7 @@ class GtexModule extends React.Component {
                                 <div id="controlgroup">
                                     <h2 className="gtexh2">GTEx Group Name:</h2>
                                     {/* <input type="controlgroup" placeholder="" autocomplete="off" required /> */}
-                                    <input type="text" value={this.state.gtexGroupName} onChange={this.handleGtexGroupName} />
+                                    <input type="text" value={this.state.gtexGroupName} onChange={this.handleGtexGroupName} className="gtexname"/>
                                 </div>
                                 <div id="sample">
                                     <h2 className="gtexh2">Sample Count:</h2>
