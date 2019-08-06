@@ -74,12 +74,12 @@ class Contributions extends React.Component {
                                                             Luis Rodriguez
                                                     </div>
                                                         <div className="postion">
-                                                            Mentor & Biologist
+                                                        Biology Mentor
                                                     </div>
                                                         <div className="contribution-line">
                                                         </div>
                                                         <div className="bio">
-                                                            Something here
+                                                        Dr. Rodriguez is a postdoctoral researcher at George Mason under the guidance of Dr. Geraldine Grant.  As a member of both the 2018 and 2019 team Dr. Rodriguez was the mentor who guided the overall biological relevance of the tool.  Dr. Rodriguez is trained in the application of genomics to problems of disease and used this expertise to ensure that the algorithms and bioinformatic approaches yielded biologically relevance data.  Throughout the process Dr. Rodriguez also served as the connection between the 2018 and 2019 project, ensuring that TATA was a collaborative effort between the students in both summer sessions.
 											        </div>
                                                     </div>
                                                     <div
@@ -110,9 +110,9 @@ class Contributions extends React.Component {
                                                 <div className="popup">
                                                     <div className="leftContent">
                                                         <div className="name">Shanshan Cui</div>
-                                                        <div className="postion">Graphic Designer</div>
+                                                        <div className="postion">Graphic Design Mentor</div>
                                                         <div className="contribution-line"></div>
-                                                        <div className="bio">Something here</div>
+                                                        <div className="bio">Shanshan Cui is an associate professor for the George Mason College of Visual and Performing Arts.  Shanshan brought her expertise in graphic information design and human-computer interface to the project.  Shanshan recruited three talented graphic design students to the 2019 project and supervised their design of the webtool.  While the graphic design students developed the styling and layout for the webtool, Shanshan refined their ideas and helped in bringing out their creativity.  Shanshan was critical in ensuring that TATA was both functional and intuitive for the user.</div>
                                                     </div>
                                                     <div className="rightPhoto" id="Shanshan_Cui"></div>
 
@@ -138,9 +138,14 @@ class Contributions extends React.Component {
                                                 <div className="popup">
                                                     <div className="leftContent">
                                                         <div className="name">Tyrus Berry</div>
-                                                        <div className="postion">Graphic Designer</div>
+                                                        <div className="postion">Mathematics Mentor</div>
                                                         <div className="contribution-line"></div>
-                                                        <div className="bio">Something here</div>
+                                                        <div className="bio">
+                                                            Dr. Berry is a professor of Mathematics at George Mason in the department of Mathematical Sciences. As a member of the 2019 team Dr. 
+                                                            Berry was the faculty mentor coordinating the mathematical analysis and statistical aspects of the tool. 
+                                                            Dr. Berry supervised the developed algorithms from the point of view of data visualization, normalization, and statistical analysis.  
+                                                            Together with the other mentors, Dr. Berry also helped manage and oversee the coordination of the various student teams.
+                                                        </div>
                                                     </div>
                                                     <div className="rightPhoto" id="Tyrus_Berry"></div>
                                                 </div>
@@ -167,7 +172,9 @@ class Contributions extends React.Component {
                                                         <div className="name">Humberto Portillo</div>
                                                         <div className="postion">Graphic Designer/Front End Developer</div>
                                                         <div className="contribution-line"></div>
-                                                        <div className="bio">Something here</div>
+                                                        <div className="bio">
+                                                        During the project Humberto Portillo had just completed her third year at George Mason as a graphic design major. As a member of the 2019 team Humberto was involved in the styling of the website used by TATA. Humbertofirst did wireframes of the website, then move to coding the HTML and CSS ofthe website.  Humberto hopes to join the workforce next year.
+                                                        </div>
                                                     </div>
                                                     <div className="rightPhoto" id="Humberto_Portillo"></div>
                                                 </div>
@@ -192,9 +199,11 @@ class Contributions extends React.Component {
                                                 <div className="popup">
                                                     <div className="leftContent">
                                                         <div className="name">Jae-Moon Hwang</div>
-                                                        <div className="postion">Graphic Designer</div>
+                                                        <div className="postion">Computer Scientist/Mathematician</div>
                                                         <div className="contribution-line"></div>
-                                                        <div className="bio">Something here</div>
+                                                        <div className="bio">
+                                                        During the project, Jae-Moon Hwang had just completed their 3rd year at George Mason as a Computer Science major. As a member of the 2019 backend team, he was involved in the design of mathematical algorithms used by TATA. Jae-Moon helped develop tools to analyze biological data. Jae-Moon hopes to enter the work force next year.
+                                                        </div>
                                                     </div>
                                                     <div className="rightPhoto" id="Jae-Moon"></div>
                                                 </div>
@@ -219,9 +228,11 @@ class Contributions extends React.Component {
                                                 <div className="popup">
                                                     <div className="leftContent">
                                                         <div className="name">Jon Rossi</div>
-                                                        <div className="postion">Graphic Designer</div>
+                                                        <div className="postion">Computer Scientist/Mathematician</div>
                                                         <div className="contribution-line"></div>
-                                                        <div className="bio">Something here</div>
+                                                        <div className="bio">
+                                                        During the project Jon had just completed his fourth year at George Mason University as a Math and Computer Science major. As a member of the 2019 team Translating Significant Biological Data through a Novel, Intuitive Graphical User Interface Jon was involved in the design of mathematical algorithms used by TATA. He first worked on creating various exploratory plots for the validation phase, he then worked on creating the querying mechanisms to form the GTEx groups, and also worked on implementing the PCIT algorithm as well as the differential wiring network graph. Next year he plans on finishing school and joining the workforce.
+                                                        </div>
                                                     </div>
                                                     <div className="rightPhoto" id="Jon-Rossi"> </div>
                                                 </div>
@@ -246,9 +257,11 @@ class Contributions extends React.Component {
                                                 <div className="popup">
                                                     <div className="leftContent">
                                                         <div className="name">Louisa Ramirez</div>
-                                                        <div className="postion">Graphic Designer</div>
+                                                        <div className="postion">Graphic Designer/Front End Developer</div>
                                                         <div className="contribution-line"></div>
-                                                        <div className="bio">Something here</div>
+                                                        <div className="bio">
+                                                        During the project Louisa Ramirez had just completed her third year at George Mason as a graphic design major. As a member of the 2019 team Louisa was involved in the styling of the website used by TATA. Louisa first did wireframes of the website, then move to coding the HTML and CSS of the website. Louisa hopes to join the workforce next year. 
+                                                        </div>
                                                     </div>
                                                     <div className="rightPhoto" id="Louisa_Ramirez"></div>
                                                 </div>
@@ -273,9 +286,10 @@ class Contributions extends React.Component {
                                                 <div className="popup">
                                                     <div className="leftContent">
                                                         <div className="name">Mathew Kim</div>
-                                                        <div className="postion">Graphic Designer</div>
+                                                        <div className="postion">Computer Scientist/Mathematician</div>
                                                         <div className="contribution-line"></div>
-                                                        <div className="bio">Something here</div>
+                                                        <div className="bio">During the project Matthew had just completed his 2nd year at George Mason as a Computer Science major. As a member of the 2019 term Matthew was involved in the design of mathematical algorithms used by TATA. Matthew first worked on the filtering and analyzing the data, then proceeded to work on the statistical analysis with the team which also involves the creation of plots and network graphs using statistically corrected data outputted by the algorithm.
+Matthew hopes to work on interesting projects like this in the future.</div>
                                                     </div>
                                                     <div className="rightPhoto" id="Mathew_Kim"></div>
                                                 </div>
@@ -300,9 +314,11 @@ class Contributions extends React.Component {
                                                 <div className="popup">
                                                     <div className="leftContent">
                                                         <div className="name">Phuong Tran</div>
-                                                        <div className="postion">Graphic Designer</div>
+                                                        <div className="postion">Computer Scientist/Full Stack Developer</div>
                                                         <div className="contribution-line"></div>
-                                                        <div className="bio">Something here</div>
+                                                        <div className="bio">
+                                                        During the project, Phuong Tran had just completed 2nd year at George Mason as a Computer Science major, and Data Science minor. As a member of the 2019 team, Phuong was involved in the development of web application of architecture and data flow. Phuong implementing design elements from HTML/CSS while giving them functionalities through Front End using React.js/JavaScript and merging math algorithms into existing back end server, using Django REST framework as well as deploy the web applications onto Apache server. Phuong hopes to continue her study with a focus in Data Analytics through an MS at George Mason University.
+                                                        </div>
                                                     </div>
                                                     <div className="rightPhoto" id="Phuong_Tran"></div>
                                                 </div>
@@ -327,9 +343,11 @@ class Contributions extends React.Component {
                                                 <div className="popup">
                                                     <div className="leftContent">
                                                         <div className="name">Quang Vo</div>
-                                                        <div className="postion">Graphic Designer</div>
+                                                        <div className="postion">Computer Scientist/Full Stack Developer</div>
                                                         <div className="contribution-line"></div>
-                                                        <div className="bio">Something here</div>
+                                                        <div className="bio">
+                                                        During the project Quang had just completed his third year at George Mason as a Computer Science major. As a member of the 2019 team Quang was involved in the architecture development and the organization of the data flow of TATA web app. Quang implemented design elements from HTML/CSS while giving them functionalities through the front end using React.js/JavaScript; merged math algorithms into existing back end server using Django REST framework; and deployed TATA web app onto Apache server. Quang hopes continue his study in Computer Science and become a full stack developer after his graduation.
+                                                            </div>
                                                     </div>
                                                     <div className="rightPhoto" id="Quang_Vo"></div>
                                                 </div>
@@ -354,9 +372,11 @@ class Contributions extends React.Component {
                                                 <div className="popup">
                                                     <div className="leftContent">
                                                         <div className="name">Sydney Gahr</div>
-                                                        <div className="postion">Graphic Designer</div>
+                                                        <div className="postion">Graphic Designer/Front End Developer</div>
                                                         <div className="contribution-line"></div>
-                                                        <div className="bio">Something here</div>
+                                                        <div className="bio">
+                                                            During the project Sydney Gahr had just completed her third year at George Mason as a graphic design major. As a member of the 2019 team Sydney was involved in the styling of the website used by TATA. Sydney first did wireframes of the website, then move to coding the HTML and CSS of the website.  Sydney hopes to join the workforce next year. 
+                                                        </div>
                                                     </div>
                                                     <div className="rightPhoto" id="Sydney_Gahr"></div>
                                                 </div>
@@ -381,9 +401,9 @@ class Contributions extends React.Component {
                                                 <div className="popup">
                                                     <div className="leftContent">
                                                         <div className="name">Yemeen Ayub</div>
-                                                        <div className="postion">Graphic Designer</div>
+                                                        <div className="postion">Mathematics Mentor</div>
                                                         <div className="contribution-line"></div>
-                                                        <div className="bio">Something here</div>
+                                                        <div className="bio">Yemeen is a Mathematics PhD student under the direction of Dr. Tyrus Berry.  Yemeen is a talented mathematician with experience in math, physics, programming, and graphic design.  Given his unique perspectives on the application of math, Yemeen was an important contributor to TATA.  Over the summer Yemeen worked with the algorithm design team, lending help through the troubleshooting process and inspiring new approaches for the students to pursue.  Yemeen was also instrumental in the requirement of Jae-Moon Hwang, which facilitated the progress of the tool greatly.  Yemeen will continue his PhD work at George Mason and hopes to further explore applications of machine learning to real-word challenges.</div>
                                                     </div>
                                                     <div className="rightPhoto" id="Yemeen_Ayub"></div>
                                                 </div>
