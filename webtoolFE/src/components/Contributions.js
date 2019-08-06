@@ -727,9 +727,11 @@ Matthew hopes to work on interesting projects like this in the future.</div>
                             </div>
                         </div>
                         {/* <!---------------------------------------------------------- End of 2018 Gallery item --> */}
+                    <BotNav/>    
                     </div>
+                    
                 </body>
-                <BotNav/>
+                
             </div>
         )
     }

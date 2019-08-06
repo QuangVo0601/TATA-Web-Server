@@ -1,7 +1,7 @@
 import React from "react";
 import {
     withRouter
-  } from 'react-router-dom'
+} from 'react-router-dom'
 import "../styles/tata.css";
 import Footer from './botNav';
 import axios from 'axios'; // to send data to back end
@@ -20,24 +20,23 @@ class GroupingPage extends React.Component {
             percent: 0,
             showModal: false,
             divState: 'groupflex-section',
+            disable: false,
             // to store GTEx
             gtexQueries: [],
             //by default is 2 groups (1st group is control group)
             groupLabel: '2 groups',
             // For dropdown box option
-            numberOfGroupsOptions: [{ value: 2, label: "2 groups" },
-            { value: 3, label: "3 groups" },
-            { value: 4, label: "4 groups" },
-            { value: 5, label: "5 groups" },
-            { value: 6, label: "6 groups" },
-            { value: 7, label: "7 groups" },
-            { value: 8, label: "8 groups" },
-            { value: 9, label: "9 groups" },
-            { value: 10, label: "10 groups" }],
+            numberOfGroupsOptions: [
+                { value: 2, label: "2 groups" },
+                { value: 3, label: "3 groups" },
+                { value: 4, label: "4 groups" },
+                { value: 5, label: "5 groups" },
+                { value: 6, label: "6 groups" },
+                { value: 7, label: "7 groups" }],
             // Default html format
             dndGroup: {
                 // replace() to eliminate line break
-                'samples': (localStorage.getItem('pca_text').replace(/(\r\n|\n|\r)/gm,"")).split(','),
+                'samples': (localStorage.getItem('pca_text').replace(/(\r\n|\n|\r)/gm, "")).split(','),
                 'Control group': [],
                 '2': []
             },
@@ -66,13 +65,18 @@ class GroupingPage extends React.Component {
             href: "",
             /*-------------------Quang's part ends-------------------------*/
         };
-        this.myRef={}
+        this.myRef = {}
     }
 
     // gtex group handler
     handleGtex = (name, array, gtexQuery) => {
-        this.state.gtexGroup[name] = array
-        this.state.gtexQueries.push(gtexQuery) // new added 
+        if (Object.keys(this.state.dndGroup).length - 1 + this.state.gtexQueries.length < 11) {
+            this.state.gtexGroup[name] = array
+            this.state.gtexQueries.push(gtexQuery) // new added             
+        }
+        else if (Object.keys(this.state.dndGroup).length - 1 + this.state.gtexQueries.length === 11) {
+            return alert('You have reached the maximum number of 11 groups')
+        }
     }
 
     // If reset group, reset those states
@@ -157,8 +161,8 @@ class GroupingPage extends React.Component {
                 obj[`${item}`] = false
             })
             this.setState({ dndSelectedValue: obj })
-            Object.keys(this.myRef).map(key=>{
-                if(this.myRef[key]!==null && this.myRef[key].classList.contains('sample-true') ){
+            Object.keys(this.myRef).map(key => {
+                if (this.myRef[key] !== null && this.myRef[key].classList.contains('sample-true')) {
                     this.myRef[key].classList.remove('sample-true')
                     this.myRef[key].classList.add('sample-false')
                 }
@@ -234,10 +238,10 @@ class GroupingPage extends React.Component {
     }
     // loading from grouping to batch
     toggleModalPopup() {
-        this.setState({ showModal: (!this.state.showModal)},(()=>{
+        this.setState({ showModal: (!this.state.showModal) }, (() => {
             if (this.state.showModal) {
-            this.setState({blur: 'grouping-blur'})
-        }
+                this.setState({ blur: 'grouping-blur' })
+            }
         }))
     }
     //###############################################################################################
@@ -247,8 +251,8 @@ class GroupingPage extends React.Component {
         this.toggleModalPopup()
         setInterval(() => {
             this.setState({ percent: this.state.percent += 1.23 })
-        }, 1000) 
-    } 
+        }, 1000)
+    }
     /*
     include this in your axios call then block
     also route to another page using this.props.history.push('/somelink')
@@ -258,16 +262,16 @@ class GroupingPage extends React.Component {
         this.props.history.push('/somelink')
     })
     */
-    stopProgress= ()=>{
+    stopProgress = () => {
         clearInterval(this.startProgress);
-        this.setState({percent:100.00})
+        this.setState({ percent: 100.00 })
     }
     //#################################################################################################
     // ----- End of toggle popup ----- //
 
     /*--------Quang's part, Phuong em don't delete this pls-------*/
     // handle "Continue" button, go to batchPage.js
-    handleGroups = () => { 
+    handleGroups = () => {
         this.startProgress()
         let arr = []
         let control = [this.state.groupName[0]] // index 0 is default to control grroup's name
@@ -297,9 +301,9 @@ class GroupingPage extends React.Component {
                 localStorage.setItem('x_corrected_pca', JSON.stringify(arr.data.x_corrected_pca))
                 localStorage.setItem('y_corrected_pca', JSON.stringify(arr.data.y_corrected_pca))
                 localStorage.setItem('group_names_list', JSON.stringify(arr.data.group_names_list))
-                
-                
-            }).then(()=>{
+
+
+            }).then(() => {
                 this.stopProgress()
                 this.props.history.push('/batchpage') // auto route to batch page
             })
@@ -325,7 +329,7 @@ class GroupingPage extends React.Component {
                             <div id="content">
                                 <div id="nav3">
                                     <div id="logo">
-                                        <img src={require('../assets/Group 257.png')} width="46px"  alt="logo" />
+                                        <img src={require('../assets/Group 257.png')} width="46px" alt="logo" />
                                     </div>
                                     {/* <!--end of log--> */}
 
@@ -373,256 +377,257 @@ class GroupingPage extends React.Component {
                             </div>
                             <div className="grouping-rightsection">
                                 <div className="stepsContainer-group">
-						
-                        <div id="step1-group">
-                            <dt className='direction-dt'>1. Select Number of Groups</dt>
-                            <dd className='direction-dd'>Don’t count GTEx in number of groups total and name groups</dd>
-                        </div>
-                        
-                        <div id="step2-group">
-                            <dt className='direction-dt'>2. Drag Samples</dt>
-                            <dd className='direction-dd'>Drag samples into created groups</dd>
-                        </div>
-                        
-      
-                        <div id="step3-group">
-                            <dt className='direction-dt'>3. Optional: Create GTEx</dt>
-                            <dd className='direction-dd'>Use an unique name for GTEx group </dd>
-                        </div>
-                   <div id="step4-group">
-                            <dt className='direction-dt'>4. Continue</dt>
-                            <dd className='direction-dd'>Double check  samples in groups before continuing</dd>
-                        
-                    </div>
-     </div>
-                        
-                            
-                            <div id='groupflex-section'>
-                                {/* <!-- samples section --> */}
-                                <div id="sample-section">
-                                    <div
-                                        className="all1"
-                                        id="samples"
-                                        onDragOver={event => this.onDragOverHandler(event)}
-                                        onDrop={event => this.onDropHandler(event)}
-                                    >
-                                        <ul>
-                                            {/* Samples input code goes here */}
-                                            {this.state.dndGroup['samples'].map((sample) => (
-                                                <li
-                                                    className="sample-false"
-                                                    ref={(ref)=>{this.myRef[`${sample}`]=ref;}}
-                                                    id='samples'
-                                                    draggable
-                                                    onDragStart={event => this.onDragStartHandler(event, sample)}
-                                                    onClick={event => this.handleDnDSelect(event, sample)}
-                                                >
-                                                    <span className="grippy"></span> {sample}
-                                                </li>
-                                            ))}
-                                            {/* End of JSX dynamic code */}
-                                        </ul>
+
+                                    <div id="step1-group">
+                                        <dt className='direction-dt'>1. Select Number of Groups</dt>
+                                        <dd className='direction-dd'>Don’t count GTEx in number of groups total and name groups</dd>
+                                    </div>
+
+                                    <div id="step2-group">
+                                        <dt className='direction-dt'>2. Drag Samples</dt>
+                                        <dd className='direction-dd'>Drag samples into created groups</dd>
+                                    </div>
+
+
+                                    <div id="step3-group">
+                                        <dt className='direction-dt'>3. Optional: Create GTEx</dt>
+                                        <dd className='direction-dd'>Use an unique name for GTEx group </dd>
+                                    </div>
+                                    <div id="step4-group">
+                                        <dt className='direction-dt'>4. Continue</dt>
+                                        <dd className='direction-dd'>Double check  samples in groups before continuing</dd>
+
                                     </div>
                                 </div>
 
-                                {/* <!--  group bottom section --> */}
-                                <div id="group-section">
-                                    <div id="nav_group1">
-                                        <div className="styled-select rounded">
-                                            <Select
-                                                placeholder="# of Groups"
-                                                value={this.state.groupLabel}
-                                                onChange={this.handleChange}
-                                                options={this.state.numberOfGroupsOptions}
-                                            />
 
+                                <div id='groupflex-section'>
+                                    {/* <!-- samples section --> */}
+                                    <div id="sample-section">
+                                        <div
+                                            className="all1"
+                                            id="samples"
+                                            onDragOver={event => this.onDragOverHandler(event)}
+                                            onDrop={event => this.onDropHandler(event)}
+                                        >
+                                            <ul>
+                                                {/* Samples input code goes here */}
+                                                {this.state.dndGroup['samples'].map((sample) => (
+                                                    <li
+                                                        className="sample-false"
+                                                        ref={(ref) => { this.myRef[`${sample}`] = ref; }}
+                                                        id='samples'
+                                                        draggable
+                                                        onDragStart={event => this.onDragStartHandler(event, sample)}
+                                                        onClick={event => this.handleDnDSelect(event, sample)}
+                                                    >
+                                                        <span className="grippy"></span> {sample}
+                                                    </li>
+                                                ))}
+                                                {/* End of JSX dynamic code */}
+                                            </ul>
                                         </div>
-                                        {/* <!-- group gtex & reset --> */}
-                                        <div id="group-button">
+                                    </div>
 
-                                            {/* <!-- Start of pop up module button --> */}
-                                            <button
-                                                type="Create Gtext Group"
-                                                className="gtex_group"
-                                                onClick={this.togglePopup.bind(this)}
-                                            >
-                                                Create Gtex Group
-                                            </button>
-                                            {this.state.showGTExPopup ?
-                                                <Popup
-                                                    handleGtex={this.handleGtex}
-                                                    closePopup={this.togglePopup.bind(this)}
+                                    {/* <!--  group bottom section --> */}
+                                    <div id="group-section">
+                                        <div id="nav_group1">
+                                            <div className="styled-select rounded">
+                                                <Select
+                                                    placeholder="# of Groups"
+                                                    value={this.state.groupLabel}
+                                                    onChange={this.handleChange}
+                                                    options={this.state.numberOfGroupsOptions}
                                                 />
-                                                : null
-                                            }
-                                            {/* <!-- End of pop up module button --> */}
-                                            <button onClick={this.handleResetGroup} type="Reset Groups" className="reset_group">Reset All Groups</button>
-                                            <button onClick={this.handleResetGtex} type="Reset Groups" className="reset_group">Reset Gtex Groups</button>
-                                        </div>
-                                    </div>
-                                    {/* <!-- end of top of the group bottom section --> */}
 
-                                    {/* <!-- start of all group boxes --> */}
-                                    <div className="grid-container" >
-                                        <div id="sample-drop-field">
-                                            <div id="nav_group2">
-                                                <form className="signIn">
-                                                    <input
-                                                        className="groupingInput"
-                                                        type="controlgroup"
-                                                        autocomplete='off'
-                                                        required
-                                                        placeholder="Group Name"
-                                                        value={this.state.controlgroupname}
-                                                        onChange={this.handleControlGroupName}
-                                                    />
-                                                    <label className="nullhyp-container">Null Hypothesis</label>
-                                                </form>
                                             </div>
-                                            <div
-                                                className="group-box" id='Control group'
-                                                onDragOver={event => this.onDragOverHandler(event)}
-                                                onDrop={event => this.onDropHandler(event)}
-                                            >
-                                                <div className="data-draggable" id="Control group">
-                                                    {this.state.dndGroup['Control group'].map((sample) => {
-                                                        return (
-                                                            <li
-                                                                className='sample-false'
-                                                                id='Control group'
-                                                                draggable
-                                                                onDragStart={event => this.onDragStartHandler(event, sample)}
-                                                            >
-                                                                <span className="grippy"></span> {sample}
-                                                            </li>
-                                                        )
-                                                    })}
+                                            {/* <!-- group gtex & reset --> */}
+                                            <div id="group-button">
+
+                                                {/* <!-- Start of pop up module button --> */}
+                                                <button
+                                                    disabled={this.state.disable}
+                                                    type="Create Gtext Group"
+                                                    className="gtex_group"
+                                                    onClick={this.togglePopup.bind(this)}
+                                                >
+                                                    Create Gtex Group
+                                            </button>
+                                                {this.state.showGTExPopup ?
+                                                    <Popup
+                                                        handleGtex={this.handleGtex}
+                                                        closePopup={this.togglePopup.bind(this)}
+                                                    />
+                                                    : null
+                                                }
+                                                {/* <!-- End of pop up module button --> */}
+                                                <button onClick={this.handleResetGroup} type="Reset Groups" className="reset_group">Reset All Groups</button>
+                                                <button onClick={this.handleResetGtex} type="Reset Groups" className="reset_group">Reset Gtex Groups</button>
+                                            </div>
+                                        </div>
+                                        {/* <!-- end of top of the group bottom section --> */}
+
+                                        {/* <!-- start of all group boxes --> */}
+                                        <div className="grid-container" >
+                                            <div id="sample-drop-field">
+                                                <div id="nav_group2">
+                                                    <form className="signIn">
+                                                        <input
+                                                            className="groupingInput"
+                                                            type="controlgroup"
+                                                            autocomplete='off'
+                                                            required
+                                                            placeholder="Group Name"
+                                                            value={this.state.controlgroupname}
+                                                            onChange={this.handleControlGroupName}
+                                                        />
+                                                        <label className="nullhyp-container">Null Hypothesis</label>
+                                                    </form>
+                                                </div>
+                                                <div
+                                                    className="group-box" id='Control group'
+                                                    onDragOver={event => this.onDragOverHandler(event)}
+                                                    onDrop={event => this.onDropHandler(event)}
+                                                >
+                                                    <div className="data-draggable" id="Control group">
+                                                        {this.state.dndGroup['Control group'].map((sample) => {
+                                                            return (
+                                                                <li
+                                                                    className='sample-false'
+                                                                    id='Control group'
+                                                                    draggable
+                                                                    onDragStart={event => this.onDragStartHandler(event, sample)}
+                                                                >
+                                                                    <span className="grippy"></span> {sample}
+                                                                </li>
+                                                            )
+                                                        })}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        {/* <!--  --> */}
+                                            {/* <!--  --> */}
 
-                                        <div id="sample-drop-field">
-                                            <div id="nav_group2">
-                                                <form className="signIn" id='2'>
-                                                    <input
-                                                        id='2'
-                                                        className="groupingInput"
-                                                        type="groupname"
-                                                        placeholder="Group Name"
-                                                        autocomplete='off'
-                                                        onChange={this.handleNameChange}
-                                                        required
-                                                    />
-                                                </form>
-                                            </div>
-                                            <div className="group-box" id='2'
-                                                onDragOver={event => this.onDragOverHandler(event)}
-                                                onDrop={event => this.onDropHandler(event)}>
-                                                <div className="data-draggable" id="2">
-                                                    {this.state.dndGroup['2'].map((sample) => {
-                                                        return (
-                                                            <li
-                                                                className='sample-false'
-                                                                id='2'
-                                                                draggable
-                                                                onDragStart={event => this.onDragStartHandler(event, sample)}
-                                                            >
-                                                                <span className="grippy"></span> {sample}
-                                                            </li>
-                                                        )
-                                                    })}
+                                            <div id="sample-drop-field">
+                                                <div id="nav_group2">
+                                                    <form className="signIn" id='2'>
+                                                        <input
+                                                            id='2'
+                                                            className="groupingInput"
+                                                            type="groupname"
+                                                            placeholder="Group Name"
+                                                            autocomplete='off'
+                                                            onChange={this.handleNameChange}
+                                                            required
+                                                        />
+                                                    </form>
+                                                </div>
+                                                <div className="group-box" id='2'
+                                                    onDragOver={event => this.onDragOverHandler(event)}
+                                                    onDrop={event => this.onDropHandler(event)}>
+                                                    <div className="data-draggable" id="2">
+                                                        {this.state.dndGroup['2'].map((sample) => {
+                                                            return (
+                                                                <li
+                                                                    className='sample-false'
+                                                                    id='2'
+                                                                    draggable
+                                                                    onDragStart={event => this.onDragStartHandler(event, sample)}
+                                                                >
+                                                                    <span className="grippy"></span> {sample}
+                                                                </li>
+                                                            )
+                                                        })}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        {/* Start of populating group boxes after selecting number of groups*/}
-                                        {this.state.selectedNumberOfGroups.map((id) => {
-                                            return (
-                                                <div id="sample-drop-field">
-                                                    <div id="nav_group2">
-                                                        <form
-                                                            id={id}
-                                                            className="signIn"
-                                                            onSubmit={this.handleGroupName}
-                                                        >
-                                                            <input
+                                            {/* Start of populating group boxes after selecting number of groups*/}
+                                            {this.state.selectedNumberOfGroups.map((id) => {
+                                                return (
+                                                    <div id="sample-drop-field">
+                                                        <div id="nav_group2">
+                                                            <form
                                                                 id={id}
-                                                                className="groupingInput"
-                                                                type="groupname"
-                                                                placeholder="Group Name"
-                                                                autocomplete='off'
-                                                                required
-                                                                onChange={this.handleNameChange}
-                                                            />
-                                                        </form>
-                                                    </div>
-                                                    <div className="group-box" id={id}
-                                                        onDragOver={event => this.onDragOverHandler(event)}
-                                                        onDrop={event => this.onDropHandler(event)}>
-                                                        <div className="data-draggable" id={id}>
-                                                            {this.state.dndGroup[id].map((sample) => {
-                                                                return (
-                                                                    <li
-                                                                        className='sample-false'
-                                                                        id={id}
-                                                                        draggable
-                                                                        onDragStart={event => this.onDragStartHandler(event, sample)}
-                                                                    >
-                                                                        <span className="grippy"></span> {sample}
-                                                                    </li>
-                                                                )
-                                                            })}
+                                                                className="signIn"
+                                                                onSubmit={this.handleGroupName}
+                                                            >
+                                                                <input
+                                                                    id={id}
+                                                                    className="groupingInput"
+                                                                    type="groupname"
+                                                                    placeholder="Group Name"
+                                                                    autocomplete='off'
+                                                                    required
+                                                                    onChange={this.handleNameChange}
+                                                                />
+                                                            </form>
+                                                        </div>
+                                                        <div className="group-box" id={id}
+                                                            onDragOver={event => this.onDragOverHandler(event)}
+                                                            onDrop={event => this.onDropHandler(event)}>
+                                                            <div className="data-draggable" id={id}>
+                                                                {this.state.dndGroup[id].map((sample) => {
+                                                                    return (
+                                                                        <li
+                                                                            className='sample-false'
+                                                                            id={id}
+                                                                            draggable
+                                                                            onDragStart={event => this.onDragStartHandler(event, sample)}
+                                                                        >
+                                                                            <span className="grippy"></span> {sample}
+                                                                        </li>
+                                                                    )
+                                                                })}
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            )
-                                        })}
-                                        {/* End of populating group boxes after selecting number of groups*/}
+                                                )
+                                            })}
+                                            {/* End of populating group boxes after selecting number of groups*/}
 
-                                        {/* Start of populating gtex group boxes after selecting number of groups*/}
-                                        {Object.keys(this.state.gtexGroup).map((key) => {
-                                            return (
-                                                <div id="sample-drop-field">
-                                                    <div id="nav_group2">
-                                                        <form className="signIn">
-                                                            {key}
-                                                        </form>
-                                                    </div>
-                                                    <div className="group-box" >
-                                                        <div className="data-draggable" >
-                                                            {this.state.gtexGroup[key].map((sample) => {
-                                                                return (
-                                                                    <li className='sample-false'
-                                                                    >
+                                            {/* Start of populating gtex group boxes after selecting number of groups*/}
+                                            {Object.keys(this.state.gtexGroup).map((key) => {
+                                                return (
+                                                    <div id="sample-drop-field">
+                                                        <div id="nav_group2">
+                                                            <form className="signIn">
+                                                                {key}
+                                                            </form>
+                                                        </div>
+                                                        <div className="group-box" >
+                                                            <div className="data-draggable" >
+                                                                {this.state.gtexGroup[key].map((sample) => {
+                                                                    return (
+                                                                        <li className='sample-false'
+                                                                        >
 
-                                                                        <span className="grippy"></span> {sample}
+                                                                            <span className="grippy"></span> {sample}
 
-                                                                    </li>
-                                                                )
-                                                            })}
+                                                                        </li>
+                                                                    )
+                                                                })}
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            )
-                                        })}
-                                        {/* End of populating group boxes after selecting number of groups*/}
+                                                )
+                                            })}
+                                            {/* End of populating group boxes after selecting number of groups*/}
 
-                                        {/* <!-- div below is the div for the .gridcontainer --> */}
-                                    </div>
-                                    {/* <!--............................... --> */}
+                                            {/* <!-- div below is the div for the .gridcontainer --> */}
+                                        </div>
+                                        {/* <!--............................... --> */}
 
-                                    <div className="nav_container3">
-                                        <button type="Continue" className="buttontask_cont" onClick={this.handleGroups}>Continue</button>
+                                        <div className="nav_container3">
+                                            <button type="Continue" className="buttontask_cont" onClick={this.handleGroups}>Continue</button>
+                                        </div>
                                     </div>
+
+                                    {/* <!-- end of group bottom section --> */}
                                 </div>
-
-                                {/* <!-- end of group bottom section --> */}
                             </div>
+
                         </div>
-                        
-                        </div> 
                         <Footer />
                         {/*  Don't change the postition of this, app will break */}
                         {this.state.showModal ?

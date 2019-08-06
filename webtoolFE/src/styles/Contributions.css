@@ -31,7 +31,7 @@ footer, header, hgroup, menu, nav, section {
 }
 
 	#wrapper_contributor{
-		height: 2600px;
+		height: 2700px;
         background-size: cover;
 		background-repeat: no-repeat;
 		overflow-x: hidden;
@@ -538,7 +538,7 @@ body {
 /*/////////////////////////////////////////////////////////////// 1280 CSS ////////////////////////////////////////////////////*/
 @media only screen and (min-width: 1270px) {
 	#wrapper_contributor {
-		height: 2400px;
+		height: 2500px;
         background-size: cover;
 		background-repeat: no-repeat;
 	}
@@ -600,6 +600,7 @@ body {
 #summer2018 {
      margin: 0 auto;
     margin-left: -600;
+    margin-bottom: 95px;
     left: 50%;
     width: 1200px;
     border-top: #B0B0B0 solid .5px;
@@ -716,7 +717,7 @@ body {
 
 @media only screen and (min-width: 1850px) {
 	#wrapper_contributor {
-		height: 2500px;
+		height: 2600px;
 		background-image: url("../assets/Asset 6.png");
         background-size: cover;
 		background-repeat: no-repeat;
