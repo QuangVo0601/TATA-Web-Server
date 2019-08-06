@@ -116,7 +116,7 @@ class TaskPage extends React.Component {
 									{/*Box 1*/}
 									<div className="box" tabindex="0" onClick={this.selectedTask.bind(this, this.state.taskOptions[0])}>
                                     	<div className="content">
-                                            <div className="task-img"> <img id="white" src={require('../assets/taskPageImages/Asset2.png')}/> </div>
+                                            <div className="task-img"> <img id="white" src={require('../assets/taskPageImages/Asset2.png')} alt="logo"/> </div>
                                             <h3>CO-DIFFERENTIAL<br/> EXPRESSION ANALYSIS</h3>
 											<p>Gene differential expression using NoISeq R/Bioc Package.  Differential expression is done between two groups. Output includes differentially expressed genes and FDR. </p>
 										</div>
@@ -124,7 +124,7 @@ class TaskPage extends React.Component {
 									{/*Box 2*/}
 									<div className="box" tabindex="0" onClick={this.selectedTask.bind(this, this.state.taskOptions[1])}> 
 										<div className="content">
-                                            <div className="task-img"> <img id="white2" src={require('../assets/taskPageImages/Distinguishgroups.png')}/> </div>
+                                            <div className="task-img"> <img id="white2" src={require('../assets/taskPageImages/Distinguishgroups.png')} alt="logo"/> </div>
                                             <h3>CO-EXPRESSION <br/> NETWORK ANALYSIS</h3>
 											<p>Network modules are constructed from significant transcription factor-gene interactions.  Output includes individual data set nodules with clustering coefficients to determine interconnectivity. </p>
 										</div>
@@ -133,7 +133,7 @@ class TaskPage extends React.Component {
 										{/*Box 3*/}
 										<div className="box" tabindex="0" onClick={this.selectedTask.bind(this, this.state.taskOptions[2])}> 
 											<div className="content">
-                                                <div className="task-img"><img id="white3" src={require('../assets/taskPageImages/Search.png')}/> </div>
+                                                <div className="task-img"><img id="white3" src={require('../assets/taskPageImages/Search.png')} alt="logo"/> </div>
                                                 <h3>DIFFERENTIAL <br/> EXPRESSION ANALYSIS</h3>
                                                 <p>Using differentially expressed genes, data sets are analyzed for significant differences in gene-transcription factor interactions.  Output includes significant transcription factors regulating top differentially expressed genes.</p>
 											</div>
@@ -143,7 +143,7 @@ class TaskPage extends React.Component {
 										{/*Box 4*/}
 										<div className="box">
 											<div className="content">
-                                                <div className="task-img"><img id="white4" src={require('../assets/taskPageImages/Asset1.png')}/> </div>
+                                                <div className="task-img"><img id="white4" src={require('../assets/taskPageImages/Asset1.png')} alt="logo"/> </div>
                                                 <h3>Coming <br/> Soon</h3>
 												<p>We are devloping new algorithms to analyze your data!  </p>
 											</div>
