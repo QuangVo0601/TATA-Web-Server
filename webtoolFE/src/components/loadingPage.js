@@ -7,7 +7,26 @@ class LoadingPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            percent: 0
         }
+    }
+
+    startProgress() {
+        let that=this
+        console.log('in app')
+        setInterval(() => {
+            if (that.state.percent>=99.00) {
+                clearInterval(this.startProgress)
+            }
+            else {
+                this.setState({ percent: this.state.percent += 0.02 })
+            }
+        }, 1000)
+    }
+
+    componentDidMount() {
+        console.log('hi')
+        this.startProgress()
     }
     render() {
         return (
@@ -23,7 +42,7 @@ class LoadingPage extends Component {
 
                     <div className="loading-jobcode">JOB CODE:<span>1A253M4</span></div>
                     <div className="loading-etaInfo">
-                        <span className="percentage">{this.props.percent}%</span>
+                        <span className="percentage">{this.state.percent.toFixed(2)}%</span>
                     </div>
                     <div className="node-loader">
                         <span className="node"></span>

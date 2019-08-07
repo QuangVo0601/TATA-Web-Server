@@ -36,7 +36,7 @@ class GroupingPage extends React.Component {
             // Default html format
             dndGroup: {
                 // replace() to eliminate line break
-                'samples': (localStorage.getItem('pca_text').replace(/(\r\n|\n|\r)/gm, "")).split(','),
+                'samples': (localStorage.getItem('pca_text').replace(/(\r\n|\n|\r)/, "")).split(','),
                 'Control group': [],
                 '2': []
             },
@@ -82,7 +82,7 @@ class GroupingPage extends React.Component {
     // If reset group, reset those states
     handleResetGroup = () => {
         let newO = {
-            'samples': localStorage.getItem('pca_text').split(','),
+            'samples': localStorage.getItem('pca_text').replace(/(\r\n|\n|\r)/, "").split(','),
             'Control group': [],
             '2': []
         }
@@ -250,7 +250,12 @@ class GroupingPage extends React.Component {
     startProgress() {
         this.toggleModalPopup()
         setInterval(() => {
-            this.setState({ percent: this.state.percent += 0.01 })
+            if (this.state.percent>=99.00) {
+                clearInterval(this.startProgress)
+            }
+            else {
+                this.setState({ percent: this.state.percent += 0.21 })
+            }
         }, 1000)
     }
     /*

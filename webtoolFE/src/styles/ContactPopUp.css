@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,700|Oswald&display=swap');
+
+
+.contact-form{
+    padding: 2rem;
+    margin: 0 auto;
+    max-width: 18.75rem;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+    font: 100% 'Oswald', sans-serif;
+}
+
+.contactform-h1{
+    margin-top: 0;
+    margin-bottom: 3.236rem;
+    text-align: center;
+    font-size: 1.618rem;
+    font-weight: 700;
+    color: #2EC4B6;
+}
+
+.contact-label {
+    display: inline-block;
+    margin-bottom: .5rem;
+    font-size: .75rem;
+    color: #114B5F;
+    text-transform: uppercase;
+    touch-action: manipulation;
+}
+
+.form-input{
+
+    border-bottom: 1px solid #eeeeee;
+    display: block;
+    padding: .5rem .75rem;
+    max-width: 312px;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: #55595c;
+    background-color: #fff;
+    background-image: none;
+    background-clip: padding-box;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 1px solid #eee;
+    border-left: 0;
+    border-radius: 1px;
+    transition: all 0.25s cubic-bezier(0.4, 0, 1, 1)
+}
+
+.form-input:focus{
+    border-bottom-color: #FF8C42;
+}
+
+.contact-submit {
+    display: inline-block;
+    padding: .75rem 1rem;
+    margin-top: 1.618rem;
+    font-weight: 400;
+    text-align: center;
+    text-transform: uppercase;
+    color: #fff;
+    vertical-align: middle;
+    white-space: nowrap;
+    background-color: #FF8C42;
+    border: 1px solid transparent;
+    box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.25s cubic-bezier(0.4, 0, 1, 1);
+}

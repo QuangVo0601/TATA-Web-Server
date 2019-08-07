@@ -6,14 +6,12 @@ import "../styles/algorithmPage.css";
 import axios from 'axios'; // to send data to back end
 import Select from "react-select" // to use dropbox
 import Footer from './botNav';
-import Loading from './loadingPage'
+
 // to math team: ask Luis, choose from taskPage.js, and use here
 class AlgorithmPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            percent: 0,
-            step: 1,
             algorithmOptions: [{ value: "Co-Differential Expression Analysis", label: "Co-Differential Expression Analysis" },
             { value: "Co-Expression Network Analysis", label: "Co-Expression Network Analysis" },
             { value: "Differential Expression Analysis", label: "Differential Expression Analysis" }],
@@ -55,16 +53,17 @@ class AlgorithmPage extends React.Component {
 
     // when user clicks on "Run Task" button
     runTaskHandler = () => {
-        this.setState({ step: 2 })
+        // Route to loading page 
+        this.props.history.push('/loading')
 
         //to be sent to back end
         let falseDiscoveryRate_value = parseFloat(this.state.falseDiscoveryRate_value)
         let bonferroniAlpha_value = parseFloat(this.state.bonferroniAlpha_value)
 
-        console.log("false is " + falseDiscoveryRate_value)
-        console.log("type of false " + typeof (falseDiscoveryRate_value))
-        console.log("bon is " + bonferroniAlpha_value)
-        console.log("type of bon " + typeof (bonferroniAlpha_value))
+        // console.log("false is " + falseDiscoveryRate_value)
+        // console.log("type of false " + typeof (falseDiscoveryRate_value))
+        // console.log("bon is " + bonferroniAlpha_value)
+        // console.log("type of bon " + typeof (bonferroniAlpha_value))
 
         // sending request to back end need to be together
         //axios call (get in header) to send to back end
@@ -79,12 +78,11 @@ class AlgorithmPage extends React.Component {
             localStorage.setItem('test_list', JSON.stringify(arr.data.test_list))
             localStorage.setItem('test_list2', JSON.stringify(arr.data.test_list2))
         }).then(()=>{
+            this.props.stopProgress()
             this.props.history.push('/resultpage')
         })
-
-        //this.setState({ href: '/resultpage' }) 
+        this.props.history.push('/loading')
     }
-
 
     // As soon as the page route, it executes
     componentDidMount() {
@@ -103,7 +101,6 @@ class AlgorithmPage extends React.Component {
     }
 
     render() {
-        if (this.state.step === 1) {
             return (
                 <div>
                     <head>
@@ -195,10 +192,6 @@ class AlgorithmPage extends React.Component {
                                                 <div id="samplevariance">
                                                     <h2>SAMPLE VARIANCE:</h2></div>
                                                 <div id="varianceselection">
-                                                    {/* <select name="langOpt2[]" multiple id="langOpt2">
-                                                <option value="equal">Equal</option>
-                                                <option value="unequal">Unequal</option>
-                                            </select> */}
                                                     <Select
                                                         styles={{ control: (base) => ({ ...base, boxShadow: "none", width: "162px" }) }}
                                                         placeholder={this.state.selectedSampleVariance}
@@ -232,9 +225,7 @@ class AlgorithmPage extends React.Component {
 
 
                                     <div id="button5">
-                                        {/* <a href={this.state.href} style={{textDecoration: 'none'}}> */}
-                                    
-                                            <button type="Back"
+                                          <button type="Back"
                                                 className="runtask"
                                                 onClick={this.runTaskHandler}>Run Task</button>
          
@@ -249,14 +240,6 @@ class AlgorithmPage extends React.Component {
                 </div>
 
             );
-        }
-        else{
-            return(
-                <Loading
-                    percent={this.state.percent}
-                />
-            )
-        }
     }
 }
 export default withRouter(AlgorithmPage);

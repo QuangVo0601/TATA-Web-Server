@@ -13,13 +13,44 @@ import LoadModal from './components/loadingModal'
 import Contribute from './components/Contributions'
 import Loading from './components/loadingPage'
 import FileUpload from './components/fileUpload'
+import ContactForm from './components/ContactPopUp'
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      percent:0,
     }
   }
+
+    // include this in continue button handler
+    // interval will start on button click
+    startProgress() {
+      let that=this
+      console.log('in app')
+      setInterval(() => {
+          if (that.state.percent>=99.00) {
+              clearInterval(this.startProgress)
+          }
+          else {
+              this.setState({ percent: this.state.percent += 0.02 })
+          }
+      }, 1000)
+  }
+  /*
+  include this in your axios call then block
+  also route to another page using this.props.history.push('/somelink')
+  example:
+  axios.post('linl', datat).then(()=>{
+      this.stopProgress()
+      this.props.history.push('/somelink')
+  })
+  */
+  stopProgress = () => {
+      clearInterval(this.startProgress);
+      this.setState({ percent: 100.00 })
+  }
+  //#################################################################################################
 
   render() {
     return (
@@ -62,6 +93,7 @@ class App extends React.Component {
         <Route exact path="/algorithmpage"
           render={() => (
             <AlgorithmPage
+              stopProgress={this.stopProgress}
             />
           )
           }
@@ -83,6 +115,8 @@ class App extends React.Component {
         <Route exact path="/loading"
           render={() => (
             <Loading
+              percent={this.state.percent}
+              startProgress={this.startProgress}
             />
           )
           }
@@ -106,6 +140,14 @@ class App extends React.Component {
         <Route exact path="/contributions" //need to be changed to Webtool later
           render={() => (
             <Contribute
+            />
+          )
+          }
+        />
+        <Route exact path="/contact" //need to be changed to Webtool later
+          render={() => (
+            <ContactForm
+              closePopup={this.togglePopup.bind(this)}
             />
           )
           }

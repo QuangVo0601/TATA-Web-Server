@@ -46,7 +46,7 @@ class HomePage extends React.Component {
 	/* Functions go here */
 	setWaitingTime = () => {
 		this.setCanClick()
-		setTimeout(this.setNextClick, 5000)
+		setTimeout(this.setNextClick, 7000)
 	}
 
 	setCanClick = () => {
