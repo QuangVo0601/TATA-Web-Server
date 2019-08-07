@@ -41,9 +41,6 @@ class ValidationPage extends React.Component {
             traces_temp.push(trace) // add that trace obj into our tpc_trace
         }
 
-        //just for testing 07/19
-        localStorage.setItem('tpc_traces', JSON.stringify(traces_temp))
-
         // this.setState works the same as setters
         // syntax: this.setState( {target value : value to change} )
         this.setState({
@@ -54,8 +51,7 @@ class ValidationPage extends React.Component {
             pca_text: localStorage.getItem('pca_text').split(','),
             tpc_traces: traces_temp
         })
-        // remove everything from local storage for safety
-        // localStorage.removeItem('x_tpc', 'y_tpc', 'x_pca', 'y_pca', 'x_dge', 'y_dge')
+        
     }
   
     handleSubmit = () => {

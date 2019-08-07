@@ -1,5 +1,4 @@
 import React from "react";
-//import "../styles/tata.css";
 import styles from  "../styles/batchPage.module.css";
 import Plot from 'react-plotly.js';
 import Select from "react-select" // to use dropbox
