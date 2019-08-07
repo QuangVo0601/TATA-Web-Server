@@ -19,8 +19,7 @@ class FinalPlots extends React.Component {
             y_differential: [],
             jobCode: "",
             csvFileName: "",
-            //need to find a way to read img outside of 'src' folder
-            //heatmap_png_path: "../../../csvDatabase/JobCode/results/control group vs. group1_heatmap.png"
+            heatmap_png_path: ""
 
         }
 
@@ -128,6 +127,7 @@ class FinalPlots extends React.Component {
                     differential_temp.push(trace) // add that trace obj into our tpc_trace
                 }
 
+                console.log(coordinates.data.heatmap_png_path)
                 this.setState({
                     volcano_traces: volcano_temp,
                     differential_traces: differential_temp,
@@ -137,8 +137,11 @@ class FinalPlots extends React.Component {
     }
 
     render() {
+        
+
         return (
             <div >
+                
                 {/*dropdown part*/}
                 <div className={styles["finalPlot-wrapper"]}>
                     <Select
@@ -188,7 +191,7 @@ class FinalPlots extends React.Component {
                                         }
                                     },
                                     showlegend: true,
-		                            legend: {x: -.1, y: 1.3},
+                                    legend: {x: -.1, y: 1.3, "font": { size: 10}},
                                     autosize: true
                                 }}
                                 {...{ useResizeHandler: true }}
@@ -206,7 +209,7 @@ class FinalPlots extends React.Component {
                                 layout={{
                                     hovermode: 'closest',
                                     title: 'Differential Expression TPM Plot',
-                                    font: { family: 'Oswald,sans-serif', size: 18, color: '#114b5f' },
+                                    font: { family: 'Oswald,sans-serif', size: 15, color: '#114b5f' },
                                     // width: 900, height: 450,
                                     xaxis: {
                                         range: [-100, 100], showgrid: false, title: {
@@ -221,7 +224,7 @@ class FinalPlots extends React.Component {
                                         }
                                     },
                                     showlegend: true,
-		                            legend: {x: -.1, y: 1.3},
+		                            legend: {x: -.1, y: 1.3, "font": { size: 10}},
                                     autosize: true
                                 }}
                                 {...{ useResizeHandler: true }}
@@ -233,9 +236,9 @@ class FinalPlots extends React.Component {
                                 <div className={`${styles["helpcontent"]} ${styles["PCA"]}`}>This cluster map groups similar samples based on log 2 normalized values.  Each cell contains the log 2 fold change relative to the mean of each row.</div>
                             </div>
                             {/* <div className="graphsize"> */}
-                            {/* <img className={[styles["heatmap"]]} src={require('../assets/heatmap.png')} alt="tatalogo" /> */}
-                            {/* <img className={[styles["heatmap"]]} src={require('../csvDatabase/JobCode/results/control group vs. gtex group 3_heatmap.png')} alt="tatalogo" /> */}
+                            {/* <img className={[styles["heatmap"]]} src={this.state.heatmap_png_path} alt="tatalogo" /> */}
                             {/* </div> */}
+                            
                         </div>
                     </div>
                 </div>
