@@ -152,9 +152,6 @@ def input_list2(request):
         tf_ens_ids = pd.read_csv("Transcription Factor List.csv") # for localhost
         tf_ens_ids = tf_ens_ids.squeeze().tolist()
 
-        
-        #analyzer = GTEXDataAnalyzerBatch(CListDfs, group_names_list, tf_ens_ids) 
-
         # Create an analyzer object from imported GTEXDataAnalyzer.py
         # need to be global because it is used in another function
         global analyzer
@@ -188,14 +185,29 @@ def input_list2(request):
         # create a subfolder inside jobcode folder for exploratory plots
         #csvDatabase_path = '/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobCode+'/exploratory/' # for mason server
         csvDatabase_path = 'webtoolFE/src/csvDatabase/'+jobCode+'/exploratory/' # for localhost
+        csvDatabase_path2 = 'webtoolFE/src/csvDatabase/'+jobCode+'/batch/' # for localhost
+        
         try:
             os.mkdir(csvDatabase_path) # create a subfolder here
+            os.mkdir(csvDatabase_path2)
         except OSError as e:
             if e.errno != errno.EEXIST:
                 #directory already exists
                 pass
             else:
                 print(e) 
+
+        # save batch correction coordinates as CSVs in jobCode/batch subfolder
+        x_uncorrected_pca_df = pd.DataFrame(x_uncorrected_pca)
+        x_uncorrected_pca_df.to_csv(csvDatabase_path2 + 'x_uncorrected_pca.csv', index=False)
+        y_uncorrected_pca_df = pd.DataFrame(y_uncorrected_pca)
+        y_uncorrected_pca_df.to_csv(csvDatabase_path2 + 'y_uncorrected_pca.csv', index=False)
+        x_corrected_pca_df = pd.DataFrame(x_corrected_pca)
+        x_corrected_pca_df.to_csv(csvDatabase_path2 + 'x_corrected_pca.csv', index=False)
+        y_corrected_pca_df = pd.DataFrame(y_corrected_pca)
+        y_corrected_pca_df.to_csv(csvDatabase_path2 + 'y_corrected_pca.csv', index=False)   
+        group_names_list_df = pd.DataFrame(group_names_list, columns = ['group_names_list'])
+        group_names_list_df.to_csv(csvDatabase_path2 + 'group_names_list.csv', index=False)                             
 
         # save all the coordinates in that 'exploratory' folder  
         # save x_dge, y_dge as a csv in the jobCode/exploratory subfolder      
@@ -345,9 +357,7 @@ def input_results(request):
         data = JSONParser().parse(request) # Receive data from front end
 
         # for exploratory, batch, job code, csv_names_list for finalPlots & finalTables
-
-        #jobCode = data['jobCode'] # syntax: data[key], key = package's name being sent
-        jobCode = request.session['jobCode'] # for now
+        jobCode = data['jobCode'] # syntax: data[key], key = package's name being sent
         print('Job code is' + jobCode)
 
         #---------------for Exploratory Plots-------------#    
@@ -373,14 +383,22 @@ def input_results(request):
         #---------------Exploratory Plots ends------------#
 
         # path to batch correction plots files
-        #csvDatabase_path = '../csvDatabase/'+jobCode+'/batch/'+'batch.csv' # may change
+        csvDatabase_path2 = 'webtoolFE/src/csvDatabase/'+jobCode+'/batch/' # may change
         # then do sth for corrected & uncorrected graphs'''
-        '''#---------------for Batch Correction--------------#
-        x_uncorrected_pca = list(dataframe.iloc[:,8]) 
-        y_uncorrected_pca = list(dataframe.iloc[:,2]) 
-        x_corrected_pca = 
-        y_corrected_pca = 
-        #----------------Batch Correction ends------------#'''
+        #---------------for Batch Correction--------------#
+        x_uncorrected_pca_df = pd.read_csv(csvDatabase_path2 + 'x_uncorrected_pca.csv') 
+        x_uncorrected_pca = x_uncorrected_pca_df.stack().groupby(level=0).apply(list).tolist()
+        y_uncorrected_pca_df = pd.read_csv(csvDatabase_path2 + 'y_uncorrected_pca.csv') 
+        y_uncorrected_pca = y_uncorrected_pca_df.stack().groupby(level=0).apply(list).tolist()      
+        x_corrected_pca_df = pd.read_csv(csvDatabase_path2 + 'x_corrected_pca.csv') 
+        x_corrected_pca = x_corrected_pca_df.stack().groupby(level=0).apply(list).tolist()
+        y_corrected_pca_df = pd.read_csv(csvDatabase_path2 + 'y_corrected_pca.csv') 
+        y_corrected_pca = y_corrected_pca_df.stack().groupby(level=0).apply(list).tolist() 
+        group_names_list_df = pd.read_csv(csvDatabase_path2 + 'group_names_list.csv') 
+        group_names_list = list(group_names_list_df.iloc[:,0])
+        print(group_names_list)        
+
+        #----------------Batch Correction ends------------#
 
          # path to the csv_names_list file
         #csvDatabase_path = '/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobCode+'/results/'+'csv_names_list.csv' #for mason server
@@ -390,11 +408,14 @@ def input_results(request):
         csv_names_list = list(csv_names_list_df.iloc[:,0])
 
         print(csv_names_list)  
-
+       
     return JsonResponse({'jobCode': jobCode, 'csv_names_list': csv_names_list,
                          'x_dge': x_dge, 'y_dge': y_dge,
                          'x_tpc': x_tpc, 'y_tpc': y_tpc,
-                         'x_pca': x_pca, 'y_pca': y_pca, 'pca_text': pca_text}, status=201)
+                         'x_pca': x_pca, 'y_pca': y_pca, 'pca_text': pca_text,
+                         'x_uncorrected_pca': x_uncorrected_pca, 'y_uncorrected_pca': y_uncorrected_pca,
+                         'x_corrected_pca': x_corrected_pca, 'y_corrected_pca': y_corrected_pca,
+                         'group_names_list': group_names_list}, status=201)
 
 
 # for finalPlots.js, saved in urls.py
