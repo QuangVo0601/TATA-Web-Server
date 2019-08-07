@@ -20,7 +20,7 @@ class ResultPage extends React.Component {
             uncorrected_pca_traces: [],
             corrected_pca_traces: [],
             jobCode: "",
-            csv_names_list: ""
+            csv_names_list: "",
 
         }
 
@@ -29,14 +29,15 @@ class ResultPage extends React.Component {
     // As soon as the page route, it executes
     componentDidMount() {
 
-        let jobCode = "JobCode" //for now, should be from homePage or algorithmPage
+        let jobCode = JSON.parse(localStorage.getItem('jobCode')) //from algorithmPage.js or homePage.js
+
+        console.log(jobCode)
 
         axios.post('http://127.0.0.1:8000/backend/results', {
             //axios.post('http://oscar19.orc.gmu.edu/backend/results', {
                 jobCode: jobCode,
             })
             .then((coordinates) => { // to receive data from back end 
-
                 let traces_temp = []
  
                 // number of patients is number of traces in tpc graph .Ex: 7 patients
@@ -57,6 +58,50 @@ class ResultPage extends React.Component {
                     traces_temp.push(trace) // add that trace obj into our tpc_trace
                 }
 
+                // This takes care of uncorrected PCA graph
+                var group_names_list = coordinates.data.group_names_list
+
+                var x_uncorrected_pca = coordinates.data.x_uncorrected_pca
+                var y_uncorrected_pca = coordinates.data.y_uncorrected_pca
+                // console.log(x_uncorrected_pca)
+                // console.log(y_uncorrected_pca)
+        
+                // number of lines on each graph
+                let no_of_dataframes = x_uncorrected_pca.length
+        
+                // for uncorrected pca graph
+                let uncorrected_traces_temp = []
+                for(let i = 0; i < no_of_dataframes; i++){
+                    let x = x_uncorrected_pca[i]
+                    let y = y_uncorrected_pca[i]
+                    let name = group_names_list[i] //sample name
+                    let type = 'scatter'
+                    let mode = 'markers'
+                    let hoverinfo = "name"
+                    let trace = { x, y, name, type, mode, hoverinfo} // create a new trace obj
+                    uncorrected_traces_temp.push(trace) // add that trace obj into our tpc_trace
+                }
+        
+                var x_corrected_pca = coordinates.data.x_corrected_pca
+                var y_corrected_pca = coordinates.data.y_corrected_pca
+                console.log(x_corrected_pca)
+                console.log(y_corrected_pca)
+        
+                // This takes care of corrected PCA graph
+                let corrected_traces_temp = []
+                for(let i = 0; i < no_of_dataframes; i++){
+                    let x = x_corrected_pca[i]
+                    let y = y_corrected_pca[i]
+                    let name = group_names_list[i] //sample name
+                    let type = 'scatter'
+                    let mode = 'markers'
+                    let hoverinfo = "name"
+                    let trace = { x, y, name, type, mode, hoverinfo} // create a new trace obj
+                    corrected_traces_temp.push(trace) // add that trace obj into our tpc_trace
+                }
+        
+                // this.setState works the same as setters
+                // syntax: this.setState( {target value : value to change} )             
                 this.setState({
                     x_dge: coordinates.data.x_dge,
                     y_dge: coordinates.data.y_dge,
@@ -65,8 +110,16 @@ class ResultPage extends React.Component {
                     y_pca: coordinates.data.y_pca,
                     pca_text: coordinates.data.pca_text,
                     csv_names_list: coordinates.data.csv_names_list,
-                    jobCode: coordinates.data.jobCode
+                    jobCode: coordinates.data.jobCode,
+                    uncorrected_pca_traces: uncorrected_traces_temp,
+                    corrected_pca_traces: corrected_traces_temp
                 })
+
+                //remove everything from local storage for safety
+                // localStorage.removeItem('x_tpc', 'y_tpc', 'x_pca', 'y_pca', 'x_dge', 'y_dge', 'pca_text',
+                //                         'group_names_list', 'x_uncorrected_pca', 'y_uncorrected_pca', 
+                //                         'x_corrected_pca', 'y_corrected_pca', 
+                //                         'batch_correction_value', 'taskChosen', 'jobCode')
             })        
 
     }
@@ -100,40 +153,21 @@ class ResultPage extends React.Component {
                             <nav>
                                 <div id={styles["sidenav-content"]}>
                                     <div id={styles["tatalogo"]}>
-                                        <img src={require('../assets/Group 257.png')} alt="tatalogo" width="48px" height="49px" />
+                                        <a href="/">
+                                            <img src={require('../assets/TATA.png')} alt="tatalogo" />
+                                        </a>
                                     </div>
                                     <div id={styles["graph-selection"]}>
-                                        {/*need to center the button*/}
                                         <div id={styles["jobCode-section"]}>
-                                            <div id={styles["jobCode"]}>JOB CODE:<span>1A253M4</span></div>
+                                            <div id={styles["jobCode"]}>JOB CODE:<span>{this.state.jobCode}</span></div>
                                         </div>
-
-
                                         <TabList>
-                                            {/* <div id="result-validation"> */}
-                                            {/* <button type="Continue" className="button-result">Exploratory Plots</button> */}
                                             <Tab type="Continue" className={styles["button-result"]}>Exploratory Plots</Tab>
-                                            {/* </div> */}
-                                            {/* <div id="result-batch"> */}
-                                            {/* <button type="Continue" className="button-result">Batch Correction</button> */}
                                             <Tab type="Continue" className={styles["button-result"]}>Batch Correction</Tab>
-                                            {/* </div> */}
-                                            {/* <div id="result-final"> */}
-                                            {/* <button type="Continue" className="button-result">Final Plots</button> */}
                                             <Tab type="Continue" className={styles["button-result"]}>Final Plots</Tab>
-                                            {/* </div> */}
-                                            {/* <div id="result-table"> */}
-                                            {/* <button type="Continue" className="button-result">Results Table</button> */}
                                             <Tab type="Continue" className={styles["button-result"]}>Results Table</Tab>
-                                            {/* </div>                                     */}
-                                            {/* <div id="download-data"> */}
-                                            {/* <button type="Continue" className="download">Download Data</button> */}
                                             <Tab type="Continue" className={styles["download"]}>Download Data</Tab>
-                                            {/* </div> */}
-                                            {/* <div id="delete-data"> */}
-                                            {/* <button type="Continue" className="delete">Delete Data</button> */}
                                             <Tab type="Continue" className={styles["delete"]}>Delete Data</Tab>
-                                            {/* </div> */}
                                         </TabList>
                                         <div id={styles["graphresult-content"]}>
                                             <div className={styles["drophelp"]}>
@@ -279,16 +313,6 @@ class ResultPage extends React.Component {
                                                 {/* </div> */}
                                             </div>
                                         </div>
-
-                                        {/* <div className={styles["graph-result"]}>
-
-                                        </div>
-                                        <div className={styles["graph-result"]}>
-                                            
-                                        </div>
-                                        <div className={styles["graph-result"]}>
-
-                                        </div> */}
                                     </div>
 
                                 </article>
@@ -305,20 +329,7 @@ class ResultPage extends React.Component {
                                             </div>
                                             <div className={styles["corrected-graphsize"]}>
                                                 <Plot
-                                                    // data={this.state.corrected_pca_traces}
-                                                    data={[
-                                                        {
-                                                            // x: this.state.x_pca,
-                                                            // y: this.state.y_pca,
-                                                            x: [1, 2, 3],
-                                                            y: [3, 2, 1],
-                                                            type: 'scattergl',
-                                                            mode: 'markers', //lines or markers
-                                                            text: this.state.pca_text,
-                                                            hoverinfo: "text",
-                                                            marker: { color: 'green' },
-                                                        },
-                                                    ]}
+                                                    data={this.state.corrected_pca_traces}
 
                                                     layout={{
                                                         hovermode: 'closest',
@@ -355,20 +366,7 @@ class ResultPage extends React.Component {
                                             </div>
                                             <div className={styles["corrected-graphsize"]}>
                                                 <Plot
-                                                    // data={this.state.uncorrected_pca_traces}
-                                                    data={[
-                                                        {
-                                                            // x: this.state.x_pca,
-                                                            // y: this.state.y_pca,
-                                                            x: [1, 2, 3],
-                                                            y: [3, 2, 1],
-                                                            type: 'scattergl',
-                                                            mode: 'markers', //lines or markers
-                                                            text: this.state.pca_text,
-                                                            hoverinfo: "text",
-                                                            marker: { color: 'green' },
-                                                        },
-                                                    ]}
+                                                    data={this.state.uncorrected_pca_traces}
 
                                                     layout={{
                                                         hovermode: 'closest',
@@ -398,15 +396,6 @@ class ResultPage extends React.Component {
                                         </div>
                                     </div>
                                 </div>
-
-                                {/* <div className={styles["batch-display"]}>
-                                    <div className={styles["batch-result"]}>
-
-                                    </div>
-                                    <div className={styles["batch-result"]}>
-
-                                    </div>
-                                </div> */}
                             </TabPanel>
 
                             {/*This TabPanel is for "Final Plots"*/}
