@@ -76,8 +76,7 @@ class AlgorithmPage extends React.Component {
                 falseDiscoveryRate_value,
                 bonferroniAlpha_value]
         }).then((arr) => { // to receive data from back end 
-            localStorage.setItem('test_list', JSON.stringify(arr.data.test_list))
-            localStorage.setItem('test_list2', JSON.stringify(arr.data.test_list2))
+            localStorage.setItem('jobCode', JSON.stringify(arr.data.jobCode))
         }).then(()=>{
             this.props.history.push('/resultpage')
         })
@@ -118,7 +117,9 @@ class AlgorithmPage extends React.Component {
                             <div className="flex-container5">
                                 <div id="nav5">
                                     <div id="logo">
-                                        <img src={require('../assets/TATA.png')} alt="logo" />
+                                        <a href="/">
+                                            <img src={require('../assets/TATA.png')} alt="logo" />
+                                        </a>
                                     </div>
                                     {/* <!--end of log--> */}
                                     <div id="mainnav">

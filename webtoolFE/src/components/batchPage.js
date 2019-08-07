@@ -102,7 +102,9 @@ class BatchPage extends React.Component {
                             {/* <div id="content"> */}
                                 <div id={styles["nav-batch"]}>
                                     <div id={styles["logo"]}>
-                                        <img src={require('../assets/TATA.png')} alt="logo" />
+                                        <a href="/">
+                                            <img src={require('../assets/TATA.png')} alt="logo" />
+                                        </a>
                                     </div>
                                     {/* <!--end of log--> */}
 
