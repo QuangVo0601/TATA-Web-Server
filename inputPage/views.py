@@ -17,7 +17,6 @@ import csv
 def index_page(request):
     return HttpResponse("<h1>Server is running correctly</h1>") # Provide initial route 
 
-
 '''  Each of the below def corresponding with a specific Front End Axios. If create another axios, copy and paste one of these def
     and change the def's name into another unquie name, make sure to add comment what axios route it is linked to. 
     Remember to add the def's name into urls.py (Open urls.py for more details). Axios POST/GET route should have the right path in urls.py
@@ -26,6 +25,9 @@ def index_page(request):
 # for csvReader.js axios, saved in urls.py
 @csrf_exempt
 def input_list(request):
+    """
+    List all code input, or create a new input obj.
+    """
     if request.method == 'GET': # Back End send, Front End request
         inputs = Input.objects.all()
         serializer = InputSerializer(inputs, many=True)
@@ -119,16 +121,16 @@ def input_list2(request):
         # build the dataframe from 'dataString' 
         dataSet.dataframe_from_string(dataString)
 
-        # group_lists = [['control group','Patient1','Patient2','Patient3'],
-        #           ['group1','Patient4','Patient5','Patient6'],
-        #           ['group2','Patient7','Patient8','Patient9'],
-        #           ['group3','Patient10','Patient11','Patient12'],
-        #           ['group4','Patient13','Patient14','Patient15']]
+        '''group_lists = [['control group','Patient1','Patient2','Patient3'],
+                  ['group1','Patient4','Patient5','Patient6'],
+                  ['group2','Patient7','Patient8','Patient9'],
+                  ['group3','Patient10','Patient11','Patient12'],
+                  ['group4','Patient13','Patient14','Patient15']]'''
 
-        # # no of samples per each query: 8, 96, 58
-        # gtex_groups_queries = [[[],[],['20-29', '30-39'],[],[], ['Kidney'], 'gtex group 1'],
-		#                     [[],['M'],['20-29', '30-39', '40-49', '50-59'],[],[], ['Bladder'], 'gtex group 2'],
-        #                     [[], ['F'], ['50-59'], ['Ventilator', 'Fast Natural'], [], ['Liver'], 'gtex group 3']]
+        # no of samples per each query: 8, 96, 58
+        '''gtex_groups_queries = [[[],[],['20-29', '30-39'],[],[], ['Kidney'], 'gtex group 1'],
+		                    [[],['M'],['20-29', '30-39', '40-49', '50-59'],[],[], ['Bladder'], 'gtex group 2'],
+                            [[], ['F'], ['50-59'], ['Ventilator', 'Fast Natural'], [], ['Liver'], 'gtex group 3']]'''
 
         # pass in list of groups, return list of associated dataframes  
         CListDfs = dataSet.make_groups(group_lists) 
@@ -276,8 +278,8 @@ def input_list3(request):
 
         jobCode = analyzer.job_code_mgr.get_job_code()
 
-        #csvDatabase_path = '/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobCode+'/results/' # for mason server
-        csvDatabase_path = 'webtoolFE/src/csvDatabase/'+jobCode+'/results/' # for localhost
+        #csvDatabase_path = '/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobCode+'/' # for mason server
+        csvDatabase_path = 'webtoolFE/src/csvDatabase/'+jobCode+'/' # for localhost
 
         csv_names_list = []
         # convert dataframes to csv files, saved in csvDatabase 
@@ -290,6 +292,11 @@ def input_list3(request):
         csv_names_list_df = pd.DataFrame(csv_names_list, columns=["csv_file_names"])
         csv_names_list_df.to_csv(csvDatabase_path+'csv_names_list.csv', index=False)
 
+        # create a dataframe for the selections [batch correction (yes/no), algorithm, sample variance, false discovery rate, bonferroni alpha], 
+        # then save as csv in database for later use
+        selections_df = pd.DataFrame(selections, columns=["selections"])
+        selections_df.to_csv(csvDatabase_path+'selections.csv', index=False)        
+
         # bonferroni alpha from algorithmPage.js
         alpha = selections[4] 
         # fold change, default is 2
@@ -300,12 +307,10 @@ def input_list3(request):
 
         print(dataframes_for_graph[0].iloc[:,1])
         print(dataframes_for_graph[0].iloc[:,4])
-        print(dataframes_for_graph[0].iloc[:,7])       
+        print(dataframes_for_graph[0].iloc[:,7])     
+        print('Everything is done')  
 
-        request.session['jobCode'] = jobCode # for now
-
-    return JsonResponse({}, status=201)
-
+    return JsonResponse({'jobCode': jobCode}, status=201)
 
 # for gtexModal.js, saved in urls.py
 @csrf_exempt
@@ -401,12 +406,11 @@ def input_results(request):
         #----------------Batch Correction ends------------#
 
          # path to the csv_names_list file
-        #csvDatabase_path = '/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobCode+'/results/'+'csv_names_list.csv' #for mason server
-        csvDatabase_path = 'webtoolFE/src/csvDatabase/'+jobCode+'/results/'+'csv_names_list.csv' #for localhost
+        #csvDatabase_path = '/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobCode+'/'+'csv_names_list.csv' #for mason server
+        csvDatabase_path = 'webtoolFE/src/csvDatabase/'+jobCode+'/'+'csv_names_list.csv' #for localhost
         # convert csv to a list of csv file names
         csv_names_list_df = pd.read_csv(csvDatabase_path)   
         csv_names_list = list(csv_names_list_df.iloc[:,0])
-
         print(csv_names_list)  
        
     return JsonResponse({'jobCode': jobCode, 'csv_names_list': csv_names_list,
@@ -442,12 +446,15 @@ def input_finalPlots(request):
         # convert csv to a dataframe used for graphing
         dataframe = pd.read_csv(csvDatabase_path)
 
-        alpha = 0.05 # for now, should be from algorithm
+        # path to selections.csv for selections chosen in algorithmPage
+        #csvDatabase_path2 = '/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobCode+'/selections.csv' # for mason server
+        csvDatabase_path2 = 'webtoolFE/src/csvDatabase/'+jobCode+'/selections.csv' # for localhost
+        selections_df = pd.read_csv(csvDatabase_path2)   
+        selections = list(selections_df.iloc[:,0])
+        print(selections)  
 
-        # delete later
-        print(dataframe.iloc[:,2])
-        print(dataframe.iloc[:,5])
-        print(dataframe.iloc[:,8])        
+        alpha = float(selections[4])
+        print('alpha is ' + str(alpha))     
 
         #---------------for Graph 1 (Volcano Plot)-------------#       
         # only use 'fold change' col for x_axis, '-log(p-values)' for y_axis
@@ -470,9 +477,10 @@ def input_finalPlots(request):
         # if -log10(p_val) < -log10(alpha/numberOfRows)) => black else red
         # check for both graphs
         numberOfRows = len(x_volcano)
+        temp = -math.log10(alpha/numberOfRows)
         
         for i in range(numberOfRows):
-            if y_volcano[i] < (-math.log10(alpha/numberOfRows)):
+            if y_volcano[i] < temp:
                 # volcano plot black
                 x_volcano_black.append(x_volcano[i])
                 y_volcano_black.append(y_volcano[i])
@@ -508,8 +516,8 @@ def input_finalPlots(request):
 
         # still doesn't work in front end
         #heatmap_png_path = '/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobCode+'/results/'+csvFileName+' heatmap.png' # for mason server
-        heatmap_png_path = 'webtoolFE/src/csvDatabase/'+jobCode+'/results/'+csvFileName+' heatmap.png' # for localhost
-      
+        #heatmap_png_path = jobCode+'/results/'+csvFileName+' heatmap.png' # for localhost
+        heatmap_png_path = '' # doesn't work for localhost
 
     return JsonResponse({'x_volcano': x_volcano, 'y_volcano': y_volcano,
                          'x_differential': x_differential, 'y_differential': y_differential,
@@ -557,6 +565,7 @@ def input_finalTables(request):
     
     return JsonResponse({'all_columns': all_columns, 'header': header}, status=201)
 
+
 '''@csrf_exempt
 def input_detail(request, pk):
     """
@@ -583,7 +592,6 @@ def input_detail(request, pk):
         input.delete()
         return HttpResponse(status=204)'''
 
-
 # for homepage.js, saved in urls.py
 @csrf_exempt
 def input_jobcode(request):
@@ -599,6 +607,8 @@ def input_jobcode(request):
         data = JSONParser().parse(request)
         jobcode = data['jobcode']
         print(jobcode)
-        pc = pd.read_csv('/Users/phuongtran/Desktop/TATA-Web-Server/webtoolFE/src/csvDatabase/'+jobcode+'/progress.csv')
+        # pc = pd.read_csv('/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobcode+'/progress.csv')
+        pc = pd.read_csv('webtoolFE/src/csvDatabase/'+jobcode+'/progress.csv') # for localhost
         percent=int(pc.iloc[0,0])
         return JsonResponse({'progress':percent}, status=201)
+
