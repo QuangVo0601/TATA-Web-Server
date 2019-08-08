@@ -83,8 +83,6 @@ def input_list(request):
         request.session['x_pca'] = x_pca
         request.session['y_pca'] = y_pca
         request.session['pca_text'] = pca_text    
-
-        #print(pca_text)
  
         # Send as dictionary type 
         # After data processing, send it back to front end 
@@ -121,17 +119,6 @@ def input_list2(request):
         # build the dataframe from 'dataString' 
         dataSet.dataframe_from_string(dataString)
 
-        '''group_lists = [['control group','Patient1','Patient2','Patient3'],
-                  ['group1','Patient4','Patient5','Patient6'],
-                  ['group2','Patient7','Patient8','Patient9'],
-                  ['group3','Patient10','Patient11','Patient12'],
-                  ['group4','Patient13','Patient14','Patient15']]'''
-
-        # no of samples per each query: 8, 96, 58
-        '''gtex_groups_queries = [[[],[],['20-29', '30-39'],[],[], ['Kidney'], 'gtex group 1'],
-		                    [[],['M'],['20-29', '30-39', '40-49', '50-59'],[],[], ['Bladder'], 'gtex group 2'],
-                            [[], ['F'], ['50-59'], ['Ventilator', 'Fast Natural'], [], ['Liver'], 'gtex group 3']]'''
-
         # pass in list of groups, return list of associated dataframes  
         CListDfs = dataSet.make_groups(group_lists) 
         # pass in list of GTEx groups, return list of associated dataframes          
@@ -148,8 +135,6 @@ def input_list2(request):
         # combine two lists above
         group_names_list.extend(gtex_groups_names)
 
-        # For testing
-        print('This is group list')
         print(group_names_list)
 
         # tf_ens_ids = pd.read_csv("/var/www/html/webtool/Transcription Factor List.csv") # for mason server
@@ -188,6 +173,7 @@ def input_list2(request):
 
         # create a subfolder inside jobcode folder for exploratory plots
         #csvDatabase_path = '/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobCode+'/exploratory/' # for mason server
+        #csvDatabase_path2 = '/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobCode+'/batch/' # for mason server
         csvDatabase_path = 'webtoolFE/src/csvDatabase/'+jobCode+'/exploratory/' # for localhost
         csvDatabase_path2 = 'webtoolFE/src/csvDatabase/'+jobCode+'/batch/' # for localhost
         
@@ -218,7 +204,6 @@ def input_list2(request):
         dge_zippedList =  list(zip(x_dge, y_dge))
         dge_df = pd.DataFrame(dge_zippedList, columns = ['x_dge' , 'y_dge']) 
         dge_df.to_csv(csvDatabase_path + 'dge.csv')
-        #print(dge_df)
 
         # save x_tpc, y_tpc as a csv in the jobCode/exploratory subfolder 
         x_tpc_df = pd.DataFrame(x_tpc, columns = ['x_tpc'])
@@ -230,7 +215,6 @@ def input_list2(request):
         pca_zippedList = list(zip(x_pca, y_pca, pca_text))
         pca_df = pd.DataFrame(pca_zippedList, columns = ['x_pca', 'y_pca', 'pca_text'])
         pca_df.to_csv(csvDatabase_path + 'pca.csv')
-        #print(pca_df)
 
         return JsonResponse({'x_uncorrected_pca':x_uncorrected_pca,'y_uncorrected_pca':y_uncorrected_pca,
                              'x_corrected_pca':x_corrected_pca,'y_corrected_pca':y_corrected_pca,
@@ -310,7 +294,7 @@ def input_list3(request):
         print(dataframes_for_graph[0].iloc[:,1])
         print(dataframes_for_graph[0].iloc[:,4])
         print(dataframes_for_graph[0].iloc[:,7])     
-        print('Everything is done')  
+        print('Everything is done, the result page is ready')  
 
     return JsonResponse({'jobCode': jobCode}, status=201)
 
@@ -390,6 +374,7 @@ def input_results(request):
         #---------------Exploratory Plots ends------------#
 
         # path to batch correction plots files
+        #csvDatabase_path = '/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobCode+'/batch/' # for mason server        
         csvDatabase_path2 = 'webtoolFE/src/csvDatabase/'+jobCode+'/batch/' # may change
         # then do sth for corrected & uncorrected graphs'''
         #---------------for Batch Correction--------------#
@@ -497,17 +482,12 @@ def input_finalPlots(request):
                 x_differential_red.append(x_differential[i])
                 y_differential_red.append(y_differential[i])
         
-        # delete later
+        # for debugging
         print(len(x_volcano))
-        print(len(y_volcano))
         print(len(x_volcano_black))
-        print(len(y_volcano_black))
         print(len(x_volcano_red))
-        print(len(y_volcano_red))
         print(len(x_differential_black))
-        print(len(y_differential_black))
         print(len(x_differential_red))
-        print(len(y_differential_red))     
 
         # to be returned to front end
         x_volcano = [x_volcano_black,x_volcano_red]   
@@ -585,9 +565,9 @@ def input_jobcode(request):
 
         file_found = True
         percent = 0
-
-        # pc = pd.read_csv('/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobcode+'/progress.csv')
+        
         try:
+            # pc = pd.read_csv('/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobcode+'/progress.csv') # for mason server
             pc = pd.read_csv('webtoolFE/src/csvDatabase/'+jobcode+'/progress.csv') # for localhost
         except FileNotFoundError:
             file_found = False
