@@ -64,7 +64,13 @@ class HomePage extends React.Component {
             jobcode: this.state.jobcode
         }).then((arr) => { // to receive data from back end 
 			//console.log(arr.data.progress)
-			this.setState({percent: arr.data.progress})
+			if(arr.data.file_found === false){
+				alert('Job Code not found! Please try again.')
+			}
+			else{
+				this.setState({percent: arr.data.progress})
+			}
+
         })
 	}
 

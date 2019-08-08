@@ -580,8 +580,16 @@ def input_jobcode(request):
         data = JSONParser().parse(request)
         jobcode = data['jobcode']
         print(jobcode)
+
+        file_found = True
+        percent = 0
+
         # pc = pd.read_csv('/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobcode+'/progress.csv')
-        pc = pd.read_csv('webtoolFE/src/csvDatabase/'+jobcode+'/progress.csv') # for localhost
-        percent=int(pc.iloc[0,0])
-        return JsonResponse({'progress':percent}, status=201)
+        try:
+            pc = pd.read_csv('webtoolFE/src/csvDatabase/'+jobcode+'/progress.csv') # for localhost
+        except FileNotFoundError:
+            file_found = False
+        else:
+            percent=int(pc.iloc[0,0])
+        return JsonResponse({'progress':percent, 'file_found':file_found}, status=201)
 
