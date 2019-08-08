@@ -64,7 +64,13 @@ class HomePage extends React.Component {
             jobcode: this.state.jobcode
         }).then((arr) => { // to receive data from back end 
 			//console.log(arr.data.progress)
-			this.setState({percent: arr.data.progress})
+			if(arr.data.file_found === false){
+				alert('Job Code not found! Please try again.')
+			}
+			else{
+				this.setState({percent: arr.data.progress})
+			}
+
         })
 	}
 
@@ -198,7 +204,7 @@ class HomePage extends React.Component {
 												<img src={require('../assets/homePageImages/1.jpg')} alt="LOGO" />
 											</div>
 											<div className={styles.nav}>
-												<label htmlFor={styles["img-7"]} className={styles.prev}>&#x2039;</label>
+												<label htmlFor={styles["img-9"]} className={styles.prev}>&#x2039;</label>
 												<label htmlFor={styles["img-2"]} className={styles.next}>&#x203a;</label>
 											</div>
 										</li>
@@ -209,7 +215,7 @@ class HomePage extends React.Component {
 												<img src={require('../assets/homePageImages/1.jpg')} alt="LOGO" />
 											</div>
 											<div className={styles.nav}>
-												<label htmlFor={styles["img-7"]} className={styles.prev}>&#x2039;</label>
+												<label htmlFor={styles["img-9"]} className={styles.prev}>&#x2039;</label>
 												<label htmlFor={styles["img-2"]} className={styles.next}>&#x203a;</label>
 											</div>
 										</li>
@@ -250,7 +256,7 @@ class HomePage extends React.Component {
 										<input type="radio" name="radio-btn" id={styles["img-5"]} />
 										<li className={styles["slide-container"]}>
 											<div className={styles.slide}>
-												<img src={require('../assets/homePageImages/5.JPG')} alt="LOGO" />
+												<img src={require('../assets/homePageImages/5.jpg')} alt="LOGO" />
 											</div>
 											<div className={styles.nav}>
 												<label htmlFor={styles["img-4"]} className={styles.prev}>&#x2039;</label>
@@ -294,7 +300,7 @@ class HomePage extends React.Component {
 										<input type="radio" name="radio-btn" id={styles["img-9"]} />
 										<li className={styles["slide-container"]}>
 											<div className={styles.slide}>
-												<img src={require('../assets/homePageImages/9.JPG')} alt="LOGO" />
+												<img src={require('../assets/homePageImages/9.jpg')} alt="LOGO" />
 											</div>
 											<div className={styles.nav}>
 												<label htmlFor={styles["img-8"]} className={styles.prev}>&#x2039;</label>
