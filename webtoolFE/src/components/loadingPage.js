@@ -40,7 +40,7 @@ class LoadingPage extends Component {
                 <div className="loading-wrapper">
                     <TopNav />
 
-                    <div className="loading-jobcode">JOB CODE:<span>1A253M4</span></div>
+                    <div className="loading-jobcode">JOB CODE:<span>{localStorage.getItem('jobCode')}</span></div>
                     <div className="loading-etaInfo">
                         <span className="percentage">{this.state.percent.toFixed(2)}%</span>
                     </div>

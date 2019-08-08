@@ -148,6 +148,8 @@ def input_list2(request):
         # combine two lists above
         group_names_list.extend(gtex_groups_names)
 
+        # For testing
+        print('This is group list')
         print(group_names_list)
 
         # tf_ens_ids = pd.read_csv("/var/www/html/webtool/Transcription Factor List.csv") # for mason server
