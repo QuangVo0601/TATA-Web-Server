@@ -3,7 +3,6 @@ import axios from 'axios'; // to send data to back end
 import styles from "../styles/finalPlots.module.css"; //use the same css with finalPlots.js
 import Plot from 'react-plotly.js';
 import Plotly from 'plotly.js/dist/plotly'
-import Dropdown from 'react-dropdown';
 import Select from 'react-select';
 
 class FinalTables extends React.Component {
