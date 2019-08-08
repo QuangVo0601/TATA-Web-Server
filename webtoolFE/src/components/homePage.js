@@ -87,8 +87,9 @@ class HomePage extends React.Component {
 								<div className={`${styles["home-page"]} ${styles.content}`}>
 									<div className={styles["container-img"]}>
 										<div className={styles.topnav}>
-
-											<img src={require('../assets/Group 257.png')} alt="LOGO" width="77px" href="/home" />
+											<a href="/">
+												<img src={require('../assets/Group 257.png')} alt="LOGO" width="77px" href="/home" />
+											</a>
 											<nav>
 												<a href="/contributions"> Contributors </a>
 												<a href="/FAQ"> FAQ </a>

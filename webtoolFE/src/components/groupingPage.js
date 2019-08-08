@@ -334,7 +334,10 @@ class GroupingPage extends React.Component {
                             <div id="content">
                                 <div id="nav3">
                                     <div id="logo">
-                                        <img src={require('../assets/Group 257.png')} width="46px" alt="logo" />
+                                        <a href="/">
+                                            <img src={require('../assets/Group 257.png')} width="46px" alt="logo" />
+                                        </a>
+                                        
                                     </div>
                                     {/* <!--end of log--> */}
 
