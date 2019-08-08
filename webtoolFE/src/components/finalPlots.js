@@ -2,7 +2,6 @@ import React from "react";
 import axios from 'axios'; // to send data to back end
 import styles from "../styles/finalPlots.module.css";
 import Plot from 'react-plotly.js';
-import Dropdown from 'react-dropdown';
 import Select from 'react-select';
 
 class FinalPlots extends React.Component {
