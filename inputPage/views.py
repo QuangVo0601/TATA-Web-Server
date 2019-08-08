@@ -565,33 +565,6 @@ def input_finalTables(request):
     
     return JsonResponse({'all_columns': all_columns, 'header': header}, status=201)
 
-
-'''@csrf_exempt
-def input_detail(request, pk):
-    """
-    Retrieve, update or delete a code input.
-    """
-    try:
-        input = Input.objects.get(pk=pk)
-    except Input.DoesNotExist:
-        return HttpResponse(status=404)
-
-    if request.method == 'GET': # retrieve data
-        serializer = InputSerializer(input)
-        return JsonResponse(serializer.data)
-
-    elif request.method == 'PUT': # update data
-        data = JSONParser().parse(request)
-        serializer = InputSerializer(input, data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=400)
-
-    elif request.method == 'DELETE': 
-        input.delete()
-        return HttpResponse(status=204)'''
-
 # for homepage.js, saved in urls.py
 @csrf_exempt
 def input_jobcode(request):
