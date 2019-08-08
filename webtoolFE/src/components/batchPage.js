@@ -82,8 +82,6 @@ class BatchPage extends React.Component {
             corrected_pca_traces: corrected_traces_temp
         })
 
-        // localStorage.removeItem('x_uncorrected_pca', 'y_uncorrected_pca', 'x_corrected_pca', 'y_corrected_pca', 'group_names_list')
-
     }
 
     render() {
@@ -232,13 +230,7 @@ class BatchPage extends React.Component {
                                     <div id={styles["batch-bottom-container2"]} >
                                         <div id={styles["correction_header"]}>Would you like to use batch corrected data?</div>
                                         <div className={styles.select}>
-                                            {/* <select>
-                                                <option>Yes</option>
-                                                <option>No</option>
-                                            </select> */}
                                             <Select
-                                                // styles={{ control: (base) => ({ ...base, boxShadow: "none", width: "95px" }) }}
-                                                // className={styles.select}
                                                 placeholder={this.state.selectedOption}
                                                 value={this.state.selectedOption}
                                                 onChange={this.selectedOption}

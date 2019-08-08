@@ -55,7 +55,7 @@ class csvReader extends React.Component {
         // for time out
         this.setDisable()
         console.log(this.state.disableButt)
-        setTimeout(this.setDisable, 7000)
+        setTimeout(this.setDisable, 10000)
         console.log(this.state.disablbeButt)
         /* ------ End of timeout ----- */
 

@@ -19,12 +19,13 @@ class LoadingPage extends Component {
                 clearInterval(this.startProgress)
             }
             else {
-                this.setState({ percent: this.state.percent += 0.02 })
+                this.setState({ percent: this.state.percent += 0.01 })
             }
         }, 1000)
     }
 
     componentDidMount() {
+        console.log("Job Code is " + JSON.parse(localStorage.getItem('jobCode')))
         console.log('hi')
         this.startProgress()
     }
@@ -40,7 +41,7 @@ class LoadingPage extends Component {
                 <div className="loading-wrapper">
                     <TopNav />
 
-                    <div className="loading-jobcode">JOB CODE:<span>{localStorage.getItem('jobCode')}</span></div>
+                    <div className="loading-jobcode">JOB CODE:<span>{JSON.parse(localStorage.getItem('jobCode'))}</span></div>
                     <div className="loading-etaInfo">
                         <span className="percentage">{this.state.percent.toFixed(2)}%</span>
                     </div>

@@ -12,9 +12,11 @@
 
 }
 #tatalogo img{
-	margin-left:70px;
-	margin-top:45px;
-	margin-bottom:46px;
+	margin-top:63px;
+	margin-bottom:58px;
+	margin-left: 60px;
+	width:96px;
+	height:60px;
 }
 /* #nav-result{
 	display:flex;
@@ -48,10 +50,10 @@ padding-bottom: 5px;
 }
 #jobCode{
    margin: 0 auto;
-   color: #A5A5A5;
+   color: #114B5F;
    text-align: center;
-   font-size: 12px;
-   font-weight: 500;
+   font-size: 10px;
+   font-weight: 600;
    font-family: 'Montserrat', sans-serif;
 }
 
@@ -60,23 +62,19 @@ padding-bottom: 5px;
 	font-family: 'Montserrat', sans-serif;
 	font-weight: 500;
 	font-size: 8pt;
-	/* font-size: 8.75pt; */
 	color: #A5A5A5;
 	outline: none;
 	text-align: center;
 	display: inline-block;
 	width: 120px;
-	height: 25px;
-	/* height: 18px; */
+	height: 20px;
 	border-radius: 8px;
 	cursor: pointer;
 	margin-top:10px;
 	margin-left:24px;
 	background-color:#F5F5F5;
 	border:.5px solid #D3D3D3;
-	/* padding-top: 10px; */
-	padding-bottom: -100px;
-	
+	padding-top: 8px;
 }
 
 .download {
@@ -84,17 +82,18 @@ padding-bottom: 5px;
 	font-weight: 500;
 	font-size: 8pt;
 	background-color: #114B5F;
-		outline: none;
+	outline: none;
 	color:white;
 	text-align: center;
-	display: block;
+	display: inline-block;
 	border: none;
 	width: 120px;
-	height: 25px;
+	height: 20px;
 	border-radius: 8px;
 	cursor: pointer;
 	margin-left:24px;
 	margin-top:10px;
+	padding-top: 8px;
 }
 
 
@@ -106,14 +105,15 @@ padding-bottom: 5px;
 	outline: none;
 	color:white;
 	text-align: center;
-	display: block;
+	display: inline-block;
 	border: none;
 	width: 120px;
-	height: 25px;
+	height: 20px;
 	border-radius: 8px;
 	cursor: pointer;
 	margin-left:24px;
 	margin-top:10px;
+	padding-top: 8px;
 }
 .button-result:hover {
 	background-color: #FF7B26;
@@ -320,11 +320,13 @@ background: #FFFFFF;
 
 #batch_corrected_section{
 border: 1px solid #E5E5E5;
-width: 410px;
+width: 450px;
+height: 400px;
 margin-bottom: 17px;
 padding: 15px;
 border-radius: 20px;
 background-color: #F4F4F4;
+margin-left: -20px;
 }
 
 .drophelp {
@@ -374,8 +376,8 @@ background-color: #F4F4F4;
 }
 /* graph sizes  */
 .corrected-graphsize {
-	width: 400px;
-	height: 275px;
+	width: 450px;
+	height: 375px;
 	margin-top: 25px;
 	background:#ededed;
 /* place graph in this gray area */
@@ -395,11 +397,11 @@ background-color: #F4F4F4;
 	width:263px;
 }
 #tatalogo img{
-	margin-left:115px;
-	margin-top:85px;
-	margin-bottom:56px;
-	width:57px;
-	height:59px;
+	margin-top:64px;
+	margin-bottom:69px;
+	margin-left:85px;
+	width:110px;
+	height:69px;
 }
 #nav-result{
 	width:970px;
@@ -501,14 +503,16 @@ overflow-x: scroll;
 #batch_corrected_section{
 	display: flex;
   flex-direction: column;
- 	width:460px;
+	 width:460px;
+	 height: 460px;
 	margin-right: 10px;
 	background-color: #F4F4F4;
+	margin-left: 0px;
 
 }
 .corrected-graphsize {
 	width: 460px;
-	height: 450px;
+	height: 460px;
 	margin-top: 0px;
 	margin-bottom: 25px;
 	background: #ededed;
@@ -526,11 +530,11 @@ overflow-x: scroll;
 	width:413px;
 }
 #tatalogo img{
-	margin-left:190px;
-	margin-top:82px;
-	margin-bottom:67px;
-	width:89px;
-	height:91px;
+	margin-top:92px;
+	margin-bottom:122px;
+	margin-left:175px;
+	width:125px;
+	height:79px;
 }
 #nav-result{
 	width:1343px;
@@ -547,6 +551,10 @@ overflow-x: scroll;
 	width: 214px;
 	margin-bottom: 40px;
 	padding-bottom: 5px;
+}
+
+#jobCode{
+	font-size: 18px;
 }
 
 .button-result {
@@ -629,10 +637,11 @@ overflow-x: hidden;
 	#batch_corrected_section{
 		display: flex;
 		flex-direction: column;
-	 width: 645px;
-	 /* height: 605px; */
+	 	width: 645px;
+	 height: 605px;
 	 margin-right: 10px;
 	 background-color: #F4F4F4;
+	 margin-left: 0px;
 	}
  .batch_title {
 	 font-size: 20px;

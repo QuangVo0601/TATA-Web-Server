@@ -218,7 +218,7 @@ def input_list2(request):
 
         return JsonResponse({'x_uncorrected_pca':x_uncorrected_pca,'y_uncorrected_pca':y_uncorrected_pca,
                              'x_corrected_pca':x_corrected_pca,'y_corrected_pca':y_corrected_pca,
-                             'group_names_list':group_names_list}, status=201)
+                             'group_names_list':group_names_list,'jobCode':jobCode}, status=201)
 
 # for algorithmPage.js => resultPage.js, saved in urls.py
 @csrf_exempt

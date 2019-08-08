@@ -419,6 +419,13 @@ Matthew hopes to work on interesting projects like this in the future.</div>
                         </div>
                         {/* <!---------------------------------------------------------- End of 2019 item --> */}
 
+                        <div id="poster-img">
+                            <img src={require('../assets/2019_team/Design.png')} alt="design poster"/>
+                            <img src={require('../assets/2019_team/Fullstack.png')} alt="full stack poster"/>
+                            <img src={require('../assets/2019_team/Algorithm.png')} alt="algorithmsposter"/>
+                        </div>
+
+
                         {/* <!------------------------------------------------------------- 2018 Gallery --> */}
                         <div id="summer2018">
                             <div className="summerTeamTitle">Summer 2018</div>

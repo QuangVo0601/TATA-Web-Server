@@ -16,7 +16,7 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed, 
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+time, mark, audio {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -45,7 +45,7 @@ footer, header, hgroup, menu, nav, section {
   animation: Gradient 10s ease infinite;
 }
 
-@-webkit-keyframes Gradient {
+/* @-webkit-keyframes Gradient {
 	0% {
 		background-position: 0% 50%
 	}
@@ -79,7 +79,7 @@ footer, header, hgroup, menu, nav, section {
 	100% {
 		background-position: 0% 50%
 	}
-}
+} */
 .skewed-bg {
   background: #FFFFFF;
   padding: 50px 0;
@@ -326,14 +326,17 @@ footer, header, hgroup, menu, nav, section {
   }
 
   .about-content {
-    margin-left: 425px;
-    width: 309px;
+    display: flex;
+    justify-content: space-between;
+    width: 700px;
+    margin: 0 auto;
   }
 	
 	.about-inside {
 		z-index: 1;
 		width: 258px;
-		padding-right: 20px;
+    /* padding-right: 20px; */
+    margin-top: -50px;
 	}
 #circle-bg {
 	z-index: 0;
@@ -364,12 +367,18 @@ footer, header, hgroup, menu, nav, section {
   }
 
   .about-para{
-    width: 303px;
+    width: 280px;
     color: #114B5F;
     font-weight: 600;
     font-family: 'Montserrat';
     font-size: 10px;
     line-height: 15px;
+  }
+
+  video{
+    width: 400px;
+    height: 225px;
+    /* padding-right: 10px; */
   }
 
   .the-team{
@@ -688,7 +697,7 @@ input#img-9:checked ~ .nav-dots label#img-dot-9 {
     font-size: 45px;
     font-weight: 500;
     line-height: 60px;
-	  width: 389px;
+	  width: 450px;
   }
 
   .description {
@@ -788,10 +797,10 @@ input#img-9:checked ~ .nav-dots label#img-dot-9 {
     margin: 0 auto;
     width: 1200px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     flex-wrap: wrap;
-	padding: 100px 0px 100px 0px;
-	border-radius: 20px;
+	  padding: 100px 0px 100px 0px;
+	  border-radius: 20px;
   }
 	
 	.about-inside {
@@ -803,6 +812,7 @@ input#img-9:checked ~ .nav-dots label#img-dot-9 {
     text-align: left;
     color: #114B5F;
     font-weight:400;
+    margin-top: 30px;
 	  margin-bottom: 10px;
     font-family: 'Oswald';
     font-size: 70px;
@@ -820,12 +830,18 @@ input#img-9:checked ~ .nav-dots label#img-dot-9 {
 }
 
   .about-para {
-    width: 456px;
+    width: 410px;
     color: #114B5F;
     font-weight: 600;
     font-family: 'Montserrat';
     font-size: 12px;
     line-height: 25px;
+  }
+
+  video{
+    width: 700px;
+    height: 400px;
+    padding-right: 20px;
   }
 
 .team-p {
@@ -986,7 +1002,7 @@ input#img-9:checked ~ .nav-dots label#img-dot-9  {
 
 @media only screen and (min-width: 1850px) {
 	#wrapper-home{
-		height: 2500px;
+		height: 2600px;
 		/* background-image: url("../assets/homePageImages/Asset 6.png");
         background-size: cover;
 		background-repeat: no-repeat; */
@@ -1121,11 +1137,11 @@ input#img-9:checked ~ .nav-dots label#img-dot-9  {
   .title {
     color: #114B5F;
     font-family: 'Oswald', sans-serif;
-    font-size: 80px;
+    font-size: 75px;
     font-weight: 500;
     line-height: 100px;
 	  margin-top: -12px;
-    width: 706px;
+    width: 750px;
   }
 
   .description {
@@ -1234,11 +1250,13 @@ input#img-9:checked ~ .nav-dots label#img-dot-9  {
 
   .about-content {
     margin-bottom: 40px;
+    margin: 0 auto;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     flex-wrap: wrap;
-	border-radius: 20px;
-	background-color: #FFFFFF;
+    border-radius: 20px;
+    background-color: #FFFFFF;
+    width: 1300px;
   }
 
   .team-p {
@@ -1257,9 +1275,10 @@ input#img-9:checked ~ .nav-dots label#img-dot-9  {
     text-align: left;
     color: #114B5F;
     font-weight:400;
-	  margin-bottom: 20px;
+    margin-top: 0px;
+	  margin-bottom: 0px;
     font-family: 'Oswald';
-    font-size: 120px;
+    font-size: 110px;
     line-height: 178px;
   }
 
@@ -1275,12 +1294,25 @@ input#img-9:checked ~ .nav-dots label#img-dot-9  {
 
 
   .about-para {
-    width: 669px;
+    width: 600px;
     color: #114B5F;
     font-weight: 400;
     font-family: 'Montserrat';
-    font-size: 20px;
+    font-size: 18px;
     line-height: 35px;
+  }
+
+  .about-inside {
+    width: 450px;
+    height: 600px;
+    margin-top: -100px;
+	}
+
+  video{
+    width: 800px;
+    height:449px;
+    margin-top: 100px;
+    padding-right: 10px;
   }
 
   .the-team{
@@ -1295,8 +1327,8 @@ input#img-9:checked ~ .nav-dots label#img-dot-9  {
   }
 
   .team-inside {
-    width: 33%;
-	height: 450px;
+    width: 34%;
+	height: 610px;
 	  padding: 100px;
 	border-radius: 20px;
 	background-color: #FFFFFF;

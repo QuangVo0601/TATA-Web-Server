@@ -2,7 +2,7 @@ import React from "react";
 import {
     withRouter
 } from 'react-router-dom'
-import "../styles/tata.css";
+import "../styles/groupingPage.css";
 import Footer from './botNav';
 import axios from 'axios'; // to send data to back end
 import Select from "react-select"; // to use dropbox
@@ -254,7 +254,7 @@ class GroupingPage extends React.Component {
                 clearInterval(this.startProgress)
             }
             else {
-                this.setState({ percent: this.state.percent += 0.21 })
+                this.setState({ percent: this.state.percent += 0.01 })
             }
         }, 1000)
     }
@@ -306,7 +306,7 @@ class GroupingPage extends React.Component {
                 localStorage.setItem('x_corrected_pca', JSON.stringify(arr.data.x_corrected_pca))
                 localStorage.setItem('y_corrected_pca', JSON.stringify(arr.data.y_corrected_pca))
                 localStorage.setItem('group_names_list', JSON.stringify(arr.data.group_names_list))
-
+                localStorage.setItem('jobCode', JSON.stringify(arr.data.jobCode))
 
             }).then(() => {
                 this.stopProgress()
@@ -335,7 +335,7 @@ class GroupingPage extends React.Component {
                                 <div id="nav3">
                                     <div id="logo">
                                         <a href="/">
-                                            <img src={require('../assets/Group 257.png')} width="46px" alt="logo" />
+                                            <img src={require('../assets/TATA.png')} width="46px" alt="logo" />
                                         </a>
                                         
                                     </div>

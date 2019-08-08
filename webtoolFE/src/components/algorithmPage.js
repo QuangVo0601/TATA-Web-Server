@@ -173,10 +173,6 @@ class AlgorithmPage extends React.Component {
                                                     <h2>ALGORITHM:</h2>
                                                 </div>
                                                 <div id="algorithmselection">
-                                                    {/* <select name="langOpt[]" multiple id="langOpt">
-                                                <option value="option1">Option 1</option>
-                                                <option value="option2">Option 2</option>
-                                            </select> */}
                                                     <Select
                                                         styles={{ control: (base) => ({ ...base, boxShadow: "none", width: "162px" }) }}
                                                         placeholder={this.state.selectedAlgorithm}

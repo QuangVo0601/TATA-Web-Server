@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Multiselect from 'react-multiselect-checkboxes'
-import "../styles/tata.css";
+import "../styles/groupingPage.css";
 import axios from 'axios'; // to send data to back end
 
 class GtexModule extends React.Component {

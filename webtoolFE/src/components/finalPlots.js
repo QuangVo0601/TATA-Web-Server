@@ -149,15 +149,6 @@ class FinalPlots extends React.Component {
                         onChange={this.selectedPlot}
                         value={this.state.selectedPlot}
                         placeholder="Final Plots" />
-                    {/* <div className={styles["dropdown-container"]}>
-                        <div className={styles["dropdown-label"]}>
-                            <Dropdown options={this.state.PlotOptions} onChange="" value={this.state.selectedPlot} placeholder="Final Plots" />
-                            <div className={styles["dropdown-active"]}>
-                            </div>
-                            <div className={styles["dropdown-select"]}>
-                            </div>
-                        </div>
-                    </div> */}
                 </div>
                 {/*dropdown ends*/}
                 <div id={styles["graph-display"]}>

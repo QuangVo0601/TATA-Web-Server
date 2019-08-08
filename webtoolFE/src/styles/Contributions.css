@@ -31,7 +31,7 @@ footer, header, hgroup, menu, nav, section {
 }
 
 	#wrapper_contributor{
-		height: 2700px;
+		height: 3415px;
         background-size: cover;
 		background-repeat: no-repeat;
 		overflow-x: hidden;
@@ -533,12 +533,25 @@ body {
     background-image: url("../assets/2019_team/yemeen_ayub_2019.jpg");
 }
 
+#poster-img img{
+    width: 470px;
+    height: 344px;
+    margin-left:140px;
+    margin-top:20px;
+    border:1px solid #E5E5E5;
+}
+#poster-img img:first-child{
+    margin-top:0px;
+}
+#poster-img img:last-child{
+    margin-bottom:20px;
+}
 
 
 /*/////////////////////////////////////////////////////////////// 1280 CSS ////////////////////////////////////////////////////*/
 @media only screen and (min-width: 1270px) {
 	#wrapper_contributor {
-		height: 2500px;
+		height: 2650px;
         background-size: cover;
 		background-repeat: no-repeat;
 	}
@@ -712,16 +725,57 @@ body {
 #Umber_Sheikh {
     background-image: url("../assets/2018_team/Umber_Sheikh_2018.jpg");
 }
+#poster-img{
+    display:flex;
+    flex-direction:row;
+    margin-left:50px;
+}
+#poster-img img{
+    width: 370px;
+    height:277.98px;
+    margin-left:20px;
+    border:1px solid #E5E5E5;
+    margin-top:0px;
+    margin-bottom:20px;
+}
+#poster-img img:first-child{
+    margin-top:0px;
+    margin-left:10px;
+}
+#poster-img img:last-child{
+    margin-bottom:0px;
+}
 }
 /*//////////////////////////////////////////////////////////////// 1920 CSS //////////////////////////////////////////////////////////*/
 
 @media only screen and (min-width: 1850px) {
 	#wrapper_contributor {
-		height: 2600px;
+		height: 3185px;
 		background-image: url("../assets/Asset 6.png");
         background-size: cover;
 		background-repeat: no-repeat;
-	}
+    }
+    
+    #poster-img{
+        display:flex;
+        flex-direction:row;
+        margin-left:370px;
+    }
+    #poster-img img{
+        width: 370px;
+        height:277.98px;
+        margin-left:20px;
+        border:1px solid #E5E5E5;
+        margin-top:0px;
+        margin-bottom:20px;
+    }
+    #poster-img img:first-child{
+        margin-top:0px;
+        margin-left:10px;
+    }
+    #poster-img img:last-child{
+        margin-bottom:0px;
+    }
 
 /*////////////////// Footer ///////////////////*/
 

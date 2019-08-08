@@ -46,7 +46,7 @@ class HomePage extends React.Component {
 	/* Functions go here */
 	setWaitingTime = () => {
 		this.setCanClick()
-		setTimeout(this.setNextClick, 7000)
+		setTimeout(this.setNextClick, 10000)
 	}
 
 	setCanClick = () => {
@@ -94,7 +94,7 @@ class HomePage extends React.Component {
 									<div className={styles["container-img"]}>
 										<div className={styles.topnav}>
 											<a href="/">
-												<img src={require('../assets/Group 257.png')} alt="LOGO" width="77px" href="/home" />
+												<img  src={require('../assets/Group 257.png')} alt="LOGO" width="77px" href="/home" />
 											</a>
 											<nav>
 												<a href="/contributions"> Contributors </a>
@@ -105,7 +105,7 @@ class HomePage extends React.Component {
 
 										<div className={styles.container} id="home">
 											<div className={styles["left-col"]}>
-												<h1 className={styles.title}>TRANSCRIPTION FACTOR ASSOCIATION TOOL FOR ANALYSIS</h1>
+												<h1 className={styles.title}>TOOL FOR THE ANALYSIS OF TRANSCRIPTION FACTOR ASSOCIATIONS</h1>
 
 												<p className={styles.description}>
 													TATA runs a preliminary validation on uploaded data and compares it to tissue matched control data
@@ -178,6 +178,12 @@ class HomePage extends React.Component {
 							{/* <!-- End of "skewed-bg-contribution" --> */}
 							<div className={styles.background}>
 								<div className={styles["about-content"]} id="about">
+
+								<video id={styles.video} controls autoplay loop>
+									<source src={require('../assets/homePageImages/Home_page_video_720.mp4')} type="video/mp4"/>
+                               		Your browser does not support the video tag.
+                           		</video>
+
 									<div className={styles["about-inside"]}>
 										<div className={styles["about-header"]}>WHAT IS TATA?</div>
 										<div className={styles["about-para"]}>

@@ -35,16 +35,16 @@ class ResultPage extends React.Component {
 
         axios.post('http://127.0.0.1:8000/backend/results', {
             //axios.post('http://oscar19.orc.gmu.edu/backend/results', {
-                jobCode: jobCode,
-            })
+            jobCode: jobCode,
+        })
             .then((coordinates) => { // to receive data from back end 
                 let traces_temp = []
- 
+
                 // number of patients is number of traces in tpc graph .Ex: 7 patients
-                let no_of_patients = coordinates.data.y_tpc.length 
+                let no_of_patients = coordinates.data.y_tpc.length
                 //array of sample names
-                let names = coordinates.data.pca_text 
-        
+                let names = coordinates.data.pca_text
+
                 // This takes care of TPC multilines graph
                 for (let i = 0; i < no_of_patients; i++) {
                     let x = coordinates.data.x_tpc
@@ -65,41 +65,41 @@ class ResultPage extends React.Component {
                 var y_uncorrected_pca = coordinates.data.y_uncorrected_pca
                 // console.log(x_uncorrected_pca)
                 // console.log(y_uncorrected_pca)
-        
+
                 // number of lines on each graph
                 let no_of_dataframes = x_uncorrected_pca.length
-        
+
                 // for uncorrected pca graph
                 let uncorrected_traces_temp = []
-                for(let i = 0; i < no_of_dataframes; i++){
+                for (let i = 0; i < no_of_dataframes; i++) {
                     let x = x_uncorrected_pca[i]
                     let y = y_uncorrected_pca[i]
                     let name = group_names_list[i] //sample name
                     let type = 'scatter'
                     let mode = 'markers'
                     let hoverinfo = "name"
-                    let trace = { x, y, name, type, mode, hoverinfo} // create a new trace obj
+                    let trace = { x, y, name, type, mode, hoverinfo } // create a new trace obj
                     uncorrected_traces_temp.push(trace) // add that trace obj into our tpc_trace
                 }
-        
+
                 var x_corrected_pca = coordinates.data.x_corrected_pca
                 var y_corrected_pca = coordinates.data.y_corrected_pca
                 console.log(x_corrected_pca)
                 console.log(y_corrected_pca)
-        
+
                 // This takes care of corrected PCA graph
                 let corrected_traces_temp = []
-                for(let i = 0; i < no_of_dataframes; i++){
+                for (let i = 0; i < no_of_dataframes; i++) {
                     let x = x_corrected_pca[i]
                     let y = y_corrected_pca[i]
                     let name = group_names_list[i] //sample name
                     let type = 'scatter'
                     let mode = 'markers'
                     let hoverinfo = "name"
-                    let trace = { x, y, name, type, mode, hoverinfo} // create a new trace obj
+                    let trace = { x, y, name, type, mode, hoverinfo } // create a new trace obj
                     corrected_traces_temp.push(trace) // add that trace obj into our tpc_trace
                 }
-        
+
                 // this.setState works the same as setters
                 // syntax: this.setState( {target value : value to change} )             
                 this.setState({
@@ -115,12 +115,18 @@ class ResultPage extends React.Component {
                     corrected_pca_traces: corrected_traces_temp
                 })
 
-                //remove everything from local storage for safety
-                // localStorage.removeItem('x_tpc', 'y_tpc', 'x_pca', 'y_pca', 'x_dge', 'y_dge', 'pca_text',
-                //                         'group_names_list', 'x_uncorrected_pca', 'y_uncorrected_pca', 
-                //                         'x_corrected_pca', 'y_corrected_pca', 
-                //                         'batch_correction_value', 'taskChosen', 'jobCode')
-            })        
+                console.log(localStorage.getItem('x_tpc'))
+                // remove everything from local storage for safety
+                localStorage.removeItem('x_tpc', 'y_tpc', 'x_pca', 'y_pca', 'x_dge', 'y_dge', 'pca_text',
+                                        'group_names_list', 'x_uncorrected_pca', 'y_uncorrected_pca',
+                                        'x_corrected_pca', 'y_corrected_pca',
+                                        'batch_correction_value', 'taskChosen', 'jobCode')
+
+                // console.log(localStorage.getItem('x_tpc'))
+
+            })
+
+
 
     }
 
@@ -132,7 +138,7 @@ class ResultPage extends React.Component {
         this.axiosCall()
     }
 
-    axiosCall () {
+    axiosCall() {
         // need to either download or delete data in back end
     }
 
@@ -159,7 +165,7 @@ class ResultPage extends React.Component {
                                     </div>
                                     <div id={styles["graph-selection"]}>
                                         <div id={styles["jobCode-section"]}>
-                                            <div id={styles["jobCode"]}>JOB CODE:<span>{this.state.jobCode}</span></div>
+                                            <div id={styles["jobCode"]}>JOB CODE:<br/><span>{this.state.jobCode}</span></div>
                                         </div>
                                         <TabList>
                                             <Tab type="Continue" className={styles["button-result"]}>Exploratory Plots</Tab>
@@ -405,7 +411,7 @@ class ResultPage extends React.Component {
 
                             {/*This TabPanel is for "Results Table"*/}
                             <TabPanel>
-                                <FinalTables jobCode={this.state.jobCode} csv_names_list={this.state.csv_names_list}/>
+                                <FinalTables jobCode={this.state.jobCode} csv_names_list={this.state.csv_names_list} />
                             </TabPanel>
 
                             {/*This TabPanel is for "Download Data", saved in a csv file*/}
