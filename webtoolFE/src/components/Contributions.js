@@ -30,7 +30,9 @@ class Contributions extends React.Component {
                         <div className="skewed-bg-contribution">
                             <div className="contributors-page content">
                                 <div className="topnav-contribution-contribution">
-                                    <img id="home-button" src={require('../assets/White_TATA_Logo.png')} alt="LOGO" width="109px" height="68.67px" href="/home" />
+                                    <a href="/">
+                                        <img id="home-button" src={require('../assets/White_TATA_Logo.png')} alt="LOGO" width="109px" height="68.67px" href="/home" />
+                                    </a>
                                     <nav>
                                         <a className="nav_contributor" href="/contributors">Contributors</a>
                                         <a className="nav_contributor" onClick={this.handleAbout}> About us </a>
@@ -174,7 +176,7 @@ class Contributions extends React.Component {
                                                         <div className="postion">Graphic Designer/Front End Developer</div>
                                                         <div className="contribution-line"></div>
                                                         <div className="bio">
-                                                        During the project Humberto Portillo had just completed her third year at George Mason as a graphic design major. As a member of the 2019 team Humberto was involved in the styling of the website used by TATA. Humbertofirst did wireframes of the website, then move to coding the HTML and CSS ofthe website.  Humberto hopes to join the workforce next year.
+                                                        During the project Humberto Portillo had just completed his third year at George Mason as a graphic design major. As a member of the 2019 team Humberto was involved in the styling of the website used by TATA. Humberto first did wireframes of the website, then move to coding the HTML and CSS ofthe website.  Humberto hopes to join the workforce next year.
                                                         </div>
                                                     </div>
                                                     <div className="rightPhoto" id="Humberto_Portillo"></div>

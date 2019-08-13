@@ -144,8 +144,8 @@ def input_list2(request):
         # Create an analyzer object from imported GTEXDataAnalyzer.py
         # need to be global because it is used in another function
         global analyzer
-        # analyzer = GTEXDataAnalyzer(CListDfs, group_names_list, tf_ens_ids, '/var/www/html/webtool/webtoolFE/src/csvDatabase') # for mason server
-        analyzer = GTEXDataAnalyzer(CListDfs, group_names_list, tf_ens_ids, 'webtoolFE/src/csvDatabase') # for localhost
+        # analyzer = GTEXDataAnalyzer(CListDfs, group_names_list, tf_ens_ids, '/var/www/html/webtool/csvDatabase') # for mason server
+        analyzer = GTEXDataAnalyzer(CListDfs, group_names_list, tf_ens_ids, 'csvDatabase') # for localhost
 
         jobCode = analyzer.job_code_mgr.get_job_code()
         print(jobCode)
@@ -172,10 +172,10 @@ def input_list2(request):
         pca_text = request.session['pca_text']
 
         # create a subfolder inside jobcode folder for exploratory plots
-        #csvDatabase_path = '/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobCode+'/exploratory/' # for mason server
-        #csvDatabase_path2 = '/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobCode+'/batch/' # for mason server
-        csvDatabase_path = 'webtoolFE/src/csvDatabase/'+jobCode+'/exploratory/' # for localhost
-        csvDatabase_path2 = 'webtoolFE/src/csvDatabase/'+jobCode+'/batch/' # for localhost
+        #csvDatabase_path = '/var/www/html/webtool/csvDatabase/'+jobCode+'/exploratory/' # for mason server
+        #csvDatabase_path2 = '/var/www/html/webtool/csvDatabase/'+jobCode+'/batch/' # for mason server
+        csvDatabase_path = 'csvDatabase/'+jobCode+'/exploratory/' # for localhost
+        csvDatabase_path2 = 'csvDatabase/'+jobCode+'/batch/' # for localhost
         
         try:
             os.mkdir(csvDatabase_path) # create a subfolder here
@@ -264,8 +264,8 @@ def input_list3(request):
 
         jobCode = analyzer.job_code_mgr.get_job_code()
 
-        #csvDatabase_path = '/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobCode+'/' # for mason server
-        csvDatabase_path = 'webtoolFE/src/csvDatabase/'+jobCode+'/' # for localhost
+        #csvDatabase_path = '/var/www/html/webtool/csvDatabase/'+jobCode+'/' # for mason server
+        csvDatabase_path = 'csvDatabase/'+jobCode+'/' # for localhost
 
         csv_names_list = []
         # convert dataframes to csv files, saved in csvDatabase 
@@ -290,6 +290,16 @@ def input_list3(request):
         # caused the warning, then crash :(
         # create heatmaps png in 'jobCode' folder
         analyzer.cluster_graphs(alpha, fc, dataframes_for_graph)
+
+        '''
+        Note: in the future, if we select CO-DIFFERENTIAL EXPRESSION,
+                 we need to run extra these 3 functions to create network graphs:
+        fc = 1
+        rif_dict = analyzer.do_RIF_calculations(alpha, fc, results)
+        print(rif_dict)
+        listdwvals = analyzer.do_differential_wiring(analyzer.r_values)
+        analyzer.do_network_analysis(listdwvals, dataframes_for_graph)
+        '''
 
         print(dataframes_for_graph[0].iloc[:,1])
         print(dataframes_for_graph[0].iloc[:,4])
@@ -353,8 +363,8 @@ def input_results(request):
 
         #---------------for Exploratory Plots-------------#    
         # path to exploratory plots files
-        #csvDatabase_path = '/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobCode+'/exploratory/' # for mason server
-        csvDatabase_path = 'webtoolFE/src/csvDatabase/'+jobCode+'/exploratory/' # for localhost
+        #csvDatabase_path = '/var/www/html/webtool/csvDatabase/'+jobCode+'/exploratory/' # for mason server
+        csvDatabase_path = 'csvDatabase/'+jobCode+'/exploratory/' # for localhost
         # get coordinates for dge graph
         dge_df = pd.read_csv(csvDatabase_path + 'dge.csv') 
         x_dge = list(dge_df.iloc[:,1]) # 
@@ -374,8 +384,8 @@ def input_results(request):
         #---------------Exploratory Plots ends------------#
 
         # path to batch correction plots files
-        #csvDatabase_path = '/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobCode+'/batch/' # for mason server        
-        csvDatabase_path2 = 'webtoolFE/src/csvDatabase/'+jobCode+'/batch/' # may change
+        #csvDatabase_path2 = '/var/www/html/webtool/csvDatabase/'+jobCode+'/batch/' # for mason server        
+        csvDatabase_path2 = 'csvDatabase/'+jobCode+'/batch/' # may change
         # then do sth for corrected & uncorrected graphs'''
         #---------------for Batch Correction--------------#
         x_uncorrected_pca_df = pd.read_csv(csvDatabase_path2 + 'x_uncorrected_pca.csv') 
@@ -393,8 +403,8 @@ def input_results(request):
         #----------------Batch Correction ends------------#
 
          # path to the csv_names_list file
-        #csvDatabase_path = '/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobCode+'/'+'csv_names_list.csv' #for mason server
-        csvDatabase_path = 'webtoolFE/src/csvDatabase/'+jobCode+'/'+'csv_names_list.csv' #for localhost
+        #csvDatabase_path = '/var/www/html/webtool/csvDatabase/'+jobCode+'/'+'csv_names_list.csv' #for mason server
+        csvDatabase_path = 'csvDatabase/'+jobCode+'/'+'csv_names_list.csv' #for localhost
         # convert csv to a list of csv file names
         csv_names_list_df = pd.read_csv(csvDatabase_path)   
         csv_names_list = list(csv_names_list_df.iloc[:,0])
@@ -428,14 +438,14 @@ def input_finalPlots(request):
         print(jobCode)
         print(csvFileName)
         # path to the requested csv
-        #csvDatabase_path = '/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobCode+'/results/'+csvFileName+' DE results.csv' # for mason server
-        csvDatabase_path = 'webtoolFE/src/csvDatabase/'+jobCode+'/results/'+csvFileName+' DE results.csv' # for localhost
+        #csvDatabase_path = '/var/www/html/webtool/csvDatabase/'+jobCode+'/results/'+csvFileName+' DE results.csv' # for mason server
+        csvDatabase_path = 'csvDatabase/'+jobCode+'/results/'+csvFileName+' DE results.csv' # for localhost
         # convert csv to a dataframe used for graphing
         dataframe = pd.read_csv(csvDatabase_path)
 
         # path to selections.csv for selections chosen in algorithmPage
-        #csvDatabase_path2 = '/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobCode+'/selections.csv' # for mason server
-        csvDatabase_path2 = 'webtoolFE/src/csvDatabase/'+jobCode+'/selections.csv' # for localhost
+        #csvDatabase_path2 = '/var/www/html/webtool/csvDatabase/'+jobCode+'/selections.csv' # for mason server
+        csvDatabase_path2 = 'csvDatabase/'+jobCode+'/selections.csv' # for localhost
         selections_df = pd.read_csv(csvDatabase_path2)   
         selections = list(selections_df.iloc[:,0])
         print(selections)  
@@ -497,7 +507,7 @@ def input_finalPlots(request):
         ensIDs = list(dataframe.iloc[:,1]) # ens ids column 
 
         # still doesn't work in front end
-        #heatmap_png_path = '/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobCode+'/results/'+csvFileName+' heatmap.png' # for mason server
+        #heatmap_png_path = '/var/www/html/webtool/csvDatabase/'+jobCode+'/results/'+csvFileName+' heatmap.png' # for mason server
         #heatmap_png_path = jobCode+'/results/'+csvFileName+' heatmap.png' # for localhost
         heatmap_png_path = '' # doesn't work for localhost
 
@@ -526,8 +536,8 @@ def input_finalTables(request):
         print(csvFileName)
 
         # path to the requested csv
-        #csvDatabase_path = '/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobCode+'/results/'+csvFileName+' DE results.csv' #for mason server
-        csvDatabase_path = 'webtoolFE/src/csvDatabase/'+jobCode+'/results/'+csvFileName+' DE results.csv' #for localhost
+        #csvDatabase_path = '/var/www/html/webtool/csvDatabase/'+jobCode+'/results/'+csvFileName+' DE results.csv' #for mason server
+        csvDatabase_path = 'csvDatabase/'+jobCode+'/results/'+csvFileName+' DE results.csv' #for localhost
         # convert csv to a dataframe used for graphing
         dataframe = pd.read_csv(csvDatabase_path)
         # has 8 columns(for now): overlapping ensIDs, fold change, t-values, p-values, -log(p-values),
@@ -567,8 +577,8 @@ def input_jobcode(request):
         percent = 0
         
         try:
-            # pc = pd.read_csv('/var/www/html/webtool/webtoolFE/src/csvDatabase/'+jobcode+'/progress.csv') # for mason server
-            pc = pd.read_csv('webtoolFE/src/csvDatabase/'+jobcode+'/progress.csv') # for localhost
+            # pc = pd.read_csv('/var/www/html/webtool/csvDatabase/'+jobcode+'/progress.csv') # for mason server
+            pc = pd.read_csv('csvDatabase/'+jobcode+'/progress.csv') # for localhost
         except FileNotFoundError:
             file_found = False
         else:

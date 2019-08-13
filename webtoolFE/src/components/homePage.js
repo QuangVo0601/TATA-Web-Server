@@ -68,6 +68,7 @@ class HomePage extends React.Component {
 				alert('Job Code not found! Please try again.')
 			}
 			else{
+				localStorage.setItem('jobCode', JSON.stringify(this.state.jobcode))
 				this.setState({percent: arr.data.progress})
 			}
 
